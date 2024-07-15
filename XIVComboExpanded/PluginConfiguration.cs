@@ -17,6 +17,8 @@ namespace XIVComboExpandedPlugin;
 public class PluginConfiguration : IPluginConfiguration
 {
     private static readonly HashSet<CustomComboPreset> SecretCombos;
+    private static readonly HashSet<CustomComboPreset> EasyCombos;
+    private static readonly HashSet<CustomComboPreset> ExpandedCombos;
     private static readonly Dictionary<CustomComboPreset, CustomComboPreset[]> ConflictingCombos;
     private static readonly Dictionary<CustomComboPreset, CustomComboPreset?> ParentCombos;  // child: parent
 
@@ -24,6 +26,14 @@ public class PluginConfiguration : IPluginConfiguration
     {
         SecretCombos = Enum.GetValues<CustomComboPreset>()
             .Where(preset => preset.GetAttribute<SecretCustomComboAttribute>() != default)
+            .ToHashSet();
+
+        EasyCombos = Enum.GetValues<CustomComboPreset>()
+            .Where(preset => preset.GetAttribute<EasyCustomComboAttribute>() != default)
+            .ToHashSet();
+
+        ExpandedCombos = Enum.GetValues<CustomComboPreset>()
+            .Where(preset => preset.GetAttribute<EasyCustomComboAttribute>() != default)
             .ToHashSet();
 
         ConflictingCombos = Enum.GetValues<CustomComboPreset>()
@@ -105,6 +115,22 @@ public class PluginConfiguration : IPluginConfiguration
     /// <returns>The boolean representation.</returns>
     public bool IsSecret(CustomComboPreset preset)
         => SecretCombos.Contains(preset);
+
+    /// <summary>
+    /// Gets a value indicating whether a preset is an expanded one.
+    /// </summary>
+    /// <param name="preset">Preset to check.</param>
+    /// <returns>The boolean representation.</returns>
+    public bool IsExpanded(CustomComboPreset preset)
+        => ExpandedCombos.Contains(preset);
+
+    /// <summary>
+    /// Gets a value indicating whether a preset is easy.
+    /// </summary>
+    /// <param name="preset">Preset to check.</param>
+    /// <returns>The boolean representation.</returns>
+    public bool IsEasy(CustomComboPreset preset)
+        => EasyCombos.Contains(preset);
 
     /// <summary>
     /// Gets an array of conflicting combo presets.

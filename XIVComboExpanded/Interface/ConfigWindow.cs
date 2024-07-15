@@ -23,6 +23,7 @@ namespace XIVComboExpandedPlugin.Interface;
 /// </summary>
 internal class ConfigWindow : Window
 {
+    private enum Tabs { Classic = 1, Easy = 2, Expanded = 3, Secret = 4 }
     private readonly Dictionary<string, List<(CustomComboPreset Preset, CustomComboInfoAttribute Info)>> groupedPresets;
     private readonly Dictionary<CustomComboPreset, (CustomComboPreset Preset, CustomComboInfoAttribute Info)[]> presetChildren;
     private readonly Vector4 shadedColor = new(0.68f, 0.68f, 0.68f, 1.0f);
@@ -41,6 +42,7 @@ internal class ConfigWindow : Window
             .Select(preset => (Preset: preset, Info: preset.GetAttribute<CustomComboInfoAttribute>()))
             .Where(tpl => tpl.Info != null && Service.Configuration.GetParent(tpl.Preset) == null)
             .OrderBy(tpl => CustomComboInfoAttribute.RoleIDToOrder(tpl.Info.RoleName))
+            .ThenBy(tpl => tpl.Info.Order)
             .ThenBy(tpl => tpl.Info.JobID)
             .GroupBy(tpl => tpl.Info.JobName)
             .ToDictionary(
@@ -147,11 +149,60 @@ internal class ConfigWindow : Window
                     ImGui.Separator();
                     ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
                     ImGui.PopStyleColor(2);
-                    int i = 1;
-                    foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+
+                    if (ImGui.BeginTabBar("ComboTabs"))
                     {
-                        this.DrawPreset(preset, info, ref i);
+                        if (ImGui.BeginTabItem("Classic"))
+                        {
+
+                            int i = 1;
+                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            {
+                                this.DrawPreset(Tabs.Classic, preset, info, ref i);
+                            }
+
+                            ImGui.EndTabItem();
+                        }
+
+                        if (ImGui.BeginTabItem("Easy"))
+                        {
+                            int i = 1;
+                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            {
+                                this.DrawPreset(Tabs.Easy, preset, info, ref i);
+                            }
+
+                            ImGui.EndTabItem();
+                        }
+
+                        if (ImGui.BeginTabItem("Expanded"))
+                        {
+                            int i = 1;
+                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            {
+                                this.DrawPreset(Tabs.Expanded, preset, info, ref i);
+                            }
+
+                            ImGui.EndTabItem();
+                        }
+
+                        if (Service.Configuration.EnableSecretCombos)
+                        {
+                            if (ImGui.BeginTabItem("Secret"))
+                            {
+                                int i = 1;
+                                foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                                {
+                                    this.DrawPreset(Tabs.Secret, preset, info, ref i);
+                                }
+
+                                ImGui.EndTabItem();
+                            }
+                        }
+
                     }
+
+                    ImGui.EndTabBar();
 
                     ImGui.EndChild();
                 }
@@ -280,16 +331,35 @@ internal class ConfigWindow : Window
     }
 
 
-    private void DrawPreset(CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
+    private void DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
     {
         var enabled = Service.Configuration.IsEnabled(preset);
         var secret = Service.Configuration.IsSecret(preset);
-        var showSecrets = Service.Configuration.EnableSecretCombos;
+        var expanded = Service.Configuration.IsExpanded(preset);
+        var easy = Service.Configuration.IsEasy(preset);
         var conflicts = Service.Configuration.GetConflicts(preset);
         var parent = Service.Configuration.GetParent(preset);
 
-        if (secret && !showSecrets)
-            return;
+        switch (tab)
+        {
+            case Tabs.Classic:
+                if (easy || expanded || secret)
+                    return;
+                break;
+            case Tabs.Easy:
+                if (expanded || secret)
+                    return;
+                break;
+            case Tabs.Expanded:
+                if (secret)
+                    return;
+                break;
+            case Tabs.Secret:
+                break;
+            default:
+                break;
+        }
+
 
         ImGui.PushItemWidth(200);
 
@@ -342,7 +412,7 @@ internal class ConfigWindow : Window
         {
             var conflictText = conflicts.Select(conflict =>
             {
-                if (!showSecrets && Service.Configuration.IsSecret(conflict))
+                if (Service.Configuration.IsSecret(conflict))
                     return string.Empty;
 
                 var conflictInfo = conflict.GetAttribute<CustomComboInfoAttribute>();
@@ -386,7 +456,7 @@ internal class ConfigWindow : Window
                 ImGui.Indent();
 
                 foreach (var (childPreset, childInfo) in children)
-                    this.DrawPreset(childPreset, childInfo, ref i);
+                    this.DrawPreset(tab, childPreset, childInfo, ref i);
 
                 ImGui.Unindent();
             }
