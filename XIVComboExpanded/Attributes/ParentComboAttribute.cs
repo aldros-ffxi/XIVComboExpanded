@@ -11,7 +11,7 @@ internal class ParentComboAttribute : Attribute
     /// <summary>
     /// Initializes a new instance of the <see cref="ParentComboAttribute"/> class.
     /// </summary>
-    /// <param name="parentPreset">Presets that conflict with the given combo.</param>
+    /// <param name="parentPreset">Presets that depend on the given combo.</param>
     internal ParentComboAttribute(CustomComboPreset parentPreset)
     {
         this.ParentPreset = parentPreset;

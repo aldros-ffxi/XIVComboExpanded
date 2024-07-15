@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-
+using System.Reflection;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
+using Dalamud.Interface.Components;
+using Dalamud.Interface.Textures;
+using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
+using XIVComboExpandedPlugin;
 using XIVComboExpandedPlugin.Attributes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -26,7 +31,7 @@ internal class ConfigWindow : Window
     /// Initializes a new instance of the <see cref="ConfigWindow"/> class.
     /// </summary>
     public ConfigWindow()
-        : base("Custom Combo Setup")
+        : base("XIV Combo Expanded")
     {
         this.RespectCloseHotkey = true;
 
@@ -35,8 +40,8 @@ internal class ConfigWindow : Window
             .Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled)
             .Select(preset => (Preset: preset, Info: preset.GetAttribute<CustomComboInfoAttribute>()))
             .Where(tpl => tpl.Info != null && Service.Configuration.GetParent(tpl.Preset) == null)
-            .OrderBy(tpl => tpl.Info.JobName)
-            .ThenBy(tpl => tpl.Info.Order)
+            .OrderBy(tpl => CustomComboInfoAttribute.RoleIDToOrder(tpl.Info.RoleName))
+            .ThenBy(tpl => tpl.Info.JobID)
             .GroupBy(tpl => tpl.Info.JobName)
             .ToDictionary(
                 tpl => tpl.Key,
@@ -66,65 +71,201 @@ internal class ConfigWindow : Window
     /// <inheritdoc/>
     public override void Draw()
     {
-        ImGui.Text("DAWNTRAIL EDITION");
-        ImGui.Text("This version of XIVCombo has been updated for Dawntrail (7.0).");
-        ImGui.Text("Because of the massive amount of changes, some combos have been removed, reworked, added.");
-        ImGui.Text("New combos will be added at a later date.");
-        ImGui.Text("If you encounter any problems, please open an issue on github.");
-        ImGui.Separator();
-        ImGui.Text("This window allows you to enable and disable custom combos to your liking.");
-
-        var showSecrets = Service.Configuration.EnableSecretCombos;
-        if (ImGui.Checkbox("Enable secret forbidden knowledge", ref showSecrets))
+        if (ImGui.BeginTabBar("Tabs"))
         {
-            Service.Configuration.EnableSecretCombos = showSecrets;
-            Service.Configuration.Save();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.BeginTooltip();
-            ImGui.TextUnformatted("Combos too dangerous for the common folk");
-            ImGui.EndTooltip();
-        }
-
-        var hideChildren = Service.Configuration.HideChildren;
-        if (ImGui.Checkbox("Hide children of disabled combos and features", ref hideChildren))
-        {
-            Service.Configuration.HideChildren = hideChildren;
-            Service.Configuration.Save();
-        }
-
-        ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
-
-        ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
-
-        var i = 1;
-
-        foreach (var jobName in this.groupedPresets.Keys)
-        {
-            if (ImGui.CollapsingHeader(jobName))
+            if (ImGui.BeginTabItem("Combos"))
             {
-                foreach (var (preset, info) in this.groupedPresets[jobName])
+                if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(40f, 0f), false, ImGuiWindowFlags.NoScrollbar))
                 {
-                    this.DrawPreset(preset, info, ref i);
+                    ImGui.SameLine(2f);
+
+                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(400f, 36f), 5f))
+                    {
+                        foreach (var jobName in this.groupedPresets.Keys)
+                        {
+                            ImGui.TableNextRow();
+                            ImGui.TableNextColumn();
+                            ImGui.PushID($"EditorTab{CustomComboInfoAttribute.NameToJobID(jobName)}");
+                            bool selected = Service.Configuration.CurrentTab == jobName ? true : false;
+                            if (selected)
+                            {
+                                ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.DalamudGrey2);
+                                ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudGrey3);
+                            }
+                            else
+                            {
+                                ImGui.PushStyleColor(ImGuiCol.Button, 0);
+
+                                ImGui.PushStyleColor(ImGuiCol.Border, 0);
+                            }
+
+                            ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 0);
+                            var image = GetJobIcon(CustomComboInfoAttribute.NameToJobID(jobName));
+
+                            if (ImGui.ImageButton(image.GetWrapOrDefault().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
+                            {
+                                Service.Configuration.CurrentTab = jobName;
+                            }
+
+                            if (ImGui.IsItemHovered())
+                            {
+                                ImGui.BeginTooltip();
+                                ImGui.TextUnformatted(jobName);
+                                ImGui.EndTooltip();
+                            }
+
+                            ImGui.PopStyleVar();
+                            ImGui.PopStyleColor(2);
+                            ImGui.PopID();
+                        }
+
+                        ImGui.EndTable();
+                    }
+
+                    ImGui.EndChild();
+                }
+
+                ImGui.SameLine();
+
+                ImGui.BeginGroup();
+
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, ImGuiColors.DalamudWhite);
+                ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudWhite2);
+
+                ImGui.Indent();
+                if (ImGui.BeginChild("TabContent", new Vector2(0, -1), true, ImGuiWindowFlags.NoBackground))
+                {
+                    ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
+                    ImGui.PopStyleColor(2);
+                    int i = 1;
+                    foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                    {
+                        this.DrawPreset(preset, info, ref i);
+                    }
+
+                    ImGui.EndChild();
+                }
+
+                ImGui.Unindent();
+
+                ImGui.EndGroup();
+
+                ImGui.EndTabItem();
+            }
+
+            if (ImGui.BeginTabItem("Settings"))
+            {
+                var showSecrets = Service.Configuration.EnableSecretCombos;
+                if (ImGui.Checkbox("Enable secret forbidden knowledge", ref showSecrets))
+                {
+                    Service.Configuration.EnableSecretCombos = showSecrets;
+                    Service.Configuration.Save();
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.BeginTooltip();
+                    ImGui.TextUnformatted("Optimized, potentially unintuitive combos for the common folk");
+                    ImGui.EndTooltip();
+                }
+
+                var hideChildren = Service.Configuration.HideChildren;
+                if (ImGui.Checkbox("Hide children of disabled combos and features", ref hideChildren))
+                {
+                    Service.Configuration.HideChildren = hideChildren;
+                    Service.Configuration.Save();
+                }
+
+                ImGui.EndTabItem();
+            }
+
+            if (ImGui.BeginTabItem("Changelog"))
+            {
+                ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
+
+                ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
+
+                var changelog = new Dictionary<string, string[]>()
+                {
+                    { "v3", ["dummy (like me)"] },
+                    { "v2", ["data"] },
+                    { "v1", ["text", "can be on 2 lines I think", "and even three wooooo"] },
+                };
+
+
+                foreach (var (version, info) in changelog)
+                {
+                    if (ImGui.CollapsingHeader(version))
+                    {
+                        ImGui.PushItemWidth(200);
+
+                        ImGui.PopItemWidth();
+
+                        ImGui.PushStyleColor(ImGuiCol.Text, this.shadedColor);
+                        foreach (var text in info)
+                        {
+                            ImGui.BulletText(text);
+                        }
+
+                        ImGui.PopStyleColor();
+                        ImGui.Spacing();
+                    }
+                }
+
+                ImGui.EndChild();
+                ImGui.EndTabItem();
+            }
+
+
+            if (ImGui.BeginTabItem("About"))
+            {
+
+                ImGui.Text("Project's GitHub link :");
+                if (ImGui.Button("Repository link"))
+                {
+                    Process.Start(new ProcessStartInfo { FileName = "https://github.com/MKhayle/XIVComboExpanded", UseShellExecute = true });
+                }
+
+                ImGui.Separator();
+                ImGui.Spacing();
+
+                ImGui.Text("Contributors and special thanks:");
+                ImGui.BulletText("goat");
+                ImGui.BulletText("meli");
+                ImGui.BulletText("attick");
+                ImGui.BulletText("daemitus");
+                ImGui.BulletText("Grammernatzi");
+                ImGui.BulletText("khayle");
+                ImGui.BulletText("kaedys");
+                ImGui.BulletText("aldros-ffxi");
+                ImGui.BulletText("lhn1703");
+                ImGui.BulletText("pliv-dev");
+                ImGui.BulletText("bfabe8");
+                ImGui.BulletText("mikel-gh");
+                ImGui.BulletText("diwo");
+                ImGui.BulletText("MayakoAelys");
+                ImGui.BulletText("andyvorld");
+                ImGui.BulletText("rz-1");
+                ImGui.BulletText("AkiraChisaka");
+                ImGui.BulletText("Aelexe");
+                ImGui.BulletText("perks");
+                ImGui.Text("And many others who contributed through issues, bug reporting or feature requests!");
+
+                ImGui.Separator();
+                ImGui.Spacing();
+                ImGui.Text("If you want to personally support me for maintaining this project (♥):");
+                if (ImGui.Button("My Ko-Fi link"))
+                {
+                    Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/khayle", UseShellExecute = true });
+                }
+
+                ImGui.EndTabItem();
                 }
             }
-            else
-            {
-                i += this.groupedPresets[jobName].Count;
-            }
-        }
 
-        ImGui.PopStyleVar();
-
-        if (ImGui.Button("You can support me on Ko-Fi ♥"))
-        {
-            Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/khayle", UseShellExecute = true });
-        }
-
-        ImGui.EndChild();
+        ImGui.EndTabBar();
     }
+
 
     private void DrawPreset(CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
     {
@@ -180,7 +321,7 @@ internal class ConfigWindow : Window
         ImGui.PopItemWidth();
 
         ImGui.PushStyleColor(ImGuiCol.Text, this.shadedColor);
-        ImGui.TextWrapped($"#{i}: {info.Description}");
+        ImGui.TextWrapped($"{info.Description}");
         ImGui.PopStyleColor();
         ImGui.Spacing();
 
@@ -261,5 +402,23 @@ internal class ConfigWindow : Window
 
             parentMaybe = Service.Configuration.GetParent(parent);
         }
+    }
+
+
+
+    /// <summary>
+    /// Returns a ISharedImmediateTexture for the appropriate job
+    /// </summary>
+    /// <param name="jobID">ID of the job.</param>
+    private static ISharedImmediateTexture GetJobIcon(int jobID)
+    {
+        var iconID = 62100 + jobID;
+
+        if (iconID < 62101 || iconID > 62142)
+            iconID = 62145;
+        if (jobID == 0)
+            iconID = 62146;
+
+        return Service.TextureProvider.GetFromGameIcon(new GameIconLookup((uint)(iconID), true));
     }
 }

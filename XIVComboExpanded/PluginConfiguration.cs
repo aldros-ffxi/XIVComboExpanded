@@ -63,6 +63,12 @@ public class PluginConfiguration : IPluginConfiguration
     public bool EnableSecretCombos { get; set; } = false;
 
     /// <summary>
+    /// Gets or sets a value indicating whether to allow and display secret combos.
+    /// </summary>
+    [JsonProperty("Tab")]
+    public string CurrentTab { get; set; } = "Adventurer";
+
+    /// <summary>
     /// Gets or sets a value indicating whether to hide the children of a feature if it is disabled.
     /// </summary>
     public bool HideChildren { get; set; } = false;
