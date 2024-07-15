@@ -161,7 +161,7 @@ internal class CustomComboInfoAttribute : Attribute
         };
     }
 
-    private static string JobIDToRole(byte key)
+    public static string JobIDToRole(byte key)
     {
         return key switch
         {

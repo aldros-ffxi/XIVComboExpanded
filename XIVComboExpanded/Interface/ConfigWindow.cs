@@ -75,11 +75,11 @@ internal class ConfigWindow : Window
         {
             if (ImGui.BeginTabItem("Combos"))
             {
-                if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(40f, 0f), false, ImGuiWindowFlags.NoScrollbar))
+                if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(36f, 0f), false, ImGuiWindowFlags.NoScrollbar))
                 {
-                    ImGui.SameLine(2f);
+                    ImGui.SameLine(1f);
 
-                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(400f, 36f), 5f))
+                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f, 36f), 4f))
                     {
                         foreach (var jobName in this.groupedPresets.Keys)
                         {
@@ -132,9 +132,19 @@ internal class ConfigWindow : Window
                 ImGui.PushStyleColor(ImGuiCol.ChildBg, ImGuiColors.DalamudWhite);
                 ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudWhite2);
 
-                ImGui.Indent();
+                ImGui.Indent(4f);
                 if (ImGui.BeginChild("TabContent", new Vector2(0, -1), true, ImGuiWindowFlags.NoBackground))
                 {
+                    var jobID = CustomComboInfoAttribute.NameToJobID(Service.Configuration.CurrentTab);
+                    var image = GetJobIcon(jobID);
+                    ImGui.Image(image.GetWrapOrDefault().ImGuiHandle, new System.Numerics.Vector2(36f, 36f));
+                    ImGui.SameLine();
+                    ImGui.PushFont(UiBuilder.MonoFont);
+                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                    ImGui.Text($" " + Service.Configuration.CurrentTab + "\n " + (CustomComboInfoAttribute.JobIDToRole(jobID) != "Adventurer" ? CustomComboInfoAttribute.JobIDToRole(jobID) : "Warrior of Light"));
+                    ImGui.PopStyleColor();
+                    ImGui.PopFont();
+                    ImGui.Separator();
                     ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
                     ImGui.PopStyleColor(2);
                     int i = 1;
@@ -230,13 +240,15 @@ internal class ConfigWindow : Window
                 ImGui.Spacing();
 
                 ImGui.Text("Contributors and special thanks:");
-                ImGui.BulletText("goat");
-                ImGui.BulletText("meli");
-                ImGui.BulletText("attick");
-                ImGui.BulletText("daemitus");
-                ImGui.BulletText("Grammernatzi");
-                ImGui.BulletText("khayle");
-                ImGui.BulletText("kaedys");
+                ImGui.BulletText("goat and the whole Dalamud team");
+                ImGui.BulletText("ff-meli for the initial concept");
+                ImGui.BulletText("attick for XIVCombo");
+                ImGui.BulletText("daemitus for creating XIVCombo Expanded");
+                ImGui.BulletText("khayle for taking over XIV Combo Expanded");
+                ImGui.BulletText("Grammernatzi for supporting the project");
+                ImGui.BulletText("kaedys for considerably contributing to the repository");
+                ImGui.Spacing();
+                ImGui.Text("Additional thanks to all those contributors");
                 ImGui.BulletText("aldros-ffxi");
                 ImGui.BulletText("lhn1703");
                 ImGui.BulletText("pliv-dev");
@@ -249,6 +261,7 @@ internal class ConfigWindow : Window
                 ImGui.BulletText("AkiraChisaka");
                 ImGui.BulletText("Aelexe");
                 ImGui.BulletText("perks");
+                ImGui.Spacing();
                 ImGui.Text("And many others who contributed through issues, bug reporting or feature requests!");
 
                 ImGui.Separator();
