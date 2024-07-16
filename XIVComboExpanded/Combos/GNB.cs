@@ -12,10 +12,15 @@ internal static class GNB
         BrutalShell = 16139,
         DemonSlice = 16141,
         RoyalGuard = 16142,
+        LightningShot = 16143,
+        DangerZone = 16144,
         SolidBarrel = 16145,
         GnashingFang = 16146,
+        SavageClaw = 16147,
+        WickedTalon = 16150,
         DemonSlaughter = 16149,
         SonicBreak = 16153,
+        Trajectory = 36934,
         Continuation = 16155,
         JugularRip = 16156,
         AbdomenTear = 16157,
@@ -27,18 +32,23 @@ internal static class GNB
         Hypervelocity = 25759,
         DoubleDown = 25760,
         RoyalGuardRemoval = 32068,
-        FatedBrand = 36936;
+        FatedBrand = 36936,
+        ReignOfBeasts = 36937,
+        NobleBlood = 36938,
+        LionHeart = 36939;
 
     public static class Buffs
     {
         public const ushort
             NoMercy = 1831,
             RoyalGuard = 1833,
+            ReadyToBreak = 3886,
             ReadyToRip = 1842,
             ReadyToTear = 1843,
             ReadyToGouge = 1844,
             ReadyToBlast = 2686,
-            ReadyToFated = 3839;
+            ReadyToFated = 3839,
+            ReadyToReign = 3840;
     }
 
     public static class Debuffs
@@ -53,17 +63,21 @@ internal static class GNB
             NoMercy = 2,
             BrutalShell = 4,
             RoyalGuard = 10,
+            DangerZone = 18,
             SolidBarrel = 26,
             BurstStrike = 30,
             DemonSlaughter = 40,
             SonicBreak = 54,
+            Trajectory = 56,
+            GnashingFang = 60,
             BowShock = 62,
             Continuation = 70,
             FatedCircle = 72,
             Bloodfest = 76,
             EnhancedContinuation = 86,
             CartridgeCharge2 = 88,
-            DoubleDown = 90;
+            DoubleDown = 90,
+            ReignOfBeasts = 100;
     }
 }
 
@@ -181,22 +195,6 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     }
 }
 
-internal class GunbreakerBowShockSonicBreak : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerBowShockSonicBreakFeature;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == GNB.BowShock || actionID == GNB.SonicBreak)
-        {
-            if (level >= GNB.Levels.BowShock)
-                return CalcBestAction(actionID, GNB.BowShock, GNB.SonicBreak);
-        }
-
-        return actionID;
-    }
-}
-
 internal class GunbreakerDemonSlaughter : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerDemonSlaughterCombo;
@@ -263,13 +261,82 @@ internal class GunbreakerNoMercy : CustomCombo
             {
                 if (level >= GNB.Levels.NoMercy && HasEffect(GNB.Buffs.NoMercy))
                 {
-                    if (level >= GNB.Levels.BowShock)
-                        return CalcBestAction(GNB.SonicBreak, GNB.SonicBreak, GNB.BowShock);
-
-                    if (level >= GNB.Levels.SonicBreak)
+                    if (level >= GNB.Levels.SonicBreak && HasEffect(GNB.Buffs.ReadyToBreak))
                         return GNB.SonicBreak;
+
+                    if (level >= GNB.Levels.BowShock)
+                        return GNB.BowShock;
                 }
             }
+        }
+
+        return actionID;
+    }
+}
+
+internal class GunbreakerExpandedContinuation : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerExpandedContinuation;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == GNB.Continuation)
+        {
+            var gauge = GetJobGauge<GNBGauge>();
+
+            // Default continuation behavior
+            if (HasEffect(GNB.Buffs.ReadyToRip) || HasEffect(GNB.Buffs.ReadyToTear) || HasEffect(GNB.Buffs.ReadyToGouge) || HasEffect(GNB.Buffs.ReadyToBlast) || HasEffect(GNB.Buffs.ReadyToFated))
+                return OriginalHook(GNB.Continuation);
+
+            // Combo Danger/Blasting zone off Keen Edge
+            if (level >= GNB.Levels.DangerZone && (lastComboMove == GNB.KeenEdge || lastComboMove == GNB.BrutalShell) && IsCooldownUsable(GNB.DangerZone)) // TODO: IsEnabled(thing)
+                return OriginalHook(GNB.DangerZone);
+
+            // Bow Shock off cd, which functionally combos with Trajectory for your intro combo. Similar to PLD entry > Circle of Scorn
+            if (level >= GNB.Levels.BowShock && IsCooldownUsable(GNB.BowShock))
+                return GNB.BowShock;
+
+            // Combo with No Mercy > Sonic Break
+            if (HasEffect(GNB.Buffs.ReadyToBreak) && level >= GNB.Levels.SonicBreak && IsCooldownUsable(GNB.SonicBreak))
+                return GNB.SonicBreak;
+
+            // Combo Double Down off either Solid Barrel or Demon Slaughter
+            if ((lastComboMove == GNB.SolidBarrel || lastComboMove == GNB.DemonSlaughter) && level >= GNB.Levels.DoubleDown && gauge.Ammo >= 2 && IsCooldownUsable(GNB.DoubleDown))
+                return OriginalHook(GNB.DoubleDown);
+
+            // Combo to prefer Gnashing Fang combo over Burst Strike after Solid Barrel
+            if ((lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.GnashingFang && gauge.Ammo >= 1 && IsCooldownUsable(GNB.GnashingFang)) || !IsOriginal(GNB.GnashingFang))
+                return OriginalHook(GNB.GnashingFang);
+
+            // Combo for Burst Strike after Solid Barrel
+            if (lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.BurstStrike && gauge.Ammo >= 1)
+                return GNB.BurstStrike;
+
+            // Combo for Demon Slaughter > Fated Circle
+            if (lastComboMove == GNB.DemonSlaughter && level >= GNB.Levels.FatedCircle && gauge.Ammo >= 1)
+                return GNB.FatedCircle;
+
+            // Reign combo, combos off of Bloodfest
+            if (HasEffect(GNB.Buffs.ReadyToReign) || !IsOriginal(GNB.ReignOfBeasts))
+                return OriginalHook(GNB.ReignOfBeasts);
+
+            return OriginalHook(GNB.Continuation);
+        }
+
+        return actionID;
+    }
+}
+
+internal class GunbreakerTrajectoryDowngradeFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerTrajectoryDowngradeFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == GNB.Trajectory)
+        {
+            if (level <= GNB.Levels.Trajectory)
+                return GNB.LightningShot;
         }
 
         return actionID;
