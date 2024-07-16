@@ -33,7 +33,7 @@ public class PluginConfiguration : IPluginConfiguration
             .ToHashSet();
 
         ExpandedCombos = Enum.GetValues<CustomComboPreset>()
-            .Where(preset => preset.GetAttribute<EasyCustomComboAttribute>() != default)
+            .Where(preset => preset.GetAttribute<ExpandedCustomComboAttribute>() != default)
             .ToHashSet();
 
         ConflictingCombos = Enum.GetValues<CustomComboPreset>()

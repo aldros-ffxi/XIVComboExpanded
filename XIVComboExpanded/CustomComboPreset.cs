@@ -301,7 +301,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Fan Dance 4 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 4 when available.", DNC.JobID)]
     DancerFanDance4Feature = 3809,
 
-    [SecretCustomCombo]
+    [EasyCustomCombo]
     [ConflictingCombos(DancerDanceComboCompatibility)]
     [CustomComboInfo("Dance Step Combo", "Replace Standard Step and Technical Step with each dance step while dancing.", DNC.JobID)]
     DancerDanceStepCombo = 3802,
@@ -554,22 +554,22 @@ public enum CustomComboPreset
     // ====================================================================================
     #region MONK
 
-    [SecretCustomCombo]
+    [EasyCustomCombo]
     [ConflictingCombos([MonkOpoFeature, MonkRaptorFeature, MonkCoeurlFeature])]
     [CustomComboInfo("monke mode", "One-buttons the basic rotation on Bootshine/Leaping Opo. Neat for beginners, very, very bad for serious players.", MNK.JobID)]
     MonkMonkeyMode = 2021,
 
-    [SecretCustomCombo]
+    [ExpandedCustomCombo]
     [ParentCombo(MonkMonkeyMode)]
     [CustomComboInfo("Monkey Bootshine Steeled Meditation Feature", "Replace Bootshine/Leaping Opo with Steeled Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkMonkeyMeditationFeature = 2022,
 
-    [SecretCustomCombo]
+    [ExpandedCustomCombo]
     [ParentCombo(MonkMonkeyMode)]
     [CustomComboInfo("Monkey Form Shift Feature", "Replace Bootshine/Leaping Opo with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
     MonkMonkeyFormShiftFeature = 2024,
 
-    [SecretCustomCombo]
+    [ExpandedCustomCombo]
     [ParentCombo(MonkMonkeyMode)]
     [CustomComboInfo("Automatic Chakra Feature", "Replace Bootshine/Leaping Opo with The Forbidden Chakra when your Fifth Chakra is open.", MNK.JobID)]
     MonkMonkeyAutoChakraFeature = 2026,
@@ -578,15 +578,17 @@ public enum CustomComboPreset
     [CustomComboInfo("Opo feature", "Replace Bootshine/Leaping Opo with Dragon Kick if you don't have any Opo's fury stack.", MNK.JobID)]
     MonkOpoFeature = 2017,
 
+    [ExpandedCustomCombo]
     [ParentCombo(MonkOpoFeature)]
     [CustomComboInfo("Bootshine Steeled Meditation Feature", "Replace Bootshine/Leaping Opo with Steeled Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkBootshineMeditationFeature = 2012,
 
+    [ExpandedCustomCombo]
     [ParentCombo(MonkOpoFeature)]
     [CustomComboInfo("Form Shift Feature", "Replace Bootshine/Leaping Opo with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
     MonkBootshineFormShiftFeature = 2023,
 
-    [SecretCustomCombo]
+    [ExpandedCustomCombo]
     [ParentCombo(MonkOpoFeature)]
     [CustomComboInfo("Opomatic Chakra Feature", "Replace Bootshine/Leaping Opo with The Forbidden Chakra when your Fifth Chakra is open.", MNK.JobID)]
     MonkOpoChakraFeature = 2029,
@@ -609,21 +611,25 @@ public enum CustomComboPreset
     [CustomComboInfo("Enlightened Meditation Feature", "Replace Masterful Blitz with Enlightened Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkAoEMeditationFeature = 2025,
 
+    [ExpandedCustomCombo]
     [ParentCombo(MonkAoECombo)]
     [CustomComboInfo("AoE Form Shift Feature", "Replace Masterful Blitz with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
     MonkAoEFormShiftFeature = 2027,
 
-    [SecretCustomCombo]
+    [EasyCustomCombo]
     [ParentCombo(MonkAoECombo)]
     [CustomComboInfo("Automatic AoE Chakra Feature", "Replace Masterful Blitz with Enlightenment when your Fifth Chakra is open.", MNK.JobID)]
     MonkAoEAutoChakraFeature = 2028,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Perfect Balance Feature", "Replace Perfect Balance with Masterful Blitz when you have 3 Beast Chakra.", MNK.JobID)]
     MonkPerfectBalanceFeature = 2004,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Riddle of Brotherly Fire", "Replace Riddle of Fire with Brotherhood when on cooldown.", MNK.JobID)]
     MonkRiddleOfFireBrotherhood = 2009,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Riddle of Fire and Wind", "Replace Riddle of Fire with Riddle of Wind when on cooldown.", MNK.JobID)]
     MonkRiddleOfFireWind = 2010,
 

@@ -42,8 +42,8 @@ internal class ConfigWindow : Window
             .Select(preset => (Preset: preset, Info: preset.GetAttribute<CustomComboInfoAttribute>()))
             .Where(tpl => tpl.Info != null && Service.Configuration.GetParent(tpl.Preset) == null)
             .OrderBy(tpl => CustomComboInfoAttribute.RoleIDToOrder(tpl.Info.RoleName))
-            .ThenBy(tpl => tpl.Info.Order)
             .ThenBy(tpl => tpl.Info.JobID)
+            .ThenBy(tpl => tpl.Info.Order)
             .GroupBy(tpl => tpl.Info.JobName)
             .ToDictionary(
                 tpl => tpl.Key,
@@ -164,6 +164,13 @@ internal class ConfigWindow : Window
                             ImGui.EndTabItem();
                         }
 
+                        if (ImGui.IsItemHovered())
+                        {
+                            ImGui.BeginTooltip();
+                            ImGui.TextUnformatted("Classic Hover Tooltip");
+                            ImGui.EndTooltip();
+                        }
+
                         if (ImGui.BeginTabItem("Easy"))
                         {
                             int i = 1;
@@ -175,6 +182,13 @@ internal class ConfigWindow : Window
                             ImGui.EndTabItem();
                         }
 
+                        if (ImGui.IsItemHovered())
+                        {
+                            ImGui.BeginTooltip();
+                            ImGui.TextUnformatted("Easy");
+                            ImGui.EndTooltip();
+                        }
+
                         if (ImGui.BeginTabItem("Expanded"))
                         {
                             int i = 1;
@@ -184,6 +198,13 @@ internal class ConfigWindow : Window
                             }
 
                             ImGui.EndTabItem();
+                        }
+
+                        if (ImGui.IsItemHovered())
+                        {
+                            ImGui.BeginTooltip();
+                            ImGui.TextUnformatted("Expanded hover tooltip");
+                            ImGui.EndTooltip();
                         }
 
                         if (Service.Configuration.EnableSecretCombos)
@@ -198,6 +219,13 @@ internal class ConfigWindow : Window
 
                                 ImGui.EndTabItem();
                             }
+                        }
+
+                        if (ImGui.IsItemHovered())
+                        {
+                            ImGui.BeginTooltip();
+                            ImGui.TextUnformatted("Secret hover tooltip");
+                            ImGui.EndTooltip();
                         }
 
                     }
@@ -382,13 +410,51 @@ internal class ConfigWindow : Window
             Service.Configuration.Save();
         }
 
-        if (secret)
+        if (easy)
         {
             ImGui.SameLine();
             ImGui.Text("  ");
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+            ImGui.Text(FontAwesomeIcon.Star.ToIconString());
+            ImGui.PopStyleColor();
+            ImGui.PopFont();
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.BeginTooltip();
+                ImGui.TextUnformatted("Easy");
+                ImGui.EndTooltip();
+            }
+        }
+
+        if (expanded)
+        {
+            ImGui.SameLine();
+            ImGui.Text("  ");
+            ImGui.SameLine();
+            ImGui.PushFont(UiBuilder.IconFont);
+            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.TankBlue);
+            ImGui.Text(FontAwesomeIcon.Star.ToIconString());
+            ImGui.PopStyleColor();
+            ImGui.PopFont();
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.BeginTooltip();
+                ImGui.TextUnformatted("Expanded");
+                ImGui.EndTooltip();
+            }
+        }
+
+        if (secret)
+        {
+            ImGui.SameLine();
+            ImGui.Text("  ");
+            ImGui.SameLine();
+            ImGui.PushFont(UiBuilder.IconFont);
+            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DPSRed);
             ImGui.Text(FontAwesomeIcon.Star.ToIconString());
             ImGui.PopStyleColor();
             ImGui.PopFont();
