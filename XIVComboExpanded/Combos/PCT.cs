@@ -127,7 +127,7 @@ internal static class PCT
         {
             var gauge = GetJobGauge<PCTGauge>();
 
-            if ((actionID == PCT.FireRed || actionID == PCT.BlizzardCyan) && IsEnabled(CustomComboPreset.PictomancerRainbowStarter) && !InCombat())
+            if ((actionID == PCT.FireRed || actionID == PCT.BlizzardCyan) && IsEnabled(CustomComboPreset.PictomancerRainbowStarter) && !InCombat() && level >= PCT.Levels.RainbowDrip)
             {
                 return PCT.RainbowDrip;
             }
