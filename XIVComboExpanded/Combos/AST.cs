@@ -10,6 +10,7 @@ internal static class AST
     public const uint
         Draw = 3590,
         Redraw = 3593,
+        Combust = 3599,
         Benefic = 3594,
         Malefic = 3596,
         Malefic2 = 3598,
@@ -60,7 +61,9 @@ internal static class AST
     public static class Debuffs
     {
         public const ushort
-            Placeholder = 0;
+            Combust = 838,
+            Combust2 = 838,
+            Combust3 = 1881;
     }
 
     public static class Levels
@@ -85,6 +88,17 @@ internal class AstrologianMalefic : CustomCombo
         if (actionID == AST.Malefic || actionID == AST.Malefic2 || actionID == AST.Malefic3 || actionID == AST.Malefic4 || actionID == AST.FallMalefic)
         {
             var gauge = GetJobGauge<ASTGauge>();
+
+            if (IsEnabled(CustomComboPreset.AstrologianDoTFeature))
+            {
+                var combust = FindTargetEffect(AST.Debuffs.Combust);
+                var combust2 = FindTargetEffect(AST.Debuffs.Combust2);
+                var combust3 = FindTargetEffect(AST.Debuffs.Combust3);
+
+                // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
+                if (combust?.RemainingTime < 2.8 || combust2?.RemainingTime < 2.8 || combust3?.RemainingTime < 2.8)
+                    return OriginalHook(AST.Combust);
+            }
 
             if (IsEnabled(CustomComboPreset.AstrologianMaleficArcanaFeature) && gauge.DrawnCrownCard == CardType.LORD && level >= AST.Levels.MinorArcana)
                 return OriginalHook(AST.MinorArcanaDT);
