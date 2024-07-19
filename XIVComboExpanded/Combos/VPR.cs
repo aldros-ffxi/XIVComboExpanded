@@ -1,4 +1,5 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Types;
+
 using DreadCombo = Dalamud.Game.ClientState.JobGauge.Enums.DreadCombo;
 
 namespace XIVComboExpandedPlugin.Combos;
@@ -242,7 +243,7 @@ internal class AutoGenerationLegacies : CustomCombo
 
             if (level >= VPR.Levels.Legacies)
             {
-                if (OriginalHook(VPR.SerpentsTail) == VPR.FirstLegacy || 
+                if (OriginalHook(VPR.SerpentsTail) == VPR.FirstLegacy ||
                     OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy ||
                     OriginalHook(VPR.SerpentsTail) == VPR.ThirdLegacy ||
                     OriginalHook(VPR.SerpentsTail) == VPR.FourthLegacy)

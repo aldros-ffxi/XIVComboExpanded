@@ -38,8 +38,8 @@ internal struct CooldownData
     public unsafe float Cost => ActionManager.GetActionCost(ActionType.Action, this.ActionID, 1, 0, 0, 0);
 
     /// <summary>
-    /// Gets the base cooldown time of an action in seconds, adjusted for spell recast modifiers 
-    /// (ex. spell speed, if relevant)
+    /// Gets the base cooldown time of an action in seconds, adjusted for spell recast modifiers
+    /// (ex. spell speed, if relevant).
     /// </summary>
     public float BaseCooldown => ActionManager.GetAdjustedRecastTime(ActionType.Action, this.ActionID) / 1000f;
 
@@ -90,7 +90,7 @@ internal struct CooldownData
     public float CooldownRemaining => this.TotalCooldownRemaining % this.BaseCooldown;
 
     /// <summary>
-    /// Gets the overall elapsed cooldown.  The value will range from 0, immediately after all charges are used, 
+    /// Gets the overall elapsed cooldown.  The value will range from 0, immediately after all charges are used,
     /// up to the TotalBaseCooldown.  It is not known at this time if a return value of exactly 0 is possible.
     /// For abilities with charges, this will equal the time elapsed on the current charge's recharge, plus the
     /// BaseCooldown multiplied by the number of charges currently available.

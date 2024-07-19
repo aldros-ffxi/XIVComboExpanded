@@ -152,7 +152,7 @@ internal static class PCT
 
                 if (IsEnabled(CustomComboPreset.PictomancerAutoMogCombo))
                 {
-                    if (gauge.MooglePortraitReady || gauge.MadeenPortraitReady)
+                    if ((gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && GetRemainingCharges(PCT.MogOftheAges) > 0)
                     {
                         return OriginalHook(PCT.MogOftheAges);
                     }

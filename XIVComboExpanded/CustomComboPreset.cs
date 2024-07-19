@@ -165,7 +165,7 @@ public enum CustomComboPreset
 
     [SecretCustomCombo]
     [ParentCombo(BlackEnochianFeature)]
-    [CustomComboInfo("Enochian Timer Feature", "Replace Fire 4 and Blizzard 4 with Fire 3 Proc, Paradox, or Blizzard 3 when Enochian is about to run out.", BLM.JobID)]
+    [CustomComboInfo("Enochian Timer Feature", "Replace Fire 4 and Blizzard 4 with Fire 3 Proc, Paradox, Instant-Despair, or Blizzard 3 when Enochian is about to run out.", BLM.JobID)]
     BlackEnochianTimerFeature = 2525,
 
     [ParentCombo(BlackEnochianFeature)]
@@ -662,20 +662,6 @@ public enum CustomComboPreset
     [CustomComboInfo("Armor Crush / Raiju Feature", "Replace the Armor Crush combo with Forked Raiju when available.", NIN.JobID)]
     NinjaArmorCrushRaijuFeature = 3012,
 
-    //[CustomComboInfo("Huraijin / Armor Crush Combo", "Replace Huraijin with Armor Crush after using Gust Slash when Huton is missing.", NIN.JobID)]
-    //NinjaHuraijinArmorCrushCombo = 3010,
-
-    //[CustomComboInfo("Huraijin / Ninjutsu Feature", "Replace Huraijin with Ninjutsu if any Mudra are used.", NIN.JobID)]
-    //NinjaHuraijinNinjutsuFeature = 3009,
-
-    //[ConflictingCombos(NinjaHuraijinFleetingRaijuFeature)]
-    //[CustomComboInfo("Huraijin / Forked Raiju Feature", "Replace Huraijin with Forked Raiju when available.", NIN.JobID)]
-    //NinjaHuraijinForkedRaijuFeature = 3011,
-
-    //[ConflictingCombos(NinjaHuraijinForkedRaijuFeature)]
-    //[CustomComboInfo("Huraijin / Fleeting Raiju Option", "Replace Huraijin with Fleeting Raiju when available.", NIN.JobID)]
-    //NinjaHuraijinFleetingRaijuFeature = 3014,
-
     [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain.", NIN.JobID)]
     NinjaHakkeMujinsatsuCombo = 3003,
 
@@ -1003,7 +989,7 @@ public enum CustomComboPreset
     RedMageVerprocPlusFeature = 3505,
 
     [ParentCombo(RedMageVerprocPlusFeature)]
-    [CustomComboInfo("Deprioritize Grand Impact", "After using Acceleration, prioritize using Veraero/Verthunder over Grand Impact if both buffs are active.", RDM.JobID)]
+    [CustomComboInfo("Deprioritize Grand Impact Plus", "After using Acceleration, prioritize using Veraero/Verthunder over Grand Impact if both buffs are active.", RDM.JobID)]
     RedMageGrandImpactDeprioritize = 3517,
 
     [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Stone)", "Replace Verstone with Veraero when out of combat.", RDM.JobID)]

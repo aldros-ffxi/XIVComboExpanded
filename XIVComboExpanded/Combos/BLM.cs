@@ -66,7 +66,7 @@ internal static class BLM
             Fire4 = 60,
             BetweenTheLines = 62,
             Despair = 72,
-            UmbralSoul = 76,
+            UmbralSoul = 35,
             Xenoglossy = 80,
             HighFire2 = 82,
             HighBlizzard2 = 82,
@@ -118,14 +118,17 @@ internal class BlackFireBlizzard4 : CustomCombo
 
                 if (gauge.InAstralFire)
                 {
-                    if (IsEnabled(CustomComboPreset.BlackEnochianTimerFeature)) //10% safety net to account for server tick shenanigans and despair cast time
+                    if (IsEnabled(CustomComboPreset.BlackEnochianTimerFeature)) // 10% safety net to account for server tick shenanigans and despair cast time
                         {
-                            if ((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)) && gauge.ElementTimeRemaining/1000.0 < (fire4.BaseCooldown)*1.10 || gauge.ElementTimeRemaining/1000.0 < (fire4.CastTime)*1.10)
+                            if ((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast))
+                            || (gauge.ElementTimeRemaining / 1000.0 < fire4.CastTime * 1.10 && gauge.ElementTimeRemaining / 1000.0 < fire4.BaseCooldown * 1.10))
                             {
                                 if (HasEffect(BLM.Buffs.Firestarter))
                                     return BLM.Fire3;
                                 if (level > BLM.Levels.Paradox && gauge.IsParadoxActive)
                                     return BLM.Paradox;
+                                if (level > BLM.Levels.Despair && LocalPlayer?.CurrentMp > 0 && (HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)))
+                                    return BLM.Despair;
                                 if (level >= BLM.Levels.Blizzard3)
                                     return BLM.Blizzard3;
                             }

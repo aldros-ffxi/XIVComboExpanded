@@ -108,7 +108,7 @@ internal abstract partial class CustomCombo
             (uint ActionID, CooldownData Data) a1,
             (uint ActionID, CooldownData Data) a2)
         {
-            // This intent of this priority algorithm is to generate a single unified number that results in the 
+            // This intent of this priority algorithm is to generate a single unified number that results in the
             // following behaviors:
             //   * Any ability that is off cooldown and at maximum charges has maximum (and equal) priority.
             //   * If only one of the two abilities is currently usable, it has a higher priority.

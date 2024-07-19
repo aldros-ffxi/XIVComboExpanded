@@ -70,7 +70,8 @@ internal static class NIN
             EnhancedKassatsu = 76,
             Bunshin = 80,
             PhantomKamaitachi = 82,
-            Raiju = 90;
+            Raiju = 90,
+            KunaisBane = 92;
     }
 }
 
@@ -198,7 +199,7 @@ internal class NinjaKassatsu : CustomCombo
         {
             if ((level >= NIN.Levels.Hide && HasEffect(NIN.Buffs.Hidden)) ||
                 (level >= NIN.Levels.Suiton && HasEffect(NIN.Buffs.ShadowWalker)))
-                return NIN.TrickAttack;
+                return OriginalHook(NIN.TrickAttack);
         }
 
         return actionID;

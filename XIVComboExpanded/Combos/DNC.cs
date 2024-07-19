@@ -298,14 +298,14 @@ internal class DancerCascadeFountain : CustomCombo
 
             if (level >= DNC.Levels.SaberDance && !HasEffect(DNC.Buffs.StandardStep) && !HasEffect(DNC.Buffs.TechnicalStep))
             {
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetDanceOfTheDawn) && 
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetDanceOfTheDawn) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
                 if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) && 
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -323,14 +323,14 @@ internal class DancerCascadeFountain : CustomCombo
 
             if (level >= DNC.Levels.SaberDance && !HasEffect(DNC.Buffs.StandardStep) && !HasEffect(DNC.Buffs.TechnicalStep))
             {
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetDanceOfTheDawn) && 
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetDanceOfTheDawn) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
                 if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) && 
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }

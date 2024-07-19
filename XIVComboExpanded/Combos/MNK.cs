@@ -294,7 +294,7 @@ internal class MonkAoECombo : CustomCombo
             var gauge = GetJobGauge<MNKGauge>();
 
             // Auto Chakra
-            if (IsEnabled(CustomComboPreset.MonkMonkeyAutoChakraFeature))
+            if (IsEnabled(CustomComboPreset.MonkAoEAutoChakraFeature))
             {
                 if (gauge.Chakra > 4 && level >= MNK.Levels.HowlingFist && InCombat())
                     return OriginalHook(MNK.HowlingFist);
