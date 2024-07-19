@@ -13,6 +13,8 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
 using XIVComboExpandedPlugin;
+using Octokit;
+using Octokit.GraphQL;
 using XIVComboExpandedPlugin.Attributes;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -68,6 +70,7 @@ internal class ConfigWindow : Window
 
         this.SizeCondition = ImGuiCond.FirstUseEver;
         this.Size = new Vector2(740, 490);
+        this.GitHubChangelog = this.GetGithub().Result.ToDictionary();
     }
 
     /// <inheritdoc/>
@@ -527,6 +530,47 @@ internal class ConfigWindow : Window
                 ImGui.Unindent();
             }
         }
+    }
+
+
+    private async Task<Dictionary<string, string>> GetGithub()
+    {
+        List<GitHubCommit> Commits = new List<GitHubCommit>();
+        Dictionary<string, string> changeLog = new Dictionary<string, string>();
+
+        var github = new GitHubClient(new Octokit.ProductHeaderValue("XIVComboClient"));
+        //Create & initialize the client here
+
+        // Prior to first API call, this will be null, because it only deals with the last call.
+        var apiInfo = github.GetLastApiInfo();
+
+        // If the ApiInfo isn't null, there will be a property called RateLimit
+        var rateLimit = apiInfo?.RateLimit;
+
+        var howManyRequestsCanIMakePerHour = rateLimit?.Limit;
+        var howManyRequestsDoIHaveLeft = rateLimit?.Remaining;
+        var whenDoesTheLimitReset = rateLimit?.Reset; // UTC time
+
+        if (howManyRequestsDoIHaveLeft >= 1)
+        {
+            var repoCommits = await github.Repository.Commit.GetAll("MKhayle", "XIVComboExpanded");
+            Commits.AddRange(repoCommits);
+
+            foreach (var item in Commits)
+            {
+                if (item.Label.Contains("[PUSH]"))
+                    changeLog.Add(item.Label.Substring(7), item.Commit.Message);
+            }
+
+            foreach (var item in changeLog)
+            {
+                Service.PluginLog.Info(item.Key);
+                Service.PluginLog.Info(item.Value);
+            }
+        }
+
+
+        return changeLog;
     }
 
     /// <summary>
