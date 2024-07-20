@@ -3,7 +3,7 @@
 namespace XIVComboExpandedPlugin.Attributes;
 
 /// <summary>
-/// Attribute designating easy, non-optimal combos.
+/// Attribute designating sectioning for jobs.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
 internal class SectionComboAttribute : Attribute

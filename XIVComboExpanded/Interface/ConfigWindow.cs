@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 using Octokit;
 using Octokit.GraphQL;
 using XIVComboExpandedPlugin.Attributes;
-using System.Drawing;
+using Lumina.Excel.GeneratedSheets;
+using Lumina.Data;
+using Language = Lumina.Data.Language;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -150,6 +152,7 @@ internal class ConfigWindow : Window
                 ImGui.Indent(4f);
                 if (ImGui.BeginChild("TabContent", new Vector2(0, -1), true, ImGuiWindowFlags.NoBackground))
                 {
+                    #region COMBOS TAB HEADER
                     var jobID = CustomComboInfoAttribute.NameToJobID(Service.Configuration.CurrentTab);
                     var image = GetJobIcon(jobID);
                     ImGui.Image(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(36f, 36f));
@@ -160,8 +163,8 @@ internal class ConfigWindow : Window
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
                     ImGui.Separator();
-                    //ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
                     ImGui.PopStyleColor(2);
+                    #endregion
 
                     if (ImGui.BeginTabBar("ComboTabs"))
                     {
@@ -291,6 +294,8 @@ internal class ConfigWindow : Window
 
                 ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
 
+
+
                 var changelog = this.GitHubChangelog;
 
 
@@ -312,7 +317,7 @@ internal class ConfigWindow : Window
 
                 if (!changelog.Any())
                 {
-                    ImGui.Text("Reached API Limit.");
+                    ImGui.Text("Reached API Limit. Wanna try again?.");
                 }
 
                 ImGui.PopStyleVar();
@@ -383,6 +388,13 @@ internal class ConfigWindow : Window
         var accessibility = Service.Configuration.IsAccessible(preset);
         var conflicts = Service.Configuration.GetConflicts(preset);
         var parent = Service.Configuration.GetParent(preset);
+        uint[] icons = [];
+        string section = string.Empty;
+
+        if (preset.GetAttribute<IconsComboAttribute>()?.Icons.Length > 0)
+            icons = preset.GetAttribute<IconsComboAttribute>().Icons;
+        if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+            section = preset.GetAttribute<SectionComboAttribute>().Section.ToString();
 
         switch (tab)
         {
@@ -423,6 +435,36 @@ internal class ConfigWindow : Window
             }
 
             Service.Configuration.Save();
+        }
+
+
+        if (icons.Length > 0)
+        {
+            ImGui.SameLine();
+
+            foreach (var icon in icons)
+            {
+                ImGui.PushItemWidth(100);
+                ImGui.Image(GetSkillIcon(icon).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f, 24f));
+                ImGui.IsItemHovered();
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.BeginTooltip();
+                    ImGui.TextUnformatted(GetSkillName(icon));
+                    ImGui.EndTooltip();
+                }
+
+                if (icons.FirstOrDefault() == icon && icons.Length > 1)
+                {
+                    ImGui.SameLine();
+                    ImGui.Text(">");
+                }
+
+                if (icons.LastOrDefault() != icon)
+                {
+                    ImGui.SameLine();
+                }
+            }
         }
 
         if (accessibility)
@@ -608,8 +650,6 @@ internal class ConfigWindow : Window
         }
     }
 
-
-
     /// <summary>
     /// Returns a ISharedImmediateTexture for the appropriate job.
     /// </summary>
@@ -623,6 +663,36 @@ internal class ConfigWindow : Window
         if (jobID == 0)
             iconID = 62146;
 
-        return Service.TextureProvider.GetFromGameIcon(new GameIconLookup((uint)iconID, false, true));
+        return GetIcon((uint)iconID);
     }
+
+    /// <summary>
+    /// Returns a ISharedImmediateTexture for the appropriate skill.
+    /// </summary>
+    /// <param name="skillID">ID of the skill.</param>
+    private static ISharedImmediateTexture GetSkillIcon(uint skillID)
+    {
+        var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>();
+        var skill = actionList.GetRow(skillID);
+        return GetIcon((uint)skill.Icon);
+    }
+
+    /// <summary>
+    /// Returns a ISharedImmediateTexture for the appropriate skill.
+    /// </summary>
+    /// <param name="skillID">ID of the skill.</param>
+    private static string GetSkillName(uint skillID)
+    {
+        Language language = (Language)Service.ClientState.ClientLanguage + 1;
+        var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>(language);
+        var skill = actionList.GetRow(skillID);
+        return skill.Name;
+    }
+
+    /// <summary>
+    /// Returns a ISharedImmediateTexture for the appropriate icon.
+    /// </summary>
+    /// <param name="iconID">ID of the icon.</param>
+    private static ISharedImmediateTexture GetIcon(uint iconID)
+        => Service.TextureProvider.GetFromGameIcon(new GameIconLookup(iconID, false, true));
 }

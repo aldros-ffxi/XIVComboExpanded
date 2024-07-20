@@ -29,7 +29,7 @@ public class PluginConfiguration : IPluginConfiguration
             .ToHashSet();
 
         AccessibilityCombos = Enum.GetValues<CustomComboPreset>()
-            .Where(preset => preset.GetAttribute<AccessibiiltyCustomComboAttribute>() != default)
+            .Where(preset => preset.GetAttribute<AccessibilityCustomComboAttribute>() != default)
             .ToHashSet();
 
         ExpandedCombos = Enum.GetValues<CustomComboPreset>()

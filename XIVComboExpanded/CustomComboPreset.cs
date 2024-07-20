@@ -90,7 +90,8 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ADV
 
-    [CustomComboInfo("Swift Raise Feature", "Replace Ascend, Ressurection, Egeiro, Raise, Verraise, and Angel Whisper with Swiftcast when it is off cooldown (and Dualcast isn't up).", ADV.JobID)]
+    [IconsCombo([ADV.Swiftcast, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
+    [CustomComboInfo("Swift Raise Feature", "Replace Ascend, Resurrection, Egeiro, Raise, Verraise, and Angel Whisper with Swiftcast when it is off cooldown (and Dualcast isn't up).", ADV.JobID)]
     AdvSwiftcastFeature = 1000,
 
     [ParentCombo(AdvSwiftcastFeature)]
@@ -301,7 +302,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Fan Dance 4 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 4 when available.", DNC.JobID)]
     DancerFanDance4Feature = 3809,
 
-    [AccessibiiltyCustomCombo]
+    [AccessibilityCustomCombo]
     [ConflictingCombos(DancerDanceComboCompatibility)]
     [CustomComboInfo("Dance Step Combo", "Replace Standard Step and Technical Step with each dance step while dancing.", DNC.JobID)]
     DancerDanceStepCombo = 3802,
@@ -554,7 +555,7 @@ public enum CustomComboPreset
     // ====================================================================================
     #region MONK
 
-    [AccessibiiltyCustomCombo]
+    [AccessibilityCustomCombo]
     [ConflictingCombos([MonkOpoFeature, MonkRaptorFeature, MonkCoeurlFeature])]
     [CustomComboInfo("monke mode", "One-buttons the basic rotation on Bootshine/Leaping Opo. Neat for beginners, very, very bad for serious players.", MNK.JobID)]
     MonkMonkeyMode = 2021,
@@ -616,7 +617,7 @@ public enum CustomComboPreset
     [CustomComboInfo("AoE Form Shift Feature", "Replace Masterful Blitz with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
     MonkAoEFormShiftFeature = 2027,
 
-    [AccessibiiltyCustomCombo]
+    [AccessibilityCustomCombo]
     [ParentCombo(MonkAoECombo)]
     [CustomComboInfo("Automatic AoE Chakra Feature", "Replace Masterful Blitz with Enlightenment when your Fifth Chakra is open.", MNK.JobID)]
     MonkAoEAutoChakraFeature = 2028,
@@ -1429,39 +1430,47 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DOL
 
+    [SectionCombo("Disciple of the Land")]
+    [IconsCombo([DOL.AgelessWords, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld])]
+    [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
+    DolEurekaFeature = 51001,
+
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.Cast, DOL.Hook])]
     [ConflictingCombos(DolCastRestFeature)]
     [CustomComboInfo("Cast / Hook Feature", "Replace Cast with Hook when fishing.", DOL.JobID)]
     DolCastHookFeature = 51002,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.Cast, DOL.Rest])]
     [ConflictingCombos(DolCastHookFeature)]
     [CustomComboInfo("Cast / Rest Feature", "Replace Cast with Rest when fishing.", DOL.JobID)]
     DolCastRestFeature = 51008,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.Cast, DOL.Gig])]
     [CustomComboInfo("Cast / Gig Feature", "Replace Cast with Gig when underwater.", DOL.JobID)]
     DolCastGigFeature = 51003,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.SurfaceSlap, DOL.VeteranTrade])]
     [CustomComboInfo("Surface Slap / Veteran Trade Feature", "Replace Surface Slap with Veteran Trade when underwater.", DOL.JobID)]
     DolSurfaceTradeFeature = 51004,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.PrizeCatch, DOL.NaturesBounty])]
     [CustomComboInfo("Prize Catch / Nature's Bounty Feature", "Replace Prize Catch with Nature's Bounty when underwater.", DOL.JobID)]
     DolPrizeBountyFeature = 51005,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.Snagging, DOL.Salvage])]
     [CustomComboInfo("Snagging / Salvage Feature", "Replace Snagging with Salvage when underwater.", DOL.JobID)]
     DolSnaggingSalvageFeature = 51006,
 
     [SectionCombo("Disciple of the Ocean")]
+    [IconsCombo([DOL.CastLight, DOL.ElectricCurrent])]
     [CustomComboInfo("Cast Light / Electric Current Feature", "Replace Cast Light with Electric Current when underwater.", DOL.JobID)]
     DolCastLightElectricCurrentFeature = 51007,
-
-    [SectionCombo("Disciple of the Land")]
-    [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
-    DolEurekaFeature = 51001,
 
     #endregion
     // ====================================================================================
