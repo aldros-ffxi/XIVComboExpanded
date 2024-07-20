@@ -17,7 +17,7 @@ namespace XIVComboExpandedPlugin;
 public class PluginConfiguration : IPluginConfiguration
 {
     private static readonly HashSet<CustomComboPreset> SecretCombos;
-    private static readonly HashSet<CustomComboPreset> EasyCombos;
+    private static readonly HashSet<CustomComboPreset> AccessibilityCombos;
     private static readonly HashSet<CustomComboPreset> ExpandedCombos;
     private static readonly Dictionary<CustomComboPreset, CustomComboPreset[]> ConflictingCombos;
     private static readonly Dictionary<CustomComboPreset, CustomComboPreset?> ParentCombos;  // child: parent
@@ -28,8 +28,8 @@ public class PluginConfiguration : IPluginConfiguration
             .Where(preset => preset.GetAttribute<SecretCustomComboAttribute>() != default)
             .ToHashSet();
 
-        EasyCombos = Enum.GetValues<CustomComboPreset>()
-            .Where(preset => preset.GetAttribute<EasyCustomComboAttribute>() != default)
+        AccessibilityCombos = Enum.GetValues<CustomComboPreset>()
+            .Where(preset => preset.GetAttribute<AccessibiiltyCustomComboAttribute>() != default)
             .ToHashSet();
 
         ExpandedCombos = Enum.GetValues<CustomComboPreset>()
@@ -129,8 +129,8 @@ public class PluginConfiguration : IPluginConfiguration
     /// </summary>
     /// <param name="preset">Preset to check.</param>
     /// <returns>The boolean representation.</returns>
-    public bool IsEasy(CustomComboPreset preset)
-        => EasyCombos.Contains(preset);
+    public bool IsAccessible(CustomComboPreset preset)
+        => AccessibilityCombos.Contains(preset);
 
     /// <summary>
     /// Gets an array of conflicting combo presets.

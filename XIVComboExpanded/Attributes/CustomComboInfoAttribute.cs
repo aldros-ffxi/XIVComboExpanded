@@ -56,6 +56,10 @@ internal class CustomComboInfoAttribute : Attribute
     /// </summary>
     public string RoleName => JobIDToRole(this.JobID);
 
+    /// <summary>
+    /// Gets the job name from a job ID.
+    /// </summary>
+    /// <returns>The job name.</returns>
     public static string JobIDToName(byte key)
     {
         return key switch
@@ -158,6 +162,7 @@ internal class CustomComboInfoAttribute : Attribute
             "Pictomancer" => 42,
             "Disciples of the Hand" => DOH.JobID,
             "Disciples of the Land" => DOL.JobID,
+            _ => 0,
         };
     }
 
@@ -225,6 +230,7 @@ internal class CustomComboInfoAttribute : Attribute
             "Ranged" => 4,
             "Caster" => 5,
             "Others" => 6,
+            _ => 0,
         };
     }
 }

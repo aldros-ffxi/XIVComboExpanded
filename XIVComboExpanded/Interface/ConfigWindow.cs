@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using System.Reflection;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
-using Dalamud.Interface.Components;
 using Dalamud.Interface.Textures;
-using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
-using XIVComboExpandedPlugin;
+using System.Threading.Tasks;
 using Octokit;
 using Octokit.GraphQL;
 using XIVComboExpandedPlugin.Attributes;
-using static System.Net.Mime.MediaTypeNames;
+using System.Drawing;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -25,7 +22,15 @@ namespace XIVComboExpandedPlugin.Interface;
 /// </summary>
 internal class ConfigWindow : Window
 {
-    private enum Tabs { Classic = 1, Easy = 2, Expanded = 3, Secret = 4 }
+    private enum Tabs
+    {
+        Classic = 1,
+        Accessibility = 2,
+        Expanded = 3,
+        Secret = 4,
+    }
+
+    private readonly Dictionary<string,string> GitHubChangelog;
     private readonly Dictionary<string, List<(CustomComboPreset Preset, CustomComboInfoAttribute Info)>> groupedPresets;
     private readonly Dictionary<CustomComboPreset, (CustomComboPreset Preset, CustomComboInfoAttribute Info)[]> presetChildren;
     private readonly Vector4 shadedColor = new(0.68f, 0.68f, 0.68f, 1.0f);
@@ -78,6 +83,8 @@ internal class ConfigWindow : Window
     {
         if (ImGui.BeginTabBar("Tabs"))
         {
+            #region COMBOS TAB
+
             if (ImGui.BeginTabItem("Combos"))
             {
                 if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(36f, 0f), false, ImGuiWindowFlags.NoScrollbar))
@@ -100,23 +107,26 @@ internal class ConfigWindow : Window
                             else
                             {
                                 ImGui.PushStyleColor(ImGuiCol.Button, 0);
-
                                 ImGui.PushStyleColor(ImGuiCol.Border, 0);
                             }
 
                             ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 0);
-                            var image = GetJobIcon(CustomComboInfoAttribute.NameToJobID(jobName));
 
-                            if (ImGui.ImageButton(image.GetWrapOrDefault().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
-                            {
-                                Service.Configuration.CurrentTab = jobName;
-                            }
+                            ISharedImmediateTexture image = GetJobIcon(CustomComboInfoAttribute.NameToJobID(jobName));
 
-                            if (ImGui.IsItemHovered())
+                            if (image != null)
                             {
-                                ImGui.BeginTooltip();
-                                ImGui.TextUnformatted(jobName);
-                                ImGui.EndTooltip();
+                                if (ImGui.ImageButton(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
+                                {
+                                    Service.Configuration.CurrentTab = jobName;
+                                }
+
+                                if (ImGui.IsItemHovered())
+                                {
+                                    ImGui.BeginTooltip();
+                                    ImGui.TextUnformatted(jobName);
+                                    ImGui.EndTooltip();
+                                }
                             }
 
                             ImGui.PopStyleVar();
@@ -142,7 +152,7 @@ internal class ConfigWindow : Window
                 {
                     var jobID = CustomComboInfoAttribute.NameToJobID(Service.Configuration.CurrentTab);
                     var image = GetJobIcon(jobID);
-                    ImGui.Image(image.GetWrapOrDefault().ImGuiHandle, new System.Numerics.Vector2(36f, 36f));
+                    ImGui.Image(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(36f, 36f));
                     ImGui.SameLine();
                     ImGui.PushFont(UiBuilder.MonoFont);
                     ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
@@ -150,14 +160,13 @@ internal class ConfigWindow : Window
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
                     ImGui.Separator();
-                    ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
+                    //ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
                     ImGui.PopStyleColor(2);
 
                     if (ImGui.BeginTabBar("ComboTabs"))
                     {
                         if (ImGui.BeginTabItem("Classic"))
                         {
-
                             int i = 1;
                             foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                             {
@@ -171,24 +180,6 @@ internal class ConfigWindow : Window
                         {
                             ImGui.BeginTooltip();
                             ImGui.TextUnformatted("Classic Hover Tooltip");
-                            ImGui.EndTooltip();
-                        }
-
-                        if (ImGui.BeginTabItem("Easy"))
-                        {
-                            int i = 1;
-                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
-                            {
-                                this.DrawPreset(Tabs.Easy, preset, info, ref i);
-                            }
-
-                            ImGui.EndTabItem();
-                        }
-
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted("Easy");
                             ImGui.EndTooltip();
                         }
 
@@ -207,6 +198,24 @@ internal class ConfigWindow : Window
                         {
                             ImGui.BeginTooltip();
                             ImGui.TextUnformatted("Expanded hover tooltip");
+                            ImGui.EndTooltip();
+                        }
+
+                        if (ImGui.BeginTabItem("Accessibility"))
+                        {
+                            int i = 1;
+                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            {
+                                this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
+                            }
+
+                            ImGui.EndTabItem();
+                        }
+
+                        if (ImGui.IsItemHovered())
+                        {
+                            ImGui.BeginTooltip();
+                            ImGui.TextUnformatted("Accessibility");
                             ImGui.EndTooltip();
                         }
 
@@ -231,9 +240,8 @@ internal class ConfigWindow : Window
                             ImGui.EndTooltip();
                         }
 
+                        ImGui.EndTabBar();
                     }
-
-                    ImGui.EndTabBar();
 
                     ImGui.EndChild();
                 }
@@ -244,6 +252,9 @@ internal class ConfigWindow : Window
 
                 ImGui.EndTabItem();
             }
+            #endregion
+
+            #region SETTINGS TAB
 
             if (ImGui.BeginTabItem("Settings"))
             {
@@ -270,6 +281,9 @@ internal class ConfigWindow : Window
 
                 ImGui.EndTabItem();
             }
+            #endregion
+
+            #region CHANGELOG TAB
 
             if (ImGui.BeginTabItem("Changelog"))
             {
@@ -277,12 +291,7 @@ internal class ConfigWindow : Window
 
                 ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
 
-                var changelog = new Dictionary<string, string[]>()
-                {
-                    { "v3", ["dummy (like me)"] },
-                    { "v2", ["data"] },
-                    { "v1", ["text", "can be on 2 lines I think", "and even three wooooo"] },
-                };
+                var changelog = this.GitHubChangelog;
 
 
                 foreach (var (version, info) in changelog)
@@ -294,24 +303,28 @@ internal class ConfigWindow : Window
                         ImGui.PopItemWidth();
 
                         ImGui.PushStyleColor(ImGuiCol.Text, this.shadedColor);
-                        foreach (var text in info)
-                        {
-                            ImGui.BulletText(text);
-                        }
-
+                        ImGui.BulletText(info);
                         ImGui.PopStyleColor();
+
                         ImGui.Spacing();
                     }
                 }
 
+                if (!changelog.Any())
+                {
+                    ImGui.Text("Reached API Limit.");
+                }
+
+                ImGui.PopStyleVar();
+
                 ImGui.EndChild();
                 ImGui.EndTabItem();
             }
+            #endregion
 
-
+            #region ABOUT TAB
             if (ImGui.BeginTabItem("About"))
             {
-
                 ImGui.Text("Project's GitHub link :");
                 if (ImGui.Button("Repository link"))
                 {
@@ -355,33 +368,33 @@ internal class ConfigWindow : Window
                 }
 
                 ImGui.EndTabItem();
-                }
             }
+        #endregion
+        }
 
         ImGui.EndTabBar();
     }
-
 
     private void DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
     {
         var enabled = Service.Configuration.IsEnabled(preset);
         var secret = Service.Configuration.IsSecret(preset);
         var expanded = Service.Configuration.IsExpanded(preset);
-        var easy = Service.Configuration.IsEasy(preset);
+        var accessibility = Service.Configuration.IsAccessible(preset);
         var conflicts = Service.Configuration.GetConflicts(preset);
         var parent = Service.Configuration.GetParent(preset);
 
         switch (tab)
         {
             case Tabs.Classic:
-                if (easy || expanded || secret)
-                    return;
-                break;
-            case Tabs.Easy:
-                if (expanded || secret)
+                if (accessibility || expanded || secret)
                     return;
                 break;
             case Tabs.Expanded:
+                if (accessibility || secret)
+                    return;
+                break;
+            case Tabs.Accessibility:
                 if (secret)
                     return;
                 break;
@@ -390,7 +403,6 @@ internal class ConfigWindow : Window
             default:
                 break;
         }
-
 
         ImGui.PushItemWidth(200);
 
@@ -413,7 +425,7 @@ internal class ConfigWindow : Window
             Service.Configuration.Save();
         }
 
-        if (easy)
+        if (accessibility)
         {
             ImGui.SameLine();
             ImGui.Text("  ");
@@ -427,7 +439,7 @@ internal class ConfigWindow : Window
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("Easy");
+                ImGui.TextUnformatted("Accessibility combo");
                 ImGui.EndTooltip();
             }
         }
@@ -446,7 +458,7 @@ internal class ConfigWindow : Window
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("Expanded");
+                ImGui.TextUnformatted("Expanded combo");
                 ImGui.EndTooltip();
             }
         }
@@ -465,7 +477,7 @@ internal class ConfigWindow : Window
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("Secret");
+                ImGui.TextUnformatted("Secret combo");
                 ImGui.EndTooltip();
             }
         }
@@ -532,7 +544,6 @@ internal class ConfigWindow : Window
         }
     }
 
-
     private async Task<Dictionary<string, string>> GetGithub()
     {
         List<GitHubCommit> Commits = new List<GitHubCommit>();
@@ -558,8 +569,8 @@ internal class ConfigWindow : Window
 
             foreach (var item in Commits)
             {
-                if (item.Label.Contains("[PUSH]"))
-                    changeLog.Add(item.Label.Substring(7), item.Commit.Message);
+                if (item.Commit.Message.Contains("[PUSH]"))
+                    changeLog.Add(item.Commit.Message.Substring(7), item.CommentsUrl);
             }
 
             foreach (var item in changeLog)
@@ -600,10 +611,10 @@ internal class ConfigWindow : Window
 
 
     /// <summary>
-    /// Returns a ISharedImmediateTexture for the appropriate job
+    /// Returns a ISharedImmediateTexture for the appropriate job.
     /// </summary>
     /// <param name="jobID">ID of the job.</param>
-    private static ISharedImmediateTexture GetJobIcon(int jobID)
+    private static ISharedImmediateTexture GetJobIcon(byte jobID)
     {
         var iconID = 62100 + jobID;
 
@@ -612,6 +623,6 @@ internal class ConfigWindow : Window
         if (jobID == 0)
             iconID = 62146;
 
-        return Service.TextureProvider.GetFromGameIcon(new GameIconLookup((uint)(iconID), true));
+        return Service.TextureProvider.GetFromGameIcon(new GameIconLookup((uint)iconID, false, true));
     }
 }

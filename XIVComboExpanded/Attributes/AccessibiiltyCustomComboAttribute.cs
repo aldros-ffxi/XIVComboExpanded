@@ -6,6 +6,6 @@ namespace XIVComboExpandedPlugin.Attributes;
 /// Attribute designating easy, non-optimal combos.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
-internal class EasyCustomComboAttribute : Attribute
+internal class AccessibiiltyCustomComboAttribute : Attribute
 {
 }
