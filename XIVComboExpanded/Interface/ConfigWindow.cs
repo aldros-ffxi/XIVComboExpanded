@@ -447,17 +447,15 @@ internal class ConfigWindow : Window
                 ImGui.PushItemWidth(100);
                 ImGui.Image(GetSkillIcon(icon).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f, 24f));
                 ImGui.IsItemHovered();
-                if (ImGui.IsItemHovered())
+                string skillName = GetSkillName(icon);
+                if (skillName != string.Empty)
                 {
-                    ImGui.BeginTooltip();
-                    ImGui.TextUnformatted(GetSkillName(icon));
-                    ImGui.EndTooltip();
-                }
-
-                if (icons.FirstOrDefault() == icon && icons.Length > 1)
-                {
-                    ImGui.SameLine();
-                    ImGui.Text(">");
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted(skillName);
+                        ImGui.EndTooltip();
+                    }
                 }
 
                 if (icons.LastOrDefault() != icon)
@@ -658,8 +656,10 @@ internal class ConfigWindow : Window
     {
         var iconID = 62100 + jobID;
 
+        // Outside of bounds, either DoL, DoH, or we messed up.
         if (iconID < 62101 || iconID > 62142)
             iconID = 62145;
+        // Adventurer
         if (jobID == 0)
             iconID = 62146;
 
@@ -672,8 +672,11 @@ internal class ConfigWindow : Window
     /// <param name="skillID">ID of the skill.</param>
     private static ISharedImmediateTexture GetSkillIcon(uint skillID)
     {
+        if(skillID > 60000)
+            return GetIcon((uint)skillID);
         var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>();
         var skill = actionList.GetRow(skillID);
+
         return GetIcon((uint)skill.Icon);
     }
 
@@ -683,6 +686,8 @@ internal class ConfigWindow : Window
     /// <param name="skillID">ID of the skill.</param>
     private static string GetSkillName(uint skillID)
     {
+        if (skillID > 60000)
+            return String.Empty;
         Language language = (Language)Service.ClientState.ClientLanguage + 1;
         var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>(language);
         var skill = actionList.GetRow(skillID);

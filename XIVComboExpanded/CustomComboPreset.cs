@@ -1,6 +1,8 @@
 using XIVComboExpandedPlugin.Attributes;
 using XIVComboExpandedPlugin.Combos;
 
+using UTL = XIVComboExpandedPlugin.Attributes.IconsComboAttribute;
+
 namespace XIVComboExpandedPlugin;
 
 /// <summary>
@@ -90,7 +92,7 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ADV
 
-    [IconsCombo([ADV.Swiftcast, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
+    [IconsCombo([ADV.Swiftcast, UTL.ArrowLeft, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
     [CustomComboInfo("Swift Raise Feature", "Replace Ascend, Resurrection, Egeiro, Raise, Verraise, and Angel Whisper with Swiftcast when it is off cooldown (and Dualcast isn't up).", ADV.JobID)]
     AdvSwiftcastFeature = 1000,
 

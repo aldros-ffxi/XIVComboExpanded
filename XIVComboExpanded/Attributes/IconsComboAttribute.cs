@@ -31,4 +31,25 @@ internal class IconsComboAttribute : Attribute
     /// Gets the icon ID.
     /// </summary>
     public uint[] Icons { get; }
+
+    public const uint
+        ArrowLeft = 66301,
+        ArrowRight = 66302,
+        ArrowUp = 66303,
+        ArrowDown = 66304,
+        Cross = 66308,
+        Forbidden = 66309,
+        Plus = 66315,
+        Minus = 66316,
+        Clock = 66317,
+        Danger = 66318,
+        Checkmark = 66319,
+        Chatbubble = 66321,
+        AoE = 60495,
+        ST = 60423,
+        Cycle = 66329;
+
+
+
+
 }
