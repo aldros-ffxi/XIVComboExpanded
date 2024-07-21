@@ -49,7 +49,4 @@ internal class IconsComboAttribute : Attribute
         ST = 60423,
         Cycle = 66329;
 
-
-
-
 }

@@ -10,6 +10,8 @@ using Dalamud.Game.ClientState.Statuses;
 using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using XIVComboExpandedPlugin.Attributes;
+using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkHistory.Delegates;
+using static System.Collections.Specialized.BitVector32;
 
 namespace XIVComboExpandedPlugin.Combos;
 
@@ -70,7 +72,7 @@ internal abstract partial class CustomCombo
     {
         newActionID = 0;
 
-        if (!IsEnabled(this.Preset))
+        if (!IsEnabled(this.Preset) || !Service.Configuration.EnablePlugin)
             return false;
 
         var classJobID = LocalPlayer!.ClassJob.Id;

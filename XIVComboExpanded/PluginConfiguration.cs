@@ -67,13 +67,31 @@ public class PluginConfiguration : IPluginConfiguration
     public HashSet<CustomComboPreset> EnabledActions4 { get; set; } = new();
 
     /// <summary>
-    /// Gets or sets a value indicating whether to allow and display secret combos.
+    /// Gets or sets a value indicating whether to allow and display expanded combos.
     /// </summary>
-    [JsonProperty("Debug")]
-    public bool EnableSecretCombos { get; set; } = false;
+    [JsonProperty("Plugin")]
+    public bool EnablePlugin { get; set; } = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to allow and display expanded combos.
+    /// </summary>
+    [JsonProperty("Expanded")]
+    public bool EnableExpandedCombos { get; set; } = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to allow and display accessibility combos.
+    /// </summary>
+    [JsonProperty("Accessibility")]
+    public bool EnableAccessibilityCombos { get; set; } = false;
 
     /// <summary>
     /// Gets or sets a value indicating whether to allow and display secret combos.
+    /// </summary>
+    [JsonProperty("Secret")]
+    public bool EnableSecretCombos { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets a value indicating which is the current tab.
     /// </summary>
     [JsonProperty("Tab")]
     public string CurrentTab { get; set; } = "Adventurer";
@@ -106,7 +124,10 @@ public class PluginConfiguration : IPluginConfiguration
     /// <param name="preset">Preset to check.</param>
     /// <returns>The boolean representation.</returns>
     public bool IsEnabled(CustomComboPreset preset)
-        => this.EnabledActions.Contains(preset) && (this.EnableSecretCombos || !this.IsSecret(preset));
+        => this.EnabledActions.Contains(preset)
+        && (this.EnableSecretCombos || !this.IsSecret(preset))
+        && (this.EnableExpandedCombos || !this.IsExpanded(preset))
+        && (this.EnableAccessibilityCombos || !this.IsAccessible(preset));
 
     /// <summary>
     /// Gets a value indicating whether a preset is secret.

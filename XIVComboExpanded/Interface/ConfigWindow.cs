@@ -16,6 +16,7 @@ using XIVComboExpandedPlugin.Attributes;
 using Lumina.Excel.GeneratedSheets;
 using Lumina.Data;
 using Language = Lumina.Data.Language;
+using Octokit.GraphQL.Model;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -32,7 +33,6 @@ internal class ConfigWindow : Window
         Secret = 4,
     }
 
-    private readonly Dictionary<string,string> GitHubChangelog;
     private readonly Dictionary<string, List<(CustomComboPreset Preset, CustomComboInfoAttribute Info)>> groupedPresets;
     private readonly Dictionary<CustomComboPreset, (CustomComboPreset Preset, CustomComboInfoAttribute Info)[]> presetChildren;
     private readonly Vector4 shadedColor = new(0.68f, 0.68f, 0.68f, 1.0f);
@@ -76,8 +76,10 @@ internal class ConfigWindow : Window
                 .OrderBy(tpl => tpl.Info.Order).ToArray());
 
         this.SizeCondition = ImGuiCond.FirstUseEver;
-        this.Size = new Vector2(740, 490);
-        this.GitHubChangelog = this.GetGithub().Result.ToDictionary();
+        this.Size = new Vector2(750, 500);
+        WindowSizeConstraints windowSizeConstraints = new WindowSizeConstraints();
+        windowSizeConstraints.MinimumSize = new Vector2(750, 500);
+        this.SizeConstraints = windowSizeConstraints;
     }
 
     /// <inheritdoc/>
@@ -95,45 +97,56 @@ internal class ConfigWindow : Window
 
                     if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f, 36f), 4f))
                     {
+                        if ((Service.Configuration.CurrentTab == "Adventurer" || Service.Configuration.CurrentTab == "Disciples of the Land" || Service.Configuration.CurrentTab == "Sage") && !Service.Configuration.EnableExpandedCombos)
+                        {
+                            Service.Configuration.CurrentTab = "Paladin";
+                        }
+
                         foreach (var jobName in this.groupedPresets.Keys)
                         {
-                            ImGui.TableNextRow();
-                            ImGui.TableNextColumn();
-                            ImGui.PushID($"EditorTab{CustomComboInfoAttribute.NameToJobID(jobName)}");
-                            bool selected = Service.Configuration.CurrentTab == jobName ? true : false;
-                            if (selected)
+                            if ((jobName == "Adventurer" || jobName == "Disciples of the Land" || jobName == "Sage") && !Service.Configuration.EnableExpandedCombos)
                             {
-                                ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.DalamudGrey2);
-                                ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudGrey3);
                             }
                             else
                             {
-                                ImGui.PushStyleColor(ImGuiCol.Button, 0);
-                                ImGui.PushStyleColor(ImGuiCol.Border, 0);
-                            }
-
-                            ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 0);
-
-                            ISharedImmediateTexture image = GetJobIcon(CustomComboInfoAttribute.NameToJobID(jobName));
-
-                            if (image != null)
-                            {
-                                if (ImGui.ImageButton(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
+                                ImGui.TableNextRow();
+                                ImGui.TableNextColumn();
+                                ImGui.PushID($"EditorTab{CustomComboInfoAttribute.NameToJobID(jobName)}");
+                                bool selected = Service.Configuration.CurrentTab == jobName ? true : false;
+                                if (selected)
                                 {
-                                    Service.Configuration.CurrentTab = jobName;
+                                    ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.DalamudGrey2);
+                                    ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudGrey3);
+                                }
+                                else
+                                {
+                                    ImGui.PushStyleColor(ImGuiCol.Button, 0);
+                                    ImGui.PushStyleColor(ImGuiCol.Border, 0);
                                 }
 
-                                if (ImGui.IsItemHovered())
-                                {
-                                    ImGui.BeginTooltip();
-                                    ImGui.TextUnformatted(jobName);
-                                    ImGui.EndTooltip();
-                                }
-                            }
+                                ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 0);
 
-                            ImGui.PopStyleVar();
-                            ImGui.PopStyleColor(2);
-                            ImGui.PopID();
+                                ISharedImmediateTexture image = GetJobIcon(CustomComboInfoAttribute.NameToJobID(jobName));
+
+                                if (image != null)
+                                {
+                                    if (ImGui.ImageButton(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
+                                    {
+                                        Service.Configuration.CurrentTab = jobName;
+                                    }
+
+                                    if (ImGui.IsItemHovered())
+                                    {
+                                        ImGui.BeginTooltip();
+                                        ImGui.TextUnformatted(jobName);
+                                        ImGui.EndTooltip();
+                                    }
+                                }
+
+                                ImGui.PopStyleVar();
+                                ImGui.PopStyleColor(2);
+                                ImGui.PopID();
+                            }
                         }
 
                         ImGui.EndTable();
@@ -168,64 +181,80 @@ internal class ConfigWindow : Window
 
                     if (ImGui.BeginTabBar("ComboTabs"))
                     {
-                        if (ImGui.BeginTabItem("Classic"))
+                        if(Service.Configuration.CurrentTab != "Adventurer" && Service.Configuration.CurrentTab != "Disciples of the Land")
                         {
-                            int i = 1;
-                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            if (ImGui.BeginTabItem("Classic"))
                             {
-                                this.DrawPreset(Tabs.Classic, preset, info, ref i);
+                                if ((ImGui.IsItemHovered() && !ImGui.IsItemActive()) || ImGui.IsItemHovered())
+                                {
+                                    ImGui.BeginTooltip();
+                                    ImGui.TextUnformatted("Classic Hover Tooltip");
+                                    ImGui.EndTooltip();
+                                }
+
+                                int i = 1;
+                                foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                                {
+                                    this.DrawPreset(Tabs.Classic, preset, info, ref i);
+                                }
+
+                                ImGui.EndTabItem();
                             }
-
-                            ImGui.EndTabItem();
                         }
 
-                        if (ImGui.IsItemHovered())
+                        if (Service.Configuration.EnableExpandedCombos)
                         {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted("Classic Hover Tooltip");
-                            ImGui.EndTooltip();
-                        }
-
-                        if (ImGui.BeginTabItem("Expanded"))
-                        {
-                            int i = 1;
-                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            if (ImGui.BeginTabItem("Expanded"))
                             {
-                                this.DrawPreset(Tabs.Expanded, preset, info, ref i);
+                                if (ImGui.IsItemHovered())
+                                {
+                                    ImGui.BeginTooltip();
+                                    ImGui.TextUnformatted("Expanded hover tooltip");
+                                    ImGui.EndTooltip();
+                                }
+
+                                int i = 1;
+                                foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                                {
+                                    this.DrawPreset(Tabs.Expanded, preset, info, ref i);
+                                }
+
+                                ImGui.EndTabItem();
                             }
-
-                            ImGui.EndTabItem();
                         }
 
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted("Expanded hover tooltip");
-                            ImGui.EndTooltip();
-                        }
 
-                        if (ImGui.BeginTabItem("Accessibility"))
+                        if (Service.Configuration.EnableAccessibilityCombos)
                         {
-                            int i = 1;
-                            foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                            if (ImGui.BeginTabItem("Accessibility"))
                             {
-                                this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
+                                if (ImGui.IsItemHovered())
+                                {
+                                    ImGui.BeginTooltip();
+                                    ImGui.TextUnformatted("Accessibility");
+                                    ImGui.EndTooltip();
+                                }
+
+                                int i = 1;
+                                foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
+                                {
+                                    this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
+                                }
+
+                                ImGui.EndTabItem();
                             }
-
-                            ImGui.EndTabItem();
-                        }
-
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted("Accessibility");
-                            ImGui.EndTooltip();
                         }
 
                         if (Service.Configuration.EnableSecretCombos)
                         {
                             if (ImGui.BeginTabItem("Secret"))
                             {
+                                if (ImGui.IsItemHovered())
+                                {
+                                    ImGui.BeginTooltip();
+                                    ImGui.TextUnformatted("Secret hover tooltip");
+                                    ImGui.EndTooltip();
+                                }
                                 int i = 1;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
@@ -234,13 +263,6 @@ internal class ConfigWindow : Window
 
                                 ImGui.EndTabItem();
                             }
-                        }
-
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted("Secret hover tooltip");
-                            ImGui.EndTooltip();
                         }
 
                         ImGui.EndTabBar();
@@ -261,19 +283,69 @@ internal class ConfigWindow : Window
 
             if (ImGui.BeginTabItem("Settings"))
             {
-                var showSecrets = Service.Configuration.EnableSecretCombos;
-                if (ImGui.Checkbox("Enable secret forbidden knowledge", ref showSecrets))
+
+                var enablePlugin = Service.Configuration.EnablePlugin;
+                if (ImGui.Checkbox("Enables this plugin.", ref enablePlugin))
                 {
-                    Service.Configuration.EnableSecretCombos = showSecrets;
+                    Service.Configuration.EnablePlugin = enablePlugin;
                     Service.Configuration.Save();
                 }
 
                 if (ImGui.IsItemHovered())
                 {
                     ImGui.BeginTooltip();
-                    ImGui.TextUnformatted("Optimized, potentially unintuitive combos for the common folk");
+                    ImGui.TextUnformatted("Completely disables every combo when unchecked.");
                     ImGui.EndTooltip();
                 }
+
+                var showExpanded = Service.Configuration.EnableExpandedCombos;
+                if (ImGui.Checkbox("Enables the expanded features for XIVCombo.", ref showExpanded))
+                {
+                    Service.Configuration.EnableExpandedCombos = showExpanded;
+                    Service.Configuration.EnableAccessibilityCombos = showExpanded;
+                    Service.Configuration.EnableSecretCombos = showExpanded;
+                    Service.Configuration.Save();
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.BeginTooltip();
+                    ImGui.TextUnformatted("Optimized, potentially unintuitive combos.");
+                    ImGui.EndTooltip();
+                }
+
+                if (showExpanded)
+
+                {
+                    var showAccessibility = Service.Configuration.EnableAccessibilityCombos;
+                    if (ImGui.Checkbox("Enable accessibility combos", ref showAccessibility))
+                    {
+                        Service.Configuration.EnableAccessibilityCombos = showAccessibility;
+                        Service.Configuration.Save();
+                    }
+
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted("Unoptimized, easy-to-use combos.");
+                        ImGui.EndTooltip();
+                    }
+
+                    var showSecrets = Service.Configuration.EnableSecretCombos;
+                    if (ImGui.Checkbox("Enable secret forbidden knowledge", ref showSecrets))
+                    {
+                        Service.Configuration.EnableSecretCombos = showSecrets;
+                        Service.Configuration.Save();
+                    }
+
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted("Optimized, potentially unintuitive combos.");
+                        ImGui.EndTooltip();
+                    }
+                }
+
 
                 var hideChildren = Service.Configuration.HideChildren;
                 if (ImGui.Checkbox("Hide children of disabled combos and features", ref hideChildren))
@@ -295,8 +367,12 @@ internal class ConfigWindow : Window
                 ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
 
 
-
-                var changelog = this.GitHubChangelog;
+                var changelog = new Dictionary<string, string[]>()
+                {
+                    { "v3", ["dummy (like me)"] },
+                    { "v2", ["data"] },
+                    { "v1", ["text", "can be on 2 lines I think", "and even three wooooo"] },
+                };
 
 
                 foreach (var (version, info) in changelog)
@@ -308,16 +384,16 @@ internal class ConfigWindow : Window
                         ImGui.PopItemWidth();
 
                         ImGui.PushStyleColor(ImGuiCol.Text, this.shadedColor);
-                        ImGui.BulletText(info);
+
+                        foreach (var text in info)
+                        {
+                            ImGui.BulletText(text);
+                        }
+
                         ImGui.PopStyleColor();
 
                         ImGui.Spacing();
                     }
-                }
-
-                if (!changelog.Any())
-                {
-                    ImGui.Text("Reached API Limit. Wanna try again?.");
                 }
 
                 ImGui.PopStyleVar();
@@ -411,6 +487,8 @@ internal class ConfigWindow : Window
                     return;
                 break;
             case Tabs.Secret:
+                if (accessibility && !Service.Configuration.EnableAccessibilityCombos)
+                    return;
                 break;
             default:
                 break;
@@ -436,7 +514,6 @@ internal class ConfigWindow : Window
 
             Service.Configuration.Save();
         }
-
 
         if (icons.Length > 0)
         {
@@ -465,29 +542,8 @@ internal class ConfigWindow : Window
             }
         }
 
-        if (accessibility)
-        {
-            ImGui.SameLine();
-            ImGui.Text("  ");
-            ImGui.SameLine();
-            ImGui.PushFont(UiBuilder.IconFont);
-            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-            ImGui.Text(FontAwesomeIcon.Star.ToIconString());
-            ImGui.PopStyleColor();
-            ImGui.PopFont();
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.BeginTooltip();
-                ImGui.TextUnformatted("Accessibility combo");
-                ImGui.EndTooltip();
-            }
-        }
-
         if (expanded)
         {
-            ImGui.SameLine();
-            ImGui.Text("  ");
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.TankBlue);
@@ -503,10 +559,25 @@ internal class ConfigWindow : Window
             }
         }
 
-        if (secret)
+        if (accessibility)
         {
             ImGui.SameLine();
-            ImGui.Text("  ");
+            ImGui.PushFont(UiBuilder.IconFont);
+            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+            ImGui.Text(FontAwesomeIcon.Star.ToIconString());
+            ImGui.PopStyleColor();
+            ImGui.PopFont();
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.BeginTooltip();
+                ImGui.TextUnformatted("Accessibility combo");
+                ImGui.EndTooltip();
+            }
+        }
+
+        if (secret)
+        {
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DPSRed);
@@ -529,20 +600,40 @@ internal class ConfigWindow : Window
         ImGui.PopStyleColor();
         ImGui.Spacing();
 
-        if (conflicts.Length > 0)
+        if (conflicts.Length > 0 && enabled)
         {
             var conflictText = conflicts.Select(conflict =>
             {
-                if (Service.Configuration.IsSecret(conflict))
-                    return string.Empty;
+                switch (tab)
+                {
+                    case Tabs.Classic:
+                        if ((Service.Configuration.IsSecret(conflict) && !Service.Configuration.EnableSecretCombos)
+                        || (Service.Configuration.IsAccessible(conflict) && !Service.Configuration.EnableAccessibilityCombos)
+                        || (Service.Configuration.IsExpanded(conflict) && !Service.Configuration.EnableExpandedCombos))
+                            return string.Empty;
+                        break;
+                    case Tabs.Expanded:
+                        if ((Service.Configuration.IsSecret(conflict) && !Service.Configuration.EnableSecretCombos)
+                        || (Service.Configuration.IsAccessible(conflict) && !Service.Configuration.EnableAccessibilityCombos))
+                            return string.Empty;
+                        break;
+                    case Tabs.Accessibility:
+                        if (Service.Configuration.IsSecret(conflict) && !Service.Configuration.EnableSecretCombos)
+                            return string.Empty;
+                        break;
+                    case Tabs.Secret:
+                        break;
+                    default:
+                        break;
+                }
 
                 var conflictInfo = conflict.GetAttribute<CustomComboInfoAttribute>();
-                return $"\n - {conflictInfo.FancyName}";
+                return $" · {conflictInfo.FancyName}";
             }).Aggregate((t1, t2) => $"{t1}{t2}");
 
             if (conflictText.Length > 0)
             {
-                ImGui.TextColored(this.shadedColor, $"Conflicts with: {conflictText}");
+                ImGui.TextColored(ImGuiColors.DPSRed, $"Conflicts with {conflictText}");
                 ImGui.Spacing();
             }
         }
@@ -582,46 +673,6 @@ internal class ConfigWindow : Window
                 ImGui.Unindent();
             }
         }
-    }
-
-    private async Task<Dictionary<string, string>> GetGithub()
-    {
-        List<GitHubCommit> Commits = new List<GitHubCommit>();
-        Dictionary<string, string> changeLog = new Dictionary<string, string>();
-
-        var github = new GitHubClient(new Octokit.ProductHeaderValue("XIVComboClient"));
-        //Create & initialize the client here
-
-        // Prior to first API call, this will be null, because it only deals with the last call.
-        var apiInfo = github.GetLastApiInfo();
-
-        // If the ApiInfo isn't null, there will be a property called RateLimit
-        var rateLimit = apiInfo?.RateLimit;
-
-        var howManyRequestsCanIMakePerHour = rateLimit?.Limit;
-        var howManyRequestsDoIHaveLeft = rateLimit?.Remaining;
-        var whenDoesTheLimitReset = rateLimit?.Reset; // UTC time
-
-        if (howManyRequestsDoIHaveLeft >= 1)
-        {
-            var repoCommits = await github.Repository.Commit.GetAll("MKhayle", "XIVComboExpanded");
-            Commits.AddRange(repoCommits);
-
-            foreach (var item in Commits)
-            {
-                if (item.Commit.Message.Contains("[PUSH]"))
-                    changeLog.Add(item.Commit.Message.Substring(7), item.CommentsUrl);
-            }
-
-            foreach (var item in changeLog)
-            {
-                Service.PluginLog.Info(item.Key);
-                Service.PluginLog.Info(item.Value);
-            }
-        }
-
-
-        return changeLog;
     }
 
     /// <summary>
