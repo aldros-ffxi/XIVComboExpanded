@@ -191,6 +191,8 @@ internal class GunbreakerBowShockSonicBreak : CustomCombo
         {
             if (level >= GNB.Levels.BowShock)
                 return CalcBestAction(actionID, GNB.BowShock, GNB.SonicBreak);
+            else
+                return GNB.SonicBreak;
         }
 
         return actionID;
