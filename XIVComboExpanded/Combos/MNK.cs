@@ -242,7 +242,7 @@ internal class MonkMonkeyMode : CustomCombo
                 }
             }
 
-            if (IsEnabled(CustomComboPreset.MonkBootshineMeditationFeature))
+            if (IsEnabled(CustomComboPreset.MonkMonkeyMeditationFeature))
             {
                 if (level >= MNK.Levels.SteeledMeditation && gauge.Chakra < 5 && !InCombat())
                     return MNK.SteeledMeditation;
