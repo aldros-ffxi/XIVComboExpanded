@@ -26,6 +26,7 @@ internal static class WHM
         AfflatusMisery = 16535,
         Temperance = 16536,
         Holy3 = 25860,
+        Glare3 = 25859,
         Aquaveil = 25861,
         LiturgyOfTheBell = 25862,
         Glare4 = 37009,
@@ -68,15 +69,8 @@ internal class WhiteMageAfflatusSolace : CustomCombo
 
             if (level >= WHM.Levels.AfflatusMisery && gauge.BloodLily == 3)
             {
-                if (IsEnabled(CustomComboPreset.WhiteMageSolaceMiseryTargetFeature))
-                {
-                    if (TargetIsEnemy())
-                        return WHM.AfflatusMisery;
-                }
-                else
-                {
+                if (TargetIsEnemy())
                     return WHM.AfflatusMisery;
-                }
             }
         }
 
@@ -142,15 +136,8 @@ internal class WhiteMageCure2 : CustomCombo
                 {
                     if (level >= WHM.Levels.AfflatusMisery && gauge.BloodLily == 3)
                     {
-                        if (IsEnabled(CustomComboPreset.WhiteMageSolaceMiseryTargetFeature))
-                        {
-                            if (TargetIsEnemy())
-                                return WHM.AfflatusMisery;
-                        }
-                        else
-                        {
+                        if (TargetIsEnemy())
                             return WHM.AfflatusMisery;
-                        }
                     }
                 }
 
