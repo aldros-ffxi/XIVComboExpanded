@@ -10,7 +10,7 @@ internal static class VPR
 
     public const uint
             SteelFangs = 34606,
-            DreadFangs = 34607,
+            ReavingFangs = 34607,
             HuntersSting = 34608,
             SwiftskinsSting = 34609,
             FlankstingStrike = 34610,
@@ -19,16 +19,16 @@ internal static class VPR
             HindsbaneFang = 34613,
 
             SteelMaw = 34614,
-            DreadMaw = 34615,
+            ReavingMaw = 34615,
             HuntersBite = 34616,
             SwiftskinsBite = 34617,
             JaggedMaw = 34618,
             BloodiedMaw = 34619,
 
-            Dreadwinder = 34620,
+            Vicewinder = 34620,
             HuntersCoil = 34621,
             SwiftskinsCoil = 34622,
-            PitOfDread = 34623,
+            Vicepit = 34623,
             HuntersDen = 34624,
             SwiftskinsDen = 34625,
 
@@ -79,13 +79,14 @@ internal static class VPR
             HuntersInstinct = 3668, // Double check, might also be 4120
             Swiftscaled = 3669,     // Might also be 4121
             Reawakened = 3670,
-            ReadyToReawaken = 3671;
+            ReadyToReawaken = 3671,
+            HonedSteel = 3672,
+            HonedReavers = 3772;
     }
 
     public static class Debuffs
     {
-        public const ushort
-            NoxiousGash = 3667;
+
     }
 
     public static class Levels
@@ -93,12 +94,12 @@ internal static class VPR
         public const byte
             SteelFangs = 1,
             HuntersSting = 5,
-            DreadFangs = 10,
+            ReavingFangs = 10,
             WrithingSnap = 15,
             SwiftskinsSting = 20,
             SteelMaw = 25,
             Single3rdCombo = 30, // Includes Flanksting, Flanksbane, Hindsting, and Hindsbane
-            DreadMaw = 35,
+            ReavingMaw = 35,
             Slither = 40,
             HuntersBite = 40,
             SwiftskinsBike = 45,
@@ -131,7 +132,7 @@ internal class SteelTailFeature : CustomCombo
                 return VPR.DeathRattle;
         }
 
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.DeathRattle)
                 return VPR.DeathRattle;
@@ -153,7 +154,7 @@ internal class SteelTailAoEFeature : CustomCombo
                 return VPR.LastLash;
         }
 
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.LastLash)
                 return VPR.LastLash;
@@ -243,10 +244,7 @@ internal class AutoGenerationLegacies : CustomCombo
 
             if (level >= VPR.Levels.Legacies)
             {
-                if (OriginalHook(VPR.SerpentsTail) == VPR.FirstLegacy ||
-                    OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy ||
-                    OriginalHook(VPR.SerpentsTail) == VPR.ThirdLegacy ||
-                    OriginalHook(VPR.SerpentsTail) == VPR.FourthLegacy)
+                if (OriginalHook(VPR.SerpentsTail) is VPR.FirstLegacy or VPR.SecondLegacy or VPR.ThirdLegacy or VPR.FourthLegacy)
                     return OriginalHook(VPR.SerpentsTail);
             }
 
@@ -281,7 +279,7 @@ internal class GenerationLegacies : CustomCombo
                 return VPR.FirstLegacy;
         }
 
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy)
                 return VPR.SecondLegacy;
@@ -315,7 +313,7 @@ internal class GenerationLegaciesAoE : CustomCombo
                 return VPR.FirstLegacy;
         }
 
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy)
                 return VPR.SecondLegacy;
@@ -363,11 +361,11 @@ internal class DreadfangsDreadwinderFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             // I think in this case if we're not in a combo (and something else isn't replacing Dread Fangs), we can just replace if we have charges
-            if (level >= VPR.Levels.Dreadwinder && IsOriginal(VPR.DreadFangs) && IsCooldownUsable(VPR.Dreadwinder) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
-                return VPR.Dreadwinder;
+            if (level >= VPR.Levels.Dreadwinder && IsOriginal(VPR.ReavingFangs) && IsCooldownUsable(VPR.Vicewinder) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
+                return VPR.Vicewinder;
         }
 
         return actionID;
@@ -380,10 +378,10 @@ internal class PitOfDreadFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
-            if (level >= VPR.Levels.PitOfDread && IsOriginal(VPR.DreadMaw) && IsCooldownUsable(VPR.PitOfDread) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
-                return VPR.PitOfDread;
+            if (level >= VPR.Levels.PitOfDread && IsOriginal(VPR.ReavingMaw) && IsCooldownUsable(VPR.Vicepit) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
+                return VPR.Vicepit;
         }
 
         return actionID;
@@ -466,51 +464,58 @@ internal class PvPMainComboFeature : CustomCombo
                     return VPR.ThirdGeneration;
                 if (gauge.AnguineTribute == maxtribute - 3)
                     return VPR.FourthGeneration;
+                // Even though this deviates from the way it works in PvP, this is likely the more desired behavior to avoid accidentally using First Generation
+                return VPR.Ouroboros;
             }
 
-            // First step, decide whether or not we need to apply debuff
-            if (OriginalHook(VPR.SteelFangs) == VPR.SteelFangs)
+            // Switch case here for optimization, rather than calling OriginalHook in a lot of places.
+            switch (OriginalHook(VPR.SteelFangs))
             {
-                var noxious = FindTargetEffect(VPR.Debuffs.NoxiousGash);
-                if (level >= VPR.Levels.DreadFangs && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
-                    return VPR.DreadFangs;
+                // Combo step 1, detect presence of buffs, returned buffed Reavers or SteelFangs
+                case VPR.SteelFangs:
+                    if (HasEffect(VPR.Buffs.HonedReavers))
+                        return VPR.ReavingFangs;
 
-                return VPR.SteelFangs;
-            }
+                    return VPR.SteelFangs;
 
-            // Second step, if we have a third step buff use that combo, otherwise use from default combo
-            if (OriginalHook(VPR.SteelFangs) == VPR.HuntersSting)
-            {
-                if (HasEffect(VPR.Buffs.HindsbaneVenom) || HasEffect(VPR.Buffs.HindstungVenom))
+                // Combo step 2, prioritize whichever buff we don't have. Starts with Swiftscaled since that speeds up the rotation significantly
+                case VPR.HuntersSting:
+                    if (HasEffect(VPR.Buffs.HindsbaneVenom) || HasEffect(VPR.Buffs.HindstungVenom))
+                        return VPR.SwiftskinsSting;
+                    if (HasEffect(VPR.Buffs.FlanksbaneVenom) || HasEffect(VPR.Buffs.FlankstungVenom))
+                        return VPR.HuntersSting;
+
+                    if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlankstingFeature) || IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlanksbaneFeature))
+                        return VPR.HuntersSting;
+
                     return VPR.SwiftskinsSting;
-                if (HasEffect(VPR.Buffs.FlanksbaneVenom) || HasEffect(VPR.Buffs.FlankstungVenom))
-                    return VPR.HuntersSting;
 
-                if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlankstingFeature) || IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlanksbaneFeature))
-                    return VPR.HuntersSting;
+                // Combo step 3, flank. Use whichever buff we have, or default to Flanksbane if we're here and buff has fallen off.
+                case VPR.FlankstingStrike:
+                    if (HasEffect(VPR.Buffs.FlanksbaneVenom))
+                        return VPR.FlanksbaneFang;
+                    if (HasEffect(VPR.Buffs.FlankstungVenom))
+                        return VPR.FlankstingStrike;
+                    if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlanksbaneFeature))
+                        return VPR.FlanksbaneFang;
+                    if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlankstingFeature))
+                        return VPR.FlankstingStrike;
+                    // Default return here handles an edge case where the buff has fallen off before you've cast this.
+                    return VPR.FlanksbaneFang;
 
-                return VPR.SwiftskinsSting;
-            }
-
-            // Third step, if we are here, prefer to use what we have buffs for, otherwise use defaults
-            if (OriginalHook(VPR.SteelFangs) == VPR.FlankstingStrike || OriginalHook(VPR.SteelFangs) == VPR.HindstingStrike)
-            {
-                if (HasEffect(VPR.Buffs.HindsbaneVenom))
+                // Combo step 3, use whichever buff we have, or default to start hindsbane unless otherwise specified
+                case VPR.HindstingStrike:
+                    if (HasEffect(VPR.Buffs.HindsbaneVenom))
+                        return VPR.HindsbaneFang;
+                    if (HasEffect(VPR.Buffs.HindstungVenom))
+                        return VPR.HindstingStrike;
+                    if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartHindstingFeature))
+                        return VPR.HindstingStrike;
                     return VPR.HindsbaneFang;
-                if (HasEffect(VPR.Buffs.HindstungVenom))
-                    return VPR.HindstingStrike;
-                if (HasEffect(VPR.Buffs.FlanksbaneVenom))
-                    return VPR.FlanksbaneFang;
-                if (HasEffect(VPR.Buffs.FlankstungVenom))
-                    return VPR.FlankstingStrike;
 
-                if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartHindstingFeature))
-                    return VPR.HindstingStrike;
-                if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlanksbaneFeature))
-                    return VPR.FlanksbaneFang;
-                if (IsEnabled(CustomComboPreset.ViperPvPMainComboStartFlankstingFeature))
-                    return VPR.FlankstingStrike;
-                return VPR.HindsbaneFang;
+                // Default return of actionID
+                default:
+                    return actionID;
             }
         }
 
@@ -540,44 +545,43 @@ internal class PvPMainComboAoEFeature : CustomCombo
                     return VPR.ThirdGeneration;
                 if (gauge.AnguineTribute == maxtribute - 3)
                     return VPR.FourthGeneration;
+                // Even though this deviates from the way it works in PvP, this is likely the more desired behavior to avoid accidentally using First Generation
+                return VPR.Ouroboros;
             }
 
-            // First step, decide whether or not we need to apply debuff
-            if (OriginalHook(VPR.SteelMaw) == VPR.SteelMaw)
+            switch (OriginalHook(VPR.SteelMaw))
             {
-                var noxious = FindTargetEffect(VPR.Debuffs.NoxiousGash); // TODO: Would be useful to handle the case with no target
-                if (level >= VPR.Levels.DreadMaw && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
-                    return VPR.DreadMaw;
+                case VPR.SteelMaw:
+                    if (HasEffect(VPR.Buffs.HonedReavers))
+                        return VPR.ReavingMaw;
 
-                return VPR.SteelMaw;
-            }
+                    return VPR.SteelMaw;
 
-            // Second step, since there's no requirement here, we can just use whichever has the shorter buff timer
-            if (OriginalHook(VPR.SteelMaw) == VPR.HuntersBite)
-            {
-                var swift = FindEffect(VPR.Buffs.Swiftscaled);
-                var instinct = FindEffect(VPR.Buffs.HuntersInstinct);
-                if (swift is null) // I think we'd always want to prioritize swift since it speeds up the rotation
-                    return VPR.SwiftskinsBite;
-                if (instinct is null)
+                case VPR.HuntersBite:
+                    var swift = FindEffect(VPR.Buffs.Swiftscaled);
+                    var instinct = FindEffect(VPR.Buffs.HuntersInstinct);
+                    if (swift is null) // I think we'd always want to prioritize swift since it speeds up the rotation
+                        return VPR.SwiftskinsBite;
+                    if (instinct is null)
+                        return VPR.HuntersBite;
+                    if (swift?.RemainingTime <= instinct?.RemainingTime)
+                        return VPR.SwiftskinsBite;
+
                     return VPR.HuntersBite;
-                if (swift?.RemainingTime <= instinct?.RemainingTime)
-                    return VPR.SwiftskinsBite;
 
-                return VPR.HuntersBite;
-            }
+                case VPR.JaggedMaw:
+                    if (HasEffect(VPR.Buffs.GrimhuntersVenom))
+                        return VPR.JaggedMaw;
+                    if (HasEffect(VPR.Buffs.GrimskinsVenom))
+                        return VPR.BloodiedMaw;
 
-            if (OriginalHook(VPR.SteelMaw) == VPR.JaggedMaw)
-            {
-                if (HasEffect(VPR.Buffs.GrimhuntersVenom))
+                    if (IsEnabled(CustomComboPreset.ViperPvPMainComboAoEStartBloodiedFeature))
+                        return VPR.BloodiedMaw;
+
                     return VPR.JaggedMaw;
-                if (HasEffect(VPR.Buffs.GrimskinsVenom))
-                    return VPR.BloodiedMaw;
 
-                if (IsEnabled(CustomComboPreset.ViperPvPMainComboAoEStartBloodiedFeature))
-                    return VPR.BloodiedMaw;
-
-                return VPR.JaggedMaw;
+                default:
+                    return actionID;
             }
         }
 
@@ -591,7 +595,7 @@ internal class PvPWinderComboFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.Dreadwinder)
+        if (actionID == VPR.Vicewinder)
         {
             var gauge = GetJobGauge<VPRGauge>();
             if (level >= VPR.Levels.Ouroboros && HasEffect(VPR.Buffs.Reawakened))
@@ -619,9 +623,9 @@ internal class PvPWinderComboFeature : CustomCombo
                 if (gauge.DreadCombo is DreadCombo.HuntersCoil and not DreadCombo.PitOfDread and not DreadCombo.HuntersDen and not DreadCombo.SwiftskinsDen)
                     return VPR.SwiftskinsCoil;
                 if (gauge.DreadCombo is DreadCombo.SwiftskinsCoil and not DreadCombo.PitOfDread and not DreadCombo.HuntersDen and not DreadCombo.SwiftskinsDen)
-                    return VPR.Dreadwinder;
+                    return VPR.Vicewinder;
 
-                return VPR.Dreadwinder;
+                return VPR.Vicewinder;
             }
 
             if (gauge.DreadCombo is DreadCombo.Dreadwinder and not DreadCombo.PitOfDread and not DreadCombo.HuntersDen and not DreadCombo.SwiftskinsDen)
@@ -629,9 +633,9 @@ internal class PvPWinderComboFeature : CustomCombo
             if (gauge.DreadCombo is DreadCombo.SwiftskinsCoil and not DreadCombo.PitOfDread and not DreadCombo.HuntersDen and not DreadCombo.SwiftskinsDen)
                 return VPR.HuntersCoil;
             if (gauge.DreadCombo is DreadCombo.HuntersCoil and not DreadCombo.PitOfDread and not DreadCombo.HuntersDen and not DreadCombo.SwiftskinsDen)
-                return VPR.Dreadwinder;
+                return VPR.Vicewinder;
 
-            return VPR.Dreadwinder;
+            return VPR.Vicewinder;
         }
 
         return actionID;
@@ -644,7 +648,7 @@ internal class PvPPitComboFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.PitOfDread)
+        if (actionID == VPR.Vicepit)
         {
             var gauge = GetJobGauge<VPRGauge>();
             if (level >= VPR.Levels.Ouroboros && HasEffect(VPR.Buffs.Reawakened))
@@ -672,9 +676,9 @@ internal class PvPPitComboFeature : CustomCombo
                 if (gauge.DreadCombo is DreadCombo.HuntersDen and not DreadCombo.Dreadwinder and not DreadCombo.HuntersCoil and not DreadCombo.SwiftskinsCoil)
                     return VPR.SwiftskinsDen;
                 if (gauge.DreadCombo is DreadCombo.SwiftskinsDen and not DreadCombo.Dreadwinder and not DreadCombo.HuntersCoil and not DreadCombo.SwiftskinsCoil)
-                    return VPR.PitOfDread;
+                    return VPR.Vicepit;
 
-                return VPR.PitOfDread;
+                return VPR.Vicepit;
             }
 
             if (gauge.DreadCombo is DreadCombo.PitOfDread and not DreadCombo.Dreadwinder and not DreadCombo.HuntersCoil and not DreadCombo.SwiftskinsCoil)
@@ -682,16 +686,15 @@ internal class PvPPitComboFeature : CustomCombo
             if (gauge.DreadCombo is DreadCombo.SwiftskinsDen and not DreadCombo.Dreadwinder and not DreadCombo.HuntersCoil and not DreadCombo.SwiftskinsCoil)
                 return VPR.HuntersDen;
             if (gauge.DreadCombo is DreadCombo.HuntersDen and not DreadCombo.Dreadwinder and not DreadCombo.HuntersCoil and not DreadCombo.SwiftskinsCoil)
-                return VPR.PitOfDread;
+                return VPR.Vicepit;
 
-            return VPR.PitOfDread;
+            return VPR.Vicepit;
         }
 
         return actionID;
     }
 }
 
-// TODO: Once Gauge is implemented
 internal class FuryAndIreFeature : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ViperFuryAndIreFeature;
