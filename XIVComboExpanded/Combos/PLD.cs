@@ -168,9 +168,12 @@ internal class PaladinRoyalAuthority : PaladinCombo
                             return OriginalHook(PLD.Atonement);
                     }
 
-                    if ((HasEffect(PLD.Buffs.DivineMight) || HasEffect(PLD.Buffs.Requiescat)) && this.HasMp(PLD.HolySpirit))
+                    if (HasEffect(PLD.Buffs.DivineMight) && this.HasMp(PLD.HolySpirit))
                         return PLD.HolySpirit;
                 }
+
+                if (HasEffect(PLD.Buffs.Requiescat) && this.HasMp(PLD.HolySpirit))
+                    return PLD.HolySpirit;
             }
 
             if (level >= PLD.Levels.Atonement && IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature))
