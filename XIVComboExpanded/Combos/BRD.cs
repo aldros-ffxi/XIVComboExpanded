@@ -29,7 +29,6 @@ internal static class BRD
         CausticBite = 7406,
         Stormbite = 7407,
         RefulgentArrow = 7409,
-        Peloton = 7557,
         BurstShot = 16495,
         ApexArrow = 16496,
         Shadowbite = 16494,
