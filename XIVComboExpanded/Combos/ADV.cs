@@ -9,6 +9,7 @@ internal static class ADV
         LucidDreaming = 1204,
         Provoke = 7533,
         Shirk = 7537,
+        Peloton = 7557,
         Swiftcast = 7561,
         AngelWhisper = 18317,
         VariantRaise2 = 29734;

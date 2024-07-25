@@ -411,25 +411,6 @@ internal class BardRadiantFinale : CustomCombo
     }
 }
 
-internal class BardPeloton : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BardWanderersPitchPerfectFeature;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == BRD.Peloton)
-        {
-            var gauge = GetJobGauge<BRDGauge>();
-
-            if (level >= BRD.Levels.PitchPerfect && gauge.Song == Song.WANDERER && HasTarget())
-                return BRD.PitchPerfect;
-
-            return BRD.WanderersMinuet;
-        }
-
-        return actionID;
-    }
-}
 
 internal class BardMagesBallad : CustomCombo
 {
