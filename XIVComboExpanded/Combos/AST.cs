@@ -30,6 +30,8 @@ internal static class AST
         EarthlyStar = 7439,
         Malefic3 = 7442,
         MinorArcana = 7443,
+        LordOfCrowns = 7444,
+        LadyofCrowns = 7445,
         SleeveDraw = 7448,
         Divination = 16552,
         CelestialOpposition = 16553,

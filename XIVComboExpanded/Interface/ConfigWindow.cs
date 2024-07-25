@@ -17,6 +17,7 @@ using Lumina.Excel.GeneratedSheets;
 using Lumina.Data;
 using Language = Lumina.Data.Language;
 using Octokit.GraphQL.Model;
+using static System.Collections.Specialized.BitVector32;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -53,6 +54,7 @@ internal class ConfigWindow : Window
             .OrderBy(tpl => CustomComboInfoAttribute.RoleIDToOrder(tpl.Info.RoleName))
             .ThenBy(tpl => tpl.Info.JobID)
             .ThenBy(tpl => tpl.Info.Order)
+            .ThenBy(tpl => tpl.Preset.GetAttribute<SectionComboAttribute>()?.Section)
             .GroupBy(tpl => tpl.Info.JobName)
             .ToDictionary(
                 tpl => tpl.Key,
@@ -97,14 +99,18 @@ internal class ConfigWindow : Window
 
                     if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f, 36f), 4f))
                     {
-                        if ((Service.Configuration.CurrentTab == "Adventurer" || Service.Configuration.CurrentTab == "Disciples of the Land" || Service.Configuration.CurrentTab == "Sage") && !Service.Configuration.EnableExpandedCombos)
+                        if ((Service.Configuration.CurrentTab == "Adventurer"
+                            || Service.Configuration.CurrentTab == "Disciples of the Land"
+                            || Service.Configuration.CurrentTab == "Sage") && !Service.Configuration.EnableExpandedCombos)
                         {
                             Service.Configuration.CurrentTab = "Paladin";
                         }
 
                         foreach (var jobName in this.groupedPresets.Keys)
                         {
-                            if ((jobName == "Adventurer" || jobName == "Disciples of the Land" || jobName == "Sage") && !Service.Configuration.EnableExpandedCombos)
+                            if ((jobName == "Adventurer"
+                                || jobName == "Disciples of the Land"
+                                || jobName == "Sage") && !Service.Configuration.EnableExpandedCombos)
                             {
                             }
                             else
@@ -181,7 +187,7 @@ internal class ConfigWindow : Window
 
                     if (ImGui.BeginTabBar("ComboTabs"))
                     {
-                        if(Service.Configuration.CurrentTab != "Adventurer" && Service.Configuration.CurrentTab != "Disciples of the Land")
+                        if(Service.Configuration.CurrentTab != "Adventurer" && Service.Configuration.CurrentTab != "Disciples of the Land" && Service.Configuration.CurrentTab != "Sage")
                         {
                             if (ImGui.BeginTabItem("Classic"))
                             {
@@ -193,9 +199,20 @@ internal class ConfigWindow : Window
                                 }
 
                                 int i = 1;
+                                string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
+                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+                                    {
+                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
+                                        {
+                                            this.DrawSection(Tabs.Classic, preset, info, ref i);
+                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
+                                        }
+                                    }
+
                                     this.DrawPreset(Tabs.Classic, preset, info, ref i);
+
                                 }
 
                                 ImGui.EndTabItem();
@@ -214,8 +231,24 @@ internal class ConfigWindow : Window
                                 }
 
                                 int i = 1;
+                                string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
+                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+                                    {
+                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
+                                        {
+                                            this.DrawSection(Tabs.Expanded, preset, info, ref i);
+                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                    }
+
                                     this.DrawPreset(Tabs.Expanded, preset, info, ref i);
                                 }
 
@@ -236,8 +269,24 @@ internal class ConfigWindow : Window
                                 }
 
                                 int i = 1;
+                                string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
+                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+                                    {
+                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
+                                        {
+                                            this.DrawSection(Tabs.Accessibility, preset, info, ref i);
+                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                    }
+
                                     this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
                                 }
 
@@ -255,9 +304,26 @@ internal class ConfigWindow : Window
                                     ImGui.TextUnformatted("Secret hover tooltip");
                                     ImGui.EndTooltip();
                                 }
+
                                 int i = 1;
+                                string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
+                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+                                    {
+                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
+                                        {
+                                            this.DrawSection(Tabs.Secret, preset, info, ref i);
+                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                        ImGui.Spacing();
+                                    }
+
                                     this.DrawPreset(Tabs.Secret, preset, info, ref i);
                                 }
 
@@ -318,7 +384,7 @@ internal class ConfigWindow : Window
 
                 {
                     var showAccessibility = Service.Configuration.EnableAccessibilityCombos;
-                    if (ImGui.Checkbox("Enable accessibility combos", ref showAccessibility))
+                    if (ImGui.Checkbox("Enable accessibility combos.", ref showAccessibility))
                     {
                         Service.Configuration.EnableAccessibilityCombos = showAccessibility;
                         Service.Configuration.Save();
@@ -332,7 +398,7 @@ internal class ConfigWindow : Window
                     }
 
                     var showSecrets = Service.Configuration.EnableSecretCombos;
-                    if (ImGui.Checkbox("Enable secret forbidden knowledge", ref showSecrets))
+                    if (ImGui.Checkbox("Enable secret forbidden knowledge.", ref showSecrets))
                     {
                         Service.Configuration.EnableSecretCombos = showSecrets;
                         Service.Configuration.Save();
@@ -347,8 +413,16 @@ internal class ConfigWindow : Window
                 }
 
 
+                var hideIcons = Service.Configuration.HideIcons;
+                if (ImGui.Checkbox("Hide icons for combos and features.", ref hideIcons))
+                {
+                    Service.Configuration.HideIcons = hideIcons;
+                    Service.Configuration.Save();
+                }
+
+
                 var hideChildren = Service.Configuration.HideChildren;
-                if (ImGui.Checkbox("Hide children of disabled combos and features", ref hideChildren))
+                if (ImGui.Checkbox("Hide children of disabled combos and features.", ref hideChildren))
                 {
                     Service.Configuration.HideChildren = hideChildren;
                     Service.Configuration.Save();
@@ -406,11 +480,11 @@ internal class ConfigWindow : Window
             #region ABOUT TAB
             if (ImGui.BeginTabItem("About"))
             {
-                ImGui.Text("Project's GitHub link :");
                 if (ImGui.Button("Repository link"))
                 {
                     Process.Start(new ProcessStartInfo { FileName = "https://github.com/MKhayle/XIVComboExpanded", UseShellExecute = true });
                 }
+
 
                 ImGui.Separator();
                 ImGui.Spacing();
@@ -420,7 +494,6 @@ internal class ConfigWindow : Window
                 ImGui.BulletText("ff-meli for the initial concept");
                 ImGui.BulletText("attick for XIVCombo");
                 ImGui.BulletText("daemitus for creating XIVCombo Expanded");
-                ImGui.BulletText("khayle for taking over XIV Combo Expanded");
                 ImGui.BulletText("Grammernatzi for supporting the project");
                 ImGui.BulletText("kaedys for considerably contributing to the repository");
                 ImGui.Spacing();
@@ -440,20 +513,63 @@ internal class ConfigWindow : Window
                 ImGui.Spacing();
                 ImGui.Text("And many others who contributed through issues, bug reporting or feature requests!");
 
-                ImGui.Separator();
-                ImGui.Spacing();
-                ImGui.Text("If you want to personally support me for maintaining this project (♥):");
-                if (ImGui.Button("My Ko-Fi link"))
-                {
-                    Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/khayle", UseShellExecute = true });
-                }
-
                 ImGui.EndTabItem();
             }
-        #endregion
+            #endregion
+        }
+
+        ImGui.SameLine();
+        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - 100f - ImGui.GetScrollX()
+                               - 2 * ImGui.GetStyle().ItemSpacing.X);
+        if (ImGui.Button("My Ko-Fi link ♥"))
+        {
+            Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/khayle", UseShellExecute = true });
         }
 
         ImGui.EndTabBar();
+    }
+
+    private void DrawSection(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
+    {
+        var enabled = Service.Configuration.IsEnabled(preset);
+        var secret = Service.Configuration.IsSecret(preset);
+        var expanded = Service.Configuration.IsExpanded(preset);
+        var accessibility = Service.Configuration.IsAccessible(preset);
+        var conflicts = Service.Configuration.GetConflicts(preset);
+        var parent = Service.Configuration.GetParent(preset);
+        string section = preset.GetAttribute<SectionComboAttribute>()?.Section;
+        uint[] icons = [];
+
+        switch (tab)
+        {
+            case Tabs.Classic:
+                if (accessibility || expanded || secret)
+                    return;
+                break;
+            case Tabs.Expanded:
+                if (accessibility || secret)
+                    return;
+                break;
+            case Tabs.Accessibility:
+                if (secret)
+                    return;
+                break;
+            case Tabs.Secret:
+                if (accessibility && !Service.Configuration.EnableAccessibilityCombos)
+                    return;
+                break;
+            default:
+                break;
+        }
+
+        ImGui.Spacing();
+        ImGui.Spacing();
+        ImGui.PushFont(UiBuilder.MonoFont);
+        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedOrange);
+        ImGui.Text(section);
+        ImGui.PopStyleColor();
+        ImGui.PopFont();
+        ImGui.Separator();
     }
 
     private void DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
@@ -515,33 +631,6 @@ internal class ConfigWindow : Window
             Service.Configuration.Save();
         }
 
-        if (icons.Length > 0)
-        {
-            ImGui.SameLine();
-
-            foreach (var icon in icons)
-            {
-                ImGui.PushItemWidth(100);
-                ImGui.Image(GetSkillIcon(icon).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f, 24f));
-                ImGui.IsItemHovered();
-                string skillName = GetSkillName(icon);
-                if (skillName != string.Empty)
-                {
-                    if (ImGui.IsItemHovered())
-                    {
-                        ImGui.BeginTooltip();
-                        ImGui.TextUnformatted(skillName);
-                        ImGui.EndTooltip();
-                    }
-                }
-
-                if (icons.LastOrDefault() != icon)
-                {
-                    ImGui.SameLine();
-                }
-            }
-        }
-
         if (expanded)
         {
             ImGui.SameLine();
@@ -593,6 +682,37 @@ internal class ConfigWindow : Window
             }
         }
 
+        ImGui.SameLine();
+        ImGui.Text("     ");
+
+        if (icons.Length > 0 && !Service.Configuration.HideIcons)
+        {
+            ImGui.SameLine();
+            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - (icons.Length * 30f) - ImGui.GetScrollX()
+                                    - 2 * ImGui.GetStyle().ItemSpacing.X);
+
+            foreach (var icon in icons)
+            {
+                ImGui.Image(GetSkillIcon(icon).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f, 24f));
+                ImGui.IsItemHovered();
+                string skillName = GetSkillName(icon);
+                if (skillName != string.Empty)
+                {
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted(skillName);
+                        ImGui.EndTooltip();
+                    }
+                }
+
+                if (icons.LastOrDefault() != icon)
+                {
+                    ImGui.SameLine();
+                }
+            }
+        }
+
         ImGui.PopItemWidth();
 
         ImGui.PushStyleColor(ImGuiCol.Text, this.shadedColor);
@@ -622,6 +742,8 @@ internal class ConfigWindow : Window
                             return string.Empty;
                         break;
                     case Tabs.Secret:
+                        if (Service.Configuration.IsAccessible(conflict) && !Service.Configuration.EnableAccessibilityCombos)
+                            return string.Empty;
                         break;
                     default:
                         break;

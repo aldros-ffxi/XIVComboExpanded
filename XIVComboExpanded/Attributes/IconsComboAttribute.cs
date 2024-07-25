@@ -33,20 +33,25 @@ internal class IconsComboAttribute : Attribute
     public uint[] Icons { get; }
 
     public const uint
+        Blank = 61699,
+        Ally = 61701,
+        Enemy = 61710,
         ArrowLeft = 66301,
         ArrowRight = 66302,
         ArrowUp = 66303,
         ArrowDown = 66304,
         Cross = 66308,
         Forbidden = 66309,
+        Danger = 66310,
         Plus = 66315,
         Minus = 66316,
         Clock = 66317,
-        Danger = 66318,
-        Checkmark = 66319,
+        Idea = 66318,
+        Checkmark = 66311,
         Chatbubble = 66321,
+        ChatbubbleCute = 63933,
         AoE = 60495,
-        ST = 60423,
+        ST = 60429,
         Cycle = 66329;
 
 }

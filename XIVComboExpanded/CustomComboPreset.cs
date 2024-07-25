@@ -92,36 +92,49 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ADV
 
+    [SectionCombo("Raising Features")]
     [IconsCombo([ADV.Swiftcast, UTL.ArrowLeft, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Swift Raise Feature", "Replace Ascend, Resurrection, Egeiro, Raise, Verraise, and Angel Whisper with Swiftcast when it is off cooldown (and Dualcast isn't up).", ADV.JobID)]
     AdvSwiftcastFeature = 1000,
 
+    [SectionCombo("Raising Features")]
+    [IconsCombo([UTL.Forbidden, RDM.Verraise])]
     [ParentCombo(AdvSwiftcastFeature)]
     [ConflictingCombos(AdvVerRaiseToVerCureFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Disable for VerRaise", "Doesn't apply this feature to RDM's VerRaise.", ADV.JobID)]
     AdvDisableVerRaiseFeature = 1002,
 
+    [SectionCombo("Raising Features")]
+    [IconsCombo([RDM.Vercure, UTL.ArrowLeft, RDM.Verraise])]
     [ParentCombo(AdvSwiftcastFeature)]
     [ConflictingCombos(AdvDisableVerRaiseFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Replace VerRaise by Vercure instead", "Do those puny dead bodies really deserve you wasting 2 GCDs?", ADV.JobID)]
     AdvVerRaiseToVerCureFeature = 1003,
 
+    [SectionCombo("Raising Features")]
+    [IconsCombo([ADV.VariantRaise2, UTL.ArrowLeft, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Variant Raise Feature", "Replace Ascend, Ressurection, Egeiro, Raise, Verraise, and Angel Whisper with Variant Raise II when in a variant dungeon.", ADV.JobID)]
     AdvVariantRaiseFeature = 1001,
 
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWill, WAR.Defiance, DRK.Grit, GNB.RoyalGuard])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Stance over Provoke", "Replace Provoke with Iron Will, Defiance, Grit or Royal Guard when it is off cooldown and your stance isn't up.", ADV.JobID)]
     AdvStanceProvokeFeature = 1004,
 
-    [ExpandedCustomCombo]
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
     [ParentCombo(AdvStanceProvokeFeature)]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Stance Removal while on CD", "Replace Provoke by your Stance removal action when Provoke is on cooldown. Be careful with this option as you won't be able to track Provoke's cooldown.", ADV.JobID)]
     AdvStanceBackProvokeFeature = 1005,
 
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Shirk, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Stance Removal over Shirk", "Replace Shirk by your Stance removal action when it is on cooldown and your stance is up.", ADV.JobID)]
     AdvShirkStanceFeature = 1006,
@@ -130,30 +143,44 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ASTROLOGIAN
 
+    [SectionCombo("Draw features")]
+    [IconsCombo([AST.Play1, AST.Play2, AST.Play3, AST.MinorArcanaDT, UTL.ArrowLeft, AST.AstralDraw, AST.UmbralDraw])]
     [CustomComboInfo("Play to Astral/Umbral Draw", "Replace Play I / II / III & Minor Arcana with with Astral/Umbral Draw when no card is drawn and you can draw.", AST.JobID)]
     AstrologianPlayDrawFeature = 3323,
 
+    [SectionCombo("Draw features")]
+    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.AstralDraw, AST.UmbralDraw])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Malefic to Astral/Umbral Draw", "Replace Malefic with Astral/Umbral Draw when no card is drawn and you can draw.", AST.JobID)]
     AstrologianMaleficDrawFeature = 3320,
 
+    [SectionCombo("Draw features")]
+    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.AstralDraw, AST.UmbralDraw, UTL.Blank, UTL.Clock, AST.Play1])]
     [ParentCombo(AstrologianMaleficDrawFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Play 1 override", "Replace Malefic with Astral/Umbral when Play I isn't drawn yet, even if there are remaining other cards.", AST.JobID)]
     AstrologianDraw1Feature = 3321,
 
+    [SectionCombo("Draw features")]
+    [IconsCombo([AST.Gravity, UTL.ArrowLeft, AST.AstralDraw, AST.UmbralDraw])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Gravity to Astral/Umbral Draw", "Replace Gravity with with Astral/Umbral Draw when no card is drawn and you can draw..", AST.JobID)]
+    [CustomComboInfo("Gravity to Astral/Umbral Draw", "Replace Gravity with with Astral/Umbral Draw when no card is drawn and you can draw.", AST.JobID)]
     AstrologianGravityDrawFeature = 3322,
 
+    [SectionCombo("Minor Arcanas")]
+    [IconsCombo([AST.Helios, UTL.ArrowLeft, AST.LadyofCrowns])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Helios to Arcana", "Replace Helios by Lady of Crowns when drawn.", AST.JobID)]
     AstrologianHeliosArcanaFeature = 3324,
 
+    [SectionCombo("Minor Arcanas")]
+    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.LordOfCrowns])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Malefic/Gravity to Arcana", "Replace Malefic & Gravity by Lord of Crowns when drawn.", AST.JobID)]
     AstrologianMaleficArcanaFeature = 3325,
 
+    [SectionCombo("Level Synchronization")]
+    [IconsCombo([AST.Benefic, UTL.ArrowLeft, AST.Benefic2])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Benefic II to Benefic Level Sync", "Replace Benefic 2 with Benefic when below level 26 in synced content.", AST.JobID)]
     AstrologianBeneficSyncFeature = 3326,
@@ -368,13 +395,12 @@ public enum CustomComboPreset
     DancerSingleTargetProcs = 3811,
 
     [SecretCustomCombo]
-    [CustomComboInfo("Single Target Saber Dance", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
-    DancerSingleTargetSabreDance = 3817,
-
-    [SecretCustomCombo]
-    [ParentCombo(DancerSingleTargetSabreDance)]
     [CustomComboInfo("Single Target Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
     DancerSingleTargetSabreDanceTech = 3818,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("AoE Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
+    DancerAoeSabreDanceTech = 3821,
 
     [SecretCustomCombo]
     [CustomComboInfo("Single Target Dance of the Dawn", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
@@ -383,15 +409,6 @@ public enum CustomComboPreset
     [SecretCustomCombo]
     [CustomComboInfo("AoE Multibutton", "Replace Windmill with its procs and combos as they activate.", DNC.JobID)]
     DancerAoeMultibutton = 3805,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("AoE Saber Dance", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
-    DancerAoeSabreDance = 3820,
-
-    [SecretCustomCombo]
-    [ParentCombo(DancerAoeSabreDance)]
-    [CustomComboInfo("AoE Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
-    DancerAoeSabreDanceTech = 3821,
 
     [SecretCustomCombo]
     [CustomComboInfo("AoE Dance of the Dawn", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
@@ -410,6 +427,14 @@ public enum CustomComboPreset
     [ParentCombo(DancerLastDanceFeature)]
     [CustomComboInfo("Finishing Move Priority", "Priorize Finishing Move over Last Dance when replacing Standard Step.", DNC.JobID)]
     DancerFinishingMovePriorityFeature = 3814,
+
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Single Target Saber Dance", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
+    DancerSingleTargetSabreDance = 3817,
+
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("AoE Saber Dance", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
+    DancerAoeSabreDance = 3820,
 
     [ConflictingCombos(DancerDanceComboCompatibility)]
     [AccessibilityCustomCombo]
@@ -432,38 +457,56 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DARK KNIGHT
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([DRK.Souleater, UTL.ArrowLeft, DRK.SyphonStrike, UTL.ArrowLeft, DRK.HardSlash])]
     [CustomComboInfo("Souleater Combo", "Replace Souleater with its combo chain.", DRK.JobID)]
     DarkSouleaterCombo = 3201,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([DRK.Bloodspiller, UTL.ArrowLeft, DRK.Souleater, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(DarkSouleaterCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Souleater Overcap Feature", "Replace Souleater with Bloodspiller when the next combo action would cause the Blood Gauge to overcap.", WAR.JobID)]
     DarkSouleaterOvercapFeature = 3206,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([DRK.StalwartSoul, UTL.ArrowLeft, DRK.Unleash])]
     [CustomComboInfo("Stalwart Soul Combo", "Replace Stalwart Soul with its combo chain.", DRK.JobID)]
     DarkStalwartSoulCombo = 3202,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([DRK.Quietus, UTL.ArrowLeft, DRK.StalwartSoul, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(DarkStalwartSoulCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Stalwart Soul Overcap Feature", "Replace Stalwart Soul with Quietus when the next combo action would cause the Blood Gauge to overcap.", WAR.JobID)]
     DarkStalwartSoulOvercapFeature = 3207,
 
+    [SectionCombo("Blood Weapon")]
+    [IconsCombo([DRK.Bloodspiller, UTL.ArrowLeft, DRK.Souleater, UTL.Plus, DRK.Quietus, UTL.ArrowLeft, DRK.StalwartSoul])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Delirium Feature", "Replace Souleater and Stalwart Soul with Bloodspiller & its combo chain and Quietus/Impalement when Delirium is active.", DRK.JobID)]
+    [CustomComboInfo("Delirium Feature", "Replace Souleater and Stalwart Soul with Bloodspiller (& its combo chain) and Quietus/Impalement when Delirium is active.", DRK.JobID)]
     DarkDeliriumFeature = 3203,
 
+    [SectionCombo("Blood Weapon")]
+    [IconsCombo([DRK.BloodWeapon, UTL.ArrowLeft, DRK.CarveAndSpit, DRK.AbyssalDrain])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Blood Weapon Feature", "Replace Carve and Spit, and Abyssal Drain with Blood Weapon/Delirium when available.", DRK.JobID)]
     DarkBloodWeaponFeature = 3204,
 
+    [SectionCombo("Living Shadow")]
+    [IconsCombo([DRK.LivingShadow, UTL.ArrowLeft, DRK.Bloodspiller, UTL.Plus, DRK.LivingShadow, UTL.ArrowLeft, DRK.Quietus])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Living Shadow Feature", "Replace Quietus and Bloodspiller with Living Shadow when available.", DRK.JobID)]
     DarkLivingShadowFeature = 3205,
 
+    [SectionCombo("Living Shadow")]
+    [IconsCombo([DRK.Shadowbringer, UTL.ArrowLeft, DRK.LivingShadow, UTL.Blank, DRK.LivingShadow, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Living Shadowbringer Feature", "Replace Living Shadow with Shadowbringer when charges are available and your Shadow is present.", DRK.JobID)]
     DarkLivingShadowbringerFeature = 3208,
 
+    [SectionCombo("Living Shadow")]
+    [IconsCombo([DRK.Shadowbringer, UTL.ArrowLeft, DRK.LivingShadow, UTL.Blank, DRK.LivingShadow, UTL.Clock])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Missing Shadowbringer Feature", "Replace Living Shadow with Shadowbringer when charges are available and Living Shadow is on cooldown.", DRK.JobID)]
     DarkLivingShadowbringerHpFeature = 3209,
@@ -472,14 +515,17 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DRAGOON
 
-    [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain.", DRG.JobID)]
-    DragoonCoerthanTormentCombo = 2202,
-
+    [IconsCombo([UTL.ST, DRG.TrueThrust, DRG.Disembowel, DRG.ChaosThrust])]
     [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain.", DRG.JobID)]
     DragoonChaosThrustCombo = 2203,
 
+    [IconsCombo([UTL.ST, DRG.TrueThrust, DRG.VorpalThrust, DRG.FullThrust])]
     [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain.", DRG.JobID)]
     DragoonFullThrustCombo = 2204,
+
+    [IconsCombo([UTL.AoE, DRG.DoomSpike, DRG.SonicThrust, DRG.CoerthanTorment])]
+    [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain.", DRG.JobID)]
+    DragoonCoerthanTormentCombo = 2202,
 
     [ParentCombo(DragoonChaosThrustCombo)]
     [ExpandedCustomCombo]
@@ -509,7 +555,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Geirskogul to Wyrmwind Thrust", "Replace Geirskogul with Wyrmwind Thrust when available and Geirskogul or Nastrond are on cooldown.", DRG.JobID)]
     DragoonGeirskogulWyrmwindFeature = 2212,
 
-    [ExpandedCustomCombo]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("Lance Charge to Battle Litany", "Replace Lance Charge Battle Litany when available and Lance Charge is on cooldown.", DRG.JobID)]
     DragoonLanceChargeFeature = 2213,
 
@@ -517,55 +563,81 @@ public enum CustomComboPreset
     // ====================================================================================
     #region GUNBREAKER
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.SolidBarrel, UTL.ArrowLeft, GNB.BrutalShell, UTL.ArrowLeft, GNB.KeenEdge])]
     [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain.", GNB.JobID)]
     GunbreakerSolidBarrelCombo = 3701,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.SolidBarrel, UTL.ArrowLeft, GNB.BurstStrike, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(GunbreakerSolidBarrelCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Burst Strike Feature", "Replace Solid Barrel with Burst Strike when charges are full.", GNB.JobID)]
     GunbreakerBurstStrikeFeature = 3710,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.EyeGouge, UTL.ArrowLeft, GNB.WickedTalon, UTL.ArrowLeft, GNB.AbdomenTear, UTL.ArrowLeft, GNB.SavageClaw, UTL.ArrowLeft, GNB.JugularRip, UTL.ArrowLeft, GNB.GnashingFang])]
     [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerGnashingFangCont = 3702,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.Hypervelocity, UTL.ArrowLeft, GNB.BurstStrike])]
     [CustomComboInfo("Burst Strike Continuation", "Replace Burst Strike with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerBurstStrikeCont = 3703,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.DemonSlice])]
     [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain.", GNB.JobID)]
     GunbreakerDemonSlaughterCombo = 3705,
 
-    [CustomComboInfo("Fated Circle Continuation", "Replace Fated Circle with Continuation moves when appropriate.", GNB.JobID)]
-    GunbreakerFatedCircleCont = 3714,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Sonic Shock Feature", "Replace Bow Shock and Sonic Break with one or the other depending on which is on cooldown.", GNB.JobID)]
-    GunbreakerBowShockSonicBreakFeature = 3704,
-
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.FatedCircle, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(GunbreakerDemonSlaughterCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fated Circle Feature", "In addition to the Demon Slaughter combo, add Fated Circle when charges are full.", GNB.JobID)]
     GunbreakerFatedCircleFeature = 3706,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Empty Bloodfest Feature", "Replace Burst Strike and Fated Circle with Bloodfest if the powder gauge is empty.", GNB.JobID)]
-    GunbreakerEmptyBloodfestFeature = 3707,
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.FatedBrand, UTL.ArrowLeft, GNB.FatedCircle])]
+    [CustomComboInfo("Fated Circle Continuation", "Replace Fated Circle with Continuation moves when appropriate.", GNB.JobID)]
+    GunbreakerFatedCircleCont = 3714,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("No Mercy Bow Shock/Sonic Break Feature", "Replace No Mercy with Bow Shock, and then Sonic Break, while No Mercy is active.", GNB.JobID)]
-    GunbreakerNoMercyFeature = 3708,
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.DoubleDown, UTL.ArrowLeft, GNB.FatedCircle, GNB.BurstStrike])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
+    GunbreakerDoubleDownFeature = 3709,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("No Mercy Double Down Feature", "Replace No Mercy with Double Down while No Mercy is active, 2 cartridges are available, and Double Down is off cooldown.\nThis takes priority over the No Mercy Bow Shock/Sonic Break Feature.", GNB.JobID)]
-    GunbreakerNoMercyDoubleDownFeature = 3712,
-
+    [SectionCombo("No Mercy")]
+    [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.NoMercy, UTL.Checkmark])]
     [ConflictingCombos(GunbreakerNoMercyFeature)]
-    [ExpandedCustomCombo]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("No Mercy Always Double Down Feature", "Replace No Mercy with Double Down while No Mercy is active.", GNB.JobID)]
     GunbreakerNoMercyAlwaysDoubleDownFeature = 3713,
 
+    [SectionCombo("No Mercy")]
+    [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.SonicBreak, UTL.Clock])]
     [SecretCustomCombo]
-    [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
-    GunbreakerDoubleDownFeature = 3709,
+    [CustomComboInfo("No Mercy Double Down Feature", "Replace No Mercy with Double Down while No Mercy is active, 2 cartridges are available, and Double Down is off cooldown.\nThis takes priority over the No Mercy Bow Shock/Sonic Break Feature.", GNB.JobID)]
+    GunbreakerNoMercyDoubleDownFeature = 3712,
+
+    [SectionCombo("No Mercy")]
+    [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.BowShock, UTL.Blank, GNB.SonicBreak, UTL.Clock])]
+    [SecretCustomCombo]
+    [CustomComboInfo("No Mercy Bow Shock", "Replace No Mercy with Bow Shock while No Mercy is active and Sonic Break has been used up.", GNB.JobID)]
+    GunbreakerNoMercyFeature = 3708,
+
+    [SectionCombo("Buffs")]
+    [IconsCombo([GNB.Bloodfest, UTL.ArrowLeft, GNB.BurstStrike, GNB.FatedCircle])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Empty Bloodfest Feature", "Replace Burst Strike and Fated Circle with Bloodfest if the powder gauge is empty.", GNB.JobID)]
+    GunbreakerEmptyBloodfestFeature = 3707,
+
+    [SectionCombo("Buffs")]
+    [IconsCombo([GNB.BowShock, UTL.Cycle, GNB.SonicBreak])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Sonic Shock Feature", "Replace Bow Shock and Sonic Break with one or the other depending on which is on cooldown.", GNB.JobID)]
+    GunbreakerBowShockSonicBreakFeature = 3704,
 
     #endregion
     // ====================================================================================
@@ -620,82 +692,99 @@ public enum CustomComboPreset
     // ====================================================================================
     #region MONK
 
+    [SectionCombo("Single Target")]
     [ConflictingCombos(MonkMonkeyMode)]
     [CustomComboInfo("Opo Feature", "Replace Bootshine/Leaping Opo with Dragon Kick if you don't have any Opo's fury stack.", MNK.JobID)]
     MonkOpoFeature = 2017,
 
-    [ExpandedCustomCombo]
+    [SectionCombo("Single Target")]
     [ParentCombo(MonkOpoFeature)]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Bootshine Steeled Meditation Feature", "Replace Bootshine/Leaping Opo with Steeled Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkBootshineMeditationFeature = 2012,
 
-    [ExpandedCustomCombo]
+    [SectionCombo("Single Target")]
     [ParentCombo(MonkOpoFeature)]
-    [CustomComboInfo("Form Shift Feature", "Replace Bootshine/Leaping Opo with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
-    MonkBootshineFormShiftFeature = 2023,
-
     [ExpandedCustomCombo]
-    [ParentCombo(MonkOpoFeature)]
     [CustomComboInfo("Opomatic Chakra Feature", "Replace Bootshine/Leaping Opo with The Forbidden Chakra when your Fifth Chakra is open.", MNK.JobID)]
     MonkOpoChakraFeature = 2029,
 
+    [SectionCombo("Single Target")]
+    [ParentCombo(MonkOpoFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Form Shift Feature", "Replace Bootshine/Leaping Opo with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
+    MonkBootshineFormShiftFeature = 2023,
+
+    [SectionCombo("Single Target")]
     [ConflictingCombos(MonkMonkeyMode)]
     [CustomComboInfo("Raptor Feature", "Replace True Strike with Twin Snakes if you don't have any Raptor's fury stack.", MNK.JobID)]
     MonkRaptorFeature = 2018,
 
+    [SectionCombo("Single Target")]
     [ConflictingCombos(MonkMonkeyMode)]
     [CustomComboInfo("Coeurl Feature", "Replace Snap Punch with Demolish if you don't have any Coeurl's fury stack.", MNK.JobID)]
     MonkCoeurlFeature = 2019,
 
+    [SectionCombo("Masterful Blitz")]
     [CustomComboInfo("Perfect Balance Feature", "Replace Perfect Balance with Masterful Blitz when you have 3 Beast Chakra.", MNK.JobID)]
     MonkPerfectBalanceFeature = 2004,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("ST Balance Feature", "Replace Bootshine/Leaping Opo, Dragon Kick, True Strike/Rising Raptor, Twin Snakes, Snap Punch/Pouncing Coeurl and Demolish with Masterful Blitz if you have 3 Beast Chakra.", MNK.JobID)]
+    [SectionCombo("Masterful Blitz")]
+    [CustomComboInfo("Single Target Perfect Balance Feature", "Replace Bootshine/Leaping Opo, Dragon Kick, True Strike/Rising Raptor, Twin Snakes, Snap Punch/Pouncing Coeurl and Demolish with Masterful Blitz if you have 3 Beast Chakra.", MNK.JobID)]
     MonkSTBalanceFeature = 2005,
 
+    [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Monk AoE Combo", "Replace Masterful Blitz with the AoE combo chain. This was changed from Rockbreaker due to an action queueing bug.", MNK.JobID)]
     MonkAoECombo = 2001,
 
+    [SectionCombo("Area of Effect")]
     [ParentCombo(MonkAoECombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Enlightened Meditation Feature", "Replace Masterful Blitz with Enlightened Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkAoEMeditationFeature = 2025,
 
-    [ParentCombo(MonkAoECombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("AoE Form Shift Feature", "Replace Masterful Blitz with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
-    MonkAoEFormShiftFeature = 2027,
-
+    [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
     [ParentCombo(MonkAoECombo)]
     [CustomComboInfo("Automatic AoE Chakra Feature", "Replace Masterful Blitz with Enlightenment when your Fifth Chakra is open.", MNK.JobID)]
     MonkAoEAutoChakraFeature = 2028,
 
+    [SectionCombo("Area of Effect")]
+    [ParentCombo(MonkAoECombo)]
+    [SecretCustomCombo]
+    [CustomComboInfo("AoE Form Shift Feature", "Replace Masterful Blitz with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
+    MonkAoEFormShiftFeature = 2027,
+
+    [SectionCombo("Self-Buffs")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Riddle of Brotherly Fire", "Replace Riddle of Fire with Brotherhood when on cooldown.", MNK.JobID)]
     MonkRiddleOfFireBrotherhood = 2009,
 
+    [SectionCombo("Self-Buffs")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Riddle of Fire and Wind", "Replace Riddle of Fire with Riddle of Wind when on cooldown.", MNK.JobID)]
     MonkRiddleOfFireWind = 2010,
 
+    [SectionCombo("Monkey Mode")]
     [ConflictingCombos([MonkOpoFeature, MonkRaptorFeature, MonkCoeurlFeature])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("monke mode", "One-buttons the basic rotation on Bootshine/Leaping Opo. Neat for beginners, very, very bad for serious players.", MNK.JobID)]
+    [CustomComboInfo("Monkey Mode", "One-buttons the basic rotation on Bootshine/Leaping Opo. Neat for beginners, very, very bad for serious players.", MNK.JobID)]
     MonkMonkeyMode = 2021,
 
+    [SectionCombo("Monkey Mode")]
     [ParentCombo(MonkMonkeyMode)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Monkey Bootshine Steeled Meditation Feature", "Replace Bootshine/Leaping Opo with Steeled Meditation when out of combat and the Fifth Chakra is not open.", MNK.JobID)]
     MonkMonkeyMeditationFeature = 2022,
 
+    [SectionCombo("Monkey Mode")]
     [ParentCombo(MonkMonkeyMode)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Monkey Form Shift Feature", "Replace Bootshine/Leaping Opo with Form Shift when out of combat and you don't have Formless Fist.", MNK.JobID)]
     MonkMonkeyFormShiftFeature = 2024,
 
+    [SectionCombo("Monkey Mode")]
     [ParentCombo(MonkMonkeyMode)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Automatic Chakra Feature", "Replace Bootshine/Leaping Opo with The Forbidden Chakra when your Fifth Chakra is open.", MNK.JobID)]
@@ -875,8 +964,6 @@ public enum CustomComboPreset
     [CustomComboInfo("Landscape Muse/Motif Combo", "Replace Starry Sky Motif with Starry Muse when the Landscape Canvas is painted.", PCT.JobID)]
     PictomancerLandscapeMotifCombo = 4210,
 
-    [ExpandedCustomCombo]
-    [ParentCombo(PictomancerLandscapeMotifCombo)]
     [CustomComboInfo("Landscape Muse/Star Prism Combo", "Replace Starry Muse with Star Prism when it is usable.", PCT.JobID)]
     PictomancerLandscapePrismCombo = 4211,
 
@@ -884,36 +971,35 @@ public enum CustomComboPreset
     PictomancerHolyCometCombo = 4203,
 
     [ExpandedCustomCombo]
-    [CustomComboInfo("Don't overcap Subtractive", "Replace Fire in Red and Fire II in Red, and their combo chains, with Subtractive Palette if the next cast in the chain would overcap the Palette Gauge.", PCT.JobID)]
-    PictomancerSubtractiveAutoCombo = 4205,
-
-    [SecretCustomCombo]
-    [ParentCombo(PictomancerSubtractiveAutoCombo)]
-    [CustomComboInfo("Subtractive Early Autocast", "Do it as soon as you reach 50 Palette gauge or you are under the effect of Substractive Palette Ready instead.", PCT.JobID)]
-    PictomancerSubtractiveEarlyAutoCombo = 4221,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Holy Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Holy or Comet if the next cast would overcap the Paint Gauge.", PCT.JobID)]
-    PictomancerHolyAutoCombo = 4204,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Rainbow Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Rainbow Drip when you have Rainbow Drip Ready.", PCT.JobID)]
-    PictomancerRainbowAutoCombo = 4213,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Star Prism Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Star Prism when you have Star Prism Ready.", PCT.JobID)]
-    PictomancerStarPrismAutoCombo = 4214,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Mog of the Ages Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Mog of the Ages and Retribution of the Madeen when they are usable.", PCT.JobID)]
-    PictomancerAutoMogCombo = 4220,
-
     [ParentCombo(PictomancerHolyCometCombo)]
-    [ExpandedCustomCombo]
     [CustomComboInfo("Rainbow Holy Combo", "Replace Holy in White with Rainbow Drip when under the effect of Rainbow Drip Ready (has priority over Comet in Black).", PCT.JobID)]
     PictomancerRainbowHolyCombo = 4215,
 
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Subtractive Early Autocast", "Do it as soon as you reach 50 Palette gauge or you are under the effect of Substractive Palette Ready instead.", PCT.JobID)]
+    PictomancerSubtractiveEarlyAutoCombo = 4221,
+
     [ExpandedCustomCombo]
+    [CustomComboInfo("Don't overcap Subtractive", "Replace Fire in Red and Fire II in Red, and their combo chains, with Subtractive Palette if the next cast in the chain would overcap the Palette Gauge.", PCT.JobID)]
+    PictomancerSubtractiveAutoCombo = 4205,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Holy Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Holy or Comet if the next cast would overcap the Paint Gauge.", PCT.JobID)]
+    PictomancerHolyAutoCombo = 4204,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Rainbow Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Rainbow Drip when you have Rainbow Drip Ready.", PCT.JobID)]
+    PictomancerRainbowAutoCombo = 4213,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Star Prism Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Star Prism when you have Star Prism Ready.", PCT.JobID)]
+    PictomancerStarPrismAutoCombo = 4214,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Mog of the Ages Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Mog of the Ages and Retribution of the Madeen when they are usable.", PCT.JobID)]
+    PictomancerAutoMogCombo = 4220,
+
+    [SecretCustomCombo]
     [CustomComboInfo("Rainbow Drip Starter", "Replace Fire in Red & Fire in Red II with Rainbow Drip when out of combat.", PCT.JobID)]
     PictomancerRainbowStarter = 4216,
 
@@ -1120,14 +1206,14 @@ public enum CustomComboPreset
     RedMageVerprocFeature = 3504,
 
     [ParentCombo(RedMageVerprocFeature)]
-    [ExpandedCustomCombo]
+    [SecretCustomCombo]
     [CustomComboInfo("Deprioritize Grand Impact", "After using Acceleration, prioritize using Verstone/Verfire over Grand Impact if both buffs are active.", RDM.JobID)]
     RedMageVerprocGrandImpactDeprioritize = 3519,
 
     [CustomComboInfo("AoE Combo", "Replace Veraero/Verthunder 2 with Impact when various instant-cast effects are active.", RDM.JobID)]
     RedMageAoEFeature = 3501,
 
-    [CustomComboInfo("Melee combo", "Replace Redoublement with its combo chain, following enchantment rules.", RDM.JobID)]
+    [CustomComboInfo("Melee Combo", "Replace Redoublement with its combo chain, following enchantment rules.", RDM.JobID)]
     RedMageMeleeCombo = 3502,
 
     [ExpandedCustomCombo]
@@ -1135,17 +1221,9 @@ public enum CustomComboPreset
     RedMageVerprocPlusFeature = 3505,
 
     [ParentCombo(RedMageVerprocPlusFeature)]
-    [ExpandedCustomCombo]
+    [SecretCustomCombo]
     [CustomComboInfo("Deprioritize Grand Impact Plus", "After using Acceleration, prioritize using Veraero/Verthunder over Grand Impact if both buffs are active.", RDM.JobID)]
     RedMageGrandImpactDeprioritize = 3517,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Stone)", "Replace Verstone with Veraero when out of combat.", RDM.JobID)]
-    RedMageVerprocOpenerStoneFeature = 3506,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Fire)", "Replace Verfire with Verthunder when out of combat.", RDM.JobID)]
-    RedMageVerprocOpenerFireFeature = 3507,
 
     [ExpandedCustomCombo]
     [CustomComboInfo("Verstone/Verfire Mana Stacks Feature", "Replace Verstone/Verfire with Verflare/Verholy at 3 mana stacks.", RDM.JobID)]
@@ -1185,47 +1263,66 @@ public enum CustomComboPreset
     RedMageAccelerationSwiftcastOption = 3511,
 
     [ExpandedCustomCombo]
-    [CustomComboInfo("Embolden to Manaification", "Replace Embolden with Manafication if the former is on cooldown and the latter is not.", RDM.JobID)]
+    [CustomComboInfo("Embolden to Manafication", "Replace Embolden with Manafication if the former is on cooldown and the latter is not.", RDM.JobID)]
     RedMageEmboldenFeature = 3510,
 
-    [SecretCustomCombo]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Contre Sixte / Fleche Feature", "Replace Contre Sixte and Fleche with whichever is available.", RDM.JobID)]
     RedMageContreFlecheFeature = 3508,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Stone)", "Replace Verstone with Veraero when out of combat.", RDM.JobID)]
+    RedMageVerprocOpenerStoneFeature = 3506,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Fire)", "Replace Verfire with Verthunder when out of combat.", RDM.JobID)]
+    RedMageVerprocOpenerFireFeature = 3507,
 
     #endregion
     // ====================================================================================
     #region SAGE
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Dosis Kardia Feature", "Replace Dosis with Kardia when missing Kardion.", SGE.JobID)]
     SageDosisKardiaFeature = 4010,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Druochole into Rhizomata Feature", "Replace Druochole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageDruocholeRhizomataFeature = 4003,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Druochole into Taurochole Feature", "Replace Druochole with Taurochole when off cooldown.\nWarning: This will limit your abiility to use Druochole.", SGE.JobID)]
     SageDruocholeTaurocholeFeature = 4009,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Ixochole into Rhizomata Feature", "Replace Ixochole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageIxocholeRhizomataFeature = 4004,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Kerachole into Rhizomata Feature", "Replace Kerachole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageKeracholaRhizomataFeature = 4005,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Phlegma into Dyskrasia", "Replace Phlegma with Dyskrasia when no charges remain or have no target.", SGE.JobID)]
     SagePhlegmaDyskrasia = 4008,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Phlegma into Toxikon", "Replace Phlegma with Toxikon when no charges rmemain and have Addersting.\nThis takes priority over Phlegma into Dyskrasia.", SGE.JobID)]
     SagePhlegmaToxicon = 4007,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Soteria Kardia Feature", "Replace Soteria with Kardia when off cooldown and missing Kardion.", SGE.JobID)]
     SageSoteriaKardionFeature = 4006,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Taurochole into Druochole Feature", "Replace Taurochole with Druochole when on cooldown", SGE.JobID)]
     SageTaurocholeDruocholeFeature = 4001,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Taurochole into Rhizomata Feature", "Replace Taurochole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageTaurocholeRhizomataFeature = 4002,
 
+    [ExpandedCustomCombo]
     [CustomComboInfo("Toxikon into Phlegma Feature", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
     SageToxikonPhlegma = 4011,
 
@@ -1322,26 +1419,6 @@ public enum CustomComboPreset
     ScholarEnergyDrainAetherflowFeature = 2802,
 
     [ExpandedCustomCombo]
-    [CustomComboInfo("Seraph Fey Blessing/Consolation", "Replace Fey Blessing with Consolation when Seraph is out.", SCH.JobID)]
-    ScholarSeraphConsolationFeature = 2801,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Lustrate to Recitation", "Replace Lustrate with Recitation when Recitation is off cooldown.", SCH.JobID)]
-    ScholarLustrateRecitationFeature = 2807,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Lustrate to Excogitation", "Replace Lustrate with Excogitation when Excogitation is off cooldown.", SCH.JobID)]
-    ScholarLustrateExcogitationFeature = 2808,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Excogitation to Recitation", "Replace Excogitation with Recitation when Recitation is off cooldown.", SCH.JobID)]
-    ScholarExcogitationRecitationFeature = 2806,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Excogitation to Lustrate", "Replace Excogitation with Lustrate when Excogitation is on cooldown.", SCH.JobID)]
-    ScholarExcogitationLustrateFeature = 2809,
-
-    [ExpandedCustomCombo]
     [CustomComboInfo("Lustrous Aetherflow", "Replace Lustrate with Aetherflow when you have no more Aetherflow stacks.", SCH.JobID)]
     ScholarLustrateAetherflowFeature = 2803,
 
@@ -1360,6 +1437,26 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Seraphism Feature", "Replace Seraphism with Emergency Tactics as long as you are under its effect.", SCH.JobID)]
     ScholarSeraphismFeature = 2812,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Seraph Fey Blessing/Consolation", "Replace Fey Blessing with Consolation when Seraph is out.", SCH.JobID)]
+    ScholarSeraphConsolationFeature = 2801,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Excogitation to Recitation", "Replace Excogitation with Recitation when Recitation is off cooldown.", SCH.JobID)]
+    ScholarExcogitationRecitationFeature = 2806,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Excogitation to Lustrate", "Replace Excogitation with Lustrate when Excogitation is on cooldown.", SCH.JobID)]
+    ScholarExcogitationLustrateFeature = 2809,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Lustrate to Recitation", "Replace Lustrate with Recitation when Recitation is off cooldown.", SCH.JobID)]
+    ScholarLustrateRecitationFeature = 2807,
+
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Lustrate to Excogitation", "Replace Lustrate with Excogitation when Excogitation is off cooldown.", SCH.JobID)]
+    ScholarLustrateExcogitationFeature = 2808,
 
     [ExpandedCustomCombo]
     [CustomComboInfo("Adloquium Level Sync", "Replace Adloquium with Physick when below level 30 in synced content.", SCH.JobID)]
@@ -1419,10 +1516,6 @@ public enum CustomComboPreset
     SummonerDemiEnkindleFeature = 2710,
 
     [ExpandedCustomCombo]
-    [CustomComboInfo("Searing Demi Feature", "Change Summon Bahamut, Summon Phoenix and Summon Solar Bahamut into Searing Light when any of them is ready to be summoned, Searing Light is off cooldown, and you are in combat.", SMN.JobID)]
-    SummonerDemiSearingLightFeature = 2715,
-
-    [ExpandedCustomCombo]
     [CustomComboInfo("Radiant Carbuncle Feature", "Change Radiant Aegis into Summon Carbuncle when no pet has been summoned.", SMN.JobID)]
     SummonerRadiantCarbuncleFeature = 2711,
 
@@ -1434,6 +1527,10 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Demi Carbuncle Feature", "Change Summon Bahamut into Summon Carbuncle when no pet has been summoned.", SMN.JobID)]
     SummonerDemiCarbuncleFeature = 2716,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Searing Demi Feature", "Change Summon Bahamut, Summon Phoenix and Summon Solar Bahamut into Searing Light when any of them is ready to be summoned, Searing Light is off cooldown, and you are in combat.", SMN.JobID)]
+    SummonerDemiSearingLightFeature = 2715,
 
     #endregion
     // ====================================================================================
@@ -1546,89 +1643,123 @@ public enum CustomComboPreset
     // ====================================================================================
     #region WARRIOR
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.Maim, UTL.ArrowLeft, WAR.HeavySwing])]
     [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain.", WAR.JobID)]
     WarriorStormsPathCombo = 2101,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.FellCleave, UTL.ArrowLeft, WAR.StormsPath, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(WarriorStormsPathCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Storms Path Overcap Feature", "Replace Storms Path with Fell Cleave when the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
     WarriorStormsPathOvercapFeature = 2104,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.FellCleave, UTL.ArrowLeft, WAR.StormsPath, UTL.Blank, WAR.InnerRelease, UTL.Checkmark])]
     [ParentCombo(WarriorStormsPathCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Storms Path Inner Release Feature", "Replace Storms Path with Fell Cleave when Inner Release is active.", WAR.JobID)]
     WarriorStormsPathInnerReleaseFeature = 2110,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsEye, UTL.ArrowLeft, WAR.Maim, UTL.ArrowLeft, WAR.HeavySwing])]
     [CustomComboInfo("Storms Eye Combo", "Replace Storms Eye with its combo chain.", WAR.JobID)]
     WarriorStormsEyeCombo = 2102,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.Overpower])]
     [CustomComboInfo("Mythril Tempest Combo", "Replace Mythril Tempest with its combo chain.", WAR.JobID)]
     WarriorMythrilTempestCombo = 2103,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.MythrilTempest, UTL.Blank, UTL.Blank, UTL.Danger])]
     [ParentCombo(WarriorMythrilTempestCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Mythril Tempest Overcap Feature", "Replace Mythril Tempest with Decimate the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
     WarriorMythrilTempestOvercapFeature = 2105,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.MythrilTempest, UTL.Blank, WAR.InnerRelease, UTL.Checkmark])]
     [ParentCombo(WarriorMythrilTempestCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Mythril Tempest Inner Release Feature", "Replace Mythril Tempest with Decimate when Inner Release is active.", WAR.JobID)]
     WarriorMythrilTempestInnerReleaseFeature = 2111,
 
+    [SectionCombo("Inner Warrior")]
+    [IconsCombo([WAR.Infuriate, UTL.ArrowLeft, WAR.InnerBeast, WAR.SteelCyclone, UTL.Blank, UTL.Blank, UTL.Cross])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Angry Beast Feature", "Replace Inner Beast and Steel Cyclone with Infuriate when less then 50 Beast Gauge is available.", WAR.JobID)]
+    [CustomComboInfo("Angry Beast Feature", "Replace Inner Beast/Fell Cleave and Steel Cyclone/Decimate with Infuriate when less then 50 Beast Gauge is available.", WAR.JobID)]
     WarriorInfuriateBeastFeature = 2109,
 
+    [SectionCombo("Inner Warrior")]
+    [IconsCombo([WAR.PrimalRend, UTL.ArrowLeft, WAR.FellCleave, WAR.Decimate, UTL.Blank, WAR.PrimalRend, UTL.Checkmark])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Nascent Flash Level Sync", "Replace Nascent Flash with Raw intuition when Synced.", WAR.JobID)]
-    WarriorNascentFlashSyncFeature = 2106,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Healthy Balanced Diet Feature", "Replace Bloodwhetting with Thrill of Battle, and then Equilibrium when the preceding is on cooldown.", WAR.JobID)]
-    WarriorHealthyBalancedDietFeature = 2112,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Primal Beast Feature", "Replace Inner Beast and Steel Cyclone with Primal Rend when available", WAR.JobID)]
+    [CustomComboInfo("Primal Beast Feature", "Replace Fell Cleave and Decimate with Primal Rend when available", WAR.JobID)]
     WarriorPrimalBeastFeature = 2107,
 
+    [SectionCombo("Inner Warrior")]
+    [IconsCombo([WAR.PrimalRend, UTL.ArrowLeft, WAR.InnerRelease, UTL.Blank, WAR.PrimalRend, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Primal Release Feature", "Replace Inner Release with Primal Rend when available", WAR.JobID)]
     WarriorPrimalReleaseFeature = 2108,
+
+    [SectionCombo("Buffs")]
+    [IconsCombo([WAR.Equilibrium, UTL.ArrowLeft, WAR.ThrillOfBattle, UTL.ArrowLeft, WAR.Bloodwhetting])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Healthy Balanced Diet Feature", "Replace Bloodwhetting with Thrill of Battle, and then Equilibrium when the preceding is on cooldown.", WAR.JobID)]
+    WarriorHealthyBalancedDietFeature = 2112,
+
+    [SectionCombo("Level Synchronization")]
+    [IconsCombo([WAR.RawIntuition, UTL.ArrowLeft, WAR.NascentFlash])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Nascent Flash Level Sync", "Replace Nascent Flash with Raw Intuition when Level Synced.", WAR.JobID)]
+    WarriorNascentFlashSyncFeature = 2106,
 
     #endregion
     // ====================================================================================
     #region WHITE MAGE
 
-    [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready.", WHM.JobID)]
+    [SectionCombo("Single Target")]
+    [IconsCombo([WHM.Glare3, UTL.ArrowLeft, WHM.Glare4])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Glare 4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
+    WhiteMageGlare4Feature = 2407,
+
+    [SectionCombo("Afflatus Misery")]
+    [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
+    [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
     WhiteMageSolaceMiseryFeature = 2401,
 
+    [SectionCombo("Afflatus Misery")]
+    [IconsCombo([WHM.AfflatusRapture, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
     [CustomComboInfo("Rapture into Misery", "Replace Afflatus Rapture with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
     WhiteMageRaptureMiseryFeature = 2402,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Targeted Misery", "Only swap to Afflatus Misery when targeting an enemy.", WHM.JobID)]
-    WhiteMageSolaceMiseryTargetFeature = 2406,
-
+    [SectionCombo("Afflatus Misery")]
+    [IconsCombo([WHM.Holy, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Holy into Misery", "Replace Holy/Holy 3 with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
     WhiteMageHolyMiseryFeature = 2405,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Cure 2 Level Sync", "Replace Cure 2 with Cure when below level 30 in synced content.", WHM.JobID)]
-    WhiteMageCureFeature = 2403,
-
+    [SectionCombo("Afflatus Solace")]
+    [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.Cure2, UTL.Plus, WHM.AfflatusRapture, UTL.ArrowLeft, WHM.Medica])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Afflatus Feature", "Replace Cure 2 with Afflatus Solace and Medica with Afflatus Rapture when a Lily is available.", WHM.JobID)]
     WhiteMageAfflatusFeature = 2404,
 
+    [SectionCombo("Afflatus Solace")]
+    [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.Medica2, WHM.Medica3])]
     [ParentCombo(WhiteMageAfflatusFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Medicafflatus Feature", "Also replaces Medica 2 & Medica 3 with Afflatus Rapture when a Lily is available.", WHM.JobID)]
     WhiteMageAfflatusMedicaPlusFeature = 2408,
 
+    [SectionCombo("Level Synchronization")]
+    [IconsCombo([WHM.Cure, UTL.ArrowLeft, WHM.Cure2])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Glare4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
-    WhiteMageGlare4Feature = 2407,
+    [CustomComboInfo("Cure 2 Level Sync", "Replace Cure 2 with Cure when below level 30 in synced content.", WHM.JobID)]
+    WhiteMageCureFeature = 2403,
 
     #endregion
     // ====================================================================================
@@ -1641,55 +1772,55 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DOL
 
-    [SectionCombo("Disciple of the Land")]
-    [IconsCombo([DOL.AgelessWords, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
-    DolEurekaFeature = 51001,
-
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.Cast, DOL.Hook])]
+    [IconsCombo([DOL.Cast, UTL.ArrowLeft, DOL.Hook])]
     [ConflictingCombos(DolCastRestFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Cast / Hook Feature", "Replace Cast with Hook when fishing.", DOL.JobID)]
     DolCastHookFeature = 51002,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.Cast, DOL.Rest])]
+    [IconsCombo([DOL.Cast, UTL.ArrowLeft, DOL.Rest])]
     [ConflictingCombos(DolCastHookFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Cast / Rest Feature", "Replace Cast with Rest when fishing.", DOL.JobID)]
     DolCastRestFeature = 51008,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.Cast, DOL.Gig])]
+    [IconsCombo([DOL.Cast, UTL.ArrowLeft, DOL.Gig])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Cast / Gig Feature", "Replace Cast with Gig when underwater.", DOL.JobID)]
     DolCastGigFeature = 51003,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.SurfaceSlap, DOL.VeteranTrade])]
+    [IconsCombo([DOL.SurfaceSlap, UTL.ArrowLeft, DOL.VeteranTrade])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Surface Slap / Veteran Trade Feature", "Replace Surface Slap with Veteran Trade when underwater.", DOL.JobID)]
     DolSurfaceTradeFeature = 51004,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.PrizeCatch, DOL.NaturesBounty])]
+    [IconsCombo([DOL.PrizeCatch, UTL.ArrowLeft, DOL.NaturesBounty])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Prize Catch / Nature's Bounty Feature", "Replace Prize Catch with Nature's Bounty when underwater.", DOL.JobID)]
     DolPrizeBountyFeature = 51005,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.Snagging, DOL.Salvage])]
+    [IconsCombo([DOL.Snagging, UTL.ArrowLeft, DOL.Salvage])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Snagging / Salvage Feature", "Replace Snagging with Salvage when underwater.", DOL.JobID)]
     DolSnaggingSalvageFeature = 51006,
 
     [SectionCombo("Disciple of the Ocean")]
-    [IconsCombo([DOL.CastLight, DOL.ElectricCurrent])]
+    [IconsCombo([DOL.CastLight, UTL.ArrowLeft, DOL.ElectricCurrent])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Cast Light / Electric Current Feature", "Replace Cast Light with Electric Current when underwater.", DOL.JobID)]
     DolCastLightElectricCurrentFeature = 51007,
+
+    [SectionCombo("Disciple of the Land")]
+    [IconsCombo([DOL.AgelessWords, UTL.ArrowLeft, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
+    DolEurekaFeature = 51001,
 
     #endregion
     // ====================================================================================
