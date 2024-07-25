@@ -41,6 +41,8 @@ internal static class DRG
         // Dragon
         Stardiver = 16480,
         WyrmwindThrust = 25773,
+        RiseOfTheDragon = 36953,
+        Starcross = 36956,
         // Buff abilities
         LanceCharge = 85,
         DragonSight = 7398,
@@ -52,7 +54,9 @@ internal static class DRG
             SharperFangAndClaw = 802,
             EnhancedWheelingThrust = 803,
             DiveReady = 1243,
-            DraconianFire = 1863;
+            DraconianFire = 1863,
+            Dragonsflight = 3845,
+            StarcrossReady = 3846;
     }
 
     public static class Debuffs
@@ -85,7 +89,9 @@ internal static class DRG
             HighJump = 74,
             RaidenThrust = 76,
             Stardiver = 80,
-            WyrmwindThrust = 90;
+            WyrmwindThrust = 90,
+            RiseOfTheDragon = 92,
+            Starcross = 100;
     }
 }
 
@@ -213,6 +219,9 @@ internal class DragoonStardiver : CustomCombo
         {
             var gauge = GetJobGauge<DRGGauge>();
 
+            if (HasEffect(DRG.Buffs.StarcrossReady))
+                return DRG.Starcross;
+
             if (IsEnabled(CustomComboPreset.DragoonStardiverNastrondFeature))
             {
                 if (level >= DRG.Levels.Geirskogul && (!gauge.IsLOTDActive || IsCooldownUsable(DRG.Nastrond) || !IsCooldownUsable(DRG.Stardiver)))
@@ -222,6 +231,9 @@ internal class DragoonStardiver : CustomCombo
 
             if (IsEnabled(CustomComboPreset.DragoonStardiverDragonfireDiveFeature))
             {
+                if (IsEnabled(CustomComboPreset.DragoonStardiverDragonfireDiveFeature) && HasEffect(DRG.Buffs.Dragonsflight))
+                    return DRG.RiseOfTheDragon;
+
                 if (level < DRG.Levels.Stardiver || !gauge.IsLOTDActive || !IsCooldownUsable(DRG.Stardiver) || (IsCooldownUsable(DRG.DragonfireDive) && gauge.LOTDTimer > 7.5))
                     return DRG.DragonfireDive;
             }
