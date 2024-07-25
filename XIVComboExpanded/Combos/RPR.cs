@@ -142,7 +142,7 @@ internal class ReaperSlice : CustomCombo
                 (level >= RPR.Levels.Executioner && HasEffect(RPR.Buffs.Executioner)) ||
                 (level >= RPR.Levels.Enshroud && gauge.EnshroudedTimeRemaining > 0))
             {
-                if (IsEnabled(CustomComboPreset.ReaperSliceEnhancedEnshroudedFeature))
+                if (IsEnabled(CustomComboPreset.ReaperSliceEnhancedEnshroudedFeature) && HasEffect(RPR.Buffs.Enshrouded))
                 {
                     if (HasEffect(RPR.Buffs.EnhancedVoidReaping))
                         return RPR.VoidReaping;
