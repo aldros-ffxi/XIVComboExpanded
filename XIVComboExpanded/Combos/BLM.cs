@@ -120,8 +120,8 @@ internal class BlackFireBlizzard4 : CustomCombo
                 {
                     if (IsEnabled(CustomComboPreset.BlackEnochianTimerFeature)) // 10% safety net to account for server tick shenanigans and despair cast time
                         {
-                            if ((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast))
-                            || (gauge.ElementTimeRemaining / 1000.0 < fire4.CastTime * 1.10 && gauge.ElementTimeRemaining / 1000.0 < fire4.BaseCooldown * 1.10))
+                            if (((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast))
+                            && gauge.ElementTimeRemaining / 1000.0 < fire4.BaseCooldown * 1.10) || gauge.ElementTimeRemaining / 1000.0 < fire4.CastTime * 1.10)
                             {
                                 if (HasEffect(BLM.Buffs.Firestarter))
                                     return BLM.Fire3;

@@ -29,7 +29,6 @@ internal static class BRD
         CausticBite = 7406,
         Stormbite = 7407,
         RefulgentArrow = 7409,
-        Peloton = 7557,
         BurstShot = 16495,
         ApexArrow = 16496,
         Shadowbite = 16494,
@@ -411,25 +410,6 @@ internal class BardRadiantFinale : CustomCombo
     }
 }
 
-internal class BardPeloton : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BardWanderersPitchPerfectFeature;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == BRD.Peloton)
-        {
-            var gauge = GetJobGauge<BRDGauge>();
-
-            if (level >= BRD.Levels.PitchPerfect && gauge.Song == Song.WANDERER && HasTarget())
-                return BRD.PitchPerfect;
-
-            return BRD.WanderersMinuet;
-        }
-
-        return actionID;
-    }
-}
 
 internal class BardMagesBallad : CustomCombo
 {
