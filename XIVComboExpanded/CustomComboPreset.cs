@@ -510,15 +510,34 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DRAGOON
 
-    [IconsCombo([UTL.ST, DRG.TrueThrust, DRG.Disembowel, DRG.ChaosThrust])]
-    [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain.", DRG.JobID)]
-    DragoonChaosThrustCombo = 2203,
-
-    [IconsCombo([UTL.ST, DRG.TrueThrust, DRG.VorpalThrust, DRG.FullThrust])]
+    [IconsCombo([UTL.AoE, DRG.DoomSpike, DRG.SonicThrust, DRG.CoerthanTorment])]
     [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain.", DRG.JobID)]
     DragoonFullThrustCombo = 2204,
 
-    [IconsCombo([UTL.AoE, DRG.DoomSpike, DRG.SonicThrust, DRG.CoerthanTorment])]
+    [ParentCombo(DragoonFullThrustCombo)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Vorpal Thrust Option", "Replace Full Thrust with its combo chain starting instead at Vorpal Thrust, not True Thrust, while no combo is ongoing.", DRG.JobID)]
+    DragoonFullThrustComboOption = 2210,
+    
+    [ExpandedCustomCombo]
+    [ParentCombo(DragoonFullThrustCombo)]
+    [CustomComboInfo("Double Chaos Thrust Option", "Replicates the Full Thrust combo while not in the Chaotic Thrust combo.", DRG.JobID)]
+    DragoonDoubleFullThrustComboOption = 2215,
+
+    [IconsCombo([UTL.ST, DRG.TrueThrust, DRG.Disembowel, DRG.ChaosThrust])]
+    [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain.", DRG.JobID)]
+    DragoonChaosThrustCombo = 2203,
+    
+    [ExpandedCustomCombo]
+    [ParentCombo(DragoonChaosThrustCombo)]
+    [CustomComboInfo("Chaos Thrust Disembowel Option", "Replace Chaos Thrust with its combo chain starting instead at Disembowel, not True Thrust, while no combo is ongoing.", DRG.JobID)]
+    DragoonChaosThrustComboOption = 2209,
+
+    [ExpandedCustomCombo]
+    [ParentCombo(DragoonChaosThrustCombo)]
+    [CustomComboInfo("Double Full Thrust Option", "Replicates the Chaotic Thrust combo while not in the Full Thrust combo.", DRG.JobID)]
+    DragoonDoubleChaosComboOption = 2214,
+    
     [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain.", DRG.JobID)]
     DragoonCoerthanTormentCombo = 2202,
 
