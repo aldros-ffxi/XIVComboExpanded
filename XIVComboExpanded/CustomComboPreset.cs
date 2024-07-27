@@ -418,6 +418,17 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DRAGOON
 
+    [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain.", DRG.JobID)]
+    DragoonFullThrustCombo = 2204,
+
+    [ParentCombo(DragoonFullThrustCombo)]
+    [CustomComboInfo("Vorpal Thrust Option", "Replace Full Thrust with its combo chain starting instead at Vorpal Thrust, not True Thrust, while no combo is ongoing.", DRG.JobID)]
+    DragoonFullThrustComboOption = 2210,
+
+    [ParentCombo(DragoonFullThrustCombo)]
+    [CustomComboInfo("Double Chaos Thrust Option", "Replicates the Full Thrust combo while not in the Chaotic Thrust combo.", DRG.JobID)]
+    DragoonDoubleFullThrustComboOption = 2215,
+
     [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain.", DRG.JobID)]
     DragoonChaosThrustCombo = 2203,
 
@@ -425,12 +436,9 @@ public enum CustomComboPreset
     [CustomComboInfo("Chaos Thrust Disembowel Option", "Replace Chaos Thrust with its combo chain starting instead at Disembowel, not True Thrust, while no combo is ongoing.", DRG.JobID)]
     DragoonChaosThrustComboOption = 2209,
 
-    [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain.", DRG.JobID)]
-    DragoonFullThrustCombo = 2204,
-
-    [ParentCombo(DragoonFullThrustCombo)]
-    [CustomComboInfo("Full Thrust Vorpal Thrust Option", "Replace Full Thrust with its combo chain starting instead at Vorpal Thrust, not True Thrust, while no combo is ongoing.", DRG.JobID)]
-    DragoonFullThrustComboOption = 2210,
+    [ParentCombo(DragoonChaosThrustCombo)]
+    [CustomComboInfo("Double Full Thrust Option", "Replicates the Chaotic Thrust combo while not in the Full Thrust combo.", DRG.JobID)]
+    DragoonDoubleChaosComboOption = 2214,
 
     [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain.", DRG.JobID)]
     DragoonCoerthanTormentCombo = 2202,

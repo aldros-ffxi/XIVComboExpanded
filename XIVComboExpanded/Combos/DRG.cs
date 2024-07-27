@@ -1,4 +1,5 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
+using Lumina.Data.Parsing.Layer;
 
 namespace XIVComboExpandedPlugin.Combos;
 
@@ -125,76 +126,64 @@ internal class DragoonCoerthanTorment : CustomCombo
     }
 }
 
-internal class DragoonChaosThrust : CustomCombo
+internal class DragoonSingleTargetThrust : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DrgAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)
+        if (IsEnabled(CustomComboPreset.DragoonChaosThrustCombo) || IsEnabled(CustomComboPreset.DragoonFullThrustCombo))
         {
-            if (IsEnabled(CustomComboPreset.DragoonChaosThrustCombo))
+            if (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring || actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)
             {
                 if (level >= DRG.Levels.Drakesbane && (lastComboMove == DRG.WheelingThrust || lastComboMove == DRG.FangAndClaw))
                     return DRG.Drakesbane;
 
                 if (comboTime > 0)
                 {
-                    if ((lastComboMove == DRG.ChaosThrust || lastComboMove == DRG.ChaoticSpring) && level >= DRG.Levels.WheelingThrust)
-                        // Wheeling
-                        return OriginalHook(DRG.WheelingThrust);
+                    if (((actionID == DRG.FullThrust || actionID == DRG.HeavensThrust) && IsEnabled(CustomComboPreset.DragoonFullThrustCombo))
+                        || (IsEnabled(CustomComboPreset.DragoonDoubleChaosComboOption) && (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)))
+                        {
+                        if ((lastComboMove == DRG.FullThrust || lastComboMove == DRG.HeavensThrust) && level >= DRG.Levels.FangAndClaw)
+                            // Claw
+                            return OriginalHook(DRG.FangAndClaw);
 
-                    if ((lastComboMove == DRG.Disembowel || lastComboMove == DRG.ExplosiveThrust) && level >= DRG.Levels.ChaosThrust)
-                        // ChaoticSpring
-                        return OriginalHook(DRG.ChaosThrust);
+                        if ((lastComboMove == DRG.VorpalThrust || lastComboMove == DRG.BarrageThrust) && level >= DRG.Levels.FullThrust)
+                            // Heavens' Thrust
+                            return OriginalHook(DRG.FullThrust);
+                    }
 
-                    if ((lastComboMove == DRG.TrueThrust || lastComboMove == DRG.RaidenThrust) && level >= DRG.Levels.Disembowel)
+                    if (((actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring) && IsEnabled(CustomComboPreset.DragoonChaosThrustCombo))
+                             || (IsEnabled(CustomComboPreset.DragoonDoubleFullThrustComboOption) && (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)))
+                        {
+                            if ((lastComboMove == DRG.ChaosThrust || lastComboMove == DRG.ChaoticSpring) && level >= DRG.Levels.WheelingThrust)
+                                // Wheeling
+                                return OriginalHook(DRG.WheelingThrust);
+
+                            if ((lastComboMove == DRG.Disembowel || lastComboMove == DRG.ExplosiveThrust) && level >= DRG.Levels.ChaosThrust)
+                                // ChaoticSpring
+                                return OriginalHook(DRG.ChaosThrust);
+                        }
+
+                    if (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)
+                    {
+                        if ((lastComboMove == DRG.TrueThrust || lastComboMove == DRG.RaidenThrust) && level >= DRG.Levels.VorpalThrust)
+                            return OriginalHook(DRG.VorpalThrust);
+                    }
+
+                    if (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)
+                    {
+                        if ((lastComboMove == DRG.TrueThrust || lastComboMove == DRG.RaidenThrust) && level >= DRG.Levels.Disembowel)
+                            return OriginalHook(DRG.Disembowel);
+                    }
+
+                    if (IsEnabled(CustomComboPreset.DragoonFullThrustComboOption) && (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust))
+                        return OriginalHook(DRG.VorpalThrust);
+
+                    if (IsEnabled(CustomComboPreset.DragoonChaosThrustComboOption) && (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring))
                         return OriginalHook(DRG.Disembowel);
                 }
 
-                if (IsEnabled(CustomComboPreset.DragoonChaosThrustComboOption))
-                    return OriginalHook(DRG.Disembowel);
-
-                // Vorpal Thrust
-                return OriginalHook(DRG.TrueThrust);
-            }
-        }
-
-        return actionID;
-    }
-}
-
-internal class DragoonFullThrust : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DrgAny;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)
-        {
-            if (IsEnabled(CustomComboPreset.DragoonFullThrustCombo))
-            {
-                if (level >= DRG.Levels.Drakesbane && (lastComboMove == DRG.WheelingThrust || lastComboMove == DRG.FangAndClaw))
-                    return DRG.Drakesbane;
-
-                if (comboTime > 0)
-                {
-                    if ((lastComboMove == DRG.FullThrust || lastComboMove == DRG.HeavensThrust) && level >= DRG.Levels.FangAndClaw)
-                        // Claw
-                        return OriginalHook(DRG.FangAndClaw);
-
-                    if ((lastComboMove == DRG.VorpalThrust || lastComboMove == DRG.BarrageThrust) && level >= DRG.Levels.FullThrust)
-                        // Heavens' Thrust
-                        return OriginalHook(DRG.FullThrust);
-
-                    if ((lastComboMove == DRG.TrueThrust || lastComboMove == DRG.RaidenThrust) && level >= DRG.Levels.VorpalThrust)
-                        return OriginalHook(DRG.VorpalThrust);
-                }
-
-                if (IsEnabled(CustomComboPreset.DragoonFullThrustComboOption))
-                    return OriginalHook(DRG.VorpalThrust);
-
-                // Vorpal Thrust
                 return OriginalHook(DRG.TrueThrust);
             }
         }
