@@ -143,7 +143,7 @@ internal class DragoonSingleTargetThrust : CustomCombo
                 {
                     if (((actionID == DRG.FullThrust || actionID == DRG.HeavensThrust) && IsEnabled(CustomComboPreset.DragoonFullThrustCombo))
                         || (IsEnabled(CustomComboPreset.DragoonDoubleChaosComboOption) && (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)))
-                        {
+                    {
                         if ((lastComboMove == DRG.FullThrust || lastComboMove == DRG.HeavensThrust) && level >= DRG.Levels.FangAndClaw)
                             // Claw
                             return OriginalHook(DRG.FangAndClaw);
@@ -155,15 +155,15 @@ internal class DragoonSingleTargetThrust : CustomCombo
 
                     if (((actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring) && IsEnabled(CustomComboPreset.DragoonChaosThrustCombo))
                              || (IsEnabled(CustomComboPreset.DragoonDoubleFullThrustComboOption) && (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)))
-                        {
-                            if ((lastComboMove == DRG.ChaosThrust || lastComboMove == DRG.ChaoticSpring) && level >= DRG.Levels.WheelingThrust)
-                                // Wheeling
-                                return OriginalHook(DRG.WheelingThrust);
+                    {
+                        if ((lastComboMove == DRG.ChaosThrust || lastComboMove == DRG.ChaoticSpring) && level >= DRG.Levels.WheelingThrust)
+                            // Wheeling
+                            return OriginalHook(DRG.WheelingThrust);
 
-                            if ((lastComboMove == DRG.Disembowel || lastComboMove == DRG.ExplosiveThrust) && level >= DRG.Levels.ChaosThrust)
-                                // ChaoticSpring
-                                return OriginalHook(DRG.ChaosThrust);
-                        }
+                        if ((lastComboMove == DRG.Disembowel || lastComboMove == DRG.ExplosiveThrust) && level >= DRG.Levels.ChaosThrust)
+                            // ChaoticSpring
+                            return OriginalHook(DRG.ChaosThrust);
+                    }
 
                     if ((actionID == DRG.FullThrust || actionID == DRG.HeavensThrust) && IsEnabled(CustomComboPreset.DragoonFullThrustCombo))
                     {
