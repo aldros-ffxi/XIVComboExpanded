@@ -212,7 +212,6 @@ internal class ConfigWindow : Window
                                     }
 
                                     this.DrawPreset(Tabs.Classic, preset, info, ref i);
-
                                 }
 
                                 ImGui.EndTabItem();

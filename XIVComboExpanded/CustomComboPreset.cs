@@ -92,6 +92,31 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ADV
 
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWill, WAR.Defiance, DRK.Grit, GNB.RoyalGuard])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Stance over Provoke", "Replace Provoke with Iron Will, Defiance, Grit or Royal Guard when it is off cooldown and your stance isn't up.", ADV.JobID)]
+    AdvStanceProvokeFeature = 1004,
+
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
+    [ParentCombo(AdvStanceProvokeFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Stance Removal while on CD", "Replace Provoke by your Stance removal action when Provoke is on cooldown. Be careful with this option as you won't be able to track Provoke's cooldown.", ADV.JobID)]
+    AdvStanceBackProvokeFeature = 1005,
+
+    [SectionCombo("Tank Role Actions")]
+    [IconsCombo([ADV.Shirk, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Stance Removal over Shirk", "Replace Shirk by your Stance removal action when it is on cooldown and your stance is up.", ADV.JobID)]
+    AdvShirkStanceFeature = 1006,
+
+    [SectionCombo("Ranged Role Actions")]
+    [IconsCombo([ADV.HeadGraze, UTL.ArrowLeft, ADV.Peloton])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Silent Peloton", "Replace Head Graze by Peloton when out of combat or you aren't already under its effect.", ADV.JobID)]
+    AdvPelotonSTFeature = 1007,
+
     [SectionCombo("Raising Features")]
     [IconsCombo([ADV.Swiftcast, UTL.ArrowLeft, WHM.Raise, SCH.Resurrection, AST.Ascend, RDM.Verraise, SGE.Egeiro, BLU.AngelWhisper])]
     [ExpandedCustomCombo]
@@ -120,24 +145,11 @@ public enum CustomComboPreset
     [CustomComboInfo("Variant Raise Feature", "Replace Ascend, Ressurection, Egeiro, Raise, Verraise, and Angel Whisper with Variant Raise II when in a variant dungeon.", ADV.JobID)]
     AdvVariantRaiseFeature = 1001,
 
-    [SectionCombo("Tank Role Actions")]
-    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWill, WAR.Defiance, DRK.Grit, GNB.RoyalGuard])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Stance over Provoke", "Replace Provoke with Iron Will, Defiance, Grit or Royal Guard when it is off cooldown and your stance isn't up.", ADV.JobID)]
-    AdvStanceProvokeFeature = 1004,
-
-    [SectionCombo("Tank Role Actions")]
-    [IconsCombo([ADV.Provoke, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
-    [ParentCombo(AdvStanceProvokeFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Stance Removal while on CD", "Replace Provoke by your Stance removal action when Provoke is on cooldown. Be careful with this option as you won't be able to track Provoke's cooldown.", ADV.JobID)]
-    AdvStanceBackProvokeFeature = 1005,
-
-    [SectionCombo("Tank Role Actions")]
-    [IconsCombo([ADV.Shirk, UTL.ArrowLeft, PLD.IronWillRemoval, WAR.DefianceRemoval, DRK.GritRemoval, GNB.RoyalGuardRemoval])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Stance Removal over Shirk", "Replace Shirk by your Stance removal action when it is on cooldown and your stance is up.", ADV.JobID)]
-    AdvShirkStanceFeature = 1006,
+    [SectionCombo("Casters & Healers Role Actions")]
+    [IconsCombo([ADV.LucidDreaming, UTL.ArrowLeft, UTL.ArrowLeft, UTL.ArrowLeft, UTL.Danger])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Automatic Dreams", "Replace EVERY SPELL AND ABILITY by Lucid Dreaming whenever your MP drop under 5000 and you are a Healer or Caster. Use with caution.", ADV.JobID)]
+    AdvAutoLucidDreamingFeature = 1008,
 
     #endregion
     // ====================================================================================

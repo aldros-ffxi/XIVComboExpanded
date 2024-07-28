@@ -1,4 +1,6 @@
-﻿namespace XIVComboExpandedPlugin.Combos;
+﻿using Lumina.Excel.GeneratedSheets2;
+
+namespace XIVComboExpandedPlugin.Combos;
 
 internal static class ADV
 {
@@ -6,17 +8,19 @@ internal static class ADV
     public const byte JobID = 0;
 
     public const uint
-        LucidDreaming = 1204,
         Provoke = 7533,
         Shirk = 7537,
+        HeadGraze = 7551,
         Peloton = 7557,
         Swiftcast = 7561,
+        LucidDreaming = 7562,
         AngelWhisper = 18317,
         VariantRaise2 = 29734;
 
     public static class Buffs
     {
         public const ushort
+            Peloton = 1199,
             Medicated = 49;
     }
 
@@ -157,6 +161,54 @@ internal class ShirkStanceFeature : CustomCombo
                     return DRK.GritRemoval;
                 if (job == GNB.JobID && level >= GNB.Levels.RoyalGuard)
                     return GNB.RoyalGuardRemoval;
+            }
+        }
+
+        return actionID;
+    }
+}
+
+internal class SprintPelotonFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset => CustomComboPreset.AdvPelotonSTFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == ADV.HeadGraze && (LocalPlayer?.ClassJob.Id == BRD.ClassID || LocalPlayer?.ClassJob.Id == BRD.JobID || LocalPlayer?.ClassJob.Id == MCH.JobID || LocalPlayer?.ClassJob.Id == DNC.JobID))
+        {
+            if (!HasEffect(ADV.Buffs.Peloton) && OutOfCombat())
+            {
+                return ADV.Peloton;
+            }
+        }
+
+        return actionID;
+    }
+}
+
+
+internal class AdvAutoLucidDreamingFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset => CustomComboPreset.AdvAutoLucidDreamingFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (LocalPlayer?.CurrentMp < 5000)
+        {
+            if(LocalPlayer?.ClassJob.Id == WHM.ClassID
+            || LocalPlayer?.ClassJob.Id == BLM.ClassID
+            || LocalPlayer?.ClassJob.Id == WHM.JobID
+            || LocalPlayer?.ClassJob.Id == BLM.JobID
+            || LocalPlayer?.ClassJob.Id == SMN.ClassID
+            || LocalPlayer?.ClassJob.Id == SMN.JobID
+            || LocalPlayer?.ClassJob.Id == SCH.JobID
+            || LocalPlayer?.ClassJob.Id == AST.JobID
+            || LocalPlayer?.ClassJob.Id == RDM.JobID
+            || LocalPlayer?.ClassJob.Id == BLU.JobID
+            || LocalPlayer?.ClassJob.Id == SGE.JobID
+            || LocalPlayer?.ClassJob.Id == PCT.JobID)
+            {
+                return ADV.LucidDreaming;
             }
         }
 
