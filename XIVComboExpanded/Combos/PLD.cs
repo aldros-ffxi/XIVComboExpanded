@@ -382,7 +382,7 @@ internal class PaladinRequiescat : PaladinCombo
                     // FoF is cast.  This ensures that the button shows the action that will next be available for use in
                     // that hotbar slot, rather than swapping to FoF at the last instant when FoF comes off cooldown a
                     // a single weave slot earlier than Req.
-                    return CalcBestAction(PLD.FightOrFlight, PLD.FightOrFlight, PLD.Requiescat);
+                    return OriginalHook(CalcBestAction(PLD.FightOrFlight, PLD.FightOrFlight, PLD.Requiescat));
                 }
             }
         }
