@@ -198,6 +198,8 @@ internal class ConfigWindow : Window
                                     ImGui.EndTooltip();
                                 }
 
+                                ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
+
                                 int i = 1;
                                 string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
@@ -214,6 +216,7 @@ internal class ConfigWindow : Window
                                     this.DrawPreset(Tabs.Classic, preset, info, ref i);
                                 }
 
+                                ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
                         }
@@ -228,6 +231,8 @@ internal class ConfigWindow : Window
                                     ImGui.TextUnformatted("Expanded hover tooltip");
                                     ImGui.EndTooltip();
                                 }
+
+                                ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
                                 string previousSection = string.Empty;
@@ -251,6 +256,8 @@ internal class ConfigWindow : Window
                                     this.DrawPreset(Tabs.Expanded, preset, info, ref i);
                                 }
 
+
+                                ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
                         }
@@ -266,6 +273,8 @@ internal class ConfigWindow : Window
                                     ImGui.TextUnformatted("Accessibility");
                                     ImGui.EndTooltip();
                                 }
+
+                                ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
                                 string previousSection = string.Empty;
@@ -289,6 +298,8 @@ internal class ConfigWindow : Window
                                     this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
                                 }
 
+
+                                ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
                         }
@@ -303,6 +314,8 @@ internal class ConfigWindow : Window
                                     ImGui.TextUnformatted("Secret hover tooltip");
                                     ImGui.EndTooltip();
                                 }
+
+                                ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
                                 string previousSection = string.Empty;
@@ -326,6 +339,8 @@ internal class ConfigWindow : Window
                                     this.DrawPreset(Tabs.Secret, preset, info, ref i);
                                 }
 
+
+                                ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
                         }
@@ -479,16 +494,54 @@ internal class ConfigWindow : Window
             #region ABOUT TAB
             if (ImGui.BeginTabItem("About"))
             {
-                if (ImGui.Button("Repository link"))
-                {
-                    Process.Start(new ProcessStartInfo { FileName = "https://github.com/MKhayle/XIVComboExpanded", UseShellExecute = true });
-                }
 
 
                 ImGui.Separator();
                 ImGui.Spacing();
 
-                ImGui.Text("Contributors and special thanks:");
+                ImGui.Spacing();
+                ImGui.Spacing();
+                ImGui.PushFont(UiBuilder.MonoFont);
+                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite2);
+                ImGui.Text("Statistics");
+                ImGui.PopStyleColor();
+                ImGui.PopFont();
+                ImGui.Separator();
+                ImGui.Spacing();
+
+                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && Service.Configuration.IsEnabled(preset)).Count()} combos currently enabled.");
+                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled).Count()} available in total.");
+
+                ImGui.Separator();
+                ImGui.Spacing();
+                ImGui.Spacing();
+                ImGui.PushFont(UiBuilder.MonoFont);
+                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite2);
+                ImGui.Text("GitHub Repository");
+                ImGui.PopStyleColor();
+                ImGui.PopFont();
+                ImGui.Separator();
+                ImGui.Spacing();
+
+                if (ImGui.Button("Open the GitHub Repository"))
+                {
+                    Process.Start(new ProcessStartInfo { FileName = "https://github.com/MKhayle/XIVComboExpanded", UseShellExecute = true });
+                }
+
+                ImGui.Text("Dalamud Repository URL");
+                var url = "https://github.com/daemitus/MyDalamudPlugins/raw/master/pluginmaster.json";
+                ImGui.InputText("", ref url, 100, ImGuiInputTextFlags.ReadOnly);
+
+                ImGui.Spacing();
+                ImGui.Spacing();
+                ImGui.PushFont(UiBuilder.MonoFont);
+                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite2);
+                ImGui.Text("Contributors and special thanks");
+                ImGui.PopStyleColor();
+                ImGui.PopFont();
+                ImGui.Separator();
+                ImGui.Spacing();
+
                 ImGui.BulletText("goat and the whole Dalamud team");
                 ImGui.BulletText("ff-meli for the initial concept");
                 ImGui.BulletText("attick for XIVCombo");
@@ -569,6 +622,7 @@ internal class ConfigWindow : Window
         ImGui.PopStyleColor();
         ImGui.PopFont();
         ImGui.Separator();
+        ImGui.Spacing();
     }
 
     private void DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
@@ -630,6 +684,9 @@ internal class ConfigWindow : Window
             Service.Configuration.Save();
         }
 
+        ImGui.SameLine();
+        ImGui.Text("   ");
+
         if (expanded)
         {
             ImGui.SameLine();
@@ -681,13 +738,11 @@ internal class ConfigWindow : Window
             }
         }
 
-        ImGui.SameLine();
-        ImGui.Text("     ");
 
         if (icons.Length > 0 && !Service.Configuration.HideIcons)
         {
             ImGui.SameLine();
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - (icons.Length * 30f) - ImGui.GetScrollX()
+            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - (icons.Length * 32f) - ImGui.GetScrollX()
                                     - 2 * ImGui.GetStyle().ItemSpacing.X);
 
             foreach (var icon in icons)
