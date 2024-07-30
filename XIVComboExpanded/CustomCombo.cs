@@ -208,6 +208,13 @@ internal abstract partial class CustomCombo
         => !IsEnabled(preset);
 
     /// <summary>
+    /// Gets bool determining if action is greyed out or not.
+    /// </summary>
+    /// <param name="actionID">Action ID.</param>
+    /// <returns>A bool value of whether the action can be used or not.</returns>
+    protected static bool CanUseAction(uint actionID) => Service.IconReplacer.CanUseAction(actionID);
+
+    /// <summary>
     /// Find if the player has a certain condition.
     /// </summary>
     /// <param name="flag">Condition flag.</param>
