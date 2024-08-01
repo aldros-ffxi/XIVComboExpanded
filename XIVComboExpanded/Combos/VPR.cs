@@ -160,28 +160,18 @@ internal class ViperFangs : CustomCombo
                         return VPR.TwinbloodBite;
                 }
 
-                if (actionID == VPR.SteelFangs)
+                if (gauge.AnguineTribute > 0)
                 {
-                    if (gauge.AnguineTribute == maxtribute)
-                        return VPR.FirstGeneration;
-
-                    if (gauge.AnguineTribute == maxtribute - 2)
-                        return VPR.ThirdGeneration;
-
-                    if (CanUseAction(VPR.SwiftskinsCoil) && gauge.AnguineTribute == 0)
-                        return VPR.SwiftskinsCoil;
-                }
-
-                if (actionID == VPR.ReavingFangs)
+                    if (actionID == VPR.SteelFangs)
+                        return gauge.AnguineTribute == maxtribute ? VPR.FirstGeneration : VPR.ThirdGeneration;
+                
+                    if (actionID == VPR.ReavingFangs)
+                        return gauge.AnguineTribute >= maxtribute - 1 ? VPR.SecondGeneration : VPR.FourthGeneration;
+                } 
+                else
                 {
-                    if (gauge.AnguineTribute >= 3 || (level < VPR.Levels.Ouroboros && gauge.AnguineTribute >= 2))
-                        return VPR.SecondGeneration;
-
-                    if (gauge.AnguineTribute > 0)
-                        return VPR.FourthGeneration;
-
-                    if (CanUseAction(VPR.HuntersCoil) && gauge.AnguineTribute == 0)
-                        return VPR.HuntersCoil;
+                    if (CanUseAction(VPR.SwiftskinsCoil) || CanUseAction(VPR.HuntersCoil))
+                        return actionID == VPR.SteelFangs ? VPR.HuntersCoil: VPR.SwiftskinsCoil;
                 }
             }
 
@@ -238,28 +228,18 @@ internal class ViperMaws : CustomCombo
                         return VPR.TwinbloodThresh;
                 }
 
-                if (actionID == VPR.SteelMaw)
+                if (gauge.AnguineTribute > 0)
                 {
-                    if (gauge.AnguineTribute == maxtribute)
-                        return VPR.FirstGeneration;
-
-                    if (gauge.AnguineTribute == maxtribute - 2)
-                        return VPR.ThirdGeneration;
-
-                    if (CanUseAction(VPR.SwiftskinsDen) && gauge.AnguineTribute == 0)
-                        return VPR.SwiftskinsDen;
-                }
-
-                if (actionID == VPR.ReavingMaw)
+                    if (actionID == VPR.SteelMaw)
+                        return gauge.AnguineTribute == maxtribute ? VPR.FirstGeneration : VPR.ThirdGeneration;
+                
+                    if (actionID == VPR.ReavingMaw)
+                        return gauge.AnguineTribute >= maxtribute - 1 ? VPR.SecondGeneration : VPR.FourthGeneration;
+                } 
+                else
                 {
-                    if (gauge.AnguineTribute >= 3 || (level < VPR.Levels.Ouroboros && gauge.AnguineTribute >= 2))
-                        return VPR.SecondGeneration;
-
-                    if (gauge.AnguineTribute > 0)
-                        return VPR.FourthGeneration;
-
-                    if (CanUseAction(VPR.HuntersDen) && gauge.AnguineTribute == 0)
-                        return VPR.HuntersDen;
+                    if (CanUseAction(VPR.SwiftskinsDen) || CanUseAction(VPR.HuntersDen))
+                        return actionID == VPR.SteelMaw ? VPR.HuntersDen: VPR.SwiftskinsDen;
                 }
             }
 
