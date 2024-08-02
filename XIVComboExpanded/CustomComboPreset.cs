@@ -143,7 +143,7 @@ public enum CustomComboPreset
     AstrologianBeneficSyncFeature = 3326,
 
     [SecretCustomCombo]
-    [CustomComboInfo("AST DoT Feature", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
+    [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
     AstrologianDoTFeature = 3327,
 
     #endregion
@@ -1093,7 +1093,7 @@ public enum CustomComboPreset
     SageToxikonPhlegma = 4011,
 
     [SecretCustomCombo]
-    [CustomComboInfo("SGE DoT Feature", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
     SageDoTFeature = 4012,
 
     #endregion
@@ -1208,7 +1208,7 @@ public enum CustomComboPreset
     ScholarAdloquiumSyncFeature = 2810,
 
     [SecretCustomCombo]
-    [CustomComboInfo("SCH DoT Feature", "Replace Malefic with Combust when it is about to run out.", SCH.JobID)]
+    [CustomComboInfo("Auto Biolysis", "Replace Broil with Biolysis when it is about to run out.", SCH.JobID)]
     ScholarDoTFeature = 2813,
 
     #endregion
@@ -1443,7 +1443,7 @@ public enum CustomComboPreset
     WhiteMageGlare4Feature = 2407,
 
     [SecretCustomCombo]
-    [CustomComboInfo("WHM DoT Feature", "Replace Stone or Glare 3 with Aero or Dia when it is about to run out.", WHM.JobID)]
+    [CustomComboInfo("Auto Dia", "Replace Glare with Dia when it is about to run out.", WHM.JobID)]
     WhiteMageDoTFeature = 2409,
 
     #endregion
