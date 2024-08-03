@@ -203,14 +203,14 @@ internal class WhiteMageGlare4Feature : CustomCombo
     {
         if (actionID == WHM.Stone)
         {
-            if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature))
+            if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature) && TargetIsEnemy())
             {
                 var aero = FindTargetEffect(WHM.Debuffs.Aero);
                 var aero2 = FindTargetEffect(WHM.Debuffs.Aero2);
                 var dia = FindTargetEffect(WHM.Debuffs.Dia);
 
                 // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (aero?.RemainingTime < 2.8 || aero2?.RemainingTime < 2.8 || dia?.RemainingTime < 2.8)
+                if (!(aero?.RemainingTime > 2.8 || aero2?.RemainingTime > 2.8 || dia?.RemainingTime > 2.8))
                     return OriginalHook(WHM.Aero);
             }
 

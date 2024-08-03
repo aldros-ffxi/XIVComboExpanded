@@ -88,7 +88,7 @@ internal class SageDosis : CustomCombo
     {
         if (actionID == SGE.Dosis || actionID == SGE.Dosis2 || actionID == SGE.Dosis3)
         {
-            if (IsEnabled(CustomComboPreset.SageDoTFeature))
+            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy())
             {
                 var eurkasiandosis = FindTargetEffect(SGE.Debuffs.EukrasianDosis);
                 var eurkasiandosis2 = FindTargetEffect(SGE.Debuffs.EukrasianDosis2);
@@ -98,7 +98,7 @@ internal class SageDosis : CustomCombo
                     return OriginalHook(SGE.Dosis);
 
                 // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (eurkasiandosis?.RemainingTime < 2.8 || eurkasiandosis2?.RemainingTime < 2.8 || eurkasiandosis3?.RemainingTime < 2.8)
+                if (!(eurkasiandosis?.RemainingTime > 2.8 || eurkasiandosis2?.RemainingTime > 2.8 || eurkasiandosis3?.RemainingTime > 2.8))
                     return SGE.Eukrasia;
             }
 

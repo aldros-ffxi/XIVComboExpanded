@@ -89,14 +89,14 @@ internal class AstrologianMalefic : CustomCombo
         {
             var gauge = GetJobGauge<ASTGauge>();
 
-            if (IsEnabled(CustomComboPreset.AstrologianDoTFeature))
+            if (IsEnabled(CustomComboPreset.AstrologianDoTFeature) && TargetIsEnemy())
             {
                 var combust = FindTargetEffect(AST.Debuffs.Combust);
                 var combust2 = FindTargetEffect(AST.Debuffs.Combust2);
                 var combust3 = FindTargetEffect(AST.Debuffs.Combust3);
 
                 // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (combust?.RemainingTime < 2.8 || combust2?.RemainingTime < 2.8 || combust3?.RemainingTime < 2.8)
+                if (!(combust?.RemainingTime > 2.8 || combust2?.RemainingTime > 2.8 || combust3?.RemainingTime > 2.8))
                     return OriginalHook(AST.Combust);
             }
 

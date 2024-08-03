@@ -260,14 +260,14 @@ internal class ScholarRuin : CustomCombo
     {
         if (actionID == SCH.Ruin || actionID == SCH.Broil || actionID == SCH.Broil2 || actionID == SCH.Broil3 || actionID == SCH.Broil4)
         {
-            if (IsEnabled(CustomComboPreset.ScholarDoTFeature))
+            if (IsEnabled(CustomComboPreset.ScholarDoTFeature) && TargetIsEnemy())
             {
                 var bio = FindTargetEffect(SCH.Debuffs.Bio);
                 var bio2 = FindTargetEffect(SCH.Debuffs.Bio2);
                 var biolysis = FindTargetEffect(SCH.Debuffs.Biolysis);
 
                 // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (bio?.RemainingTime < 2.8 || bio2?.RemainingTime < 2.8 || biolysis?.RemainingTime < 2.8)
+                if (!(bio?.RemainingTime > 2.8 || bio2?.RemainingTime > 2.8 || biolysis?.RemainingTime > 2.8))
                     return OriginalHook(SCH.Bio);
             }
         }
