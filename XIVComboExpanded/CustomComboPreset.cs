@@ -142,6 +142,10 @@ public enum CustomComboPreset
     [CustomComboInfo("Benefic II to Benefic Level Sync", "Replace Benefic 2 with Benefic when below level 26 in synced content.", AST.JobID)]
     AstrologianBeneficSyncFeature = 3326,
 
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
+    AstrologianDoTFeature = 3327,
+
     #endregion
     // ====================================================================================
     #region BLACK MAGE
@@ -226,6 +230,10 @@ public enum CustomComboPreset
     [SecretCustomCombo]
     [CustomComboInfo("Pre Iron Jaws Feature", "Replace Iron Jaws with Caustic Bite/Stormbite depending on the duration when Iron Jaws is not available.", BRD.JobID)]
     BardPreIronJawsFeature = 2303,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Caustic Bite/Stormbite is about to run out on the target.", BRD.JobID)]
+    BardShotIronJawsFeature = 2322,
 
     [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replace Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID)]
     BardApexFeature = 2304,
@@ -1075,6 +1083,10 @@ public enum CustomComboPreset
     [CustomComboInfo("Toxikon into Phlegma Feature", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
     SageToxikonPhlegma = 4011,
 
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    SageDoTFeature = 4012,
+
     #endregion
     // ====================================================================================
     #region SAMURAI
@@ -1185,6 +1197,10 @@ public enum CustomComboPreset
 
     [CustomComboInfo("Adloquium Level Sync", "Replace Adloquium with Physick when below level 30 in synced content.", SCH.JobID)]
     ScholarAdloquiumSyncFeature = 2810,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Biolysis", "Replace Broil with Biolysis when it is about to run out.", SCH.JobID)]
+    ScholarDoTFeature = 2813,
 
     #endregion
     // ====================================================================================
@@ -1426,6 +1442,10 @@ public enum CustomComboPreset
 
     [CustomComboInfo("Glare4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
     WhiteMageGlare4Feature = 2407,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Dia", "Replace Glare with Dia when it is about to run out.", WHM.JobID)]
+    WhiteMageDoTFeature = 2409,
 
     #endregion
     // ====================================================================================

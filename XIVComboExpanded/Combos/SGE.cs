@@ -8,6 +8,8 @@ internal static class SGE
 
     public const uint
         Dosis = 24283,
+        Dosis2 = 24306,
+        Dosis3 = 24312,
         Diagnosis = 24284,
         Kardia = 24285,
         Prognosis = 24286,
@@ -37,13 +39,17 @@ internal static class SGE
     public static class Buffs
     {
         public const ushort
-            Kardion = 2604;
+            Kardion = 2604,
+            Eukrasia = 2606;
     }
 
     public static class Debuffs
     {
         public const ushort
-            Placeholder = 0;
+            EukrasianDosis = 2614,
+            EukrasianDosis2 = 2615, 
+            EukrasianDosis3 = 2616;
+
     }
 
     public static class Levels
@@ -80,8 +86,22 @@ internal class SageDosis : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == SGE.Dosis)
+        if (actionID == SGE.Dosis || actionID == SGE.Dosis2 || actionID == SGE.Dosis3)
         {
+            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy())
+            {
+                var eurkasiandosis = FindTargetEffect(SGE.Debuffs.EukrasianDosis);
+                var eurkasiandosis2 = FindTargetEffect(SGE.Debuffs.EukrasianDosis2);
+                var eurkasiandosis3 = FindTargetEffect(SGE.Debuffs.EukrasianDosis3);
+
+                if (HasEffect(SGE.Buffs.Eukrasia))
+                    return OriginalHook(SGE.Dosis);
+
+                // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
+                if (!(eurkasiandosis?.RemainingTime > 2.8 || eurkasiandosis2?.RemainingTime > 2.8 || eurkasiandosis3?.RemainingTime > 2.8))
+                    return SGE.Eukrasia;
+            }
+
             if (IsEnabled(CustomComboPreset.SageDosisKardiaFeature))
             {
                 if (!HasEffect(SGE.Buffs.Kardion))
