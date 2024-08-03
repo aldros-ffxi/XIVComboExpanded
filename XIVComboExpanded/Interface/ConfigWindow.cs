@@ -9,15 +9,8 @@ using Dalamud.Interface.Textures;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
-using System.Threading.Tasks;
-using Octokit;
-using Octokit.GraphQL;
 using XIVComboExpandedPlugin.Attributes;
-using Lumina.Excel.GeneratedSheets;
-using Lumina.Data;
 using Language = Lumina.Data.Language;
-using Octokit.GraphQL.Model;
-using static System.Collections.Specialized.BitVector32;
 
 namespace XIVComboExpandedPlugin.Interface;
 
@@ -683,9 +676,6 @@ internal class ConfigWindow : Window
 
             Service.Configuration.Save();
         }
-
-        ImGui.SameLine();
-        ImGui.Text("   ");
 
         if (expanded)
         {
