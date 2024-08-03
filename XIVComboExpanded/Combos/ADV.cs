@@ -168,7 +168,7 @@ internal class ShirkStanceFeature : CustomCombo
     }
 }
 
-internal class SprintPelotonFeature : CustomCombo
+internal class HeadGrazePelotonFeature : CustomCombo
 {
     protected internal override CustomComboPreset Preset => CustomComboPreset.AdvPelotonSTFeature;
 
