@@ -163,6 +163,12 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ASTROLOGIAN
 
+    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.Combust, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
+    AstrologianDoTFeature = 3327,
+
     [SectionCombo("Draw features")]
     [IconsCombo([AST.Play1, AST.Play2, AST.Play3, AST.MinorArcanaDT, UTL.ArrowLeft, AST.AstralDraw, AST.UmbralDraw])]
     [CustomComboInfo("Play to Astral/Umbral Draw", "Replace Play I / II / III & Minor Arcana with with Astral/Umbral Draw when no card is drawn and you can draw.", AST.JobID)]
@@ -204,10 +210,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Benefic II to Benefic Level Sync", "Replace Benefic 2 with Benefic when below level 26 in synced content.", AST.JobID)]
     AstrologianBeneficSyncFeature = 3326,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
-    AstrologianDoTFeature = 3327,
 
     #endregion
     // ====================================================================================
@@ -304,16 +306,16 @@ public enum CustomComboPreset
     [CustomComboInfo("Heavy Shot into Straight Shot", "Replace Heavy Shot with Straight Shot/Refulgent Arrow when available.", BRD.JobID)]
     BardStraightShotUpgradeFeature = 2302,
 
-    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.CausticBite, UTL.Cycle, BRD.Stormbite, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Iron Jaws Feature", "Replace Iron Jaws with Caustic Bite/Stormbite depending on which is not present on the target.", BRD.JobID)]
+    [CustomComboInfo("Iron Jaws Feature", "Replace Iron Jaws with Venomous Bite/Windbite depending on which is not present on the target.", BRD.JobID)]
     BardIronJawsFeature = 2308,
 
-    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.CausticBite, UTL.Cycle, BRD.Stormbite, UTL.Blank, BRD.IronJaws, UTL.Cross])]
+    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, BRD.IronJaws, UTL.Cross])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Locked Iron Jaws", "Replace Iron Jaws with Caustic Bite/Stormbite depending on the duration when Iron Jaws is not available.", BRD.JobID)]
+    [CustomComboInfo("Locked Iron Jaws", "Replace Iron Jaws with Venomous Bite/Windbite depending on the duration when Iron Jaws is not available.", BRD.JobID)]
     BardPreIronJawsFeature = 2303,
 
     [IconsCombo([BRD.BurstShot, BRD.QuickNock, UTL.ArrowLeft, BRD.ApexArrow, UTL.Blank, BRD.ApexArrow, UTL.Checkmark])]
@@ -322,10 +324,10 @@ public enum CustomComboPreset
     [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replace Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID)]
     BardApexFeature = 2304,
 
-    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,, UTL.Cycle, BRD.Stormbite, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,  UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Danger])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Caustic Bite/Stormbite is about to run out on the target.", BRD.JobID)]
+    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is about to run out on the target.", BRD.JobID)]
     BardShotIronJawsFeature = 2322,
 
     [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.EmpyrealArrow, UTL.Cycle, BRD.Bloodletter, UTL.Cycle, BRD.Sidewinder])]
@@ -365,7 +367,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Rain of Death Feature", "Replace Rain of Death with Empyreal Arrow and Sidewinder depending on which is available.", BRD.JobID)]
     BardRainOfDeathFeature = 2307,
 
-    [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.RainOfDeath, UTL.Blank, BRD.VenomousBite, BRD.Stormbite, UTL.Cross])]
+    [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.RainOfDeath, UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Cross])]
     [SectionCombo("Area of Effect")]
     [SecretCustomCombo]
     [ConflictingCombos(BardBloodletterFeature)]
@@ -1555,6 +1557,12 @@ public enum CustomComboPreset
     // ====================================================================================
     #region SAGE
 
+    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Eukrasia, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    SageDoTFeature = 4012,
+
     [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Kardia, UTL.Cross])]
     [SectionCombo("Kardia features")]
     [ExpandedCustomCombo]
@@ -1566,11 +1574,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Soteria Kardia Feature", "Replace Soteria with Kardia when off cooldown and missing Kardion.", SGE.JobID)]
     SageSoteriaKardionFeature = 4006,
-    
-    [SectionCombo("Automatic DoT")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
-    SageDoTFeature = 4012,
 
     [IconsCombo([SGE.Druochole, UTL.ArrowLeft, SGE.Rhizomata, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Rhizomata features")]
@@ -1755,6 +1758,12 @@ public enum CustomComboPreset
     // ====================================================================================
     #region SCHOLAR
 
+    [IconsCombo([SCH.Ruin, UTL.ArrowLeft, SCH.Bio, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Bio", "Replace Ruin and its upgrades with Bio and its upgrades when it is about to run out.", SCH.JobID)]
+    ScholarDoTFeature = 2813,
+
     [IconsCombo([SCH.EnergyDrain, UTL.ArrowLeft, SCH.Aetherflow, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Aetherflow features")]
     [CustomComboInfo("ED Aetherflow", "Replace Energy Drain with Aetherflow when you have no more Aetherflow stacks.", SCH.JobID)]
@@ -1825,9 +1834,6 @@ public enum CustomComboPreset
     [CustomComboInfo("Adloquium Level Sync", "Replace Adloquium with Physick when below level 30 in synced content.", SCH.JobID)]
     ScholarAdloquiumSyncFeature = 2810,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("Auto Biolysis", "Replace Broil with Biolysis when it is about to run out.", SCH.JobID)]
-    ScholarDoTFeature = 2813,
 
     #endregion
     // ====================================================================================
@@ -2136,6 +2142,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Glare 4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
     WhiteMageGlare4Feature = 2407,
 
+    [IconsCombo([WHM.Stone, UTL.ArrowLeft, WHM.Aero, UTL.Blank, UTL.Clock])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Aero", "Replace Stone and its upgrades with Aero and its upgrades when it is about to run out.", WHM.JobID)]
+    WhiteMageDoTFeature = 2409,
+
     [SectionCombo("Afflatus Misery")]
     [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
     [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
@@ -2170,10 +2182,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Cure 2 Level Sync", "Replace Cure 2 with Cure when below level 30 in synced content.", WHM.JobID)]
     WhiteMageCureFeature = 2403,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Auto Dia", "Replace Glare with Dia when it is about to run out.", WHM.JobID)]
-    WhiteMageDoTFeature = 2409,
 
     #endregion
     // ====================================================================================
