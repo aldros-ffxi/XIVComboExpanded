@@ -103,6 +103,21 @@ internal class BardHeavyShot : CustomCombo
     {
         if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
         {
+            if (IsEnabled(CustomComboPreset.BardShotIronJawsFeature))
+            {
+                if (level >= BRD.Levels.IronJaws)
+                {
+                    // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
+                    var venomous = FindTargetEffect(BRD.Debuffs.VenomousBite);
+                    var windbite = FindTargetEffect(BRD.Debuffs.Windbite);
+                    var stormbite = FindTargetEffect(BRD.Debuffs.Stormbite);
+                    var caustic = FindTargetEffect(BRD.Debuffs.CausticBite);
+
+                    if (venomous?.RemainingTime < 2.8 || windbite?.RemainingTime < 2.8 || stormbite?.RemainingTime < 2.8 || caustic?.RemainingTime < 2.8)
+                        return BRD.IronJaws;
+                }
+            }
+
             if (IsEnabled(CustomComboPreset.BardApexFeature))
             {
                 var gauge = GetJobGauge<BRDGauge>();

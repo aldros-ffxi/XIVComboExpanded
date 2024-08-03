@@ -11,6 +11,12 @@ internal static class SCH
         Aetherflow = 166,
         EnergyDrain = 167,
         Resurrection = 173,
+        Ruin = 17869,
+        Broil = 3584,
+        Broil2 = 7435,
+        Broil3 = 16541,
+        Broil4 = 25865,
+        Bio = 17864,
         Adloquium = 185,
         SacredSoil = 188,
         Lustrate = 189,
@@ -45,7 +51,9 @@ internal static class SCH
     public static class Debuffs
     {
         public const ushort
-            Placeholder = 0;
+            Bio = 179,
+            Bio2 = 189,
+            Biolysis = 1895;
     }
 
     public static class Levels
@@ -238,6 +246,30 @@ internal class ScholarAdloquium : CustomCombo
         {
             if (level < SCH.Levels.Adloquium)
                 return SCH.Physick;
+        }
+
+        return actionID;
+    }
+}
+
+internal class ScholarRuin : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SchAny;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == SCH.Ruin || actionID == SCH.Broil || actionID == SCH.Broil2 || actionID == SCH.Broil3 || actionID == SCH.Broil4)
+        {
+            if (IsEnabled(CustomComboPreset.ScholarDoTFeature) && TargetIsEnemy())
+            {
+                var bio = FindTargetEffect(SCH.Debuffs.Bio);
+                var bio2 = FindTargetEffect(SCH.Debuffs.Bio2);
+                var biolysis = FindTargetEffect(SCH.Debuffs.Biolysis);
+
+                // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
+                if (!(bio?.RemainingTime > 2.8 || bio2?.RemainingTime > 2.8 || biolysis?.RemainingTime > 2.8))
+                    return OriginalHook(SCH.Bio);
+            }
         }
 
         return actionID;

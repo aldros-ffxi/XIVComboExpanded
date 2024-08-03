@@ -205,6 +205,10 @@ public enum CustomComboPreset
     [CustomComboInfo("Benefic II to Benefic Level Sync", "Replace Benefic 2 with Benefic when below level 26 in synced content.", AST.JobID)]
     AstrologianBeneficSyncFeature = 3326,
 
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
+    AstrologianDoTFeature = 3327,
+
     #endregion
     // ====================================================================================
     #region BLACK MAGE
@@ -317,6 +321,12 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replace Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID)]
     BardApexFeature = 2304,
+
+    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,, UTL.Cycle, BRD.Stormbite, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Caustic Bite/Stormbite is about to run out on the target.", BRD.JobID)]
+    BardShotIronJawsFeature = 2322,
 
     [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.EmpyrealArrow, UTL.Cycle, BRD.Bloodletter, UTL.Cycle, BRD.Sidewinder])]
     [SectionCombo("Single Target")]
@@ -1556,6 +1566,11 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Soteria Kardia Feature", "Replace Soteria with Kardia when off cooldown and missing Kardion.", SGE.JobID)]
     SageSoteriaKardionFeature = 4006,
+    
+    [SectionCombo("Automatic DoT")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    SageDoTFeature = 4012,
 
     [IconsCombo([SGE.Druochole, UTL.ArrowLeft, SGE.Rhizomata, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Rhizomata features")]
@@ -1809,6 +1824,10 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Adloquium Level Sync", "Replace Adloquium with Physick when below level 30 in synced content.", SCH.JobID)]
     ScholarAdloquiumSyncFeature = 2810,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Biolysis", "Replace Broil with Biolysis when it is about to run out.", SCH.JobID)]
+    ScholarDoTFeature = 2813,
 
     #endregion
     // ====================================================================================
@@ -2151,6 +2170,10 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Cure 2 Level Sync", "Replace Cure 2 with Cure when below level 30 in synced content.", WHM.JobID)]
     WhiteMageCureFeature = 2403,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Dia", "Replace Glare with Dia when it is about to run out.", WHM.JobID)]
+    WhiteMageDoTFeature = 2409,
 
     #endregion
     // ====================================================================================

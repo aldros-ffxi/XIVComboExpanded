@@ -9,6 +9,7 @@ internal static class WHM
 
     public const uint
         Stone = 119,
+        Aero = 121,
         Cure = 120,
         Medica = 124,
         Raise = 125,
@@ -42,7 +43,9 @@ internal static class WHM
     public static class Debuffs
     {
         public const ushort
-            Placeholder = 0;
+            Aero = 143,
+            Aero2 = 144,
+            Dia = 1871;
     }
 
     public static class Levels
@@ -187,6 +190,17 @@ internal class WhiteMageGlare4Feature : CustomCombo
     {
         if (actionID == WHM.Glare3)
         {
+            if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature) && TargetIsEnemy())
+            {
+                var aero = FindTargetEffect(WHM.Debuffs.Aero);
+                var aero2 = FindTargetEffect(WHM.Debuffs.Aero2);
+                var dia = FindTargetEffect(WHM.Debuffs.Dia);
+
+                // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
+                if (!(aero?.RemainingTime > 2.8 || aero2?.RemainingTime > 2.8 || dia?.RemainingTime > 2.8))
+                    return OriginalHook(WHM.Aero);
+            }
+
             if (IsEnabled(CustomComboPreset.WhiteMageGlare4Feature))
             {
                 if (level >= WHM.Levels.Glare4 && HasEffect(WHM.Buffs.Glare4Ready))
