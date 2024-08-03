@@ -276,22 +276,22 @@ internal class SummonerDemiFeature : CustomCombo
 
 internal class SummonerRadiantCarbuncleFeature : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SummonerRadiantCarbuncleFeature;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SmnAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
         if (actionID == SMN.RadiantAegis)
         {
-            var gauge = GetJobGauge<SMNGauge>();
-
-            if (level >= SMN.Levels.SummonCarbuncle && !HasPetPresent())
-                return SMN.SummonCarbuncle;
-
             if (IsEnabled(CustomComboPreset.SummonerRadiantLuxSolarisFeature))
             {
                 if (HasEffect(SMN.Buffs.LuxSolarisReady))
                     return SMN.LuxSolaris;
             }
+
+            var gauge = GetJobGauge<SMNGauge>();
+
+            if (level >= SMN.Levels.SummonCarbuncle && !HasPetPresent() && IsEnabled(CustomComboPreset.SummonerRadiantCarbuncleFeature))
+                return SMN.SummonCarbuncle;
         }
 
         return actionID;

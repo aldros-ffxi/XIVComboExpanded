@@ -211,7 +211,7 @@ internal class BardQuickNock : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BardShadowbiteFeature))
             {
-                if (level >= BRD.Levels.WideVolley && (HasEffect(BRD.Buffs.HawksEye) || HasEffect(BRD.Buffs.Barrage)))
+                if (level >= BRD.Levels.WideVolley)
                 {
                     if (IsEnabled(CustomComboPreset.BardShadowbiteBarrageFeature))
                     {
@@ -219,7 +219,8 @@ internal class BardQuickNock : CustomCombo
                             return BRD.Barrage;
                     }
 
-                    return OriginalHook(BRD.WideVolley);
+                    if (HasEffect(BRD.Buffs.HawksEye))
+                        return OriginalHook(BRD.WideVolley);
                 }
             }
         }
@@ -350,23 +351,6 @@ internal class BardEmpyrealArrow : CustomCombo
         {
             if (level >= BRD.Levels.Sidewinder)
                 return CalcBestAction(actionID, BRD.EmpyrealArrow, BRD.Sidewinder);
-        }
-
-        return actionID;
-    }
-}
-
-internal class BardBarrage : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BardBarrageFeature;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == BRD.Barrage)
-        {
-            if (level >= BRD.Levels.StraightShot && HasEffect(BRD.Buffs.HawksEye))
-                // Refulgent Arrow
-                return OriginalHook(BRD.StraightShot);
         }
 
         return actionID;

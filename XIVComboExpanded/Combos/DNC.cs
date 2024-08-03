@@ -33,15 +33,21 @@ internal static class DNC
         FanDance2 = 16008,
         FanDance3 = 16009,
         FanDance4 = 25791,
-        // Other
+        // Steps
+        Emboite = 15999,
+        Entrechat = 16000,
+        Jete = 16001,
+        Pirouette = 16002,
 
+        // Other
         SaberDance = 16005,
         ClosedPosition = 16006,
         EnAvant = 16010,
         Devilment = 16011,
         Flourish = 16013,
         Improvisation = 16014,
-        StarfallDance = 25792;
+        StarfallDance = 25792,
+        DanceOfTheDawn = 36985;
 
     public static class Buffs
     {
@@ -265,10 +271,10 @@ internal class DancerCascadeFountain : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -302,10 +308,10 @@ internal class DancerCascadeFountain : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -327,10 +333,10 @@ internal class DancerCascadeFountain : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerSingleTargetSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerSingleTargetSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -356,10 +362,10 @@ internal class DancerWindmillBladeshower : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -393,10 +399,10 @@ internal class DancerWindmillBladeshower : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }
@@ -418,10 +424,10 @@ internal class DancerWindmillBladeshower : CustomCombo
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.DanceOfTheDawnReady))
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDance) && gauge.Esprit >= 85)
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDance) && gauge.Esprit >= 85)
                     return OriginalHook(DNC.SaberDance);
 
-                if (IsEnabled(CustomComboPreset.DancerAoeSabreDanceTech) &&
+                if (IsEnabled(CustomComboPreset.DancerAoeSaberDanceTech) &&
                     gauge.Esprit >= 50 && HasEffect(DNC.Buffs.TechnicalFinish))
                     return OriginalHook(DNC.SaberDance);
             }

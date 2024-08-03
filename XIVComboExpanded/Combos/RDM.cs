@@ -103,6 +103,9 @@ internal class RedMageVeraeroVerthunder : CustomCombo
 
             if (IsEnabled(CustomComboPreset.RedMageVeraeroVerthunderCapstoneCombo))
             {
+                if (HasEffect(RDM.Buffs.PrefulgenceReady))
+                    return RDM.Prefulgence;
+
                 if (lastComboMove == RDM.Scorch && level >= RDM.Levels.Resolution)
                     return RDM.Resolution;
 
@@ -146,6 +149,9 @@ internal class RedMageVeraeroVerthunder2 : CustomCombo
 
             if (IsEnabled(CustomComboPreset.RedMageAoECapstoneCombo))
             {
+                if (HasEffect(RDM.Buffs.PrefulgenceReady))
+                    return RDM.Prefulgence;
+
                 if (lastComboMove == RDM.Scorch && level >= RDM.Levels.Resolution)
                     return RDM.Resolution;
 
@@ -198,6 +204,7 @@ internal class RedMageRedoublementMoulinet : CustomCombo
             {
                 if (HasEffect(RDM.Buffs.PrefulgenceReady))
                     return RDM.Prefulgence;
+
                 if (lastComboMove == RDM.Scorch && level >= RDM.Levels.Resolution)
                     return RDM.Resolution;
 
@@ -263,6 +270,9 @@ internal class RedMageVerstoneVerfire : CustomCombo
 
             if (IsEnabled(CustomComboPreset.RedMageVerprocCapstoneCombo))
             {
+                if (HasEffect(RDM.Buffs.PrefulgenceReady))
+                    return RDM.Prefulgence;
+
                 if (lastComboMove == RDM.Scorch && level >= RDM.Levels.Resolution)
                     return RDM.Resolution;
 

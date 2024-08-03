@@ -185,7 +185,7 @@ internal class WhiteMageGlare4Feature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == WHM.Stone)
+        if (actionID == WHM.Glare3)
         {
             if (IsEnabled(CustomComboPreset.WhiteMageGlare4Feature))
             {

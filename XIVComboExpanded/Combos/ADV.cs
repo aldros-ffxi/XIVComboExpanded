@@ -193,20 +193,21 @@ internal class AdvAutoLucidDreamingFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (LocalPlayer?.CurrentMp < 5000)
+        if (LocalPlayer?.CurrentMp < 5000 && CanUseAction(OriginalHook(ADV.LucidDreaming)) && IsCooldownUsable(ADV.LucidDreaming))
         {
-            if(LocalPlayer?.ClassJob.Id == WHM.ClassID
-            || LocalPlayer?.ClassJob.Id == BLM.ClassID
-            || LocalPlayer?.ClassJob.Id == WHM.JobID
-            || LocalPlayer?.ClassJob.Id == BLM.JobID
-            || LocalPlayer?.ClassJob.Id == SMN.ClassID
-            || LocalPlayer?.ClassJob.Id == SMN.JobID
-            || LocalPlayer?.ClassJob.Id == SCH.JobID
-            || LocalPlayer?.ClassJob.Id == AST.JobID
-            || LocalPlayer?.ClassJob.Id == RDM.JobID
-            || LocalPlayer?.ClassJob.Id == BLU.JobID
-            || LocalPlayer?.ClassJob.Id == SGE.JobID
-            || LocalPlayer?.ClassJob.Id == PCT.JobID)
+            var job = LocalPlayer?.ClassJob.Id;
+            if (job == WHM.ClassID
+            || (job == BLM.ClassID && !IsEnabled(CustomComboPreset.AdvDisableBLMLucidFeature))
+            || job == WHM.JobID
+            || (job == BLM.JobID && !IsEnabled(CustomComboPreset.AdvDisableBLMLucidFeature))
+            || job == SMN.ClassID
+            || job == SMN.JobID
+            || job == SCH.JobID
+            || job == AST.JobID
+            || job == RDM.JobID
+            || job == BLU.JobID
+            || job == SGE.JobID
+            || job == PCT.JobID)
             {
                 return ADV.LucidDreaming;
             }

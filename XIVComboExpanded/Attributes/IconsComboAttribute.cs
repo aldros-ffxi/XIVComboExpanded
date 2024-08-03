@@ -33,7 +33,15 @@ internal class IconsComboAttribute : Attribute
     public uint[] Icons { get; }
 
     public const uint
+        // Combo-Specific
+        Opo = 70123,
+        PartnerChocobo = 70104,
+
+        // General utility icons
+        Party = 61522,
+        Duty = 61585,
         Blank = 61699,
+        Blank2 = 61034,
         Ally = 61701,
         Enemy = 61710,
         ArrowLeft = 66301,
@@ -52,6 +60,8 @@ internal class IconsComboAttribute : Attribute
         ChatbubbleCute = 63933,
         AoE = 60495,
         ST = 60429,
+        InBattle = 61510,
+        OutOfBattle = 61822,
         Cycle = 66329;
 
 }

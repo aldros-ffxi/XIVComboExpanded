@@ -20,6 +20,7 @@ internal static class NIN
         Chi = 2261,
         JinNormal = 2263,
         Kassatsu = 2264,
+        Suiton = 2271,
         ArmorCrush = 3563,
         DreamWithinADream = 3566,
         TenChiJin = 7403,
@@ -59,7 +60,7 @@ internal static class NIN
             Hide = 10,
             Mug = 15,
             AeolianEdge = 26,
-            Ninjitsu = 30,
+            Ninjutsu = 30,
             Suiton = 45,
             HakkeMujinsatsu = 52,
             ArmorCrush = 54,
@@ -87,7 +88,7 @@ internal class NinjaAeolianEdge : CustomCombo
 
             if (IsEnabled(CustomComboPreset.NinjaAeolianNinjutsuFeature))
             {
-                if (level >= NIN.Levels.Ninjitsu && HasEffect(NIN.Buffs.Mudra))
+                if (level >= NIN.Levels.Ninjutsu && HasEffect(NIN.Buffs.Mudra))
                     return OriginalHook(NIN.Ninjutsu);
             }
 
@@ -101,9 +102,8 @@ internal class NinjaAeolianEdge : CustomCombo
             {
                 if (comboTime > 0)
                 {
-                    // TODO Gauge stuff
-                    //if (lastComboMove == NIN.GustSlash && level >= NIN.Levels.ArmorCrush && gauge.)
-                    //    return NIN.AeolianEdge;
+                    if (IsEnabled(CustomComboPreset.NinjaKazematoiFeature) && lastComboMove == NIN.GustSlash && level >= NIN.Levels.ArmorCrush && gauge.Kazematoi > 0)
+                        return NIN.AeolianEdge;
 
                     if (lastComboMove == NIN.GustSlash && level >= NIN.Levels.AeolianEdge)
                         return NIN.AeolianEdge;
@@ -136,7 +136,7 @@ internal class NinjaArmorCrush : CustomCombo
 
             if (IsEnabled(CustomComboPreset.NinjaArmorCrushNinjutsuFeature))
             {
-                if (level >= NIN.Levels.Ninjitsu && HasEffect(NIN.Buffs.Mudra))
+                if (level >= NIN.Levels.Ninjutsu && HasEffect(NIN.Buffs.Mudra))
                     return OriginalHook(NIN.Ninjutsu);
             }
 
@@ -169,7 +169,7 @@ internal class NinjaHakkeMujinsatsu : CustomCombo
         {
             if (IsEnabled(CustomComboPreset.NinjaHakkeMujinsatsuNinjutsuFeature))
             {
-                if (level >= NIN.Levels.Ninjitsu && HasEffect(NIN.Buffs.Mudra))
+                if (level >= NIN.Levels.Ninjutsu && HasEffect(NIN.Buffs.Mudra))
                     return OriginalHook(NIN.Ninjutsu);
             }
 
@@ -216,7 +216,7 @@ internal class NinjaHide : CustomCombo
         {
             if (IsEnabled(CustomComboPreset.NinjaHideNinjutsuFeature))
             {
-                if (level >= NIN.Levels.Ninjitsu && HasEffect(NIN.Buffs.Mudra))
+                if (level >= NIN.Levels.Ninjutsu && HasEffect(NIN.Buffs.Mudra))
                     return OriginalHook(NIN.Ninjutsu);
             }
 
@@ -268,7 +268,7 @@ internal class NinjaTenChiJin : CustomCombo
     }
 }
 
-internal class NinjaNinjitsu : CustomCombo
+internal class NinjaNinjutsu : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.NinAny;
 
@@ -278,10 +278,10 @@ internal class NinjaNinjitsu : CustomCombo
         {
             if (level >= NIN.Levels.Raiju && HasEffect(NIN.Buffs.RaijuReady) && !HasEffect(NIN.Buffs.Mudra))
             {
-                if (IsEnabled(CustomComboPreset.NinjaNinjitsuForkedRaijuFeature))
+                if (IsEnabled(CustomComboPreset.NinjaNinjutsuForkedRaijuFeature))
                     return NIN.ForkedRaiju;
 
-                if (IsEnabled(CustomComboPreset.NinjaNinjitsuFleetingRaijuFeature))
+                if (IsEnabled(CustomComboPreset.NinjaNinjutsuFleetingRaijuFeature))
                     return NIN.FleetingRaiju;
             }
         }
