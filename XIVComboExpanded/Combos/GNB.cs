@@ -175,7 +175,7 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
             if (IsEnabled(CustomComboPreset.GunbreakerEmptyBloodfestFeature))
             {
                 if (level >= GNB.Levels.Bloodfest && gauge.Ammo == 0)
-                    return GNB.Bloodfest;
+                    return OriginalHook(GNB.Bloodfest);
             }
         }
 
