@@ -21,6 +21,7 @@ internal static class BLM
         Flare = 162,
         LeyLines = 3573,
         Sharpcast = 3574,
+        Triplecast = 7421,
         Blizzard4 = 3576,
         Fire4 = 3577,
         BetweenTheLines = 7419,
@@ -32,6 +33,7 @@ internal static class BLM
         HighFire2 = 25794,
         HighBlizzard2 = 25795,
         Paradox = 25797,
+        Retrace = 36988,
         FlareStar = 36989;
 
     public static class Buffs
@@ -72,6 +74,7 @@ internal static class BLM
             HighBlizzard2 = 82,
             EnhancedSharpcast2 = 88,
             Paradox = 90,
+            Retrace = 96,
             FlareStar = 100;
     }
 
@@ -209,7 +212,7 @@ internal class BlackLeyLines : CustomCombo
     {
         if (actionID == BLM.LeyLines)
         {
-            if (level >= BLM.Levels.BetweenTheLines && HasEffect(BLM.Buffs.LeyLines))
+            if (level >= BLM.Levels.BetweenTheLines && HasEffect(BLM.Buffs.LeyLines) && !IsCooldownUsable(BLM.Retrace))
                 return BLM.BetweenTheLines;
         }
 

@@ -215,87 +215,125 @@ public enum CustomComboPreset
     // ====================================================================================
     #region BLACK MAGE
 
+    [IconsCombo([BLM.Fire4, UTL.Cycle, BLM.Blizzard4])]
+    [SectionCombo("Single Target")]
     [CustomComboInfo("Enochian Feature", "Replace Fire 4 and Blizzard 4 with whichever action you can currently use.", BLM.JobID)]
     BlackEnochianFeature = 2501,
 
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.FlareStar, UTL.Blank, BLM.FlareStar, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul.", BLM.JobID)]
     BlackFlareStarFeature = 2523,
 
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Despair, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
     [SecretCustomCombo]
     [CustomComboInfo("Enochian Despair Feature", "Replace Fire 4 and Blizzard 4 with Despair when in Astral Fire with less than 2400 mana.", BLM.JobID)]
     BlackEnochianDespairFeature = 2510,
 
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Despair, UTL.ArrowLeft, BLM.FlareStar, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianDespairFeature)]
     [SecretCustomCombo]
     [CustomComboInfo("Enochian Despair into Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul and 0 mana.", BLM.JobID)]
     BlackEnochianDespairFlareStarFeature = 2524,
 
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, UTL.Clock])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
-    [SecretCustomCombo]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("Enochian Timer Feature", "Replace Fire 4 and Blizzard 4 with Fire 3 Proc, Paradox, Instant-Despair, or Blizzard 3 when Enochian is about to run out.", BLM.JobID)]
     BlackEnochianTimerFeature = 2525,
 
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.Cross, UTL.ArrowLeft, BLM.Fire, BLM.Blizzard])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Enochian No Sync Feature", "Fire 4 and Blizzard 4 will not sync to Fire 1 and Blizzard 1.", BLM.JobID)]
     BlackEnochianNoSyncFeature = 2518,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Transpose into Umbral Soul", "Replace Transpose with Umbral Soul when Umbral Soul is usable.", BLM.JobID)]
-    BlackTransposeUmbralSoulFeature = 2502,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Umbral Soul into Transpose", "Replace Umbral Soul with Transpose when Umbral Soul is not usable.", BLM.JobID)]
-    BlackUmbralSoulTransposeFeature = 2522,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("(Between the) Ley Lines", "Replace Ley Lines with BTL when Ley Lines is active.", BLM.JobID)]
-    BlackLeyLinesFeature = 2503,
-
+    [IconsCombo([BLM.Fire, UTL.ArrowLeft, BLM.Fire3,  UTL.Blank, BLM.Fire3, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fire 1/3 Feature", "Fire 1 becomes Fire 3 outside of Astral Fire, and when Firestarter is up.", BLM.JobID)]
     BlackFireFeature = 2504,
 
+    [IconsCombo([BLM.Fire, UTL.Cross, UTL.ArrowLeft, BLM.Fire3, UTL.Blank, UTL.Danger])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackFireFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fire 1/3 Option", "Fire 1 will stay Fire 3 when not at max Astral Fire.", BLM.JobID)]
     BlackFireOption = 2515,
 
+    [IconsCombo([BLM.Fire, UTL.Cross, UTL.ArrowLeft, BLM.Fire3, UTL.Blank, UTL.Plus, UTL.Danger])]
+    [SectionCombo("Single Target")]
     [ParentCombo(BlackFireFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fire 1/3 Option (2)", "Fire 1 does not become Fire 3 outside of Astral Fire.", BLM.JobID)]
     BlackFireOption2 = 2516,
 
+    [IconsCombo([BLM.Blizzard, UTL.ArrowLeft, BLM.Blizzard3, UTL.Cycle, BLM.Paradox, UTL.Blank, BLM.Paradox, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Blizzard 1/3 Feature", "Replace Blizzard 1 with Blizzard 3 when unlocked and becomes Paradox when available.", BLM.JobID)]
     BlackBlizzardFeature = 2505,
 
+    [IconsCombo([BLM.Scathe, UTL.ArrowLeft, BLM.Xenoglossy, UTL.Blank, BLM.Xenoglossy, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Scathe/Xenoglossy Feature", "Scathe becomes Xenoglossy when available.", BLM.JobID)]
+    BlackScatheFeature = 2507,
+
+    [IconsCombo([BLM.Freeze, UTL.Cycle, BLM.Flare])]
+    [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Freeze/Flare Feature", "Freeze and Flare become whichever action you can currently use.", BLM.JobID)]
     BlackFreezeFlareFeature = 2506,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Fire 2 Feature", "(High) Fire 2 becomes Flare when in Astral Fire and is optimal.", BLM.JobID)]
+    [IconsCombo([BLM.HighFire2, UTL.ArrowLeft, BLM.Flare, UTL.ArrowLeft, BLM.FlareStar, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Area of Effect")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Fire 2 Feature", "(High) Fire 2 becomes Flare and Flare Star when in Astral Fire and is optimal.", BLM.JobID)]
     BlackFire2Feature = 2508,
 
+    [IconsCombo([BLM.HighBlizzard2, UTL.ArrowLeft, BLM.Freeze])]
+    [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ice 2 Feature", "(High) Blizzard 2 becomes Freeze in Umbral Ice.", BLM.JobID)]
     BlackBlizzard2Feature = 2509,
 
+    [IconsCombo([BLM.HighBlizzard2, BLM.HighFire2, UTL.Cross, UTL.ArrowLeft, BLM.Freeze, BLM.Flare, UTL.Blank, UTL.Danger])]
+    [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fire 2/Ice 2 Option", "Fire 2 and Blizzard 2 will not change unless you're at max Astral Fire or Umbral Ice.", BLM.JobID)]
     BlackFireBlizzard2Option = 2514,
 
+    [IconsCombo([BLM.Transpose, UTL.ArrowLeft, BLM.UmbralSoul, UTL.Blank, BLM.UmbralSoul, UTL.Checkmark])]
+    [SectionCombo("Umbral Soul Features")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Transpose into Umbral Soul", "Replace Transpose with Umbral Soul when Umbral Soul is usable.", BLM.JobID)]
+    BlackTransposeUmbralSoulFeature = 2502,
+
+    [IconsCombo([BLM.UmbralSoul, UTL.ArrowLeft, BLM.Transpose, UTL.Blank, BLM.UmbralSoul, UTL.Cross])]
+    [SectionCombo("Umbral Soul Features")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Umbral Soul into Transpose", "Replace Umbral Soul with Transpose when Umbral Soul is not usable.", BLM.JobID)]
+    BlackUmbralSoulTransposeFeature = 2522,
+
+    [IconsCombo([BLM.Blizzard3, UTL.ArrowLeft, BLM.UmbralSoul, UTL.Blank, UTL.Enemy, UTL.Cross])]
+    [SectionCombo("Umbral Soul Features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Umbral Soul Feature", "Replace your ice spells with Umbral Soul, while in Umbral Ice and having no target.", BLM.JobID)]
     BlackSpellsUmbralSoulFeature = 2517,
 
+    [IconsCombo([BLM.LeyLines, UTL.ArrowLeft, BLM.BetweenTheLines, UTL.Blank, BLM.Retrace, UTL.Cross])]
+    [SectionCombo("Abilities Features")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Scathe/Xenoglossy Feature", "Scathe becomes Xenoglossy when available.", BLM.JobID)]
-    BlackScatheFeature = 2507,
+    [CustomComboInfo("(Between the [Retraced]) Ley Lines", "Replace Ley Lines with BTL when Ley Lines is active and Retrace is on Cooldown.", BLM.JobID)]
+    BlackLeyLinesFeature = 2503,
 
     #endregion
     // ====================================================================================
