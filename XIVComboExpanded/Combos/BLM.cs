@@ -212,7 +212,8 @@ internal class BlackLeyLines : CustomCombo
     {
         if (actionID == BLM.LeyLines)
         {
-            if (level >= BLM.Levels.BetweenTheLines && HasEffect(BLM.Buffs.LeyLines) && !IsCooldownUsable(BLM.Retrace))
+            if (level >= BLM.Levels.BetweenTheLines && level < BLM.Levels.Retrace && HasEffect(BLM.Buffs.LeyLines) || 
+            (level >=BLM.Levels.Retrace && !IsCooldownUsable(BLM.Retrace)))
                 return BLM.BetweenTheLines;
         }
 
