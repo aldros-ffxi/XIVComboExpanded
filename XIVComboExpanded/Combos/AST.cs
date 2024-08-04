@@ -63,7 +63,7 @@ internal static class AST
     {
         public const ushort
             Combust = 838,
-            Combust2 = 838,
+            Combust2 = 843,
             Combust3 = 1881;
     }
 
