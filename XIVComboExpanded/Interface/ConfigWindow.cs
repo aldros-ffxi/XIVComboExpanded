@@ -769,6 +769,7 @@ internal class ConfigWindow : Window
             foreach (var iconId in icons)
             {
                 bool isStatus = false;
+                bool isUTL = false;
                 string hoverName = string.Empty;
                 ISharedImmediateTexture icon;
 
@@ -776,6 +777,7 @@ internal class ConfigWindow : Window
                 if (iconId > 60000)
                 {
                     icon = GetIcon(iconId);
+                    isUTL = true;
                 }
                 else
                 {
@@ -793,6 +795,12 @@ internal class ConfigWindow : Window
                     ImGui.SameLine(0, 0);
                     ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(18f * scale, 24f * scale));
                     hoverName = GetStatusName(iconId);
+                }
+                else if (isUTL)
+                {
+                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(2f * scale, 24f * scale));
+                    ImGui.SameLine(0, 0);
+                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(20f * scale, 20f * scale));
                 }
                 else
                 {
@@ -814,6 +822,12 @@ internal class ConfigWindow : Window
                 {
                     ImGui.SameLine(0, 0);
                     ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
+                }
+
+                if (isUTL)
+                {
+                    ImGui.SameLine(0, 0);
+                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(2f * scale, 24f * scale));
                 }
 
                 it++;
