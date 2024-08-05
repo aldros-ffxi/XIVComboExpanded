@@ -9,7 +9,9 @@ using Dalamud.Interface.Textures;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
+using Lumina.Excel.GeneratedSheets;
 using XIVComboExpandedPlugin.Attributes;
+using Action = Lumina.Excel.GeneratedSheets.Action;
 using Language = Lumina.Data.Language;
 
 namespace XIVComboExpandedPlugin.Interface;
@@ -73,6 +75,9 @@ internal class ConfigWindow : Window
         this.SizeCondition = ImGuiCond.FirstUseEver;
         this.Size = new Vector2(750, 500);
         WindowSizeConstraints windowSizeConstraints = new WindowSizeConstraints();
+        if (Service.Configuration.BigComboIcons || Service.Configuration.BigJobIcons)
+            windowSizeConstraints.MinimumSize = new Vector2(900, 700);
+        else
         windowSizeConstraints.MinimumSize = new Vector2(750, 500);
         this.SizeConstraints = windowSizeConstraints;
     }
@@ -86,11 +91,15 @@ internal class ConfigWindow : Window
 
             if (ImGui.BeginTabItem("Combos"))
             {
-                if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(36f, 0f), false, ImGuiWindowFlags.NoScrollbar))
+                float scale = 1f;
+                if (Service.Configuration.BigJobIcons)
+                    scale = 1.5f;
+
+                if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(36f*scale, 0f), false, ImGuiWindowFlags.NoScrollbar))
                 {
                     ImGui.SameLine(1f);
 
-                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f, 36f), 4f))
+                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f*scale, 36f*scale), 4f*scale))
                     {
                         if ((Service.Configuration.CurrentTab == "Adventurer"
                             || Service.Configuration.CurrentTab == "Disciples of the Land"
@@ -129,7 +138,7 @@ internal class ConfigWindow : Window
 
                                 if (image != null)
                                 {
-                                    if (ImGui.ImageButton(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(28f, 28f)))
+                                    if (ImGui.ImageButton(image.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(28f*scale, 28f*scale)))
                                     {
                                         Service.Configuration.CurrentTab = jobName;
                                     }
@@ -419,6 +428,19 @@ internal class ConfigWindow : Window
                     }
                 }
 
+                var bigComboIcons = Service.Configuration.BigComboIcons;
+                if (ImGui.Checkbox("Increase the size of icons for combos and features.", ref bigComboIcons))
+                {
+                    Service.Configuration.BigComboIcons = bigComboIcons;
+                    Service.Configuration.Save();
+                }
+
+                var bigJobIcons = Service.Configuration.BigJobIcons;
+                if (ImGui.Checkbox("Increase the size of icons for the jobs on the side bar.", ref bigJobIcons))
+                {
+                    Service.Configuration.BigJobIcons = bigJobIcons;
+                    Service.Configuration.Save();
+                }
 
                 var hideIcons = Service.Configuration.HideIcons;
                 if (ImGui.Checkbox("Hide icons for combos and features.", ref hideIcons))
@@ -426,7 +448,6 @@ internal class ConfigWindow : Window
                     Service.Configuration.HideIcons = hideIcons;
                     Service.Configuration.Save();
                 }
-
 
                 var hideChildren = Service.Configuration.HideChildren;
                 if (ImGui.Checkbox("Hide children of disabled combos and features.", ref hideChildren))
@@ -729,32 +750,82 @@ internal class ConfigWindow : Window
         }
 
 
+        float scale = 1;
+        if (Service.Configuration.BigComboIcons)
+            scale = 1.3f;
+
+
         if (icons.Length > 0 && !Service.Configuration.HideIcons)
         {
             ImGui.SameLine();
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - (icons.Length * 32f) - ImGui.GetScrollX()
-                                    - 2 * ImGui.GetStyle().ItemSpacing.X);
+            ImGui.SetCursorPosX(
+              ImGui.GetCursorPosX()
+              + ImGui.GetColumnWidth()
+              - (icons.Length * ((24f * scale) + (float)ImGui.GetStyle().ItemSpacing.X))
+              + ImGui.GetScrollX());
 
-            foreach (var icon in icons)
+
+            int it = 0;
+            foreach (var iconId in icons)
             {
-                ImGui.Image(GetSkillIcon(icon).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f, 24f));
-                ImGui.IsItemHovered();
-                string skillName = GetSkillName(icon);
-                if (skillName != string.Empty)
+                bool isStatus = false;
+                string hoverName = string.Empty;
+                ISharedImmediateTexture icon;
+
+                // Workaround which will work until it won't work anymore
+                if (iconId > 60000)
+                {
+                    icon = GetIcon(iconId);
+                }
+                else
+                {
+                    icon = GetSkillIcon(iconId);
+                    if (icon == null)
+                    {
+                        isStatus = true;
+                        icon = GetStatusIcon(iconId);
+                    }
+                }
+
+                if (isStatus)
+                {
+                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
+                    ImGui.SameLine(0, 0);
+                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(18f * scale, 24f * scale));
+                    hoverName = GetStatusName(iconId);
+                }
+                else
+                {
+                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f*scale, 24f*scale));
+                    hoverName = GetSkillName(iconId);
+                }
+
+                if (hoverName != string.Empty)
                 {
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
-                        ImGui.TextUnformatted(skillName);
+                        ImGui.TextUnformatted(hoverName);
                         ImGui.EndTooltip();
                     }
                 }
 
-                if (icons.LastOrDefault() != icon)
+                if (isStatus)
+                {
+                    ImGui.SameLine(0, 0);
+                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
+                }
+
+                it++;
+
+                if (icons.Count() != it)
                 {
                     ImGui.SameLine();
                 }
+                else
+                    it = 0;
             }
+
         }
 
         ImGui.PopItemWidth();
@@ -889,26 +960,59 @@ internal class ConfigWindow : Window
     /// <param name="skillID">ID of the skill.</param>
     private static ISharedImmediateTexture GetSkillIcon(uint skillID)
     {
-        if(skillID > 60000)
-            return GetIcon((uint)skillID);
-        var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>();
+        var actionList = Service.DataManager.GameData.Excel.GetSheet<Action>();
         var skill = actionList.GetRow(skillID);
-
+        // Check if the icon isn't Cure's AND isn't actually Cure
+        if (skill.Icon == 405 && skill.RowId != 120)
+            return null;
         return GetIcon((uint)skill.Icon);
     }
 
     /// <summary>
-    /// Returns a ISharedImmediateTexture for the appropriate skill.
+    /// Returns a ISharedImmediateTexture for the appropriate status.
+    /// </summary>
+    /// <param name="statusID">ID of the status.</param>
+    private static ISharedImmediateTexture GetStatusIcon(uint statusID)
+    {
+        var statusList = Service.DataManager.GameData.Excel.GetSheet<Status>();
+        var status = statusList.GetRow(statusID);
+
+        if (status.ClassJobCategory.Value.Name.RawString.Length == 3)
+            return GetIcon((uint)status.Icon);
+        else
+            return GetIcon((uint)statusID);
+    }
+
+    /// <summary>
+    /// Returns the localized string name for the appropriate skill/status.
     /// </summary>
     /// <param name="skillID">ID of the skill.</param>
     private static string GetSkillName(uint skillID)
     {
         if (skillID > 60000)
             return String.Empty;
+
         Language language = (Language)Service.ClientState.ClientLanguage + 1;
-        var actionList = Service.DataManager.GameData.Excel.GetSheet<Lumina.Excel.GeneratedSheets.Action>(language);
+        var actionList = Service.DataManager.GameData.Excel.GetSheet<Action>(language);
         var skill = actionList.GetRow(skillID);
         return skill.Name;
+
+    }
+
+    /// <summary>
+    /// Returns the localized string name for the appropriate skill/status.
+    /// </summary>
+    /// <param name="skillID">ID of the skill.</param>
+    private static string GetStatusName(uint skillID)
+    {
+        if (skillID > 60000)
+            return String.Empty;
+
+        Language language = (Language)Service.ClientState.ClientLanguage + 1;
+        var statusList = Service.DataManager.GameData.Excel.GetSheet<Status>(language);
+        var status = statusList.GetRow(skillID);
+        return status.Name;
+
     }
 
     /// <summary>

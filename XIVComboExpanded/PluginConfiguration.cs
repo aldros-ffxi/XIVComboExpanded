@@ -67,7 +67,7 @@ public class PluginConfiguration : IPluginConfiguration
     public HashSet<CustomComboPreset> EnabledActions4 { get; set; } = new();
 
     /// <summary>
-    /// Gets or sets a value indicating whether to allow and display expanded combos.
+    /// Gets or sets a value indicating whether to enable the plugin or not.
     /// </summary>
     [JsonProperty("Plugin")]
     public bool EnablePlugin { get; set; } = true;
@@ -105,6 +105,16 @@ public class PluginConfiguration : IPluginConfiguration
     /// Gets or sets a value indicating whether to hide the icons of a feature.
     /// </summary>
     public bool HideIcons { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to increase the icons of the jobs on the sidebar or not.
+    /// </summary>
+    public bool BigJobIcons { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether increase the icons featured in the combo lists or not.
+    /// </summary>
+    public bool BigComboIcons { get; set; } = false;
 
     /// <summary>
     /// Gets or sets an array of 4 ability IDs to interact with the <see cref="CustomComboPreset.DancerDanceComboCompatibility"/> combo.
