@@ -494,7 +494,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Single Target Saber Dance", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
     DancerSingleTargetSaberDance = 3817,
 
-    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.DanceOfTheDawn, UTL.Checkmark])]
+    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.Buffs.DanceOfTheDawnReady, UTL.Checkmark])]
     [SectionCombo("Saber Dance features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Single Target Dance of the Dawn", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
@@ -512,31 +512,31 @@ public enum CustomComboPreset
     [CustomComboInfo("AoE Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
     DancerAoeSaberDanceTech = 3821,
 
-    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.DanceOfTheDawn, UTL.Checkmark])]
+    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.Buffs.DanceOfTheDawnReady, UTL.Checkmark])]
     [SectionCombo("Saber Dance features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("AoE Dance of the Dawn", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
     DancerAoeDanceOfTheDawn = 3822,
 
-    [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.FanDance3, UTL.Checkmark])]
+    [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [CustomComboInfo("Fan Dance 3 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 3 when available.", DNC.JobID)]
     DancerFanDance3Feature = 3801,
 
-    [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.FanDance4, UTL.Checkmark])]
+    [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.Buffs.FourfoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [ParentCombo(DancerFanDance3Feature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Fan Dance 4 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 4 when available.", DNC.JobID)]
     DancerFanDance4Feature = 3809,
 
-    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.FanDance3, UTL.Checkmark])]
+    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Flourishing Fan Dance 3", "Replace Flourish with Fan Dance 3 when available.", DNC.JobID)]
     DancerFlourishFan3Feature = 3810,
 
-    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.FanDance4, UTL.Checkmark])]
+    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.Buffs.FourfoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [CustomComboInfo("Flourishing Fan Dance 4", "Replace Flourish with Fan Dance 4 when available.", DNC.JobID)]
     DancerFlourishFan4Feature = 3808,
@@ -554,17 +554,17 @@ public enum CustomComboPreset
     [CustomComboInfo("Chocobo Partner Feature", "Also applies if you are out of duty and that your Chocobo is summoned.", DNC.JobID)]
     DancerChocoboPartnerFeature = 3816,
 
-    [IconsCombo([DNC.Devilment, UTL.ArrowLeft, DNC.StarfallDance, UTL.Blank, DNC.StarfallDance, UTL.Checkmark])]
+    [IconsCombo([DNC.Devilment, UTL.ArrowLeft, DNC.StarfallDance, UTL.Blank, DNC.Buffs.FlourishingStarfall, UTL.Checkmark])]
     [SectionCombo("Dances features")]
     [CustomComboInfo("Devilment Feature", "Replace Devilment with Starfall Dance when active.", DNC.JobID)]
     DancerDevilmentFeature = 3807,
 
-    [IconsCombo([DNC.StandardStep, UTL.ArrowLeft, DNC.LastDance, UTL.Blank, DNC.LastDance, UTL.Checkmark])]
+    [IconsCombo([DNC.StandardStep, UTL.ArrowLeft, DNC.LastDance, UTL.Blank, DNC.Buffs.LastDanceReady, UTL.Checkmark])]
     [SectionCombo("Dances features")]
     [CustomComboInfo("Last Dance Feature", "Replace Standard Step by Last Dance if available.", DNC.JobID)]
     DancerLastDanceFeature = 3813,
 
-    [IconsCombo([DNC.StandardStep, UTL.ArrowLeft, DNC.FinishingMove, UTL.ArrowLeft, DNC.LastDance, UTL.Blank, DNC.LastDance, UTL.Checkmark])]
+    [IconsCombo([DNC.StandardStep, UTL.ArrowLeft, DNC.FinishingMove, UTL.ArrowLeft, DNC.LastDance, UTL.Blank, DNC.Buffs.LastDanceReady, UTL.Checkmark])]
     [SectionCombo("Dances features")]
     [SecretCustomCombo]
     [ParentCombo(DancerLastDanceFeature)]
