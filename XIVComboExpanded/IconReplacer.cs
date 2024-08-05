@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 
 using Dalamud.Hooking;
-using Dalamud.Logging;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVComboExpandedPlugin.Combos;
@@ -29,6 +28,7 @@ internal sealed partial class IconReplacer : IDisposable
     public unsafe IconReplacer(IGameInteropProvider gameInteropProvider)
     {
         this.clientStructActionManager = ActionManager.Instance();
+
         this.customCombos = Assembly.GetAssembly(typeof(CustomCombo))!.GetTypes()
             .Where(t => !t.IsAbstract && IsDescendant(t, typeof(CustomCombo)))
             .Select(t => Activator.CreateInstance(t))
@@ -105,6 +105,17 @@ internal sealed partial class IconReplacer : IDisposable
             Service.PluginLog.Error(ex, "Don't crash the game");
             return this.OriginalHook(actionID);
         }
+    }
+
+    /// <summary>
+    /// Gets bool determining if action is greyed out or not.
+    /// </summary>
+    /// <param name="actionID">Action ID.</param>
+    /// <param name="targetID">Target ID.</param>
+    /// <returns>A bool value of whether the action can be used or not.</returns>
+    internal unsafe bool CanUseAction(uint actionID, uint targetID = 0xE000_0000)
+    {
+        return clientStructActionManager->GetActionStatus(ActionType.Action, actionID, targetID, false, true) == 0;
     }
 
     private ulong IsIconReplaceableDetour(uint actionID) => 1;

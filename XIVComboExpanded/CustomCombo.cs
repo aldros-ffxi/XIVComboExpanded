@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.Enums;
@@ -8,7 +5,8 @@ using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
 using Dalamud.Utility;
-using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using System;
+using System.Linq;
 using XIVComboExpandedPlugin.Attributes;
 using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkHistory.Delegates;
 using static System.Collections.Specialized.BitVector32;
@@ -110,7 +108,7 @@ internal abstract partial class CustomCombo
             (uint ActionID, CooldownData Data) a1,
             (uint ActionID, CooldownData Data) a2)
         {
-            // This intent of this priority algorithm is to generate a single unified number that results in the
+            // This intent of this priority algorithm is to generate a single unified number that results in the 
             // following behaviors:
             //   * Any ability that is off cooldown and at maximum charges has maximum (and equal) priority.
             //   * If only one of the two abilities is currently usable, it has a higher priority.
@@ -453,4 +451,11 @@ internal abstract partial class CustomCombo
 
         return true;
     }
+
+    /// <summary>
+    /// Gets bool determining if action is greyed out or not.
+    /// </summary>
+    /// <param name="actionID">Action ID.</param>
+    /// <returns>A bool value of whether the action can be used or not.</returns>
+    protected static bool CanUseAction(uint actionID) => Service.IconReplacer.CanUseAction(actionID);
 }

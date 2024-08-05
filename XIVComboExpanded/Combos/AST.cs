@@ -1,3 +1,4 @@
+using System.Linq;
 using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 
@@ -64,7 +65,7 @@ internal static class AST
     {
         public const ushort
             Combust = 838,
-            Combust2 = 838,
+            Combust2 = 843,
             Combust3 = 1881;
     }
 
@@ -91,15 +92,19 @@ internal class AstrologianMalefic : CustomCombo
         {
             var gauge = GetJobGauge<ASTGauge>();
 
-            if (IsEnabled(CustomComboPreset.AstrologianDoTFeature) && TargetIsEnemy())
+            if (IsEnabled(CustomComboPreset.AstrologianDoTFeature) && InCombat() && TargetIsEnemy())
             {
-                var combust = FindTargetEffect(AST.Debuffs.Combust);
-                var combust2 = FindTargetEffect(AST.Debuffs.Combust2);
-                var combust3 = FindTargetEffect(AST.Debuffs.Combust3);
+                var combustEffects = new[]
+                {
+                    FindTargetEffect(AST.Debuffs.Combust3),
+                    FindTargetEffect(AST.Debuffs.Combust2),
+                    FindTargetEffect(AST.Debuffs.Combust),
+                };
 
-                // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (!(combust?.RemainingTime > 2.8 || combust2?.RemainingTime > 2.8 || combust3?.RemainingTime > 2.8))
+                if (!combustEffects.Any(effect => effect?.RemainingTime > 2.8))
+                {
                     return OriginalHook(AST.Combust);
+                }
             }
 
             if (IsEnabled(CustomComboPreset.AstrologianMaleficArcanaFeature) && gauge.DrawnCrownCard == CardType.LORD && level >= AST.Levels.MinorArcana)
