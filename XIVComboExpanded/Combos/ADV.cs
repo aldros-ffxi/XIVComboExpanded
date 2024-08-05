@@ -10,6 +10,7 @@ internal static class ADV
     public const uint
         Provoke = 7533,
         Shirk = 7537,
+        LowBlow = 7540,
         HeadGraze = 7551,
         Peloton = 7557,
         Swiftcast = 7561,
@@ -33,6 +34,9 @@ internal static class ADV
     public static class Levels
     {
         public const byte
+            // Note that unlike class/job abilities, role actions are available even when level-synced below their
+            // the level they are learned at.
+            LowBlow = 12,
             Swiftcast = 18,
             VariantRaise2 = 90;
     }
