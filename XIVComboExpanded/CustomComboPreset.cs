@@ -2105,9 +2105,6 @@ public enum CustomComboPreset
     [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken by the Generation skills with their respective Legacies in order.", VPR.JobID)]
     ViperReawakenAIOFeature = 4123,
 
-    [CustomComboInfo("Generation Legacy Feature", "Replaces the Generation skills with their respective Legacies.", VPR.JobID)]
-    ViperGenerationLegaciesFeature = 4105,
-
     [CustomComboInfo("Uncoiled Fury Followup", "Replaces Uncoiled Fury with Uncoiled Twinfang and Uncoiled Twinblood in sequence.", VPR.JobID)]
     ViperUncoiledFollowupFeature = 4107,
 

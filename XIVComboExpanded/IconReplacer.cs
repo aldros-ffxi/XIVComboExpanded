@@ -107,16 +107,5 @@ internal sealed partial class IconReplacer : IDisposable
         }
     }
 
-    /// <summary>
-    /// Gets bool determining if action is greyed out or not.
-    /// </summary>
-    /// <param name="actionID">Action ID.</param>
-    /// <param name="targetID">Target ID.</param>
-    /// <returns>A bool value of whether the action can be used or not.</returns>
-    internal unsafe bool CanUseAction(uint actionID, uint targetID = 0xE000_0000)
-    {
-        return clientStructActionManager->GetActionStatus(ActionType.Action, actionID, targetID, false, true) == 0;
-    }
-
     private ulong IsIconReplaceableDetour(uint actionID) => 1;
 }
