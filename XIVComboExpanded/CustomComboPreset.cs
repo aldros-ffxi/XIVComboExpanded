@@ -807,6 +807,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Sonic Shock Feature", "Replace Bow Shock and Sonic Break with one or the other depending on which is on cooldown.", GNB.JobID)]
     GunbreakerBowShockSonicBreakFeature = 3704,
 
+    [SecretCustomCombo]
+    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\nCombo Danger Zone after Keen Edge or Brutal Shell\nCombo Sonic Break after No Mercy\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike\nFollow up Demon Slaughter with Double Down or Fated Circle\nFollow up Bloodfest with the Reign combo", GNB.JobID)]
+    GunbreakerExpandedContinuation = 3715,
+
+    [CustomComboInfo("Trajectory downgrade when level capped", "Replaces Trajectory with Lightning Shot when below level for it.", GNB.JobID)]
+    GunbreakerTrajectoryDowngradeFeature = 3716,
+
     #endregion
     // ====================================================================================
     #region MACHINIST
