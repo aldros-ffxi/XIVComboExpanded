@@ -1262,10 +1262,16 @@ public enum CustomComboPreset
     // ====================================================================================
     #region VIPER
 
-    [CustomComboInfo("Steel Tail Feature", "Replace Steel Fangs and Dread Fangs with Serpent's Tail after finishing a combo.", VPR.JobID)]
+    [CustomComboInfo("Auto Fangs", "Replace Steel Fangs and Reaving Fangs with whichever is currently empowered. Only affects the first combo hit.", VPR.JobID)]
+    ViperAutoFangsFeature = 4124,
+
+    [CustomComboInfo("Auto Maw", "Replace Steel Maw and Reaving Maw with whichever is currently empowered.  Only affects the first combo hit", VPR.JobID)]
+    ViperAutoMawFeature = 4125,
+
+    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs and Reaving Fangs with Serpent's Tail after finishing a combo.", VPR.JobID)]
     ViperSteelTailFeature = 4101,
 
-    [CustomComboInfo("Steel Tail AoE Feature", "Replace Steel Maw and Dread Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
+    [CustomComboInfo("Serpent's Maw (AoE) Feature", "Replace Steel Maw and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
     ViperSteelTailAoEFeature = 4102,
 
     [SecretCustomCombo]
@@ -1293,11 +1299,11 @@ public enum CustomComboPreset
     ViperFuryAndIreFeature = 4108,
 
     [SecretCustomCombo]
-    [CustomComboInfo("Dread Fangs to Dreadwinder", "Replaces Dread Fangs to Dreadwinder when there are stacks present and not currently in a combo.", VPR.JobID)]
+    [CustomComboInfo("Reaving Fangs to Vicewinder", "Replaces Reaving Fangs to Vicewinder when charges are available and you're not currently in a combo.", VPR.JobID)]
     ViperDreadfangsDreadwinderFeature = 4109,
 
     [SecretCustomCombo]
-    [CustomComboInfo("Dread Maw to Pit of Dread", "Replaces Dread Maw with Pit of Dread when there are stacks present and not currently in a combo.", VPR.JobID)]
+    [CustomComboInfo("Reaving Maw to Vicepit", "Replaces Reaving Maw with Vicepit when charges are available and not you're currently in a combo.", VPR.JobID)]
     ViperPitOfDreadFeature = 4110,
 
     [ConflictingCombos(ViperMergeTwinsSerpentFeature)]
@@ -1331,10 +1337,10 @@ public enum CustomComboPreset
     //[CustomComboInfo("PvP Combo Start Hindsting Strike", "With no buffs, end first combo with Hindsting Strike.", VPR.JobID)]
     //ViperPvPMainComboStartHindstingFeature = 4116,
 
-    [SecretCustomCombo]
-    [ConflictingCombos(ViperSteelTailAoEFeature)]
-    [CustomComboInfo("Viper PvP Style AoE Combo", "Condenses the main combo to a single button, like PvP.\nThe combo can only detect debuffs on the current target.\nStarts with Jagged Maw by default, configurable below.", VPR.JobID)]
-    ViperPvPMainComboAoEFeature = 4117,
+    // [SecretCustomCombo]
+    // [ConflictingCombos(ViperSteelTailAoEFeature)]
+    // [CustomComboInfo("Viper PvP Style AoE Combo", "Condenses the main combo to a single button, like PvP.\nThe combo can only detect debuffs on the current target.\nStarts with Jagged Maw by default, configurable below.", VPR.JobID)]
+    // ViperPvPMainComboAoEFeature = 4117,
 
     //[SecretCustomCombo]
     //[ParentCombo(ViperPvPMainComboAoEFeature)]

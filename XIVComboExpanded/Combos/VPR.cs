@@ -10,7 +10,7 @@ internal static class VPR
 
     public const uint
             SteelFangs = 34606,
-            DreadFangs = 34607,
+            ReavingFangs = 34607,
             HuntersSting = 34608,
             SwiftskinsSting = 34609,
             FlankstingStrike = 34610,
@@ -19,7 +19,7 @@ internal static class VPR
             HindsbaneFang = 34613,
 
             SteelMaw = 34614,
-            DreadMaw = 34615,
+            ReavingMaw = 34615,
             HuntersBite = 34616,
             SwiftskinsBite = 34617,
             JaggedMaw = 34618,
@@ -79,13 +79,15 @@ internal static class VPR
             HuntersInstinct = 3668, // Double check, might also be 4120
             Swiftscaled = 3669,     // Might also be 4121
             Reawakened = 3670,
-            ReadyToReawaken = 3671;
+            ReadyToReawaken = 3671,
+            HonedSteel = 3672,
+            HonedReavers = 3772;
     }
 
     public static class Debuffs
     {
         public const ushort
-            NoxiousGash = 3667;
+            Placeholder = 0;
     }
 
     public static class Levels
@@ -93,12 +95,12 @@ internal static class VPR
         public const byte
             SteelFangs = 1,
             HuntersSting = 5,
-            DreadFangs = 10,
+            ReavingFangs = 10,
             WrithingSnap = 15,
             SwiftskinsSting = 20,
             SteelMaw = 25,
             Single3rdCombo = 30, // Includes Flanksting, Flanksbane, Hindsting, and Hindsbane
-            DreadMaw = 35,
+            ReavingMaw = 35,
             Slither = 40,
             HuntersBite = 40,
             SwiftskinsBike = 45,
@@ -119,6 +121,32 @@ internal static class VPR
     }
 }
 
+internal class AutoFangsFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ViperAutoFangsFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if ((actionID == VPR.SteelFangs || actionID == VPR.ReavingFangs) && OriginalHook(VPR.SteelFangs) == VPR.SteelFangs)
+            return HasEffect(VPR.Buffs.HonedReavers) ? VPR.ReavingFangs : VPR.SteelFangs;
+
+        return actionID;
+    }
+}
+
+internal class AutoMawFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ViperAutoMawFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if ((actionID == VPR.SteelMaw || actionID == VPR.ReavingMaw) && OriginalHook(VPR.SteelMaw) == VPR.SteelMaw)
+            return HasEffect(VPR.Buffs.HonedReavers) ? VPR.ReavingMaw : VPR.SteelMaw;
+
+        return actionID;
+    }
+}
+
 internal class SteelTailFeature : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ViperSteelTailFeature;
@@ -131,7 +159,7 @@ internal class SteelTailFeature : CustomCombo
                 return VPR.DeathRattle;
         }
 
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.DeathRattle)
                 return VPR.DeathRattle;
@@ -153,7 +181,7 @@ internal class SteelTailAoEFeature : CustomCombo
                 return VPR.LastLash;
         }
 
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.LastLash)
                 return VPR.LastLash;
@@ -281,7 +309,7 @@ internal class GenerationLegacies : CustomCombo
                 return VPR.FirstLegacy;
         }
 
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy)
                 return VPR.SecondLegacy;
@@ -315,7 +343,7 @@ internal class GenerationLegaciesAoE : CustomCombo
                 return VPR.FirstLegacy;
         }
 
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
             if (OriginalHook(VPR.SerpentsTail) == VPR.SecondLegacy)
                 return VPR.SecondLegacy;
@@ -363,10 +391,10 @@ internal class DreadfangsDreadwinderFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.DreadFangs)
+        if (actionID == VPR.ReavingFangs)
         {
             // I think in this case if we're not in a combo (and something else isn't replacing Dread Fangs), we can just replace if we have charges
-            if (level >= VPR.Levels.Dreadwinder && IsOriginal(VPR.DreadFangs) && IsCooldownUsable(VPR.Dreadwinder) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
+            if (level >= VPR.Levels.Dreadwinder && IsOriginal(VPR.ReavingFangs) && IsCooldownUsable(VPR.Dreadwinder) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
                 return VPR.Dreadwinder;
         }
 
@@ -380,9 +408,9 @@ internal class PitOfDreadFeature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == VPR.DreadMaw)
+        if (actionID == VPR.ReavingMaw)
         {
-            if (level >= VPR.Levels.PitOfDread && IsOriginal(VPR.DreadMaw) && IsCooldownUsable(VPR.PitOfDread) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
+            if (level >= VPR.Levels.PitOfDread && IsOriginal(VPR.ReavingMaw) && IsCooldownUsable(VPR.PitOfDread) && IsOriginal(VPR.SerpentsTail)) // Add the check for Serpent's Tail to avoid stepping on other combo
                 return VPR.PitOfDread;
         }
 
@@ -472,8 +500,8 @@ internal class MergeTwinsSerpentFeature : CustomCombo
 //            if (OriginalHook(VPR.SteelFangs) == VPR.SteelFangs)
 //            {
 //                var noxious = FindTargetEffect(VPR.Debuffs.NoxiousGash);
-//                if (level >= VPR.Levels.DreadFangs && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
-//                    return VPR.DreadFangs;
+//                if (level >= VPR.Levels.ReavingFangs && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
+//                    return VPR.ReavingFangs;
 
 //                return VPR.SteelFangs;
 //            }
@@ -546,8 +574,8 @@ internal class MergeTwinsSerpentFeature : CustomCombo
 //            if (OriginalHook(VPR.SteelMaw) == VPR.SteelMaw)
 //            {
 //                var noxious = FindTargetEffect(VPR.Debuffs.NoxiousGash); // TODO: Would be useful to handle the case with no target
-//                if (level >= VPR.Levels.DreadMaw && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
-//                    return VPR.DreadMaw;
+//                if (level >= VPR.Levels.ReavingMaw && (noxious is null || noxious?.RemainingTime < 12)) // 12s hopefully means we won't miss anything on a Reawaken window
+//                    return VPR.ReavingMaw;
 
 //                return VPR.SteelMaw;
 //            }
