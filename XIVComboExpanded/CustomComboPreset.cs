@@ -1067,79 +1067,100 @@ public enum CustomComboPreset
     // ====================================================================================
     #region PALADIN
 
-    [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority with its combo chain.", PLD.JobID)]
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.RiotBlade, UTL.ArrowLeft, PLD.FastBlade])]
+    [SectionCombo("Single Target")]
+    [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority/Rage of Halone with its combo chain.", PLD.JobID)]
     PaladinRoyalAuthorityCombo = 1902,
 
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.Atonement,PLD.Supplication, PLD.Sepulchre])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.\nNOTE: Does not require the Royal Authority Combo, if you prefer to do your standard 1-2-3 combo yourself.", PLD.JobID)]
+    PaladinRoyalAuthorityAtonementComboFeature = 1903,
+
+    [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.TotalEclipse])]
+    [SectionCombo("Area of Effect")]
     [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID)]
     PaladinProminenceCombo = 1904,
 
-    [CustomComboInfo("Requiescat/Imperator Confiteor", "Replace Requiescat/Imperator with Confiteor and combo chain while under the effect of Requiescat, and then with Holy Spirit if there are remaining charges.", PLD.JobID)]
-    PaladinRequiescatCombo = 1905,
+    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit, PLD.HolyCircle])]
+    [SectionCombo("Combined/Other")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
+    PaladinComboDivineMightFeature = 1912,
 
-    [ParentCombo(PaladinRoyalAuthorityCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Royal Authority Divine Might Feature", "Replace Royal Authority with Holy Spirit when Divine Might would overcap.", PLD.JobID)]
-    PaladinRoyalAuthorityDivineMightFeature = 1912,
-
-    [ParentCombo(PaladinRoyalAuthorityCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Royal Authority Fight or Flight Feature", "Replace Royal Authority with Holy Spirit during Fight or Flight when Divine Might is active.", PLD.JobID)]
-    PaladinRoyalAuthorityFightOrFlightFeature = 1915,
-
-    [ParentCombo(PaladinRoyalAuthorityCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.", PLD.JobID)]
-    PaladinRoyalAuthorityAtonementComboFeature = 1903,
-
-    [ParentCombo(PaladinRoyalAuthorityCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Royal Authority Confiteor Feature", "Replace Royal Authority with Confiteor and its combo chain when under the effect of Requiescat.", PLD.JobID)]
-    PaladinRoyalAuthorityConfiteorComboFeature = 1917,
-
-    [ParentCombo(PaladinRoyalAuthorityCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Royal Authority Goring Blade Feature", "Replace Royal Authority with Goring Blade when available.", PLD.JobID)]
-    PaladinRoyalAuthorityGoringBladeComboFeature = 1918,
-
-    [ConflictingCombos(PaladinRoyalAuthorityAtonementComboFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Atonement Follow-up", "Replace Royal Authority by Atonement and its combo chain when under the effect of Atonement Ready.", PLD.JobID)]
-    PaladinAtonementCombo = 1921,
-
-    [ParentCombo(PaladinProminenceCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Prominence Divine Might Feature", "Replace Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
-    PaladinProminenceDivineMightFeature = 1913,
-
-    [ParentCombo(PaladinProminenceCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Prominence Confiteor Feature", "Replace Prominence with Confiteor and its combo chain when under the effect of Requiescat.", PLD.JobID)]
-    PaladinProminenceConfiteorComboFeature = 1919,
-
-    [ParentCombo(PaladinProminenceCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Prominence Goring Blade Feature", "Replace Prominence with Goring Blade when available.", PLD.JobID)]
-    PaladinProminenceGoringBladeComboFeature = 1920,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Requiescat Fight or Flight Feature", "Replace Requiescat with Fight or Flight when off cooldown or if it will be ready sooner.", PLD.JobID)]
-    PaladinRequiescatFightOrFlightFeature = 1914,
-
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Confiteor Feature", "Replace Holy Spirit/Circle with Confiteor while under the effect of Requiescat.", PLD.JobID)]
-    PaladinConfiteorFeature = 1907,
-
+    [IconsCombo([PLD.HolySpirit, UTL.ArrowLeft, PLD.ShieldLob])]
+    [SectionCombo("Combined/Other")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Holy Spirit Level Sync", "Replace Holy Spirit with Shield Lob when below level 64 in synced content.", PLD.JobID)]
     PaladinHolySpiritLevelSyncFeature = 1916,
 
+    [IconsCombo([UTL.Idea, PLD.CircleOfScorn, PLD.SpiritsWithin, PLD.Expiacion])]
+    [SectionCombo("Combined/Other")]
     [SecretCustomCombo]
     [CustomComboInfo("Scornful Spirits Feature", "Replace Spirits Within/Expiacion and Circle of Scorn with whichever is available soonest.", PLD.JobID)]
     PaladinScornfulSpiritsFeature = 1908,
 
+    [IconsCombo([PLD.ShieldBash, UTL.ArrowLeft, ADV.LowBlow])]
+    [SectionCombo("Combined/Other")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Shields on your Feet Feature", "Replace Shield Bash with Low Blow when available.", PLD.JobID)]
+    [CustomComboInfo("One-Stop Stun Button", "Replace Shield Bash with Low Blow when the latter is off cooldown.", PLD.JobID)]
     PaladinShieldBashFeature = 1910,
+
+    [IconsCombo([PLD.Requiescat, UTL.ArrowLeft, PLD.FightOrFlight])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Requiescat Fight or Flight Feature", "Replace Requiescat with Fight or Flight when off cooldown, when Goring Blade is available, or when Fight or Flight will be off cooldown sooner.\nNOTE: If enabled with Requiescat/Imperator Confiteor, Confiteor and its combo chain will be used prior to Goring Blade.", PLD.JobID)]
+    PaladinRequiescatFightOrFlightFeature = 1914,
+
+    [IconsCombo([PLD.Requiescat, UTL.ArrowLeft, PLD.Confiteor, PLD.BladeOfFaith, PLD.BladeOfTruth, PLD.BladeOfValor, PLD.BladeOfHonor])]
+    [SectionCombo("Cooldowns")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Requiescat/Imperator Confiteor", "Replace Requiescat/Imperator with Confiteor and combo chain when available, and then with Holy Spirit if there are remaining charges.", PLD.JobID)]
+    PaladinRequiescatConfiteorFeature = 1905,
+
+    [IconsCombo([PLD.HolySpirit, PLD.HolyCircle, UTL.ArrowLeft, PLD.Confiteor, PLD.BladeOfFaith, PLD.BladeOfTruth, PLD.BladeOfValor, PLD.BladeOfHonor])]
+    [SectionCombo("Cooldowns")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Holy Confiteor Feature", "Replace Holy Spirit/Circle with Confiteor and its combo chain when available.", PLD.JobID)]
+    PaladinHolyConfiteorFeature = 1907,
+
+    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.Confiteor, PLD.BladeOfFaith, PLD.BladeOfTruth, PLD.BladeOfValor, PLD.BladeOfHonor])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Combo Confiteor Feature", "Replace Royal Authority and Prominence with Confiteor and its combo chain when available.", PLD.JobID)]
+    PaladinComboConfiteorFeature = 1917,
+
+    [IconsCombo([UTL.Idea, PLD.HolyCircle, PLD.Atonement, PLD.Supplication, PLD.Sepulchre, PLD.GoringBlade])]
+    [SectionCombo("Cooldowns")]
+    [SecretCustomCombo]
+    [ParentCombo(PaladinComboConfiteorFeature)]
+    [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  It will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Supplication, Sepulchre, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
+    PaladinFoFOptimizeFeature = 1922,
+    
+    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Combo Fight or Flight Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominance with Holy Circle while both Fight or Flight and Divine Might are active.", PLD.JobID)]
+    PaladinFightOrFlightDivineMightFeature = 1915,
+
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.GoringBlade])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Royal Authority Goring Blade Feature", "Replace Royal Authority and Prominence with Goring Blade when available.\nNOTE: Used after the Confiteor combo if enabled with Combo Confiteor Feature.", PLD.JobID)]
+    PaladinRoyalAuthorityGoringBladeFeature = 1918,
+
+    [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.GoringBlade])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Prominence Goring Blade Feature", "Also replace Prominence with Goring Blade when available.\nNOTE: Used after the Confiteor combo if enabled with Combo Confiteor Feature.", PLD.JobID)]
+    PaladinProminenceGoringBladeFeature = 1920,
+
+    [IconsCombo([PLD.GoringBlade, UTL.Plus])]
+    [SectionCombo("Cooldowns")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Goring Blade before Confiteor", "Use Goring Blade before the Confiteor combo, rather than after it, for any combos that combine the two on the same button.\nNOTE: This is generally not recommended, from an optimization perspective, but can help avoid lost Goring Blade usage if you have to disengage from the boss shortly after using Requiescat.  Confiteor will still be used over Goring Blade if you're not currently in melee range.", PLD.JobID)]
+    PaladinGoringBladeBeforeConfiteorFeature = 1923,
 
     #endregion
     // ====================================================================================
