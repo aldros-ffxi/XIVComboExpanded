@@ -587,6 +587,8 @@ public class ConfigWindow : Window
                 }
 
                 ImGui.SameLine();
+                ImGui.Text(" ");
+                ImGui.SameLine();
                 ImGui.InputText("", ref url, 100, ImGuiInputTextFlags.ReadOnly);
 
                 url = "https://github.com/daemitus/MyDalamudPlugins/raw/master/pluginmaster.json";
