@@ -1798,7 +1798,7 @@ public enum CustomComboPreset
     [SectionCombo("Phlegma features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Phlegma into Toxikon", "Replace Phlegma with Toxikon when no charges remain and you have Addersting.\nThis takes priority over Phlegma into Dyskrasia.", SGE.JobID)]
-    SagePhlegmaToxicon = 4007,
+    SagePhlegmaToxikon = 4007,
 
     [IconsCombo([SGE.Toxikon, UTL.ArrowLeft, SGE.Phlegma, UTL.Blank, SGE.Phlegma, UTL.Checkmark])]
     [SectionCombo("Phlegma features")]
@@ -1822,9 +1822,6 @@ public enum CustomComboPreset
     [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
     SagePsycheToxikonFeature = 4013,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
-    SageDoTFeature = 4012,
     #endregion
     // ====================================================================================
     #region SAMURAI

@@ -42,7 +42,6 @@ internal static class GNB
         public const ushort
             NoMercy = 1831,
             RoyalGuard = 1833,
-            ReadyToBreak = 3886,
             ReadyToRip = 1842,
             ReadyToTear = 1843,
             ReadyToGouge = 1844,
