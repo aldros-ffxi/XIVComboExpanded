@@ -274,8 +274,11 @@ internal class MachinistAirAnchorChainsaw : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == MCH.HotShot || actionID == MCH.AirAnchor || actionID == MCH.Chainsaw)
+        if (actionID == MCH.HotShot || actionID == MCH.AirAnchor || actionID == MCH.Chainsaw || actionID == MCH.Excavator)
         {
+            if (level >= MCH.Levels.Excavator && HasEffect(MCH.Buffs.ExcavatorReady))
+                return MCH.Excavator;
+
             if (level >= MCH.Levels.Chainsaw)
                 return CalcBestAction(actionID, MCH.Chainsaw, MCH.AirAnchor);
 
