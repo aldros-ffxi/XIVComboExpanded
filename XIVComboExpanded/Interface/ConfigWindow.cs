@@ -206,16 +206,7 @@ internal class ConfigWindow : Window
                                 string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
-                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
-                                    {
-                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
-                                        {
-                                            this.DrawSection(Tabs.Classic, preset, info, ref i);
-                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
-                                        }
-                                    }
-
-                                    this.DrawPreset(Tabs.Classic, preset, info, ref i);
+                                    previousSection = this.DrawPreset(Tabs.Classic, preset, info, previousSection, ref i);
                                 }
 
                                 ImGui.EndChild();
@@ -240,22 +231,7 @@ internal class ConfigWindow : Window
                                 string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
-                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
-                                    {
-                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
-                                        {
-                                            this.DrawSection(Tabs.Expanded, preset, info, ref i);
-                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                    }
-
-                                    this.DrawPreset(Tabs.Expanded, preset, info, ref i);
+                                    previousSection = this.DrawPreset(Tabs.Expanded, preset, info, previousSection, ref i);
                                 }
 
 
@@ -282,22 +258,7 @@ internal class ConfigWindow : Window
                                 string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
-                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
-                                    {
-                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
-                                        {
-                                            this.DrawSection(Tabs.Accessibility, preset, info, ref i);
-                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                    }
-
-                                    this.DrawPreset(Tabs.Accessibility, preset, info, ref i);
+                                    previousSection = this.DrawPreset(Tabs.Accessibility, preset, info, previousSection, ref i);
                                 }
 
 
@@ -323,22 +284,7 @@ internal class ConfigWindow : Window
                                 string previousSection = string.Empty;
                                 foreach (var (preset, info) in this.groupedPresets[Service.Configuration.CurrentTab])
                                 {
-                                    if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
-                                    {
-                                        if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section)
-                                        {
-                                            this.DrawSection(Tabs.Secret, preset, info, ref i);
-                                            previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                        ImGui.Spacing();
-                                    }
-
-                                    this.DrawPreset(Tabs.Secret, preset, info, ref i);
+                                    previousSection = this.DrawPreset(Tabs.Secret, preset, info, previousSection, ref i);
                                 }
 
 
@@ -639,7 +585,7 @@ internal class ConfigWindow : Window
         ImGui.Spacing();
     }
 
-    private void DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
+    private string DrawPreset(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, string previousSection, ref int i)
     {
         var enabled = Service.Configuration.IsEnabled(preset);
         var secret = Service.Configuration.IsSecret(preset);
@@ -659,23 +605,33 @@ internal class ConfigWindow : Window
         {
             case Tabs.Classic:
                 if (accessibility || expanded || secret)
-                    return;
+                    return previousSection;
                 break;
             case Tabs.Expanded:
                 if (accessibility || secret)
-                    return;
+                    return previousSection;
                 break;
             case Tabs.Accessibility:
                 if (secret)
-                    return;
+                    return previousSection;
                 break;
             case Tabs.Secret:
                 if (accessibility && !Service.Configuration.EnableAccessibilityCombos)
-                    return;
+                    return previousSection;
                 break;
             default:
                 break;
         }
+
+        if (preset.GetAttribute<SectionComboAttribute>()?.Section != null)
+        {
+            if (previousSection != preset.GetAttribute<SectionComboAttribute>()?.Section && previousSection != "child")
+            {
+                this.DrawSection(tab, preset, info, ref i);
+                previousSection = preset.GetAttribute<SectionComboAttribute>()?.Section;
+            }
+        }
+
 
         ImGui.PushItemWidth(200);
 
@@ -919,11 +875,12 @@ internal class ConfigWindow : Window
                 ImGui.Indent();
 
                 foreach (var (childPreset, childInfo) in children)
-                    this.DrawPreset(tab, childPreset, childInfo, ref i);
+                    this.DrawPreset(tab, childPreset, childInfo, "child", ref i);
 
                 ImGui.Unindent();
             }
         }
+        return section;
     }
 
     /// <summary>
