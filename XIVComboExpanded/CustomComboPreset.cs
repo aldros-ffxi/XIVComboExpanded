@@ -1182,7 +1182,7 @@ public enum CustomComboPreset
     [ParentCombo(PaladinComboConfiteorFeature)]
     [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  It will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Supplication, Sepulchre, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
     PaladinFoFOptimizeFeature = 1922,
-    
+
     [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
     [SectionCombo("Cooldowns")]
     [AccessibilityCustomCombo]
@@ -2092,48 +2092,77 @@ public enum CustomComboPreset
     // ====================================================================================
     #region VIPER
 
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.SteelFangs, UTL.Cycle, VPR.ReavingFangs, UTL.Blank, VPR.SteelMaw, UTL.Cycle, VPR.ReavingMaw])]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Steel Reaving", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever is currently empowered. Only affects the first combo hit.", VPR.JobID)]
     ViperAutoSteelReavingFeature = 4124,
 
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
     ViperSteelTailFeature = 4101,
 
-    [CustomComboInfo("Steel Coil Feature", "Replace Steel Fangs with Swiftskin's Coil, Reaving Fangs with Hunter's Coil, Steel Maw with Swiftskin's Den, and Reaving Maw with Hunter's Den when usable.  Also replaces Steel Fangs/Maw with both First and Third Generation, and Reaving Fangs/Maw with both Second and Fourth.", VPR.JobID)]
+    [SectionCombo("Vice Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil, VPR.HuntersDen, VPR.SwiftskinsDen])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Steel Coil Feature", "Replace Steel Fangs with Swiftskin's Coil, Reaving Fangs with Hunter's Coil, Steel Maw with Swiftskin's Den, and Reaving Maw with Hunter's Den when usable.\n\nNOTE: Also replaces Steel Fangs/Maw with both First and Third Generation, and Reaving Fangs/Maw with both Second and Fourth Generation.", VPR.JobID)]
     ViperSteelCoilFeature = 4126,
 
+    [SectionCombo("Vice Combos")]
+    [IconsCombo([VPR.HuntersCoil, VPR.SwiftskinsCoil, VPR.HuntersDen, VPR.SwiftskinsDen, UTL.ArrowLeft, VPR.Twinfang, VPR.Twinblood])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Twin Coil Feature", "Replace Swiftskin's Coil/Den and Hunter's Coil/Den with their respective Twinblood and Twinfang skills, in the correct order.", VPR.JobID)]
+    ViperTwinCoilFeature = 4103,
+
+    [SectionCombo("Vice Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.Vicewinder])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Fangs to Vicewinder", "Replaces Steel Fangs and Reaving Fangs to Vicewinder when any charges are available and you're not currently in a combo.\n\nNOTE: This can lead to less than ideal usage timing, and does not respect Rattling Coil stacks.", VPR.JobID)]
+    ViperAutoViceSTFeature = 4109,
+
+    [SectionCombo("Vice Combos")]
+    [IconsCombo([VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.VicePit])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Maws to Vicepit", "Replaces Steel Maw and Reaving Maw with Vicepit when charges are available and not you're currently in a combo.\n\nNOTE: This can lead to less than ideal usage timing, and does not respect Rattling Coil stacks.", VPR.JobID)]
+    ViperAutoViceAoEFeature = 4110,
+
+    [SectionCombo("Reawaken")]
+    [IconsCombo([VPR.FirstGeneration, UTL.ArrowLeft, VPR.FirstLegacy])]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Generation Legacy Feature", "Replace the Generation skills with their respective Legacies.", VPR.JobID)]
     ViperGenerationLegaciesFeature = 4105,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("Twin Coil Feature", "Replace Swiftskin's Coil/Den and Hunter's Coil/Den with their respective Twinblood and Twinfang skills.", VPR.JobID)]
-    ViperTwinCoilFeature = 4103,
-
+    [SectionCombo("Reawaken")]
+    [IconsCombo([VPR.Reawaken, UTL.ArrowLeft, VPR.FirstLegacy, VPR.FirstLegacy, UTL.Cycle, UTL.Idea])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken by the Generation skills with their respective Legacies in order.", VPR.JobID)]
+    [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken with the Generation skills and their respective Legacies in order.", VPR.JobID)]
     ViperReawakenAIOFeature = 4123,
 
+    [SectionCombo("Uncoiled Fury")]
+    [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.UncoiledTwinfang, VPR.UncoiledTwinblood])]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Uncoiled Fury Followup", "Replaces Uncoiled Fury with Uncoiled Twinfang and Uncoiled Twinblood in sequence.", VPR.JobID)]
     ViperUncoiledFollowupFeature = 4107,
 
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Fury And Ire", "Replace Uncoiled Fury with Serpent's Ire when out of Rattling Coil stacks.", VPR.JobID)]
+    [SectionCombo("Uncoiled Fury")]
+    [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.SerpentsIre, UTL.Minus])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Fury And Ire", "Replace Uncoiled Fury with Serpent's Ire when out of Rattling Coil stacks.\n\nNOTE: This is strongly discouraged.  Serpent's Ire is not just a Rattling Coil generator, it is also Viper's primary 2-minute cooldown, as it also enables a free Reawaken.  It should be aligned with party buffs, not held and used when you happen to be out of Rattling Coil charges.", VPR.JobID)]
     ViperFuryAndIreFeature = 4108,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("Fangs to Vicewinder", "Replaces Steel Fangs and Reaving Fangs to Vicewinder when charges are available and you're not currently in a combo.", VPR.JobID)]
-    ViperAutoViceSTFeature = 4109,
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Maws to Vicepit", "Replaces Steel Maw and Reaving Maw with Vicepit when charges are available and not you're currently in a combo.", VPR.JobID)]
-    ViperAutoViceAoEFeature = 4110,
-
+    [SectionCombo("oGCDs")]
+    [IconsCombo([VPR.SerpentsTail, UTL.ArrowLeft, VPR.Twinfang, VPR.Twinblood, UTL.Idea])]
+    [AccessibilityCustomCombo]
     [ConflictingCombos(ViperMergeTwinsSerpentFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Merge Twinfang/Twinblood onto Serpent's Tail Feature", "Merge all Twinfang/Twinblood abilities onto Serpent's Tail.", VPR.JobID)]
+    [CustomComboInfo("Merge Twinfang/Twinblood onto Serpent's Tail Feature", "Merge all Twinfang/Twinblood abilities onto Serpent's Tail, in the correct order.", VPR.JobID)]
     ViperMergeSerpentTwinsFeature = 4111,
 
-    [ConflictingCombos(ViperMergeSerpentTwinsFeature)]
+    [SectionCombo("oGCDs")]
+    [IconsCombo([VPR.Twinfang, VPR.Twinblood, UTL.ArrowLeft, VPR.SerpentsTail])]
     [ExpandedCustomCombo]
+    [ConflictingCombos(ViperMergeSerpentTwinsFeature)]
     [CustomComboInfo("Merge Serpent's Tail onto Twinfang/Twinblood Feature", "Merge all Serpent's Tail abilities onto Twinfang/Twinblood.", VPR.JobID)]
     ViperMergeTwinsSerpentFeature = 4112,
 
@@ -2170,22 +2199,30 @@ public enum CustomComboPreset
     // [CustomComboInfo("PvP AoE Combo Start Bloodied Maw", "With no buffs, end first combo with Bloodied Maw.", VPR.JobID)]
     // ViperPvPMainComboAoEStartBloodiedFeature = 4118,
 
-    [SecretCustomCombo]
+    [SectionCombo("One-Button Combos")]
+    [IconsCombo([VPR.Vicewinder, UTL.ArrowLeft, VPR.SwiftskinsCoil, VPR.HuntersCoil])]
+    [ExpandedCustomCombo]
     [ConflictingCombos(ViperAutoViceSTFeature)]
-    [CustomComboInfo("Viper PvP Style Winder Combo", "Condenses the Vicewinder combo to a single button, like PvP.\nStarts with Swiftskin's Coil (rear positional) by default.", VPR.JobID)]
+    [CustomComboInfo("Viper PvP Style Winder Combo", "Condenses the Vicewinder combo to a single button, like PvP.\nStarts with Swiftskin's Coil (rear positional) by default.\n\nNOTE: Does not include the Twinfang and Twinblood weaves unless the 'Twin Coil Feature' under 'Vice Combos' is also enabled.", VPR.JobID)]
     ViperPvPWinderComboFeature = 4119,
 
-    [SecretCustomCombo]
+    [SectionCombo("One-Button Combos")]
+    [IconsCombo([VPR.Vicewinder, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil])]
+    [ExpandedCustomCombo]
     [ParentCombo(ViperPvPWinderComboFeature)]
     [CustomComboInfo("Start with Hunter's Coil", "Start with Hunter's Coil (flank positional) instead.", VPR.JobID)]
     ViperPvPWinderComboStartHuntersFeature = 4120,
 
-    [SecretCustomCombo]
+    [SectionCombo("One-Button Combos")]
+    [IconsCombo([VPR.VicePit, UTL.ArrowLeft, VPR.SwiftskinsDen, VPR.HuntersDen])]
+    [ExpandedCustomCombo]
     [ConflictingCombos(ViperAutoViceAoEFeature)]
-    [CustomComboInfo("Viper PvP Style Pit Combo", "Condenses the Vicepit combo to a single button, like PvP.\nStarts with Swiftskin's Den by default.", VPR.JobID)]
+    [CustomComboInfo("Viper PvP Style Pit Combo", "Condenses the Vicepit combo to a single button, like PvP.\nStarts with Swiftskin's Den by default.\n\nNOTE: Does not include the Twinfang and Twinblood weaves unless the 'Twin Coil Feature' under 'Vice Combos' is also enabled.", VPR.JobID)]
     ViperPvPPitComboFeature = 4121,
 
-    [SecretCustomCombo]
+    [SectionCombo("One-Button Combos")]
+    [IconsCombo([VPR.VicePit, UTL.ArrowLeft, VPR.HuntersDen, VPR.SwiftskinsDen])]
+    [ExpandedCustomCombo]
     [ParentCombo(ViperPvPPitComboFeature)]
     [CustomComboInfo("Start with Hunter's Den", "Start with Hunter's Den instead.", VPR.JobID)]
     ViperPvPPitComboStartHuntersFeature = 4122,
