@@ -164,10 +164,10 @@ internal class ViperFangs : CustomCombo
                 {
                     if (actionID == VPR.SteelFangs)
                         return gauge.AnguineTribute == maxtribute ? VPR.FirstGeneration : VPR.ThirdGeneration;
-                
+
                     if (actionID == VPR.ReavingFangs)
                         return gauge.AnguineTribute >= maxtribute - 1 ? VPR.SecondGeneration : VPR.FourthGeneration;
-                } 
+                }
                 else
                 {
                     if (CanUseAction(VPR.SwiftskinsCoil) || CanUseAction(VPR.HuntersCoil))
@@ -176,7 +176,7 @@ internal class ViperFangs : CustomCombo
             }
 
             if (IsEnabled(CustomComboPreset.ViperAutoViceSTFeature) &&
-                level >= VPR.Levels.Vicewinder && IsOriginal(VPR.ReavingFangs) && 
+                level >= VPR.Levels.Vicewinder && IsOriginal(VPR.ReavingFangs) &&
                 IsCooldownUsable(VPR.Vicewinder) && IsOriginal(VPR.SerpentsTail))
                 return VPR.Vicewinder;
 
@@ -232,10 +232,10 @@ internal class ViperMaws : CustomCombo
                 {
                     if (actionID == VPR.SteelMaw)
                         return gauge.AnguineTribute == maxtribute ? VPR.FirstGeneration : VPR.ThirdGeneration;
-                
+
                     if (actionID == VPR.ReavingMaw)
                         return gauge.AnguineTribute >= maxtribute - 1 ? VPR.SecondGeneration : VPR.FourthGeneration;
-                } 
+                }
                 else
                 {
                     if (CanUseAction(VPR.SwiftskinsDen) || CanUseAction(VPR.HuntersDen))
@@ -244,7 +244,7 @@ internal class ViperMaws : CustomCombo
             }
 
             if (IsEnabled(CustomComboPreset.ViperAutoViceAoEFeature) &&
-                level >= VPR.Levels.VicePit && IsOriginal(VPR.ReavingMaw) && 
+                level >= VPR.Levels.VicePit && IsOriginal(VPR.ReavingMaw) &&
                 IsCooldownUsable(VPR.VicePit) && IsOriginal(VPR.SerpentsTail))
                 return VPR.VicePit;
 
@@ -347,7 +347,7 @@ internal class ViperUncoiled : CustomCombo
                     return VPR.UncoiledTwinblood;
             }
 
-            if (IsEnabled(CustomComboPreset.ViperFuryAndIreFeature) && level >= VPR.Levels.SerpentsIre) 
+            if (IsEnabled(CustomComboPreset.ViperFuryAndIreFeature) && level >= VPR.Levels.SerpentsIre)
             {
                 var gauge = GetJobGauge<VPRGauge>();
                 if (gauge.RattlingCoilStacks == 0)
@@ -464,9 +464,9 @@ internal class ViperReawaken : CustomCombo
                 var gauge = GetJobGauge<VPRGauge>();
 
                 if (level >= VPR.Levels.Legacies)
-                {   
+                {
                     var original = OriginalHook(VPR.SerpentsTail);
-                    if (original == VPR.FirstLegacy || 
+                    if (original == VPR.FirstLegacy ||
                         original == VPR.SecondLegacy ||
                         original == VPR.ThirdLegacy ||
                         original == VPR.FourthLegacy)
@@ -504,13 +504,13 @@ internal class ViperoGCDs : CustomCombo
                 if (!IsOriginal(VPR.SerpentsTail))
                     return OriginalHook(VPR.SerpentsTail);
 
-                if (HasEffect(VPR.Buffs.PoisedForTwinfang) || 
-                    HasEffect(VPR.Buffs.HuntersVenom) || 
+                if (HasEffect(VPR.Buffs.PoisedForTwinfang) ||
+                    HasEffect(VPR.Buffs.HuntersVenom) ||
                     HasEffect(VPR.Buffs.FellhuntersVenom))
                     return OriginalHook(VPR.Twinfang);
 
-                if (HasEffect(VPR.Buffs.PoisedForTwinblood) || 
-                    HasEffect(VPR.Buffs.SwiftskinsVenom) || 
+                if (HasEffect(VPR.Buffs.PoisedForTwinblood) ||
+                    HasEffect(VPR.Buffs.SwiftskinsVenom) ||
                     HasEffect(VPR.Buffs.FellskinsVenom))
                     return OriginalHook(VPR.Twinblood);
 
