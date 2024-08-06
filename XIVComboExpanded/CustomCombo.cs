@@ -8,8 +8,6 @@ using Dalamud.Utility;
 using System;
 using System.Linq;
 using XIVComboExpandedPlugin.Attributes;
-using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkHistory.Delegates;
-using static System.Collections.Specialized.BitVector32;
 
 namespace XIVComboExpandedPlugin.Combos;
 

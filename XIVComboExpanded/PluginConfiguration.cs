@@ -7,6 +7,7 @@ using Dalamud.Utility;
 using Newtonsoft.Json;
 using XIVComboExpandedPlugin.Attributes;
 using XIVComboExpandedPlugin.Combos;
+using XIVComboExpandedPlugin.Interface;
 
 namespace XIVComboExpandedPlugin;
 
@@ -91,10 +92,31 @@ public class PluginConfiguration : IPluginConfiguration
     public bool EnableSecretCombos { get; set; } = false;
 
     /// <summary>
+    /// Gets or sets a value indicating whether to allow and display secret combos.
+    /// </summary>
+    [JsonProperty("SecretUnlock")]
+    public bool UnlockSecretCombos { get; set; } = false;
+
+    /// <summary>
     /// Gets or sets a value indicating which is the current tab.
     /// </summary>
     [JsonProperty("Tab")]
-    public string CurrentTab { get; set; } = "Adventurer";
+    public string CurrentJobTab { get; set; } = "Adventurer";
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the plugin automatically changes to the current job upon opening the GUI.
+    /// </summary>
+    public bool AutoJobChange { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the plugin automatically changes to the current job upon opening the GUI.
+    /// </summary>
+    public ConfigWindow.Tabs DefaultTab { get; set; } = ConfigWindow.Tabs.Classic;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to hide the Ko-Fi link.
+    /// </summary>
+    public bool HideKofi { get; set; } = false;
 
     /// <summary>
     /// Gets or sets a value indicating whether to hide the children of a feature if it is disabled.

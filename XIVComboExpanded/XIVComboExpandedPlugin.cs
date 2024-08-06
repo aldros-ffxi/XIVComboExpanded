@@ -1,11 +1,11 @@
 using System;
-using System.Linq;
 
 using Dalamud.Game;
 using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using XIVComboExpandedPlugin.Attributes;
 using XIVComboExpandedPlugin.Interface;
 
 namespace XIVComboExpandedPlugin;
@@ -69,7 +69,16 @@ public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
     }
 
     private void OnOpenConfigUi()
-        => this.configWindow.Toggle();
+    {
+        if (Service.Configuration.AutoJobChange)
+        {
+            string job = Service.ClientState.LocalPlayer?.ClassJob.Id != null ? CustomComboInfoAttribute.JobIDToName((byte)Service.ClientState.LocalPlayer?.ClassJob.Id) : Service.Configuration.CurrentJobTab;
+            Service.Configuration.CurrentJobTab = job;
+        }
+
+        this.configWindow.Toggle();
+
+    }
 
     private void OnCommand(string command, string arguments)
     {
@@ -119,11 +128,11 @@ public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
 
             case "secrets":
                 {
-                    Service.Configuration.EnableSecretCombos = !Service.Configuration.EnableSecretCombos;
+                    Service.Configuration.UnlockSecretCombos = !Service.Configuration.UnlockSecretCombos;
 
-                    Service.ChatGui.Print(Service.Configuration.EnableSecretCombos
-                        ? $"Secret combos are now shown"
-                        : $"Secret combos are now hidden");
+                    Service.ChatGui.Print(Service.Configuration.UnlockSecretCombos
+                        ? $"Secret combos are now unlocked."
+                        : $"Secret combos are now locked away.");
 
                     Service.Configuration.Save();
                     break;
@@ -169,44 +178,14 @@ public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
                     break;
                 }
 
-            case "list":
+            default:
+
+                if (Service.Configuration.AutoJobChange)
                 {
-                    var filter = argumentsParts.Length > 1
-                        ? argumentsParts[1].ToLowerInvariant()
-                        : "all";
-
-                    if (filter == "set")
-                    {
-                        foreach (var preset in Enum.GetValues<CustomComboPreset>()
-                            .Select(preset => Service.Configuration.IsEnabled(preset)))
-                        {
-                            Service.ChatGui.Print(preset.ToString());
-                        }
-                    }
-                    else if (filter == "unset")
-                    {
-                        foreach (var preset in Enum.GetValues<CustomComboPreset>()
-                            .Select(preset => !Service.Configuration.IsEnabled(preset)))
-                        {
-                            Service.ChatGui.Print(preset.ToString());
-                        }
-                    }
-                    else if (filter == "all")
-                    {
-                        foreach (var preset in Enum.GetValues<CustomComboPreset>())
-                        {
-                            Service.ChatGui.Print(preset.ToString());
-                        }
-                    }
-                    else
-                    {
-                        Service.ChatGui.PrintError("Available list filters: set, unset, all");
-                    }
-
-                    break;
+                    string job = Service.ClientState.LocalPlayer?.ClassJob.Id != null ? CustomComboInfoAttribute.JobIDToName((byte)Service.ClientState.LocalPlayer?.ClassJob.Id) : Service.Configuration.CurrentJobTab;
+                    Service.Configuration.CurrentJobTab = job;
                 }
 
-            default:
                 this.configWindow.Toggle();
                 break;
         }
