@@ -1106,11 +1106,14 @@ public enum CustomComboPreset
     [CustomComboInfo("Toxikon into Phlegma Feature", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
     SageToxikonPhlegma = 4011,
 
+    [ParentCombo(SageToxikonPhlegma)]
+    [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
+    SagePsycheToxikonFeature = 4013,
+    #endregion
+
     [SecretCustomCombo]
     [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
     SageDoTFeature = 4012,
-
-    #endregion
     // ====================================================================================
     #region SAMURAI
 
