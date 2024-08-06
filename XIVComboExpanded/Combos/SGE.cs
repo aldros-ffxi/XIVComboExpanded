@@ -123,6 +123,14 @@ internal class SageToxikon : CustomCombo
     {
         if (actionID == SGE.Toxikon)
         {
+
+            if (IsEnabled(CustomComboPreset.SageToxikonPhlegmaFeature))
+            {
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche))
+                    return OriginalHook(SGE.Psyche);
+
+            }
+
             if (IsEnabled(CustomComboPreset.SageToxikonPhlegma))
             {
                 var phlegma =
@@ -134,12 +142,6 @@ internal class SageToxikon : CustomCombo
                     return OriginalHook(SGE.Phlegma);
             }
 
-            if (IsEnabled(CustomComboPreset.SageToxikonPhlegmaFeature))
-            {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche))
-                    return OriginalHook(SGE.Psyche);
-
-            }
         }
 
         return actionID;
