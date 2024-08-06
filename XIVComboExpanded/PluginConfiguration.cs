@@ -109,11 +109,6 @@ public class PluginConfiguration : IPluginConfiguration
     public bool AutoJobChange { get; set; } = false;
 
     /// <summary>
-    /// Gets or sets a value indicating whether the plugin automatically changes to the current job upon opening the GUI.
-    /// </summary>
-    public ConfigWindow.Tabs DefaultTab { get; set; } = ConfigWindow.Tabs.Classic;
-
-    /// <summary>
     /// Gets or sets a value indicating whether to hide the Ko-Fi link.
     /// </summary>
     public bool HideKofi { get; set; } = false;

@@ -192,17 +192,10 @@ public class ConfigWindow : Window
 
                     if (ImGui.BeginTabBar("ComboTabs"))
                     {
-                        if(Service.Configuration.CurrentJobTab != "Adventurer" && Service.Configuration.CurrentJobTab != "Disciples of the Land" && Service.Configuration.CurrentJobTab != "Sage")
+                        if (Service.Configuration.CurrentJobTab != "Adventurer" && Service.Configuration.CurrentJobTab != "Disciples of the Land" && Service.Configuration.CurrentJobTab != "Sage")
                         {
                             if (ImGui.BeginTabItem("Classic"))
                             {
-                                if ((ImGui.IsItemHovered() && !ImGui.IsItemActive()) || ImGui.IsItemHovered())
-                                {
-                                    ImGui.BeginTooltip();
-                                    ImGui.TextUnformatted("Classic Hover Tooltip");
-                                    ImGui.EndTooltip();
-                                }
-
                                 ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
@@ -221,13 +214,6 @@ public class ConfigWindow : Window
                         {
                             if (ImGui.BeginTabItem("Expanded"))
                             {
-                                if (ImGui.IsItemHovered())
-                                {
-                                    ImGui.BeginTooltip();
-                                    ImGui.TextUnformatted("Expanded hover tooltip");
-                                    ImGui.EndTooltip();
-                                }
-
                                 ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
@@ -243,18 +229,10 @@ public class ConfigWindow : Window
                             }
                         }
 
-
-                        if (Service.Configuration.EnableAccessibilityCombos)
+                        if (Service.Configuration.EnableExpandedCombos && Service.Configuration.EnableAccessibilityCombos)
                         {
                             if (ImGui.BeginTabItem("Accessibility"))
                             {
-                                if (ImGui.IsItemHovered())
-                                {
-                                    ImGui.BeginTooltip();
-                                    ImGui.TextUnformatted("Accessibility");
-                                    ImGui.EndTooltip();
-                                }
-
                                 ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
@@ -270,17 +248,10 @@ public class ConfigWindow : Window
                             }
                         }
 
-                        if (Service.Configuration.EnableSecretCombos)
+                        if (Service.Configuration.EnableExpandedCombos && Service.Configuration.EnableAccessibilityCombos && Service.Configuration.EnableSecretCombos)
                         {
                             if (ImGui.BeginTabItem("Secret"))
                             {
-                                if (ImGui.IsItemHovered())
-                                {
-                                    ImGui.BeginTooltip();
-                                    ImGui.TextUnformatted("Secret hover tooltip");
-                                    ImGui.EndTooltip();
-                                }
-
                                 ImGui.BeginChild("scrolling", new Vector2(0, -1), true);
 
                                 int i = 1;
@@ -404,96 +375,81 @@ public class ConfigWindow : Window
 
                 ImGui.Separator();
 
-                bool defaultExpanded = Service.Configuration.DefaultTab == Tabs.Expanded ? true : false;
-                if (ImGui.Checkbox("Always open the Expanded tab.", ref defaultExpanded))
-                {
-                    Service.Configuration.DefaultTab = Tabs.Expanded;
-                    Service.Configuration.Save();
-                }
-
-                if (ImGui.IsItemHovered())
-                {
-                    ImGui.BeginTooltip();
-                    ImGui.TextUnformatted("Optimized, potentially unintuitive combos.");
-                    ImGui.EndTooltip();
-                }
-
                 var showExpanded = Service.Configuration.EnableExpandedCombos;
-                if (ImGui.Checkbox("Enables the expanded features for XIVCombo.", ref showExpanded))
+                if (ImGui.Checkbox("Enable the expanded features for XIVCombo.", ref showExpanded))
                 {
                     Service.Configuration.EnableExpandedCombos = showExpanded;
-                    Service.Configuration.Save();
-                }
-
-                if (ImGui.IsItemHovered())
-                {
-                    ImGui.BeginTooltip();
-                    ImGui.TextUnformatted("Optimized, potentially unintuitive combos.");
-                    ImGui.EndTooltip();
-                }
-
-                ImGui.EndChild();
-                ImGui.PopStyleVar();
-
-                ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), false, window_flags);
-
-                ImGui.PushFont(UiBuilder.MonoFont);
-                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
-                ImGui.Text($"Accessibility Combos");
-                ImGui.PopStyleColor();
-                ImGui.PopFont();
-                ImGui.Separator();
-
-                ImGui.BulletText("Those combos are non-optimal routes which simplify a rotation overall.");
-                ImGui.BulletText("They are intuitive, and aim considerably reduce button bloating.");
-                ImGui.BulletText("They are meant to be used to give accessibility options to everyone.");
-                ImGui.BulletText("However, they definitely won't make you a better player.");
-
-                ImGui.Separator();
-
-                var showAccessibility = Service.Configuration.EnableAccessibilityCombos;
-                if (ImGui.Checkbox("Enable accessibility combos.", ref showAccessibility))
-                {
-                    Service.Configuration.EnableAccessibilityCombos = showAccessibility;
+                    if (!showExpanded)
+                    {
+                        Service.Configuration.EnableAccessibilityCombos = false;
+                        Service.Configuration.EnableSecretCombos = false;
+                    }
                     Service.Configuration.Save();
                 }
 
                 ImGui.EndChild();
                 ImGui.PopStyleVar();
 
-
-                if (Service.Configuration.UnlockSecretCombos)
+                if (Service.Configuration.EnableExpandedCombos)
                 {
-                    ImGui.SameLine();
                     ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                    ImGui.BeginChild("ChildBR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 300f), true, window_flags);
+                    ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), false, window_flags);
 
                     ImGui.PushFont(UiBuilder.MonoFont);
                     ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
-                    ImGui.Text($"Secret Combos");
+                    ImGui.Text($"Accessibility Combos");
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
                     ImGui.Separator();
 
-                    ImGui.BulletText("Those combos are optimization routes which give little benefits.");
-                    ImGui.BulletText("They often have to unintuitive behavior or specific rotation routes.");
-                    ImGui.BulletText("They generally require a heavy knowledge of your job.");
-                    ImGui.BulletText("They are niche options, and probably pointless for most players.");
+                    ImGui.BulletText("Those combos are non-optimal routes which simplify a rotation overall.");
+                    ImGui.BulletText("They are intuitive, and aim considerably reduce button bloating.");
+                    ImGui.BulletText("They are meant to be used to give accessibility options to everyone.");
+                    ImGui.BulletText("However, they definitely won't make you a better player.");
+
                     ImGui.Separator();
-                    var showSecrets = Service.Configuration.EnableSecretCombos;
-                    if (ImGui.Checkbox("Enable secret forbidden knowledge.", ref showSecrets))
+
+                    var showAccessibility = Service.Configuration.EnableAccessibilityCombos;
+                    if (ImGui.Checkbox("Enable accessibility combos.", ref showAccessibility))
                     {
-                        Service.Configuration.EnableSecretCombos = showSecrets;
+                        Service.Configuration.EnableAccessibilityCombos = showAccessibility;
+                        if(!showAccessibility) Service.Configuration.EnableSecretCombos = false;
                         Service.Configuration.Save();
                     }
 
                     ImGui.EndChild();
                     ImGui.PopStyleVar();
+
+
+                    if (Service.Configuration.UnlockSecretCombos && Service.Configuration.EnableAccessibilityCombos)
+                    {
+                        ImGui.SameLine();
+                        ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
+                        ImGui.BeginChild("ChildBR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 300f), true, window_flags);
+
+                        ImGui.PushFont(UiBuilder.MonoFont);
+                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                        ImGui.Text($"Secret Combos");
+                        ImGui.PopStyleColor();
+                        ImGui.PopFont();
+                        ImGui.Separator();
+
+                        ImGui.BulletText("Those combos are optimization routes which give little benefits.");
+                        ImGui.BulletText("They often have to unintuitive behavior or specific rotation routes.");
+                        ImGui.BulletText("They generally require a heavy knowledge of your job.");
+                        ImGui.BulletText("They are niche options, and probably pointless for most players.");
+                        ImGui.Separator();
+                        var showSecrets = Service.Configuration.EnableSecretCombos;
+                        if (ImGui.Checkbox("Enable secret forbidden knowledge.\nThis option requires the accessibility combos to be enabled.", ref showSecrets))
+                        {
+                            Service.Configuration.EnableSecretCombos = showSecrets;
+                            Service.Configuration.Save();
+                        }
+
+                        ImGui.EndChild();
+                        ImGui.PopStyleVar();
+                    }
                 }
-
-
-                
 
                 ImGui.EndTabItem();
             }
@@ -616,6 +572,7 @@ public class ConfigWindow : Window
                 ImGui.BulletText("daemitus for creating XIVCombo Expanded");
                 ImGui.BulletText("Grammernatzi for supporting the project");
                 ImGui.BulletText("kaedys for considerably contributing to the repository");
+                ImGui.BulletText("vitharr137 for some research work and collaboration");
                 ImGui.Spacing();
                 ImGui.Text("Additional thanks to all those contributors");
                 ImGui.BulletText("aldros-ffxi");
@@ -638,19 +595,23 @@ public class ConfigWindow : Window
             #endregion
         }
 
+        ImGui.EndTabBar();
+
         ImGui.SameLine();
-        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - 100f - ImGui.GetScrollX()
+        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetColumnWidth() - 80f - ImGui.GetScrollX()
                                - 2 * ImGui.GetStyle().ItemSpacing.X);
 
         if (!Service.Configuration.HideKofi)
         {
+            ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.DalamudRed);
+
             if (ImGui.Button("My Ko-Fi link ♥"))
             {
                 Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/khayle", UseShellExecute = true });
             }
-        }
 
-        ImGui.EndTabBar();
+            ImGui.PopStyleColor();
+        }
     }
 
     private void DrawSection(Tabs tab, CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
