@@ -679,8 +679,15 @@ public enum CustomComboPreset
     // ====================================================================================
     #region DRAGOON
 
-    [IconsCombo([DRG.RaidenThrust, UTL.ArrowLeft, DRG.Drakesbane, UTL.ArrowLeft, DRG.FangAndClaw, UTL.ArrowLeft, DRG.FullThrust, UTL.ArrowLeft, DRG.VorpalThrust, UTL.ArrowLeft, DRG.TrueThrust])]
+
+     [IconsCombo([DRG.RaidenThrust, DRG.LanceBarrage, DRG.SpiralBlow, DRG.HeavensThrust, DRG.ChaoticSpring, DRG.FangAndClaw, DRG.WheelingThrust, DRG.Drakesbane, UTL.Cycle])]
     [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [ConflictingCombos(DragoonFullThrustCombo, DragoonChaosThrustCombo)]
+    [CustomComboInfo("All-In-One Combo", "Replace Full Thrust and Chaos Thrust with the entire 10-part combo chain, auto-selecting the Chaos Thrust combo as needed to refresh Power Surge or the bleed\n\nNOTE: This can cause you to miss positionals.", DRG.JobID)]
+    DragoonAllInOneCombo = 2216,
+
+    [ConflictingCombos(DragoonAllInOneCombo)]
     [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain.", DRG.JobID)]
     DragoonFullThrustCombo = 2204,
 
@@ -694,11 +701,12 @@ public enum CustomComboPreset
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [ParentCombo(DragoonFullThrustCombo)]
-    [CustomComboInfo("Double Chaos Thrust Option", "Replicates the Full Thrust combo while not in the Chaotic Thrust combo.", DRG.JobID)]
-    DragoonDoubleFullThrustComboOption = 2215,
+    [CustomComboInfo("Double Chaos Thrust Option", "After using Disembowel, replicates the remainder of the Chaos Thrust combo on Full Thrust, starting at Chaos Thrust.  Combined with the Double Full Thrust Option, this allows you to select which combo to use at the 2nd combo step, but the remainder of both combos will be on both buttons", DRG.JobID)]
+    DragoonDoubleChaosThrustComboOption = 2215,
 
     [IconsCombo([DRG.RaidenThrust, UTL.ArrowLeft, DRG.Drakesbane, UTL.ArrowLeft, DRG.WheelingThrust, UTL.ArrowLeft, DRG.ChaosThrust, UTL.ArrowLeft, DRG.Disembowel, UTL.ArrowLeft, DRG.TrueThrust])]
     [SectionCombo("Single Target")]
+    [ConflictingCombos(DragoonAllInOneCombo)]
     [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain.", DRG.JobID)]
     DragoonChaosThrustCombo = 2203,
 
@@ -712,8 +720,14 @@ public enum CustomComboPreset
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [ParentCombo(DragoonChaosThrustCombo)]
-    [CustomComboInfo("Double Full Thrust Option", "Replicates the Chaotic Thrust combo while not in the Full Thrust combo.", DRG.JobID)]
-    DragoonDoubleChaosComboOption = 2214,
+    [CustomComboInfo("Double Full Thrust Option", "After using Vorpal Thrust, replicates the remainder of the Full Thrust combo on Chaos Thrust, starting at Full Thrust.  Combined with the Double Choas Thrust Option, this allows you to select which combo to use at the 2nd combo step, but the remainder of both combos will be on both buttons", DRG.JobID)]
+    DragoonDoubleFullThrustComboOption = 2214,
+
+    [IconsCombo([DRG.HeavensThrust, DRG.ChaoticSpring, UTL.ArrowLeft, DRG.WyrmwindThrust, UTL.Idea])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Full Chaos Wyrmwind Feature", "Replace Full Thrust and Chaos Thrust with Wyrmwind Thrust when you have two Firstminds' Focus.", DRG.JobID)]
+    DragoonFullChaosWyrmwindFeature = 2217,
 
     [IconsCombo([DRG.CoerthanTorment, UTL.ArrowLeft, DRG.SonicThrust, UTL.ArrowLeft, DRG.DoomSpike])]
     [SectionCombo("Area of Effect")]
@@ -1804,6 +1818,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Taurochole into Druochole Feature", "Replace Taurochole with Druochole when on cooldown", SGE.JobID)]
     SageTaurocholeDruocholeFeature = 4001,
 
+    [ParentCombo(SageToxikonPhlegma)]
+    [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
+    SagePsycheToxikonFeature = 4013,
+
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    SageDoTFeature = 4012,
     #endregion
     // ====================================================================================
     #region SAMURAI
