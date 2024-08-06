@@ -9,6 +9,11 @@ internal static class WHM
 
     public const uint
         Stone = 119,
+        Stone2 = 127,
+        Stone3 = 3568,
+        Glare = 16533,
+        Glare3 = 25859,
+        Glare4 = 37009,
         Aero = 121,
         Cure = 120,
         Medica = 124,
@@ -27,10 +32,8 @@ internal static class WHM
         AfflatusMisery = 16535,
         Temperance = 16536,
         Holy3 = 25860,
-        Glare3 = 25859,
         Aquaveil = 25861,
         LiturgyOfTheBell = 25862,
-        Glare4 = 37009,
         Medica3 = 37010;
 
     public static class Buffs
@@ -188,7 +191,8 @@ internal class WhiteMageGlare4Feature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == WHM.Glare3)
+        if (actionID == WHM.Stone || actionID == WHM.Stone2 || actionID == WHM.Stone3 ||
+            actionID == WHM.Glare || actionID == WHM.Glare3)
         {
             if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature) && TargetIsEnemy())
             {

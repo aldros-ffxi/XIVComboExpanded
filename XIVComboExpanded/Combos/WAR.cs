@@ -84,7 +84,7 @@ internal static class WAR
 
 internal class WarriorStormsPathCombo : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarriorStormsPathCombo;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
@@ -98,41 +98,43 @@ internal class WarriorStormsPathCombo : CustomCombo
                     return OriginalHook(WAR.FellCleave);
             }
 
-            if (comboTime > 0)
+            if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
             {
-                if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsPath)
+                if (IsEnabled(CustomComboPreset.WarriorSTGaugeOvercapProtection))
                 {
-                    if (IsEnabled(CustomComboPreset.WarriorStormsPathOvercapFeature))
-                    {
-                        if (level >= WAR.Levels.InnerBeast && gauge.BeastGauge > 80)
-                            // Fell Cleave
-                            return OriginalHook(WAR.InnerBeast);
-                    }
-
-#if DEBUG
-                    if (level >= WAR.Levels.StormsEye)
-                    {
-                        var surgingTempest = FindEffect(WAR.Buffs.SurgingTempest);
-                        if (surgingTempest is null)
-                            return WAR.StormsEye;
-
-                        // Medicated + Opener
-                        if (HasEffect(ADV.Buffs.Medicated) && surgingTempest.RemainingTime > 10)
-                            return WAR.StormsPath;
-
-                        var innerReleleaseCd = GetCooldown(WAR.InnerRelease).CooldownRemaining;
-                        var surgingTempestFromIR = Math.Max(0, 10 - innerReleleaseCd);
-                        if (surgingTempest.RemainingTime + 30 + surgingTempestFromIR < 60)
-                            return WAR.StormsEye;
-                    }
-#endif
-
-                    return WAR.StormsPath;
+                    if (level >= WAR.Levels.InnerBeast && gauge.BeastGauge > 80)
+                        // Fell Cleave
+                        return OriginalHook(WAR.InnerBeast);
                 }
 
+                if (level >= WAR.Levels.StormsEye)
+                {
+                    var surgingTempest = FindEffect(WAR.Buffs.SurgingTempest);
+                    if (surgingTempest is null)
+                        return WAR.StormsEye;
+
+                    if (!IsEnabled(CustomComboPreset.WarriorOptimizeSurgingTempestFeature) &&
+                        surgingTempest.RemainingTime < 30)
+                        return WAR.StormsEye;
+
+                    // Medicated + Opener
+                    if (HasEffect(ADV.Buffs.Medicated) && surgingTempest.RemainingTime > 10)
+                        return WAR.StormsPath;
+
+                    var innerReleaseCD = GetCooldown(WAR.InnerRelease).CooldownRemaining;
+                    var surgingTempestFromIR = Math.Max(0, 10 - innerReleaseCD);
+                    if (surgingTempest.RemainingTime + 30 + surgingTempestFromIR < 60)
+                        return WAR.StormsEye;
+                }
+
+                return WAR.StormsPath;
+            }
+
+            if (IsEnabled(CustomComboPreset.WarriorStormsPathCombo))
+            {
                 if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
                 {
-                    if (IsEnabled(CustomComboPreset.WarriorStormsPathOvercapFeature))
+                    if (IsEnabled(CustomComboPreset.WarriorSTGaugeOvercapProtection))
                     {
                         if (level >= WAR.Levels.InnerBeast && gauge.BeastGauge > 90)
                             // Fell Cleave
@@ -141,9 +143,9 @@ internal class WarriorStormsPathCombo : CustomCombo
 
                     return WAR.Maim;
                 }
-            }
 
-            return WAR.HeavySwing;
+                return WAR.HeavySwing;
+            }
         }
 
         return actionID;
@@ -152,22 +154,42 @@ internal class WarriorStormsPathCombo : CustomCombo
 
 internal class WarriorStormsEyeCombo : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarriorStormsEyeCombo;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
         if (actionID == WAR.StormsEye)
         {
-            if (comboTime > 0)
-            {
-                if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsEye)
-                    return WAR.StormsEye;
+            var gauge = GetJobGauge<WARGauge>();
 
-                if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
-                    return WAR.Maim;
+            if (lastComboMove == WAR.Maim && level >= WAR.Levels.StormsEye)
+            {
+                if (IsEnabled(CustomComboPreset.WarriorSTGaugeOvercapProtection))
+                {
+                    if (level >= WAR.Levels.InnerBeast && gauge.BeastGauge > 90)
+                        // Fell Cleave
+                        return OriginalHook(WAR.InnerBeast);
+                }
+
+                return WAR.StormsEye;
             }
 
-            return WAR.HeavySwing;
+            if (IsEnabled(CustomComboPreset.WarriorStormsEyeCombo))
+            {
+                if (lastComboMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
+                {
+                    if (IsEnabled(CustomComboPreset.WarriorSTGaugeOvercapProtection))
+                    {
+                        if (level >= WAR.Levels.InnerBeast && gauge.BeastGauge > 90)
+                            // Fell Cleave
+                            return OriginalHook(WAR.InnerBeast);
+                    }
+
+                    return WAR.Maim;
+                }
+
+                return WAR.HeavySwing;
+            }
         }
 
         return actionID;
@@ -176,7 +198,7 @@ internal class WarriorStormsEyeCombo : CustomCombo
 
 internal class WarriorMythrilTempestCombo : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarriorMythrilTempestCombo;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WarAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
@@ -190,21 +212,19 @@ internal class WarriorMythrilTempestCombo : CustomCombo
                     return OriginalHook(WAR.Decimate);
             }
 
-            if (comboTime > 0)
+            if (lastComboMove == WAR.Overpower && level >= WAR.Levels.MythrilTempest)
             {
-                if (lastComboMove == WAR.Overpower && level >= WAR.Levels.MythrilTempest)
+                if (IsEnabled(CustomComboPreset.WarriorAoEGaugeOvercapProtection))
                 {
-                    if (IsEnabled(CustomComboPreset.WarriorMythrilTempestOvercapFeature))
-                    {
-                        if (level >= WAR.Levels.MythrilTempestTrait && gauge.BeastGauge > 80)
-                            return OriginalHook(WAR.Decimate);
-                    }
-
-                    return WAR.MythrilTempest;
+                    if (level >= WAR.Levels.MythrilTempestTrait && gauge.BeastGauge > 80)
+                        return OriginalHook(WAR.Decimate);
                 }
+
+                return WAR.MythrilTempest;
             }
 
-            return WAR.Overpower;
+            if (IsEnabled(CustomComboPreset.WarriorMythrilTempestCombo))
+                return WAR.Overpower;
         }
 
         return actionID;
@@ -217,10 +237,14 @@ internal class WarriorFellCleaveDecimate : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == WAR.InnerBeast || actionID == WAR.FellCleave || actionID == WAR.SteelCyclone || actionID == WAR.Decimate)
+        if (actionID == WAR.InnerBeast || actionID == WAR.FellCleave ||
+            actionID == WAR.SteelCyclone || actionID == WAR.Decimate)
         {
             if (IsEnabled(CustomComboPreset.WarriorPrimalBeastFeature))
             {
+                if (level >= WAR.Levels.PrimalRuination && HasEffect(WAR.Buffs.PrimalRuinationReady))
+                    return WAR.PrimalRuination;
+
                 if (level >= WAR.Levels.PrimalRend && HasEffect(WAR.Buffs.PrimalRendReady))
                     return WAR.PrimalRend;
             }
@@ -268,10 +292,7 @@ internal class WarriorNascentFlashFeature : CustomCombo
     {
         if (actionID == WAR.NascentFlash)
         {
-            if (level >= WAR.Levels.NascentFlash)
-                return WAR.NascentFlash;
-
-            if (level >= WAR.Levels.RawIntuition)
+            if (level < WAR.Levels.NascentFlash && level >= WAR.Levels.RawIntuition)
                 return WAR.RawIntuition;
         }
 

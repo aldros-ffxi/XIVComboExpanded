@@ -113,7 +113,11 @@ internal class BardHeavyShot : CustomCombo
                     var stormbite = FindTargetEffect(BRD.Debuffs.Stormbite);
                     var caustic = FindTargetEffect(BRD.Debuffs.CausticBite);
 
-                    if (venomous?.RemainingTime < 2.8 || windbite?.RemainingTime < 2.8 || stormbite?.RemainingTime < 2.8 || caustic?.RemainingTime < 2.8)
+                    // Using 5 seconds instead of 2.8s like the other DoT auto-refresh features, because Bard loses a
+                    // lot more from letting their DoTs drop, since they have to use two GCDs instead of one to
+                    // re-apply them.
+                    if (venomous?.RemainingTime < 5 || windbite?.RemainingTime < 5 ||
+                    stormbite?.RemainingTime < 5 || caustic?.RemainingTime < 5)
                         return BRD.IronJaws;
                 }
             }
@@ -234,7 +238,7 @@ internal class BardQuickNock : CustomCombo
                             return BRD.Barrage;
                     }
 
-                    if (HasEffect(BRD.Buffs.HawksEye))
+                    if (HasEffect(BRD.Buffs.HawksEye) || HasEffect(BRD.Buffs.Barrage))
                         return OriginalHook(BRD.WideVolley);
                 }
             }
@@ -450,13 +454,10 @@ internal class BardMagesBallad : CustomCombo
 
             // Show the next expected song while on cooldown
             if (level >= BRD.Levels.WanderersMinuet)
-                return BRD.WanderersMinuet;
-
-            if (level >= BRD.Levels.MagesBallad)
-                return BRD.MagesBallad;
+                return CalcBestAction(BRD.WanderersMinuet, BRD.WanderersMinuet, BRD.MagesBallad, BRD.ArmysPaeon);
 
             if (level >= BRD.Levels.ArmysPaeon)
-                return BRD.ArmysPaeon;
+                return CalcBestAction(BRD.MagesBallad, BRD.MagesBallad, BRD.ArmysPaeon);
         }
 
         return actionID;

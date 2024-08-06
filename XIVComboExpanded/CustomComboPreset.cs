@@ -329,11 +329,18 @@ public enum CustomComboPreset
     [CustomComboInfo("Umbral Soul Feature", "Replace your ice spells with Umbral Soul, while in Umbral Ice and having no target.", BLM.JobID)]
     BlackSpellsUmbralSoulFeature = 2517,
 
-    [IconsCombo([BLM.LeyLines, UTL.ArrowLeft, BLM.BetweenTheLines, UTL.Blank, BLM.Retrace, UTL.Cross])]
+    [IconsCombo([BLM.LeyLines, UTL.ArrowLeft, BLM.BetweenTheLines])]
     [SectionCombo("Abilities Features")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("(Between the [Retraced]) Ley Lines", "Replace Ley Lines with BTL when Ley Lines is active and Retrace is on Cooldown.", BLM.JobID)]
+    [CustomComboInfo("(Between the) Ley Lines", "Replace Ley Lines with Between the Ley Lines when available.", BLM.JobID)]
     BlackLeyLinesFeature = 2503,
+
+    [IconsCombo([BLM.Retrace, UTL.Cross])]
+    [SectionCombo("Abilities Features")]
+    [ParentCombo(BlackLeyLinesFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("(Between the [Retraced]) Ley Lines", "Only replace Ley Lines with Between the Ley Lines when Retrace is already on cooldown.", BLM.JobID)]
+    BlackLeyLinesRetraceFeature = 2526,
 
     #endregion
     // ====================================================================================
@@ -482,41 +489,53 @@ public enum CustomComboPreset
     [CustomComboInfo("AoE Multibutton", "Replace Windmill with its procs and combos as they activate.", DNC.JobID)]
     DancerAoeMultibutton = 3805,
 
-    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.SaberDance, UTL.Blank, DNC.SaberDance, UTL.Checkmark])]
-    [SectionCombo("Saber Dance features")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Single Target Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
-    DancerSingleTargetSaberDanceTech = 3818,
-
-    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.SaberDance, UTL.Blank, DNC.SaberDance, UTL.Danger])]
+    [IconsCombo([DNC.Cascade, DNC.Windmill, UTL.ArrowLeft, DNC.SaberDance, UTL.Idea])]
     [SectionCombo("Saber Dance features")]
     [SecretCustomCombo]
-    [CustomComboInfo("Single Target Saber Dance", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
-    DancerSingleTargetSaberDance = 3817,
+    [CustomComboInfo("Automatic Saber Dance", "Replace all single-target and AoE combo actions with Saber Dance when at >= 50 Esprit.", DNC.JobID)]
+    DancerAutoSaberDance = 3817,
 
-    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.Buffs.DanceOfTheDawnReady, UTL.Checkmark])]
-    [SectionCombo("Saber Dance features")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Single Target Dance of the Dawn", "Replace Cascade, Reverse Cascade, Fountain, and Fountainfall with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
-    DancerSingleTargetDanceOfTheDawn = 3819,
-
-    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.SaberDance, UTL.Blank, DNC.SaberDance, UTL.Danger])]
-    [SectionCombo("Saber Dance features")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("AoE Saber Dance", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Saber Dance when at >= 85 Esprit.", DNC.JobID)]
-    DancerAoeSaberDance = 3820,
-
-    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.SaberDance, UTL.Blank, DNC.SaberDance, UTL.Checkmark])]
+    [IconsCombo([DNC.Cascade, UTL.ArrowLeft, DNC.SaberDance, UTL.Idea, UTL.Danger])]
+    [ParentCombo(DancerAutoSaberDance)]
     [SectionCombo("Saber Dance features")]
     [SecretCustomCombo]
-    [CustomComboInfo("AoE Saber Dance Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
-    DancerAoeSaberDanceTech = 3821,
+    [CustomComboInfo("Single-Target 85 Esprit", "Only replace single-target combo actions with Saber Dance when at >= 85 Esprit instead of 50.\n\nNOTE: This is intended to permit greater pooling of Esprit for burst windows, while still minimizing the risk of overcapping.", DNC.JobID)]
+    DancerAutoSaberDanceST85Esprit = 3823,
 
-    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.DanceOfTheDawn, UTL.Blank, DNC.Buffs.DanceOfTheDawnReady, UTL.Checkmark])]
+    [IconsCombo([DNC.Cascade, UTL.ArrowLeft, DNC.SaberDance, UTL.Plus, DNC.TechnicalStep])]
+    [ParentCombo(DancerAutoSaberDanceST85Esprit)]
     [SectionCombo("Saber Dance features")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("AoE Dance of the Dawn", "Replace Windmill, Rising Windmill, Bladeshower, and Bloodshower with Dance of the Dawn when available and >= 50 Esprit.", DNC.JobID)]
-    DancerAoeDanceOfTheDawn = 3822,
+    [SecretCustomCombo]
+    [CustomComboInfo("Single-Target 50 Esprit in Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
+    DancerAutoSaberDanceSTTech = 3818,
+
+    [IconsCombo([DNC.Cascade, UTL.ArrowLeft, DNC.DanceOfTheDawn])]
+    [ParentCombo(DancerAutoSaberDanceST85Esprit)]
+    [SectionCombo("Saber Dance features")]
+    [SecretCustomCombo]
+    [CustomComboInfo("Single Target Dance of the Dawn", "Use Dance of the Dawn at >= 50 Esprit when available.", DNC.JobID)]
+    DancerAutoSaberDanceSTDawn = 3819,
+
+    [IconsCombo([DNC.Windmill, UTL.ArrowLeft, DNC.SaberDance, UTL.Idea, UTL.Danger])]
+    [ParentCombo(DancerAutoSaberDance)]
+    [SectionCombo("Saber Dance features")]
+    [SecretCustomCombo]
+    [CustomComboInfo("AoE 85 Esprit", "Only replace AoE combo actions with Saber Dance when at >= 85 Esprit instead of 50.\n\nNOTE: This is intended to permit greater pooling of Esprit for burst windows, while still minimizing the risk of overcapping.", DNC.JobID)]
+    DancerAutoSaberDanceAoE85Esprit = 3820,
+
+    [IconsCombo([DNC.Windmill, UTL.ArrowLeft, DNC.SaberDance, UTL.Plus, DNC.TechnicalStep])]
+    [ParentCombo(DancerAutoSaberDanceAoE85Esprit)]
+    [SectionCombo("Saber Dance features")]
+    [SecretCustomCombo]
+    [CustomComboInfo("AoE 50 Esprit in Tech Step", "Use Saber Dance at >= 50 Esprit during Technical Step.", DNC.JobID)]
+    DancerAutoSaberDanceAoETech = 3821,
+
+    [IconsCombo([DNC.Windmill, UTL.ArrowLeft, DNC.DanceOfTheDawn])]
+    [ParentCombo(DancerAutoSaberDanceAoE85Esprit)]
+    [SectionCombo("Saber Dance features")]
+    [SecretCustomCombo]
+    [CustomComboInfo("AoE Dance of the Dawn", "Use Dance of the Dawn at >= 50 Esprit when available.", DNC.JobID)]
+    DancerAutoSaberDanceAoEDawn = 3822,
 
     [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
@@ -525,12 +544,18 @@ public enum CustomComboPreset
 
     [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.Buffs.FourfoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
-    [ParentCombo(DancerFanDance3Feature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Fan Dance 4 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 4 when available.", DNC.JobID)]
+    [CustomComboInfo("Fan Dance 4 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 4 when available.\n\nNOTE: If enabled with Fance Dance 3 Feature, Fan Dance 3 has priority over Fan Dance 4.", DNC.JobID)]
     DancerFanDance4Feature = 3809,
 
-    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
+    [IconsCombo([DNC.FanDance4, UTL.Forbidden, UTL.Danger])]
+    [SectionCombo("Fan features")]
+    [ParentCombo(DancerFanDance4Feature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Except at max feathers", "Don't replace Fan Dance and Fan Dance 2 with Fan Dance 4 if at maximum feathers.", DNC.JobID)]
+    DancerFanDance4MaxFeathers = 3824,
+
+    [IconsCombo([DNC.Flourish, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.FanDance3, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Flourishing Fan Dance 3", "Replace Flourish with Fan Dance 3 when available.", DNC.JobID)]
@@ -568,7 +593,7 @@ public enum CustomComboPreset
     [SectionCombo("Dances features")]
     [SecretCustomCombo]
     [ParentCombo(DancerLastDanceFeature)]
-    [CustomComboInfo("Finishing Move Priority", "Priorize Finishing Move over Last Dance when replacing Standard Step.", DNC.JobID)]
+    [CustomComboInfo("Finishing Move Priority", "Priorize Finishing Move over Last Dance when replacing Standard Step.\n\nNOTE: This is strongly discouraged, as Finishing Move will overwrite and waste the Last Dance buff.", DNC.JobID)]
     DancerFinishingMovePriorityFeature = 3814,
 
     [IconsCombo([DNC.StandardStep, DNC.TechnicalStep, UTL.ArrowLeft, DNC.Emboite, UTL.Cycle, DNC.Entrechat, UTL.Cycle, DNC.Jete, UTL.Cycle, DNC.Pirouette])]
@@ -792,7 +817,7 @@ public enum CustomComboPreset
     [SectionCombo("No Mercy")]
     [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.BowShock, UTL.Blank, GNB.SonicBreak, UTL.Clock])]
     [SecretCustomCombo]
-    [CustomComboInfo("No Mercy Bow Shock", "Replace No Mercy with Bow Shock while No Mercy is active and Sonic Break has been used up.", GNB.JobID)]
+    [CustomComboInfo("No Mercy Bow Shock", "Replace No Mercy with Bow Shock while No Mercy is active and Sonic Break has been used or the GCD is active.", GNB.JobID)]
     GunbreakerNoMercyFeature = 3708,
 
     [SectionCombo("Buffs")]
@@ -804,7 +829,7 @@ public enum CustomComboPreset
     [SectionCombo("Buffs")]
     [IconsCombo([GNB.BowShock, UTL.Cycle, GNB.SonicBreak])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Sonic Shock Feature", "Replace Bow Shock and Sonic Break with one or the other depending on which is on cooldown.", GNB.JobID)]
+    [CustomComboInfo("Sonic Shock Feature", "Replace both Sonic Break and Bow Shock with the former when it is available and you are not on GCD, and the latter when it is not on CD and either Sonic Break is not available or you are on GCD.", GNB.JobID)]
     GunbreakerBowShockSonicBreakFeature = 3704,
 
     [SecretCustomCombo]
@@ -1182,7 +1207,7 @@ public enum CustomComboPreset
     [ParentCombo(PaladinComboConfiteorFeature)]
     [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  It will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Supplication, Sepulchre, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
     PaladinFoFOptimizeFeature = 1922,
-    
+
     [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
     [SectionCombo("Cooldowns")]
     [AccessibilityCustomCombo]
@@ -1824,30 +1849,14 @@ public enum CustomComboPreset
 
     [IconsCombo([SAM.Iaijutsu, UTL.ArrowLeft, SAM.TsubameGaeshi])]
     [SectionCombo("Iaijutsu")]
-    [ConflictingCombos(SamuraiTsubameGaeshiIaijutsuFeature)]
-    [CustomComboInfo("Iaijutsu to Tsubame-gaeshi", "Replace Iaijutsu with Tsubame-gaeshi when Sen is not empty.", SAM.JobID)]
+    [CustomComboInfo("Iaijutsu to Tsubame-gaeshi", "Replace Iaijutsu with Tsubame-gaeshi when it is usable", SAM.JobID)]
     SamuraiIaijutsuTsubameGaeshiFeature = 3409,
 
     [IconsCombo([SAM.Iaijutsu, UTL.ArrowLeft, SAM.Shoha, UTL.Blank, SAM.Shoha, UTL.Checkmark])]
     [SectionCombo("Iaijutsu")]
-    [ConflictingCombos(SamuraiTsubameGaeshiShohaFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Iaijutsu to Shoha", "Replace Iaijutsu with Shoha when meditation is 3.", SAM.JobID)]
     SamuraiIaijutsuShohaFeature = 3410,
-
-    [IconsCombo([SAM.TsubameGaeshi, UTL.ArrowLeft, SAM.Iaijutsu])]
-    [SectionCombo("Iaijutsu")]
-    [ConflictingCombos(SamuraiIaijutsuTsubameGaeshiFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Tsubame-gaeshi to Iaijutsu", "Replace Tsubame-gaeshi with Iaijutsu when Sen is empty.", SAM.JobID)]
-    SamuraiTsubameGaeshiIaijutsuFeature = 3407,
-
-    [IconsCombo([SAM.TsubameGaeshi, UTL.ArrowLeft, SAM.Shoha, UTL.Blank, SAM.Shoha, UTL.Checkmark])]
-    [SectionCombo("Iaijutsu")]
-    [ConflictingCombos(SamuraiIaijutsuShohaFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Tsubame-gaeshi to Shoha", "Replace Tsubame-gaeshi with Shoha when meditation is 3.", SAM.JobID)]
-    SamuraiTsubameGaeshiShohaFeature = 3408,
 
     [IconsCombo([SAM.HissatsuShinten, UTL.ArrowLeft, SAM.Zanshin, UTL.Blank, SAM.Zanshin, UTL.Checkmark])]
     [SectionCombo("Shinten")]
@@ -2196,27 +2205,38 @@ public enum CustomComboPreset
 
     [SectionCombo("Single Target")]
     [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.Maim, UTL.ArrowLeft, WAR.HeavySwing])]
-    [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain.", WAR.JobID)]
+    [CustomComboInfo("Storm's Path Combo", "Replace Storm's Path with its combo chain.", WAR.JobID)]
     WarriorStormsPathCombo = 2101,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([WAR.FellCleave, UTL.ArrowLeft, WAR.StormsPath, UTL.Blank, UTL.Blank, UTL.Danger])]
-    [ParentCombo(WarriorStormsPathCombo)]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.FellCleave, UTL.Plus, WAR.InnerRelease])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Storms Path Overcap Feature", "Replace Storms Path with Fell Cleave when the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
-    WarriorStormsPathOvercapFeature = 2104,
-
-    [SectionCombo("Single Target")]
-    [IconsCombo([WAR.FellCleave, UTL.ArrowLeft, WAR.StormsPath, UTL.Blank, WAR.InnerRelease, UTL.Checkmark])]
-    [ParentCombo(WarriorStormsPathCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Storms Path Inner Release Feature", "Replace Storms Path with Fell Cleave when Inner Release is active.", WAR.JobID)]
+    [CustomComboInfo("Storm's Path Inner Release Feature", "Replace Storm's Path with Fell Cleave when Inner Release is active.", WAR.JobID)]
     WarriorStormsPathInnerReleaseFeature = 2110,
 
     [SectionCombo("Single Target")]
     [IconsCombo([WAR.StormsEye, UTL.ArrowLeft, WAR.Maim, UTL.ArrowLeft, WAR.HeavySwing])]
-    [CustomComboInfo("Storms Eye Combo", "Replace Storms Eye with its combo chain.", WAR.JobID)]
+    [CustomComboInfo("Storm's Eye Combo", "Replace Storms Eye with its combo chain.", WAR.JobID)]
     WarriorStormsEyeCombo = 2102,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.FellCleave, UTL.Danger])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Beast Gauge Overcap Protection (ST)", "Replace Storm's Path and Storm's Eye with Fell Cleave when the next combo action would cause the Beast Gauge to overcap.\n\nNOTE: if Storm's Path Combo or Storm's Eye Combo are not active, this will ONLY check when Storm's Path/Eye is the next combo action.  If they are active, it will also protect against the 10 gauge gain from Maim.", WAR.JobID)]
+    WarriorSTGaugeOvercapProtection = 2104,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Idea])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Automatic Surging Tempest", "Replace Storm's Path with Storm's Eye whenever Surging Tempest is below 30 seconds.", WAR.JobID)]
+    WarriorAutoSurgingTempestFeature = 2113,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Idea, UTL.Plus])]
+    [ParentCombo(WarriorAutoSurgingTempestFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Optimize Surging Tempest", "Optimize refresh of Surging Tempest to avoid overcapping when Inner Release is used, and to maximize potency during potions  This will defer refreshing Surging Tempest if the buff would be at greater than 50 seconds when Inner Release comes off cooldown, and will allow the buff to go as low as 10 seconds remaining while a DPS potion is active, to potentially squeeze in an extra Storm's Path during the potion effect.", WAR.JobID)]
+    WarriorOptimizeSurgingTempestFeature = 2114,
 
     [SectionCombo("Area of Effect")]
     [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.Overpower])]
@@ -2224,45 +2244,43 @@ public enum CustomComboPreset
     WarriorMythrilTempestCombo = 2103,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.MythrilTempest, UTL.Blank, UTL.Blank, UTL.Danger])]
-    [ParentCombo(WarriorMythrilTempestCombo)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Mythril Tempest Overcap Feature", "Replace Mythril Tempest with Decimate the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
-    WarriorMythrilTempestOvercapFeature = 2105,
-
-    [SectionCombo("Area of Effect")]
-    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.MythrilTempest, UTL.Blank, WAR.InnerRelease, UTL.Checkmark])]
-    [ParentCombo(WarriorMythrilTempestCombo)]
+    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.Decimate, UTL.Plus, WAR.InnerRelease])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Mythril Tempest Inner Release Feature", "Replace Mythril Tempest with Decimate when Inner Release is active.", WAR.JobID)]
     WarriorMythrilTempestInnerReleaseFeature = 2111,
 
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.Decimate, UTL.Danger])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Beast Gauge Overcap Protection (AoE)", "Replace Mythril Tempest with Decimate the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
+    WarriorAoEGaugeOvercapProtection = 2105,
+
     [SectionCombo("Inner Warrior")]
-    [IconsCombo([WAR.Infuriate, UTL.ArrowLeft, WAR.InnerBeast, WAR.SteelCyclone, UTL.Blank, UTL.Blank, UTL.Cross])]
-    [ExpandedCustomCombo]
+    [IconsCombo([WAR.InnerBeast, WAR.SteelCyclone, UTL.ArrowLeft, WAR.Infuriate, UTL.Plus])]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("Angry Beast Feature", "Replace Inner Beast/Fell Cleave and Steel Cyclone/Decimate with Infuriate when less then 50 Beast Gauge is available.", WAR.JobID)]
     WarriorInfuriateBeastFeature = 2109,
 
     [SectionCombo("Inner Warrior")]
-    [IconsCombo([WAR.PrimalRend, UTL.ArrowLeft, WAR.FellCleave, WAR.Decimate, UTL.Blank, WAR.PrimalRend, UTL.Checkmark])]
+    [IconsCombo([WAR.FellCleave, WAR.Decimate, UTL.ArrowLeft, WAR.PrimalRend])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Primal Beast Feature", "Replace Fell Cleave and Decimate with Primal Rend when available", WAR.JobID)]
     WarriorPrimalBeastFeature = 2107,
 
     [SectionCombo("Inner Warrior")]
-    [IconsCombo([WAR.PrimalRend, UTL.ArrowLeft, WAR.InnerRelease, UTL.Blank, WAR.PrimalRend, UTL.Checkmark])]
+    [IconsCombo([WAR.InnerRelease, UTL.ArrowLeft, WAR.PrimalRend])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Primal Release Feature", "Replace Inner Release with Primal Rend when available", WAR.JobID)]
     WarriorPrimalReleaseFeature = 2108,
 
     [SectionCombo("Buffs")]
-    [IconsCombo([WAR.Equilibrium, UTL.ArrowLeft, WAR.ThrillOfBattle, UTL.ArrowLeft, WAR.Bloodwhetting])]
+    [IconsCombo([WAR.Bloodwhetting, UTL.ArrowLeft, WAR.ThrillOfBattle, UTL.ArrowLeft, WAR.Equilibrium])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Healthy Balanced Diet Feature", "Replace Bloodwhetting with Thrill of Battle, and then Equilibrium when the preceding is on cooldown.", WAR.JobID)]
     WarriorHealthyBalancedDietFeature = 2112,
 
     [SectionCombo("Level Synchronization")]
-    [IconsCombo([WAR.RawIntuition, UTL.ArrowLeft, WAR.NascentFlash])]
+    [IconsCombo([WAR.NascentFlash, UTL.ArrowLeft, WAR.RawIntuition])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Nascent Flash Level Sync", "Replace Nascent Flash with Raw Intuition when Level Synced.", WAR.JobID)]
     WarriorNascentFlashSyncFeature = 2106,
@@ -2285,18 +2303,18 @@ public enum CustomComboPreset
 
     [SectionCombo("Afflatus Misery")]
     [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
-    [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
+    [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageSolaceMiseryFeature = 2401,
 
     [SectionCombo("Afflatus Misery")]
     [IconsCombo([WHM.AfflatusRapture, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
-    [CustomComboInfo("Rapture into Misery", "Replace Afflatus Rapture with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
+    [CustomComboInfo("Rapture into Misery", "Replace Afflatus Rapture with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageRaptureMiseryFeature = 2402,
 
     [SectionCombo("Afflatus Misery")]
     [IconsCombo([WHM.Holy, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Holy into Misery", "Replace Holy/Holy 3 with Afflatus Misery when ready and you have an enemy target.", WHM.JobID)]
+    [CustomComboInfo("Holy into Misery", "Replace Holy/Holy 3 with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageHolyMiseryFeature = 2405,
 
     [SectionCombo("Afflatus Solace")]
