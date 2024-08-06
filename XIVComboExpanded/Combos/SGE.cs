@@ -124,7 +124,7 @@ internal class SageToxikon : CustomCombo
         if (actionID == SGE.Toxikon)
         {
 
-            if (IsEnabled(CustomComboPreset.SageToxikonPhlegmaFeature))
+            if (IsEnabled(CustomComboPreset.SagePsycheToxikonFeature))
             {
                 if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche))
                     return OriginalHook(SGE.Psyche);
