@@ -109,6 +109,12 @@ internal class SageDosis : CustomCombo
                 if (!HasEffect(SGE.Buffs.Kardion))
                     return SGE.Kardia;
             }
+
+            if (IsEnabled(CustomComboPreset.SageDosisPsyche))
+            {
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget())
+                    return OriginalHook(SGE.Psyche);
+            }
         }
 
         return actionID;

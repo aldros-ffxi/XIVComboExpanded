@@ -1093,6 +1093,11 @@ public enum CustomComboPreset
     [ParentCombo(SageToxikonPhlegma)]
     [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
     SagePsycheToxikonFeature = 4013,
+
+    [ParentCombo(SageDoTFeature)]
+    [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
+    SageDosisPsyche = 4014,
+
     #endregion
 
     [SecretCustomCombo]
