@@ -90,7 +90,7 @@ internal class SageDosis : CustomCombo
     {
         if (actionID == SGE.Dosis || actionID == SGE.Dosis2 || actionID == SGE.Dosis3)
         {
-            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy())
+            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy() && InCombat())
             {
                 var eurkasiandosis = FindTargetEffect(SGE.Debuffs.EukrasianDosis);
                 var eurkasiandosis2 = FindTargetEffect(SGE.Debuffs.EukrasianDosis2);
