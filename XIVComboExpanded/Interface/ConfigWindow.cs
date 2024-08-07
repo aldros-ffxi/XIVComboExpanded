@@ -835,11 +835,9 @@ public class ConfigWindow : Window
 
                 if (isStatus)
                 {
-                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
-                    ImGui.SameLine(0, 0);
-                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 4f);
-                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(18f * scale, 24f * scale));
                     ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 4f);
+                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f * scale, 32f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 4f);
                     hoverName = GetStatusName(iconId);
                 }
                 else if (isUTL)
@@ -864,12 +862,6 @@ public class ConfigWindow : Window
                         ImGui.TextUnformatted(hoverName);
                         ImGui.EndTooltip();
                     }
-                }
-
-                if (isStatus)
-                {
-                    ImGui.SameLine(0, 0);
-                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
                 }
 
                 if (isUTL)
