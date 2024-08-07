@@ -92,7 +92,7 @@ internal class SageDosis : CustomCombo
         {
             if (IsEnabled(CustomComboPreset.SageDosisPsyche))
             {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget())
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
                     return OriginalHook(SGE.Psyche);
             }
             
