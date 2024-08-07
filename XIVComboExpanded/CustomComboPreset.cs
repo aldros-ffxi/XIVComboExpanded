@@ -372,8 +372,15 @@ public enum CustomComboPreset
     [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,  UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Danger])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is about to run out on the target.", BRD.JobID)]
+    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 5 seconds on the target.", BRD.JobID)]
     BardShotIronJawsFeature = 2322,
+
+    [IconsCombo([UTL.Idea])]
+    [SectionCombo("Single Target")]
+    [ParentCombo(BardShotIronJawsFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Heavy Shot Iron Jaws Optimized Option", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 2.8 seconds on the target.", BRD.JobID)]
+    BardShotIronJawsOption = 2323,
 
     [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.EmpyrealArrow, UTL.Cycle, BRD.Bloodletter, UTL.Cycle, BRD.Sidewinder])]
     [SectionCombo("Single Target")]
