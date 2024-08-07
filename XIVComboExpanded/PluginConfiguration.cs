@@ -95,7 +95,7 @@ public class PluginConfiguration : IPluginConfiguration
     /// Gets or sets a value indicating whether to allow and display secret combos.
     /// </summary>
     [JsonProperty("SecretUnlock")]
-    public bool UnlockSecretCombos { get; set; } = false;
+    public bool UnlockSecretCombos { get; set; } = true;
 
     /// <summary>
     /// Gets or sets a value indicating which is the current tab.
