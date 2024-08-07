@@ -12,6 +12,7 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
+using XIVComboExpanded.Interface;
 using XIVComboExpandedPlugin.Attributes;
 
 using Action = Lumina.Excel.GeneratedSheets.Action;
@@ -35,13 +36,15 @@ public class ConfigWindow : Window
     private readonly Dictionary<string, List<(CustomComboPreset Preset, CustomComboInfoAttribute Info)>> groupedPresets;
     private readonly Dictionary<CustomComboPreset, (CustomComboPreset Preset, CustomComboInfoAttribute Info)[]> presetChildren;
     private readonly Vector4 shadedColor = new(0.68f, 0.68f, 0.68f, 1.0f);
+    private XIVComboExpandedPlugin Plugin;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConfigWindow"/> class.
     /// </summary>
-    public ConfigWindow()
+    public ConfigWindow(XIVComboExpandedPlugin Plugin)
         : base("XIV Combo Expanded")
     {
+        this.Plugin = Plugin;
         this.RespectCloseHotkey = true;
 
         this.groupedPresets = Enum
@@ -102,7 +105,7 @@ public class ConfigWindow : Window
                 {
                     ImGui.SameLine(1f);
 
-                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f*scale, 36f*scale), 4f*scale))
+                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(36f*scale, 36f*scale), 4f*scale))
                     {
                         if ((Service.Configuration.CurrentJobTab == "Adventurer"
                             || Service.Configuration.CurrentJobTab == "Disciples of the Land"
@@ -173,7 +176,7 @@ public class ConfigWindow : Window
                 ImGui.PushStyleColor(ImGuiCol.ChildBg, ImGuiColors.DalamudWhite);
                 ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudWhite2);
 
-                ImGui.Indent(4f);
+                ImGui.Indent(-10f);
                 if (ImGui.BeginChild("TabContent", new Vector2(0, -1), true, ImGuiWindowFlags.NoBackground))
                 {
                     #region COMBOS TAB HEADER
@@ -223,7 +226,6 @@ public class ConfigWindow : Window
                                     previousSection = this.DrawPreset(Tabs.Expanded, preset, info, previousSection, ref i);
                                 }
 
-
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
@@ -242,7 +244,6 @@ public class ConfigWindow : Window
                                     previousSection = this.DrawPreset(Tabs.Accessibility, preset, info, previousSection, ref i);
                                 }
 
-
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
@@ -260,7 +261,6 @@ public class ConfigWindow : Window
                                 {
                                     previousSection = this.DrawPreset(Tabs.Secret, preset, info, previousSection, ref i);
                                 }
-
 
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
@@ -354,6 +354,13 @@ public class ConfigWindow : Window
                     Service.Configuration.Save();
                 }
 
+                if (ImGui.Button("Re-open the first time pop-up window"))
+                {
+                    Service.Configuration.OneTimePopUp = true;
+                    Plugin.oneTimeModal.IsOpen = true;
+                    Service.Configuration.Save();
+                }
+
                 ImGui.EndChild();
                 ImGui.PopStyleVar();
                 ImGui.SameLine();
@@ -362,13 +369,13 @@ public class ConfigWindow : Window
                 ImGui.BeginChild("ChildR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 250f), true, window_flags);
 
                 ImGui.PushFont(UiBuilder.MonoFont);
-                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.TankBlue);
                 ImGui.Text($"Expanded Combos");
                 ImGui.PopStyleColor();
                 ImGui.PopFont();
                 ImGui.Separator();
 
-                ImGui.BulletText("Those combos are additional features not included in vanilla XIVCombo.");
+                ImGui.BulletText("Those combos are additional features absent in original XIVCombo.");
                 ImGui.BulletText("They usually aim at further reducing button bloating.");
                 ImGui.BulletText("They are also designed to bring QoL improvements to some jobs.");
                 ImGui.BulletText("They are meant to be used by anyone, whatever their reasons may be.");
@@ -397,7 +404,7 @@ public class ConfigWindow : Window
                     ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), true, window_flags);
 
                     ImGui.PushFont(UiBuilder.MonoFont);
-                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
                     ImGui.Text($"Accessibility Combos");
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
@@ -429,14 +436,14 @@ public class ConfigWindow : Window
                         ImGui.BeginChild("ChildBR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 300f), true, window_flags);
 
                         ImGui.PushFont(UiBuilder.MonoFont);
-                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DPSRed);
                         ImGui.Text($"Secret Combos");
                         ImGui.PopStyleColor();
                         ImGui.PopFont();
                         ImGui.Separator();
 
                         ImGui.BulletText("Those combos are optimization routes which give little benefits.");
-                        ImGui.BulletText("They often have to unintuitive behavior or specific rotation routes.");
+                        ImGui.BulletText("They often lead to an unintuitive behavior or specific rotation routes.");
                         ImGui.BulletText("They generally require a heavy knowledge of your job.");
                         ImGui.BulletText("They are niche options, and probably pointless for most players.");
                         ImGui.Separator();

@@ -5,6 +5,7 @@ using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using XIVComboExpanded.Interface;
 using XIVComboExpandedPlugin.Attributes;
 using XIVComboExpandedPlugin.Interface;
 
@@ -13,12 +14,13 @@ namespace XIVComboExpandedPlugin;
 /// <summary>
 /// Main plugin implementation.
 /// </summary>
-public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
+public sealed class XIVComboExpandedPlugin : IDalamudPlugin
 {
     private const string Command = "/pcombo";
 
-    private readonly WindowSystem windowSystem;
-    private readonly ConfigWindow configWindow;
+    public readonly WindowSystem windowSystem;
+    public readonly ConfigWindow configWindow;
+    public readonly OneTimeModal oneTimeModal;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XIVComboExpandedPlugin"/> class.
@@ -40,16 +42,20 @@ public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
         Service.ComboCache = new CustomComboCache();
         Service.IconReplacer = new IconReplacer(gameInteropProvider);
 
-        this.configWindow = new();
+        this.configWindow = new(this);
+        this.oneTimeModal = new(this);
         this.windowSystem = new("XIVComboExpanded");
         this.windowSystem.AddWindow(this.configWindow);
+        this.windowSystem.AddWindow(this.oneTimeModal);
 
         Service.Interface.UiBuilder.OpenConfigUi += this.OnOpenConfigUi;
         Service.Interface.UiBuilder.Draw += this.windowSystem.Draw;
 
+        if (Service.Configuration.OneTimePopUp) this.oneTimeModal.IsOpen = true;
+
         Service.CommandManager.AddHandler(Command, new CommandInfo(this.OnCommand)
         {
-            HelpMessage = "Open a window to edit custom combo settings.",
+            HelpMessage = "Open the XIV Combo Expanded main interface.",
             ShowInHelp = true,
         });
     }
@@ -68,7 +74,8 @@ public sealed partial class XIVComboExpandedPlugin : IDalamudPlugin
         Service.ComboCache?.Dispose();
     }
 
-    private void OnOpenConfigUi()
+
+    public void OnOpenConfigUi()
     {
         if (Service.Configuration.AutoJobChange)
         {
