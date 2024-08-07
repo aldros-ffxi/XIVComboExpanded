@@ -140,8 +140,9 @@ internal class BlackFireBlizzard4 : CustomCombo
                     if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature))
                     {
                         if (IsEnabled(CustomComboPreset.BlackEnochianDespairFlareStarFeature))
-                        {
-                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && LocalPlayer?.CurrentMp <= 0)
+                        {   
+                            // 2nd and 3rd checks for opener and post-manafont usage
+                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && (LocalPlayer?.CurrentMp <= 0 || LocalPlayer?.CurrentMp == 8400 || LocalPlayer?.CurrentMp == 10000))
                                 return BLM.FlareStar;
                         }
 
