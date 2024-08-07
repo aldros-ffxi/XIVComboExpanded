@@ -372,8 +372,15 @@ public enum CustomComboPreset
     [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,  UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Danger])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is about to run out on the target.", BRD.JobID)]
+    [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 5 seconds on the target.", BRD.JobID)]
     BardShotIronJawsFeature = 2322,
+
+    [IconsCombo([UTL.Idea])]
+    [SectionCombo("Single Target")]
+    [ParentCombo(BardShotIronJawsFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Heavy Shot Iron Jaws Optimized Option", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 2.8 seconds on the target.", BRD.JobID)]
+    BardShotIronJawsOption = 2323,
 
     [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.EmpyrealArrow, UTL.Cycle, BRD.Bloodletter, UTL.Cycle, BRD.Sidewinder])]
     [SectionCombo("Single Target")]
@@ -2097,7 +2104,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Gems Enkindle Feature", "Replace Gemshine and Precious Brilliance with Enkindle when Bahamut, Phoenix or Summon Solar Bahamut are summoned.", SMN.JobID)]
     SummonerShinyEnkindleFeature = 2709,
 
-    [IconsCombo([SMN.RadiantAegis, UTL.ArrowLeft, SMN.SummonCarbuncle, UTL.Blank, SMN.LuxSolaris, UTL.Checkmark])]
+    [IconsCombo([SMN.RadiantAegis, UTL.ArrowLeft, SMN.SummonCarbuncle, UTL.Blank, SMN.SummonCarbuncle, UTL.Cross])]
     [SectionCombo("Carbuncle features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Radiant Carbuncle Feature", "Replace Radiant Aegis with Summon Carbuncle when no pet has been summoned.", SMN.JobID)]
@@ -2109,7 +2116,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Radiant Lux Solaris Feature", "Replace Radiant Aegis with Lux Solaris when you have Refulgent Lux ready.", SMN.JobID)]
     SummonerRadiantLuxSolarisFeature = 2718,
 
-    [IconsCombo([SMN.SummonBahamut, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Ruin4, UTL.Checkmark])]
+    [IconsCombo([SMN.SummonBahamut, UTL.ArrowLeft, SMN.SummonCarbuncle, UTL.Blank, SMN.SummonCarbuncle, UTL.Cross])]
     [SectionCombo("Carbuncle features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Demi Carbuncle Feature", "Replace Summon Bahamut with Summon Carbuncle when no pet has been summoned.", SMN.JobID)]

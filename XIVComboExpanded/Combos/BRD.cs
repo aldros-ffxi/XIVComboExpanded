@@ -107,17 +107,22 @@ internal class BardHeavyShot : CustomCombo
             {
                 if (level >= BRD.Levels.IronJaws)
                 {
+                    // Using 5 seconds instead of 2.8s like the other DoT auto-refresh features, because Bard loses a
+                    // lot more from letting their DoTs drop, since they have to use two GCDs instead of one to
+                    // re-apply them.
+                    var dotTimer = 5.0;
+
+                    if (IsEnabled(CustomComboPreset.BardShotIronJawsOption)) // option to use 2.8
+                        dotTimer = 2.8;
+
                     // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
                     var venomous = FindTargetEffect(BRD.Debuffs.VenomousBite);
                     var windbite = FindTargetEffect(BRD.Debuffs.Windbite);
                     var stormbite = FindTargetEffect(BRD.Debuffs.Stormbite);
                     var caustic = FindTargetEffect(BRD.Debuffs.CausticBite);
 
-                    // Using 5 seconds instead of 2.8s like the other DoT auto-refresh features, because Bard loses a
-                    // lot more from letting their DoTs drop, since they have to use two GCDs instead of one to
-                    // re-apply them.
-                    if (venomous?.RemainingTime < 5 || windbite?.RemainingTime < 5 ||
-                    stormbite?.RemainingTime < 5 || caustic?.RemainingTime < 5)
+                    if (venomous?.RemainingTime < dotTimer || windbite?.RemainingTime < dotTimer ||
+                    stormbite?.RemainingTime < dotTimer || caustic?.RemainingTime < dotTimer)
                         return BRD.IronJaws;
                 }
             }
