@@ -90,6 +90,11 @@ internal class SageDosis : CustomCombo
     {
         if (actionID == SGE.Dosis || actionID == SGE.Dosis2 || actionID == SGE.Dosis3)
         {
+            if (IsEnabled(CustomComboPreset.SageDosisPsyche))
+            {
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget())
+                    return OriginalHook(SGE.Psyche);
+            }
             if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy())
             {
                 var eurkasiandosis = FindTargetEffect(SGE.Debuffs.EukrasianDosis);
@@ -108,12 +113,6 @@ internal class SageDosis : CustomCombo
             {
                 if (!HasEffect(SGE.Buffs.Kardion))
                     return SGE.Kardia;
-            }
-
-            if (IsEnabled(CustomComboPreset.SageDosisPsyche))
-            {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget())
-                    return OriginalHook(SGE.Psyche);
             }
         }
 
@@ -156,7 +155,7 @@ internal class SageToxikon : CustomCombo
 
 internal class SageSoteria : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SgeAny;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SageSoteriaKardionFeature;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
@@ -231,7 +230,7 @@ internal class SageDruochole : CustomCombo
 
 internal class SageIxochole : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SgeAny;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SageIxocholeRhizomataFeature;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
@@ -252,7 +251,7 @@ internal class SageIxochole : CustomCombo
 
 internal class SageKerachole : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SgeAny;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SageKeracholaRhizomataFeature;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
