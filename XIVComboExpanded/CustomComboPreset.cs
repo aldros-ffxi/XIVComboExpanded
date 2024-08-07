@@ -2464,7 +2464,7 @@ public enum CustomComboPreset
     DolCastLightElectricCurrentFeature = 51007,
 
     [SectionCombo("Disciple of the Land")]
-    [IconsCombo([DOL.AgelessWords, UTL.ArrowLeft, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld])]
+    [IconsCombo([DOL.AgelessWords, DOL.SolidReason, UTL.ArrowLeft, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld, UTL.Blank, DOL.Buffs.EurekaMoment, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
     DolEurekaFeature = 51001,

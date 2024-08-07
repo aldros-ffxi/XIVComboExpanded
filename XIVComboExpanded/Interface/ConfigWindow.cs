@@ -13,7 +13,7 @@ using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
 using Newtonsoft.Json.Linq;
 using XIVComboExpandedPlugin.Attributes;
-
+using XIVComboExpandedPlugin.Combos;
 using Action = Lumina.Excel.GeneratedSheets.Action;
 using Language = Lumina.Data.Language;
 
@@ -811,6 +811,7 @@ public class ConfigWindow : Window
             int it = 0;
             foreach (var iconId in icons)
             {
+                ImGui.AlignTextToFramePadding();
                 bool isStatus = false;
                 bool isUTL = false;
                 string hoverName = string.Empty;
@@ -836,14 +837,18 @@ public class ConfigWindow : Window
                 {
                     ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
                     ImGui.SameLine(0, 0);
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 4f);
                     ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(18f * scale, 24f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 4f);
                     hoverName = GetStatusName(iconId);
                 }
                 else if (isUTL)
                 {
                     ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(2f * scale, 24f * scale));
                     ImGui.SameLine(0, 0);
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 3f);
                     ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(20f * scale, 20f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 3f);
                 }
                 else
                 {
@@ -1037,7 +1042,10 @@ public class ConfigWindow : Window
         var statusList = Service.DataManager.GameData.Excel.GetSheet<Status>();
         var status = statusList.GetRow(statusID);
 
-        if (status.ClassJobCategory.Value.Name.RawString.Length == 3)
+        List<uint> whiteList = new List<uint>();
+        whiteList.Add((uint)DOL.Buffs.EurekaMoment);
+
+        if (status.ClassJobCategory.Value.Name.RawString.Length == 3 || whiteList.Contains(statusID))
             return GetIcon((uint)status.Icon);
         else
             return GetIcon((uint)statusID);
