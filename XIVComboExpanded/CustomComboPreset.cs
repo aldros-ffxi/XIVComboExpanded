@@ -1060,6 +1060,15 @@ public enum CustomComboPreset
     [CustomComboInfo("Dosis Kardia Feature", "Replace Dosis with Kardia when missing Kardion.", SGE.JobID)]
     SageDosisKardiaFeature = 4010,
 
+    [SecretCustomCombo]
+    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
+    SageDoTFeature = 4012,
+
+    [SecretCustomCombo]
+    [ParentCombo(SageDoTFeature)]
+    [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
+    SageDosisPsyche = 4014,
+
     [CustomComboInfo("Druochole into Rhizomata Feature", "Replace Druochole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageDruocholeRhizomataFeature = 4003,
 
@@ -1094,15 +1103,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
     SagePsycheToxikonFeature = 4013,
 
-    [ParentCombo(SageDoTFeature)]
-    [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
-    SageDosisPsyche = 4014,
-
     #endregion
-
-    [SecretCustomCombo]
-    [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
-    SageDoTFeature = 4012,
     // ====================================================================================
     #region SAMURAI
 
