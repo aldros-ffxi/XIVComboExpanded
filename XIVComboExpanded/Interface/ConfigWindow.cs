@@ -289,7 +289,7 @@ public class ConfigWindow : Window
                 ImGui.Spacing();
                 ImGuiWindowFlags window_flags = ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.ChildWindow;
                 ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                ImGui.BeginChild("ChildL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 250f), false, window_flags);
+                ImGui.BeginChild("ChildL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 250f), true, window_flags);
 
                 ImGui.PushFont(UiBuilder.MonoFont);
                 ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
@@ -384,6 +384,7 @@ public class ConfigWindow : Window
                         Service.Configuration.EnableAccessibilityCombos = false;
                         Service.Configuration.EnableSecretCombos = false;
                     }
+
                     Service.Configuration.Save();
                 }
 
@@ -393,7 +394,7 @@ public class ConfigWindow : Window
                 if (Service.Configuration.EnableExpandedCombos)
                 {
                     ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                    ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), false, window_flags);
+                    ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), true, window_flags);
 
                     ImGui.PushFont(UiBuilder.MonoFont);
                     ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
@@ -413,7 +414,7 @@ public class ConfigWindow : Window
                     if (ImGui.Checkbox("Enable accessibility combos.", ref showAccessibility))
                     {
                         Service.Configuration.EnableAccessibilityCombos = showAccessibility;
-                        if(!showAccessibility) Service.Configuration.EnableSecretCombos = false;
+                        if (!showAccessibility) Service.Configuration.EnableSecretCombos = false;
                         Service.Configuration.Save();
                     }
 
