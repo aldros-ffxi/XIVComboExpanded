@@ -21,8 +21,9 @@ internal static class ADV
     public static class Buffs
     {
         public const ushort
-            Peloton = 1199,
-            Medicated = 49;
+            Swiftcast = 167,
+            Medicated = 49,
+            Peloton = 1199;
     }
 
     public static class Debuffs

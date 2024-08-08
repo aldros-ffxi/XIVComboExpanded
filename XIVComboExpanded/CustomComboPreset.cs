@@ -1636,12 +1636,12 @@ public enum CustomComboPreset
     #endregion
     // ====================================================================================
     #region RED MAGE
-    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.Jolt, UTL.Blank, RDM.Verstone, RDM.Verfire, UTL.Cross])]
+    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.Jolt, UTL.Blank, RDM.Buffs.VerstoneReady, RDM.Buffs.VerfireReady, UTL.Cross])]
     [SectionCombo("Single Target")]
     [CustomComboInfo("Verstone/Verfire Feature", "Replace Verstone/Verfire with Jolt when no proc is available.", RDM.JobID)]
     RedMageVerprocFeature = 3504,
 
-    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.GrandImpact, UTL.Cross, UTL.Blank, RDM.Verstone, RDM.Verfire, UTL.Checkmark])]
+    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.GrandImpact, UTL.Cross, UTL.Blank, RDM.Buffs.VerstoneReady, RDM.Buffs.VerfireReady, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ParentCombo(RedMageVerprocFeature)]
     [SecretCustomCombo]
@@ -1654,7 +1654,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Verstone/Verfire Plus Feature", "Replace Verstone/Verfire with Veraero/Verthunder when various instant-cast effects are active.", RDM.JobID)]
     RedMageVerprocPlusFeature = 3505,
 
-    [IconsCombo([RDM.Veraero, RDM.Verthunder, UTL.ArrowLeft, RDM.GrandImpact, UTL.Cross, UTL.Blank, RDM.Verstone, RDM.Verfire, UTL.Checkmark])]
+    [IconsCombo([RDM.Veraero, RDM.Verthunder, UTL.ArrowLeft, RDM.GrandImpact, UTL.Cross, UTL.Blank, RDM.Buffs.VerstoneReady, RDM.Buffs.VerfireReady, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ParentCombo(RedMageVerprocPlusFeature)]
     [SecretCustomCombo]
@@ -1667,17 +1667,31 @@ public enum CustomComboPreset
     [CustomComboInfo("Verstone/Verfire Mana Stacks Feature", "Replace Verstone/Verfire with Verflare/Verholy at 3 mana stacks.", RDM.JobID)]
     RedMageVerprocManaStacksFeature = 3515,
 
-    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Blank, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Checkmark])]
+    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, UTL.Blank, RDM.Scorch, RDM.Resolution, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Verstone/Verfire Capstone Combo", "Replace Verstone/Verfire with Scorch and Resolution when available.", RDM.JobID)]
     RedMageVerprocCapstoneCombo = 3513,
 
-    [IconsCombo([RDM.Veraero, RDM.Verthunder, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Blank, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Checkmark])]
+    [IconsCombo([RDM.Verstone, RDM.Verfire, UTL.ArrowLeft, RDM.Prefulgence, UTL.Blank, RDM.Buffs.PrefulgenceReady, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(RedMageVerprocCapstoneCombo)]
+    [CustomComboInfo("Verstone/Verfire Prefulgence Combo", "Also replace Verstone/Verfire by Refulgence when ready.", RDM.JobID)]
+    RedMageVerprocCapstonePrefulgenceCombo = 3520,
+
+    [IconsCombo([RDM.Veraero, RDM.Verthunder, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, UTL.Blank, RDM.Scorch, RDM.Resolution, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Veraero/Verthunder Capstone Combo", "Replace Veraero/Verthunder with Scorch and Resolution when available.", RDM.JobID)]
     RedMageVeraeroVerthunderCapstoneCombo = 3512,
+
+    [IconsCombo([RDM.Veraero, RDM.Verthunder, UTL.ArrowLeft, RDM.Prefulgence, UTL.Blank, RDM.Buffs.PrefulgenceReady, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(RedMageVeraeroVerthunderCapstoneCombo)]
+    [CustomComboInfo("Veraero/Verthunder Prefulgence Combo", "Also replace Veraero/Verthunder by Refulgence when ready.", RDM.JobID)]
+    RedMageVeraeroVerthunderCapstonePrefulgenceCombo = 3521,
 
     [IconsCombo([RDM.Verstone, UTL.ArrowLeft, RDM.Veraero, UTL.Blank, UTL.OutOfBattle, UTL.Checkmark])]
     [SectionCombo("Single Target")]
@@ -1691,27 +1705,41 @@ public enum CustomComboPreset
     [CustomComboInfo("Verstone/Verfire Plus Opener Feature (Fire)", "Replace Verfire with Verthunder when out of combat.", RDM.JobID)]
     RedMageVerprocOpenerFireFeature = 3507,
 
-    [IconsCombo([RDM.Veraero2, RDM.Verthunder2, UTL.ArrowLeft, RDM.Impact, UTL.Blank, RDM.Acceleration, ADV.Swiftcast, UTL.Checkmark])]
+    [IconsCombo([RDM.Veraero2, RDM.Verthunder2, UTL.ArrowLeft, RDM.Impact, UTL.Blank, RDM.Buffs.Acceleration, ADV.Buffs.Swiftcast, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("AoE Combo", "Replace Veraero/Verthunder 2 with Impact when various instant-cast effects are active.", RDM.JobID)]
     RedMageAoEFeature = 3501,
 
-    [IconsCombo([RDM.Veraero2, RDM.Verthunder2, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Blank, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Checkmark])]
+    [IconsCombo([RDM.Veraero2, RDM.Verthunder2, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, UTL.Blank, RDM.Scorch, RDM.Resolution, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("AoE Capstone Combo", "Replace Veraero/Verthunder 2 with Scorch and Resolution when available.", RDM.JobID)]
     RedMageAoECapstoneCombo = 3514,
+
+    [IconsCombo([RDM.Veraero2, RDM.Verthunder2, UTL.ArrowLeft, RDM.Prefulgence, UTL.Blank, RDM.Buffs.PrefulgenceReady, UTL.Checkmark])]
+    [SectionCombo("Area of Effect")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(RedMageAoECapstoneCombo)]
+    [CustomComboInfo("AoE Capstone Prefulgence Combo", "Also replace Veraero/Verthunder 2 by Refulgence when ready.", RDM.JobID)]
+    RedMageAoECapstonePrefulgenceCombo = 3522,
 
     [IconsCombo([RDM.EnchantedRedoublement, RDM.Redoublement, UTL.ArrowLeft, RDM.EnchantedZwerchhau, RDM.Zwerchhau, UTL.ArrowLeft, RDM.EnchantedRiposte, RDM.Riposte])]
     [SectionCombo("Melee features")]
     [CustomComboInfo("Melee Combo", "Replace Redoublement with its combo chain, following enchantment rules.", RDM.JobID)]
     RedMageMeleeCombo = 3502,
 
-    [IconsCombo([RDM.Redoublement, RDM.Moulinet, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Blank, RDM.Scorch, RDM.Resolution, RDM.Prefulgence, UTL.Checkmark])]
+    [IconsCombo([RDM.Redoublement, RDM.Moulinet, UTL.ArrowLeft, RDM.Scorch, RDM.Resolution, UTL.Blank, RDM.Scorch, RDM.Resolution, UTL.Checkmark])]
     [SectionCombo("Melee features")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Melee Capstone Combo", "Replace Redoublement and Moulinet with Scorch, Resolution and Prefulgence when available.", RDM.JobID)]
+    [CustomComboInfo("Melee Capstone Combo", "Replace Redoublement and Moulinet with Scorch, Resolution when available.", RDM.JobID)]
     RedMageMeleeCapstoneCombo = 3503,
+
+    [IconsCombo([RDM.Redoublement, RDM.Moulinet, UTL.ArrowLeft, RDM.Prefulgence, UTL.Blank, RDM.Buffs.PrefulgenceReady, UTL.Checkmark])]
+    [SectionCombo("Melee features")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(RedMageMeleeCapstoneCombo)]
+    [CustomComboInfo("Melee Capstone Prefulgence Combo", "Also replace Redoublement and Moulinet by Refulgence when ready.", RDM.JobID)]
+    RedMageMeleeCapstonePrefulgenceCombo = 3523,
 
     [IconsCombo([RDM.Redoublement, RDM.Moulinet, UTL.ArrowLeft, RDM.Verflare, RDM.Verholy, UTL.Blank, RDM.Verflare, RDM.Verholy, UTL.Checkmark])]
     [SectionCombo("Melee features")]
@@ -1725,7 +1753,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Contre Sixte / Fleche Feature", "Replace Contre Sixte and Fleche with whichever is available.", RDM.JobID)]
     RedMageContreFlecheFeature = 3508,
 
-    [IconsCombo([RDM.Embolden, UTL.ArrowLeft, RDM.Manafication, UTL.Blank, RDM.Manafication, UTL.Checkmark])]
+    [IconsCombo([RDM.Embolden, UTL.ArrowLeft, RDM.Manafication, UTL.Blank, RDM.Embolden, UTL.Clock])]
     [SectionCombo("Abilities features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Embolden to Manafication", "Replace Embolden with Manafication if the former is on cooldown and the latter is not.", RDM.JobID)]
@@ -2047,7 +2075,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Ruin Feature", "Replace Ruin with Gemshine when attuned.", SMN.JobID)]
     SummonerRuinFeature = 2703,
 
-    [IconsCombo([SMN.Ruin, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.MountainBuster, UTL.Checkmark])]
+    [IconsCombo([SMN.Ruin, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.Buffs.TitansFavor, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Titan's Favor Ruin Feature", "Replace Ruin with Mountain Buster (oGCD) when available.", SMN.JobID)]
@@ -2065,7 +2093,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Outburst Feature", "Replace Outburst with Precious Brilliance when attuned.", SMN.JobID)]
     SummonerOutburstFeature = 2704,
 
-    [IconsCombo([SMN.Outburst, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.MountainBuster, UTL.Checkmark])]
+    [IconsCombo([SMN.Outburst, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.Buffs.TitansFavor, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Titan's Favor Outburst Feature", "Replace Outburst with Mountain Buster (oGCD) when available.", SMN.JobID)]
@@ -2104,13 +2132,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Searing Demi Feature", "Replace Summon Bahamut, Summon Phoenix and Summon Solar Bahamut with Searing Light when any of them is ready to be summoned, Searing Light is off cooldown, and you are in combat.", SMN.JobID)]
     SummonerDemiSearingLightFeature = 2715,
 
-    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.MountainBuster, UTL.Checkmark])]
+    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.Buffs.TitansFavor, UTL.Checkmark])]
     [SectionCombo("Gems features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Gems Titan's Favor Feature", "Replace Gemshine and Precious Brilliance with Mountain Buster (oGCD) when available.", SMN.JobID)]
     SummonerShinyTitansFavorFeature = 2707,
 
-    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Buffs.FurtherRuin,, UTL.Checkmark])]
+    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Buffs.FurtherRuin, UTL.Checkmark])]
     [SectionCombo("Gems features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Gems Ruin 4 Feature", "Replace Gemshine and Precious Brilliance with Ruin 4 when available and appropriate.", SMN.JobID)]
