@@ -213,7 +213,7 @@ internal class DarkQuietusBloodspiller : CustomCombo
 
             if (IsEnabled(CustomComboPreset.DarkLivingShadowFeature))
             {
-                if (level >= DRK.Levels.LivingShadow && gauge.Blood >= 50 && IsCooldownUsable(DRK.LivingShadow))
+                if (level >= DRK.Levels.LivingShadow && IsCooldownUsable(DRK.LivingShadow))
                     return DRK.LivingShadow;
             }
         }
