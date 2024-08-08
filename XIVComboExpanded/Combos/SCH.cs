@@ -114,6 +114,28 @@ internal class ScholarExcogitation : CustomCombo
     }
 }
 
+internal class ScholarDissipation : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ScholarDissipationEnergyDrainAetherflowFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        var gauge = GetJobGauge<SCHGauge>();
+
+        if (actionID == SCH.Dissipation && (!IsCooldownUsable(SCH.Dissipation) || !CanUseAction(SCH.Dissipation)))
+        {
+            if (level >= SCH.Levels.Aetherflow && gauge.Aetherflow == 0 && IsCooldownUsable(SCH.Aetherflow))
+                return SCH.Aetherflow;
+            else if (level >= SCH.Levels.Aetherflow && gauge.Aetherflow == 0 && !IsCooldownUsable(SCH.Aetherflow))
+                return SCH.Dissipation;
+            else
+                return SCH.EnergyDrain;
+        }
+
+        return actionID;
+    }
+}
+
 internal class ScholarEnergyDrain : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.ScholarEnergyDrainAetherflowFeature;

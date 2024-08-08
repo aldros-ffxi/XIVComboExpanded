@@ -966,6 +966,7 @@ public class ConfigWindow : Window
                 ImGui.Unindent();
             }
         }
+
         return section;
     }
 

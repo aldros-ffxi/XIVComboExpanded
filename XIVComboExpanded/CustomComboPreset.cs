@@ -1417,13 +1417,6 @@ public enum CustomComboPreset
     [CustomComboInfo("Grim Swathe Gluttony Feature", "Replace Grim Swathe with Gluttony when available.", RPR.JobID)]
     ReaperGrimSwatheGluttonyFeature = 3916,
 
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gibbet])]
-    [SectionCombo("Area of Effect")]
-    [ConflictingCombos(ReaperShadowGallowsFeature)]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
-    ReaperShadowGibbetFeature = 3906,
-
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSliceGallowsFeature)]
@@ -1451,6 +1444,13 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Soul Gallows Feature", "Replace Soul Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
     ReaperSoulGallowsFeature = 3925,
+
+    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gibbet])]
+    [SectionCombo("Soul Reaver")]
+    [ConflictingCombos(ReaperShadowGallowsFeature)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
+    ReaperShadowGibbetFeature = 3906,
 
     [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
@@ -1962,6 +1962,13 @@ public enum CustomComboPreset
     [SectionCombo("Aetherflow features")]
     [CustomComboInfo("ED Aetherflow", "Replace Energy Drain with Aetherflow when you have no more Aetherflow stacks.", SCH.JobID)]
     ScholarEnergyDrainAetherflowFeature = 2802,
+
+    [IconsCombo([SCH.Dissipation, UTL.ArrowLeft, SCH.EnergyDrain, UTL.Cycle, SCH.Aetherflow, UTL.Blank, SCH.Dissipation, UTL.Cross])]
+    [SectionCombo("Aetherflow features")]
+    [ParentCombo(ScholarEnergyDrainAetherflowFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("ED Dissipation", "Replace Dissipation with Energy Drain and Dissipation isn't available, and to Aetherflow when you have no more Aetherflow stacks.\nBe wary that you won't be able to track Aetherflow's cooldown that way, as it will revert to Dissipation whenever neither Aetherflow nor Energy Drain can be used.", SCH.JobID)]
+    ScholarDissipationEnergyDrainAetherflowFeature = 2814,
 
     [IconsCombo([SCH.Lustrate, UTL.ArrowLeft, SCH.Aetherflow, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Aetherflow features")]
