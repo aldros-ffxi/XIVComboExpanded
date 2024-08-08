@@ -1399,23 +1399,30 @@ public enum CustomComboPreset
     [CustomComboInfo("Scythe Combo", "Replace Nightmare Scythe with its combo chain.", RPR.JobID)]
     ReaperScytheCombo = 3902,
 
-    [IconsCombo([RPR.SoulScythe, UTL.ArrowLeft, UTL.Idea, RPR.GrimSwathe])]
-    [SectionCombo("Area of Effect")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul (Scythe) Overcap Feature", "Replace Soul Scythe with Grim Swathe when not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
-    ReaperSoulScytheOvercapFeature = 3935,
-
     [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.HarvestMoon])]
     [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Scythe Harvest Moon Feature", "Replace Nightmare Scythe with Harvest Moon when Soulsow is active and you have a target.", RPR.JobID)]
     ReaperScytheHarvestMoonFeature = 3932,
 
+    [IconsCombo([RPR.SoulScythe, UTL.ArrowLeft, UTL.Idea, RPR.GrimSwathe])]
+    [SectionCombo("Area of Effect")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Soul (Scythe) Overcap Feature", "Replace Soul Scythe with Grim Swathe when not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
+    ReaperSoulScytheOvercapFeature = 3935,
+
     [IconsCombo([RPR.GrimSwathe, UTL.ArrowLeft, RPR.Gluttony])]
     [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Grim Swathe Gluttony Feature", "Replace Grim Swathe with Gluttony when available.", RPR.JobID)]
     ReaperGrimSwatheGluttonyFeature = 3916,
+
+    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gibbet])]
+    [SectionCombo("Area of Effect")]
+    [ConflictingCombos(ReaperShadowGallowsFeature)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
+    ReaperShadowGibbetFeature = 3906,
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
@@ -1431,6 +1438,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Slice Gallows Feature", "Replace Infernal Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
     ReaperSliceGallowsFeature = 3904,
 
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gibbet])]
+    [SectionCombo("Soul Reaver")]
+    [ConflictingCombos(ReaperSoulGallowsFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
+    ReaperSoulGibbetFeature = 3926,
+
     [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSoulGibbetFeature)]
@@ -1438,26 +1452,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Soul Gallows Feature", "Replace Soul Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
     ReaperSoulGallowsFeature = 3925,
 
-    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gallows])]
-    [SectionCombo("Soul Reaver")]
-    [ConflictingCombos(ReaperSoulGallowsFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
-    ReaperSoulGibbetFeature = 3926,
-
     [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperShadowGibbetFeature)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Shadow Gallows Feature", "Replace Shadow of Death with Gallows while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
     ReaperShadowGallowsFeature = 3905,
-
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
-    [SectionCombo("Soul Reaver")]
-    [ConflictingCombos(ReaperShadowGallowsFeature)]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
-    ReaperShadowGibbetFeature = 3906,
 
     [IconsCombo([RPR.Gallows, RPR.Gibbet, UTL.Idea])]
     [SectionCombo("Soul Reaver")]
