@@ -2318,30 +2318,30 @@ public enum CustomComboPreset
     WarriorStormsPathCombo = 2101,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.FellCleave, UTL.Plus, WAR.InnerRelease])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Storm's Path Inner Release Feature", "Replace Storm's Path with Fell Cleave when Inner Release is active.", WAR.JobID)]
-    WarriorStormsPathInnerReleaseFeature = 2110,
-
-    [SectionCombo("Single Target")]
     [IconsCombo([WAR.StormsEye, UTL.ArrowLeft, WAR.Maim, UTL.ArrowLeft, WAR.HeavySwing])]
     [CustomComboInfo("Storm's Eye Combo", "Replace Storms Eye with its combo chain.", WAR.JobID)]
     WarriorStormsEyeCombo = 2102,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.FellCleave, UTL.Danger])]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.InnerBeast, UTL.Blank, WAR.Buffs.InnerRelease, UTL.Checkmark])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Storm's Path Inner Release Feature", "Replace Storm's Path with Inner Beast/Fell Cleave when Inner Release is active.", WAR.JobID)]
+    WarriorStormsPathInnerReleaseFeature = 2110,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.InnerBeast, UTL.Blank, UTL.Blank, UTL.Danger])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Beast Gauge Overcap Protection (ST)", "Replace Storm's Path and Storm's Eye with Fell Cleave when the next combo action would cause the Beast Gauge to overcap.\n\nNOTE: if Storm's Path Combo or Storm's Eye Combo are not active, this will ONLY check when Storm's Path/Eye is the next combo action.  If they are active, it will also protect against the 10 gauge gain from Maim.", WAR.JobID)]
+    [CustomComboInfo("Beast Gauge Overcap Protection (ST)", "Replace Storm's Path and Storm's Eye with Inner Beast/Fell Cleave when the next combo action would cause the Beast Gauge to overcap.\n\nNOTE: if Storm's Path Combo or Storm's Eye Combo are not active, this will ONLY check when Storm's Path/Eye is the next combo action.  If they are active, it will also protect against the 10 gauge gain from Maim.", WAR.JobID)]
     WarriorSTGaugeOvercapProtection = 2104,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Idea])]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Blank, WAR.Buffs.SurgingTempest, UTL.Idea])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Automatic Surging Tempest", "Replace Storm's Path with Storm's Eye whenever Surging Tempest is below 30 seconds.", WAR.JobID)]
     WarriorAutoSurgingTempestFeature = 2113,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Idea, UTL.Plus])]
+    [IconsCombo([WAR.StormsPath, UTL.ArrowLeft, WAR.StormsEye, UTL.Blank, WAR.Buffs.SurgingTempest, UTL.Danger])]
     [ParentCombo(WarriorAutoSurgingTempestFeature)]
     [SecretCustomCombo]
     [CustomComboInfo("Optimize Surging Tempest", "Optimize refresh of Surging Tempest to avoid overcapping when Inner Release is used, and to maximize potency during potions  This will defer refreshing Surging Tempest if the buff would be at greater than 50 seconds when Inner Release comes off cooldown, and will allow the buff to go as low as 10 seconds remaining while a DPS potion is active, to potentially squeeze in an extra Storm's Path during the potion effect.", WAR.JobID)]
@@ -2353,19 +2353,19 @@ public enum CustomComboPreset
     WarriorMythrilTempestCombo = 2103,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([WAR.Decimate, UTL.ArrowLeft, WAR.Decimate, UTL.Plus, WAR.InnerRelease])]
+    [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.SteelCyclone, UTL.Blank, WAR.Buffs.InnerRelease, UTL.Checkmark])]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Mythril Tempest Inner Release Feature", "Replace Mythril Tempest with Decimate when Inner Release is active.", WAR.JobID)]
+    [CustomComboInfo("Mythril Tempest Inner Release Feature", "Replace Mythril Tempest with Steel Cyclone/Decimate when Inner Release is active.", WAR.JobID)]
     WarriorMythrilTempestInnerReleaseFeature = 2111,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.Decimate, UTL.Danger])]
+    [IconsCombo([WAR.MythrilTempest, UTL.ArrowLeft, WAR.SteelCyclone, UTL.Blank, UTL.Blank, UTL.Danger])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Beast Gauge Overcap Protection (AoE)", "Replace Mythril Tempest with Decimate the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
+    [CustomComboInfo("Beast Gauge Overcap Protection (AoE)", "Replace Mythril Tempest with Steel Cyclone/Decimate the next combo action would cause the Beast Gauge to overcap.", WAR.JobID)]
     WarriorAoEGaugeOvercapProtection = 2105,
 
     [SectionCombo("Inner Warrior")]
-    [IconsCombo([WAR.InnerBeast, WAR.SteelCyclone, UTL.ArrowLeft, WAR.Infuriate, UTL.Plus])]
+    [IconsCombo([WAR.InnerBeast, WAR.SteelCyclone, UTL.ArrowLeft, WAR.Infuriate, UTL.Blank, UTL.Blank, UTL.Danger])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Angry Beast Feature", "Replace Inner Beast/Fell Cleave and Steel Cyclone/Decimate with Infuriate when less then 50 Beast Gauge is available.", WAR.JobID)]
     WarriorInfuriateBeastFeature = 2109,
