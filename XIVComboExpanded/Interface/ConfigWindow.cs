@@ -1017,10 +1017,14 @@ public class ConfigWindow : Window
     /// <param name="skillID">ID of the skill.</param>
     private static ISharedImmediateTexture GetSkillIcon(uint skillID)
     {
+
+        List<uint> whiteList = new List<uint>();
+        whiteList.Add((uint)ADV.VariantRaise2);
+
         var actionList = Service.DataManager.GameData.Excel.GetSheet<Action>();
         var skill = actionList.GetRow(skillID);
         // Check if the icon isn't Cure's AND isn't actually Cure
-        if (skill.Icon == 405 && skill.RowId != 120 && !skill.IsPlayerAction)
+        if ((skill.Icon == 405 && skill.RowId != 120) || (!skill.IsPlayerAction && skill.ClassJobLevel == 0) && !whiteList.Contains(skillID))
             return null;
         return GetIcon((uint)skill.Icon);
     }
