@@ -126,12 +126,12 @@ internal class BlackFireBlizzard4 : CustomCombo
                             if (((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast))
                             && gauge.ElementTimeRemaining / 1000.0 < fire4.BaseCooldown * 1.10) || gauge.ElementTimeRemaining / 1000.0 < fire4.CastTime * 1.10)
                             {
+                                if (level > BLM.Levels.Despair && LocalPlayer?.CurrentMp > 0 && LocalPlayer?.CurrentMp < 2400 && (HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)))
+                                    return BLM.Despair;
                                 if (HasEffect(BLM.Buffs.Firestarter))
                                     return BLM.Fire3;
                                 if (level > BLM.Levels.Paradox && gauge.IsParadoxActive)
                                     return BLM.Paradox;
-                                if (level > BLM.Levels.Despair && LocalPlayer?.CurrentMp > 0 && (HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)))
-                                    return BLM.Despair;
                                 if (level >= BLM.Levels.Blizzard3)
                                     return BLM.Blizzard3;
                             }
@@ -140,8 +140,9 @@ internal class BlackFireBlizzard4 : CustomCombo
                     if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature))
                     {
                         if (IsEnabled(CustomComboPreset.BlackEnochianDespairFlareStarFeature))
-                        {
-                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && LocalPlayer?.CurrentMp <= 0)
+                        {   
+                            // 2nd and 3rd checks for opener and post-manafont usage
+                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && (LocalPlayer?.CurrentMp <= 0 || LocalPlayer?.CurrentMp == 8400 || LocalPlayer?.CurrentMp == 10000))
                                 return BLM.FlareStar;
                         }
 
