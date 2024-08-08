@@ -48,6 +48,7 @@ internal static class MCH
     public static class Buffs
     {
         public const ushort
+            Overheat = 2688,
             HyperchargeReady = 3864,
             ExcavatorReady = 3865,
             FullMetalPrepared = 3866;

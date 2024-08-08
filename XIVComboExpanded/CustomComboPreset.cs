@@ -871,7 +871,7 @@ public enum CustomComboPreset
     [CustomComboInfo("(Heated) Shot Combo", "Replace Clean Shot with its combo chain.", MCH.JobID)]
     MachinistMainCombo = 3101,
 
-    [IconsCombo([MCH.CleanShot, UTL.ArrowLeft, MCH.HeatBlast, UTL.Blank, MCH.Hypercharge, UTL.Checkmark])]
+    [IconsCombo([MCH.CleanShot, UTL.ArrowLeft, MCH.HeatBlast, UTL.Blank, MCH.Buffs.Overheat, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ParentCombo(MachinistMainCombo)]
     [CustomComboInfo("Hypercharge Combo", "Replace Clean Shot combo with Heat Blast while overheated.", MCH.JobID)]
@@ -891,7 +891,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Hot Shot (Air Anchor) / Chainsaw Feature", "Replace Hot Shot (Air Anchor) and Chainsaw with whichever is available.", MCH.JobID)]
     MachinistHotShotChainsawFeature = 3107,
 
-    [IconsCombo([MCH.SpreadShot, UTL.ArrowLeft, MCH.AutoCrossbow, UTL.Blank, MCH.Hypercharge, UTL.Checkmark])]
+    [IconsCombo([MCH.SpreadShot, UTL.ArrowLeft, MCH.AutoCrossbow, UTL.Blank, MCH.Buffs.Overheat, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot with Auto Crossbow when overheated.", MCH.JobID)]
     MachinistSpreadShotFeature = 3102,
@@ -902,7 +902,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Bioblaster / Chainsaw Feature", "Replace Bioblaster with whichever of Bioblaster or Chainsaw is available.", MCH.JobID)]
     MachinistBioblasterChainsawFeature = 3111,
 
-    [IconsCombo([MCH.HeatBlast, MCH.AutoCrossbow, UTL.ArrowLeft, MCH.Hypercharge, UTL.Blank, MCH.Hypercharge, UTL.Cross])]
+    [IconsCombo([MCH.HeatBlast, MCH.AutoCrossbow, UTL.ArrowLeft, MCH.Hypercharge, UTL.Blank, MCH.Buffs.Overheat, UTL.Cross])]
     [SectionCombo("Ability features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Hypercharge Feature", "Replace Heat Blast and Auto Crossbow with Hypercharge when not overheated.", MCH.JobID)]
@@ -920,7 +920,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Gauss Round / Double Check & Ricochet / Checkmate Feature", "Replace Gauss Round / Double Check & Ricochet / Checkmate with one or the other depending on which has more charges.", MCH.JobID)]
     MachinistGaussRoundRicochetFeature = 3105,
 
-    [IconsCombo([MCH.GaussRound, UTL.Cycle, MCH.Ricochet, UTL.Blank, MCH.Hypercharge, UTL.Checkmark])]
+    [IconsCombo([MCH.GaussRound, UTL.Cycle, MCH.Ricochet, UTL.Blank, MCH.Buffs.Overheat, UTL.Checkmark])]
     [SectionCombo("Ability features")]
     [SecretCustomCombo]
     [ParentCombo(MachinistGaussRoundRicochetFeature)]
