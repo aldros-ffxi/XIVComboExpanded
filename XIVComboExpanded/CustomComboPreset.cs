@@ -149,15 +149,15 @@ public enum CustomComboPreset
     [SectionCombo("Casters & Healers Role Actions")]
     [IconsCombo([ADV.LucidDreaming, UTL.ArrowLeft, UTL.ArrowLeft, UTL.ArrowLeft, UTL.Danger])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Automatic Dreams", "Replace EVERY SPELL AND ABILITY with Lucid Dreaming whenever your MP drop under 5000, it's off cooldown and you are a Healer or Caster. Use with caution.", ADV.JobID)]
+    [CustomComboInfo("Automatic Dreams", "Replace EVERY SPELL AND ABILITY with Lucid Dreaming whenever your MP drop under 5000, it's off cooldown and you are a Healer or Caster (except BLM/THM). Use with caution.", ADV.JobID)]
     AdvAutoLucidDreamingFeature = 1008,
 
     [SectionCombo("Casters & Healers Role Actions")]
-    [IconsCombo([ADV.LucidDreaming, UTL.Forbidden])]
+    [IconsCombo([ADV.LucidDreaming, UTL.Idea])]
     [ParentCombo(AdvAutoLucidDreamingFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Disable for BLM", "Doesn't apply this feature to Black Mage nor to Thaumaturge.", ADV.JobID)]
-    AdvDisableBLMLucidFeature = 1009,
+    [CustomComboInfo("Enable for BLM", "Also apply this feature to Black Mage and Thaumaturge\nAre you REALLY sure you want to do this?.", ADV.JobID)]
+    AdvEnableBLMLucidFeature = 1009,
 
     #endregion
     // ====================================================================================
@@ -241,7 +241,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Enochian Despair into Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul and 0 mana.", BLM.JobID)]
     BlackEnochianDespairFlareStarFeature = 2524,
 
-    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, UTL.Clock])]
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Buffs.Firestarter, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, UTL.Clock])]
     [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
     [AccessibilityCustomCombo]

@@ -201,9 +201,9 @@ internal class AdvAutoLucidDreamingFeature : CustomCombo
         {
             var job = LocalPlayer?.ClassJob.Id;
             if (job == WHM.ClassID
-            || (job == BLM.ClassID && !IsEnabled(CustomComboPreset.AdvDisableBLMLucidFeature))
+            || (job == BLM.ClassID && IsEnabled(CustomComboPreset.AdvEnableBLMLucidFeature))
             || job == WHM.JobID
-            || (job == BLM.JobID && !IsEnabled(CustomComboPreset.AdvDisableBLMLucidFeature))
+            || (job == BLM.JobID && IsEnabled(CustomComboPreset.AdvEnableBLMLucidFeature))
             || job == SMN.ClassID
             || job == SMN.JobID
             || job == SCH.JobID
