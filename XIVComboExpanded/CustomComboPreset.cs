@@ -239,7 +239,7 @@ public enum CustomComboPreset
     [ParentCombo(BlackEnochianDespairFeature)]
     [ConflictingCombos(BlackFlareStarFeature)]
     [SecretCustomCombo]
-    [CustomComboInfo("Enochian Despair into Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul and 0 mana, or when optimal.\n\nSince Despair refreshes Astral Fire, casting Flare Star afterwards is safer instead of cramming it Fire 4s. Exceptions are during the Dawntrail opener, or manafont is used before casting Flare Star from the previous fire phase.", BLM.JobID)]
+    [CustomComboInfo("Enochian Despair into Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul and 0 mana, or when optimal.\n\nSince Despair refreshes Astral Fire, casting Flare Star afterwards is safer instead of cramming it with Fire 4s. Exceptions are during the Dawntrail opener, or manafont is used before casting Flare Star from the previous fire phase.", BLM.JobID)]
     BlackEnochianDespairFlareStarFeature = 2524,
 
     [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, BLM.Buffs.Firestarter, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, UTL.Clock])]
@@ -635,7 +635,7 @@ public enum CustomComboPreset
     DarkSouleaterCombo = 3201,
 
     [SectionCombo("Single Target")]
-    [IconsCombo([DRK.Bloodspiller, UTL.ArrowLeft, DRK.Souleater, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [IconsCombo([DRK.Souleater, UTL.ArrowLeft, DRK.Bloodspiller, UTL.Blank, UTL.Danger])]
     [ParentCombo(DarkSouleaterCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Souleater Overcap Feature", "Replace Souleater with Bloodspiller when the next combo action would cause the Blood Gauge to overcap.", WAR.JobID)]
@@ -647,26 +647,26 @@ public enum CustomComboPreset
     DarkStalwartSoulCombo = 3202,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([DRK.Quietus, UTL.ArrowLeft, DRK.StalwartSoul, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [IconsCombo([DRK.StalwartSoul, UTL.ArrowLeft, DRK.Quietus, UTL.Blank, UTL.Danger])]
     [ParentCombo(DarkStalwartSoulCombo)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Stalwart Soul Overcap Feature", "Replace Stalwart Soul with Quietus when the next combo action would cause the Blood Gauge to overcap.", WAR.JobID)]
     DarkStalwartSoulOvercapFeature = 3207,
 
     [SectionCombo("Blood Weapon")]
-    [IconsCombo([DRK.Bloodspiller, UTL.ArrowLeft, DRK.Souleater, UTL.Plus, DRK.Quietus, UTL.ArrowLeft, DRK.StalwartSoul])]
+    [IconsCombo([DRK.Souleater, DRK.StalwartSoul, UTL.ArrowLeft, DRK.Bloodspiller, DRK.Quietus, UTL.Blank, DRK.Buffs.Delirium, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Delirium Feature", "Replace Souleater and Stalwart Soul with Bloodspiller (& its combo chain) and Quietus/Impalement when Delirium is active.", DRK.JobID)]
     DarkDeliriumFeature = 3203,
 
     [SectionCombo("Blood Weapon")]
-    [IconsCombo([DRK.BloodWeapon, UTL.ArrowLeft, DRK.CarveAndSpit, DRK.AbyssalDrain])]
+    [IconsCombo([DRK.CarveAndSpit, DRK.AbyssalDrain, UTL.ArrowLeft, DRK.BloodWeapon, UTL.Blank, DRK.BloodWeapon, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Blood Weapon Feature", "Replace Carve and Spit, and Abyssal Drain with Blood Weapon/Delirium when available.", DRK.JobID)]
     DarkBloodWeaponFeature = 3204,
 
     [SectionCombo("Living Shadow")]
-    [IconsCombo([DRK.LivingShadow, UTL.ArrowLeft, DRK.Bloodspiller, UTL.Plus, DRK.LivingShadow, UTL.ArrowLeft, DRK.Quietus])]
+    [IconsCombo([DRK.Bloodspiller, DRK.Quietus, UTL.ArrowLeft, DRK.LivingShadow, UTL.Blank, DRK.LivingShadow, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Living Shadow Feature", "Replace Quietus and Bloodspiller with Living Shadow when available.", DRK.JobID)]
     DarkLivingShadowFeature = 3205,
