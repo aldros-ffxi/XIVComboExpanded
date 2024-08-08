@@ -163,7 +163,7 @@ public enum CustomComboPreset
     // ====================================================================================
     #region ASTROLOGIAN
 
-    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.Combust, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [IconsCombo([AST.Malefic, UTL.ArrowLeft, AST.Combust, UTL.Blank, AST.Debuffs.Combust, UTL.Clock])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Combust", "Replace Malefic with Combust when it is about to run out.", AST.JobID)]
@@ -1087,13 +1087,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Armor Crush / Ninjutsu Feature", "Replace Armor Crush with Ninjutsu if any Mudra are used.", NIN.JobID)]
     NinjaArmorCrushNinjutsuFeature = 3015,
 
-    [IconsCombo([NIN.AeolianEdge, UTL.ArrowLeft, NIN.FleetingRaiju, UTL.Blank, NIN.FleetingRaiju, UTL.Checkmark])]
+    [IconsCombo([NIN.AeolianEdge, UTL.ArrowLeft, NIN.FleetingRaiju, UTL.Blank, NIN.Buffs.RaijuReady, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Aeolian Edge / Raiju Feature", "Replace the Aeolian Edge combo with Fleeting Raiju when available.", NIN.JobID)]
     NinjaAeolianEdgeRaijuFeature = 3013,
 
-    [IconsCombo([NIN.ArmorCrush, UTL.ArrowLeft, NIN.ForkedRaiju, UTL.Blank, NIN.ForkedRaiju, UTL.Checkmark])]
+    [IconsCombo([NIN.ArmorCrush, UTL.ArrowLeft, NIN.ForkedRaiju, UTL.Blank, NIN.Buffs.RaijuReady, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Armor Crush / Raiju Feature", "Replace the Armor Crush combo with Forked Raiju when available.", NIN.JobID)]
@@ -1110,39 +1110,39 @@ public enum CustomComboPreset
     [CustomComboInfo("Hakke Mujinsatsu / Ninjutsu Feature", "Replace Hakke Mujinsatsu with Ninjutsu if any Mudra are used.", NIN.JobID)]
     NinjaHakkeMujinsatsuNinjutsuFeature = 3016,
 
-    [IconsCombo([NIN.Ninjutsu, UTL.ArrowLeft, NIN.ForkedRaiju, UTL.Blank, NIN.Ninjutsu, UTL.Cross])]
+    [IconsCombo([NIN.Ninjutsu, UTL.ArrowLeft, NIN.ForkedRaiju, UTL.Blank, NIN.Buffs.RaijuReady, UTL.Checkmark, NIN.Ninjutsu, UTL.Cross])]
     [SectionCombo("Ninjutsu features")]
     [ConflictingCombos(NinjaNinjutsuFleetingRaijuFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ninjutsu / Forked Raiju Feature", "Replace Ninjutsu with Forked Raiju when available and no Mudra are active.", NIN.JobID)]
     NinjaNinjutsuForkedRaijuFeature = 3017,
 
-    [IconsCombo([NIN.Ninjutsu, UTL.ArrowLeft, NIN.FleetingRaiju, UTL.Blank, NIN.Ninjutsu, UTL.Cross])]
+    [IconsCombo([NIN.Ninjutsu, UTL.ArrowLeft, NIN.FleetingRaiju, UTL.Blank, NIN.Buffs.RaijuReady, UTL.Checkmark, NIN.Ninjutsu, UTL.Cross])]
     [SectionCombo("Ninjutsu features")]
     [ConflictingCombos(NinjaNinjutsuForkedRaijuFeature)]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ninjutsu / Fleeting Raiju Feature", "Replace Ninjutsu with Fleeting Raiju when available and no Mudra are active.", NIN.JobID)]
     NinjaNinjutsuFleetingRaijuFeature = 3018,
 
-    [IconsCombo([NIN.Kassatsu, UTL.ArrowLeft, NIN.TrickAttack, UTL.Blank, NIN.Suiton, UTL.Checkmark])]
+    [IconsCombo([NIN.Kassatsu, UTL.ArrowLeft, NIN.TrickAttack, UTL.Blank, UTL.Blank, NIN.Buffs.ShadowWalker, NIN.Buffs.Hidden, UTL.Checkmark])]
     [SectionCombo("Ninjutsu features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Kassatsu to Trick", "Replace Kassatsu with Trick Attack while Suiton or Hidden is up.\nCooldown tracking plugin recommended.", NIN.JobID)]
     NinjaKassatsuTrickFeature = 3004,
 
-    [IconsCombo([NIN.Chi, UTL.ArrowLeft, NIN.Jin, UTL.Blank, NIN.Kassatsu, UTL.Checkmark])]
+    [IconsCombo([NIN.Chi, UTL.ArrowLeft, NIN.Jin, UTL.Blank, NIN.Buffs.Kassatsu, UTL.Checkmark])]
     [SectionCombo("Ninjutsu features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Kassatsu Chi/Jin Feature", "Replace Chi with Jin while Kassatsu is up if you have Enhanced Kassatsu.", NIN.JobID)]
     NinjaKassatsuChiJinFeature = 3006,
 
-    [IconsCombo([NIN.TenChiJin, UTL.ArrowLeft, NIN.Meisui, UTL.Blank, NIN.Suiton, UTL.Checkmark])]
+    [IconsCombo([NIN.TenChiJin, UTL.ArrowLeft, NIN.Meisui, UTL.Blank, NIN.Buffs.ShadowWalker, UTL.Checkmark])]
     [SectionCombo("Ninjutsu features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ten Chi Jin to Meisui", "Replace Ten Chi Jin (the move) with Meisui while Suiton is up.\nCooldown tracking plugin recommended.", NIN.JobID)]
     NinjaTCJMeisuiFeature = 3005,
 
-    [IconsCombo([NIN.Hide, UTL.ArrowLeft, NIN.Mug, UTL.Blank, NIN.Hide, UTL.OutOfBattle])]
+    [IconsCombo([NIN.Hide, UTL.ArrowLeft, NIN.Mug, UTL.Blank, NIN.Buffs.Hidden, UTL.OutOfBattle])]
     [SectionCombo("Hide features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Hide to Mug/Dokumori", "Replace Hide with Mug/Dokumori while in combat or hidden.", NIN.JobID)]
@@ -1273,7 +1273,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Don't overcap Subtractive", "Replace Fire in Red and Fire II in Red, and their combo chains, with Subtractive Palette if the next cast in the chain would overcap the Palette Gauge.", PCT.JobID)]
     PictomancerSubtractiveAutoCombo = 4205,
 
-    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.SubstractivePalette, UTL.Blank, PCT.SubstractivePalette, UTL.Checkmark])]
+    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.SubstractivePalette, UTL.Blank, PCT.Buffs.SubstractivePalette, UTL.Checkmark])]
     [SectionCombo("Substractive")]
     [AccessibilityCustomCombo]
     [ParentCombo(CustomComboPreset.PictomancerSubtractiveAutoCombo)]
@@ -1302,7 +1302,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Weapon Muse/Motif Combo", "Replace Hammer Motif with Striking Muse when the Weapon Canvas is painted.", PCT.JobID)]
     PictomancerWeaponMotifCombo = 4208,
 
-    [IconsCombo([PCT.HammerMotif, UTL.ArrowLeft, PCT.HammerStamp, PCT.HammerBrush, PCT.PolishingHammer, UTL.Blank, PCT.StrikingMuse, UTL.Checkmark])]
+    [IconsCombo([PCT.HammerMotif, UTL.ArrowLeft, PCT.HammerStamp, PCT.HammerBrush, PCT.PolishingHammer, UTL.Blank, PCT.Buffs.HammerReady, UTL.Checkmark])]
     [SectionCombo("Muses & Motifs")]
     [CustomComboInfo("Hammer Time", "Replace Hammer Motif with Hammer Brush and its combo chain when they are usable.", PCT.JobID)]
     PictomancerWeaponHammerCombo = 4209,
@@ -1312,12 +1312,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Landscape Muse/Motif Combo", "Replace Starry Sky Motif with Starry Muse when the Landscape Canvas is painted.", PCT.JobID)]
     PictomancerLandscapeMotifCombo = 4210,
 
-    [IconsCombo([PCT.StarryMuse, UTL.ArrowLeft, PCT.StarPrism1, UTL.Blank, PCT.StarPrism1, UTL.Checkmark])]
+    [IconsCombo([PCT.StarryMuse, UTL.ArrowLeft, PCT.StarPrism1, UTL.Blank, PCT.Buffs.StarPrismReady, UTL.Checkmark])]
     [SectionCombo("Muses & Motifs")]
     [CustomComboInfo("Landscape Muse/Star Prism Combo", "Replace Starry Muse with Star Prism when it is usable.", PCT.JobID)]
     PictomancerLandscapePrismCombo = 4211,
 
-    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.StarryMuse, UTL.Blank, PCT.StarPrism1, UTL.Checkmark])]
+    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.StarryMuse, UTL.Blank, PCT.Buffs.StarPrismReady, UTL.Checkmark])]
     [SectionCombo("Muses & Motifs")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Star Prism Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Star Prism when you have Star Prism Ready.", PCT.JobID)]
@@ -1328,7 +1328,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Holy Comet Combo", "Replace Holy in White with Comet in Black when usable.", PCT.JobID)]
     PictomancerHolyCometCombo = 4203,
 
-    [IconsCombo([PCT.HolyInWhite, UTL.ArrowLeft, PCT.RainbowDrip, UTL.Blank, PCT.RainbowDrip, UTL.Checkmark])]
+    [IconsCombo([PCT.HolyInWhite, UTL.ArrowLeft, PCT.RainbowDrip, UTL.Blank, PCT.Buffs.RainbowReady, UTL.Checkmark])]
     [SectionCombo("Holy Comet")]
     [ExpandedCustomCombo]
     [ParentCombo(PictomancerHolyCometCombo)]
@@ -1341,7 +1341,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Holy Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Holy or Comet if the next cast would overcap the Paint Gauge.", PCT.JobID)]
     PictomancerHolyAutoCombo = 4204,
 
-    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.RainbowDrip, UTL.Blank, PCT.RainbowDrip, UTL.Checkmark])]
+    [IconsCombo([PCT.FireRed, UTL.ArrowLeft, PCT.RainbowDrip, UTL.Blank, PCT.Buffs.RainbowReady, UTL.Checkmark])]
     [SectionCombo("Rainbow Drip")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Rainbow Autocast", "Replace Fire in Red, Fire II in Red, Blizzard in Cyan, Blizzard II in Cyan, and their combo chains, with Rainbow Drip when you have Rainbow Drip Ready.", PCT.JobID)]
@@ -1753,7 +1753,7 @@ public enum CustomComboPreset
     // ====================================================================================
     #region SAGE
 
-    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Eukrasia, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Eukrasia, UTL.Blank, SGE.Debuffs.EukrasianDosis, UTL.Clock])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
@@ -1766,13 +1766,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
     SageDosisPsyche = 4014,
 
-    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Kardia, UTL.Cross])]
+    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Buffs.Kardion, UTL.Cross])]
     [SectionCombo("Kardia features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Dosis Kardia Feature", "Replace Dosis with Kardia when missing Kardion.", SGE.JobID)]
     SageDosisKardiaFeature = 4010,
 
-    [IconsCombo([SGE.Soteria, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Kardia, UTL.Cross])]
+    [IconsCombo([SGE.Soteria, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Buffs.Kardion, UTL.Cross])]
     [SectionCombo("Kardia features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Soteria Kardia Feature", "Replace Soteria with Kardia when off cooldown and missing Kardion.", SGE.JobID)]
@@ -1952,7 +1952,7 @@ public enum CustomComboPreset
     // ====================================================================================
     #region SCHOLAR
 
-    [IconsCombo([SCH.Ruin, UTL.ArrowLeft, SCH.Bio, UTL.Blank, UTL.Blank, UTL.Clock])]
+    [IconsCombo([SCH.Ruin, UTL.ArrowLeft, SCH.Bio, UTL.Blank, SCH.Debuffs.Bio, UTL.Clock])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Bio", "Replace Ruin and its upgrades with Bio and its upgrades when it is about to run out.", SCH.JobID)]
@@ -2052,7 +2052,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Titan's Favor Ruin Feature", "Replace Ruin with Mountain Buster (oGCD) when available.", SMN.JobID)]
     SummonerRuinTitansFavorFeature = 2713,
 
-    [IconsCombo([SMN.Ruin, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Ruin4, UTL.Checkmark])]
+    [IconsCombo([SMN.Ruin, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Buffs.FurtherRuin, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ruin 4 to Ruin Feature", "Replace Ruin with Ruin4 when available and appropriate.", SMN.JobID)]
@@ -2070,7 +2070,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Titan's Favor Outburst Feature", "Replace Outburst with Mountain Buster (oGCD) when available.", SMN.JobID)]
     SummonerOutburstTitansFavorFeature = 2714,
 
-    [IconsCombo([SMN.Outburst, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Ruin4, UTL.Checkmark])]
+    [IconsCombo([SMN.Outburst, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Buffs.FurtherRuin, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Ruin 4 to Outburst Feature", "Replace Outburst with Ruin4 when available and appropriate.", SMN.JobID)]
@@ -2086,7 +2086,7 @@ public enum CustomComboPreset
     [CustomComboInfo("ES Painflare Feature", "Replace Painflare with Energy Syphon when out of Aetherflow stacks.", SMN.JobID)]
     SummonerESPainflareFeature = 2702,
 
-    [IconsCombo([SMN.SummonBahamut, UTL.ArrowLeft, SMN.LuxSolaris, UTL.Blank, SMN.LuxSolaris, UTL.Checkmark])]
+    [IconsCombo([SMN.SummonBahamut, UTL.ArrowLeft, SMN.LuxSolaris, UTL.Blank, SMN.Buffs.LuxSolarisReady, UTL.Checkmark])]
     [SectionCombo("Summons features")]
     [CustomComboInfo("Summon Lux Solaris Feature", "Replace Summon Bahamut with Lux Solaris when you have Refulgent Lux ready.", SMN.JobID)]
     SummonerSummonLuxSolarisFeature = 2717,
@@ -2109,7 +2109,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Gems Titan's Favor Feature", "Replace Gemshine and Precious Brilliance with Mountain Buster (oGCD) when available.", SMN.JobID)]
     SummonerShinyTitansFavorFeature = 2707,
 
-    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Ruin4, UTL.Checkmark])]
+    [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.Ruin4, UTL.Blank, SMN.Buffs.FurtherRuin,, UTL.Checkmark])]
     [SectionCombo("Gems features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Gems Ruin 4 Feature", "Replace Gemshine and Precious Brilliance with Ruin 4 when available and appropriate.", SMN.JobID)]
@@ -2127,7 +2127,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Radiant Carbuncle Feature", "Replace Radiant Aegis with Summon Carbuncle when no pet has been summoned.", SMN.JobID)]
     SummonerRadiantCarbuncleFeature = 2711,
 
-    [IconsCombo([SMN.RadiantAegis, UTL.ArrowLeft, SMN.LuxSolaris, UTL.Blank, SMN.LuxSolaris, UTL.Checkmark])]
+    [IconsCombo([SMN.RadiantAegis, UTL.ArrowLeft, SMN.LuxSolaris, UTL.Blank, SMN.Buffs.LuxSolarisReady, UTL.Checkmark])]
     [SectionCombo("Carbuncle features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Radiant Lux Solaris Feature", "Replace Radiant Aegis with Lux Solaris when you have Refulgent Lux ready.", SMN.JobID)]
@@ -2374,24 +2374,24 @@ public enum CustomComboPreset
     [CustomComboInfo("Glare 4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
     WhiteMageGlare4Feature = 2407,
 
-    [IconsCombo([WHM.Stone, UTL.ArrowLeft, WHM.Aero, UTL.Blank, UTL.Clock])]
+    [IconsCombo([WHM.Stone, UTL.ArrowLeft, WHM.Aero, UTL.Blank, WHM.Debuffs.Aero, UTL.Clock])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Aero", "Replace Stone and its upgrades with Aero and its upgrades when it is about to run out.", WHM.JobID)]
     WhiteMageDoTFeature = 2409,
 
     [SectionCombo("Afflatus Misery")]
-    [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
+    [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Blank, UTL.Enemy])]
     [CustomComboInfo("Solace into Misery", "Replace Afflatus Solace with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageSolaceMiseryFeature = 2401,
 
     [SectionCombo("Afflatus Misery")]
-    [IconsCombo([WHM.AfflatusRapture, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
+    [IconsCombo([WHM.AfflatusRapture, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Blank, UTL.Enemy])]
     [CustomComboInfo("Rapture into Misery", "Replace Afflatus Rapture with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageRaptureMiseryFeature = 2402,
 
     [SectionCombo("Afflatus Misery")]
-    [IconsCombo([WHM.Holy, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Enemy])]
+    [IconsCombo([WHM.Holy, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Blank, UTL.Enemy])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Holy into Misery", "Replace Holy/Holy 3 with Afflatus Misery when ready and you have an enemy target and 3 Blood Lilies.", WHM.JobID)]
     WhiteMageHolyMiseryFeature = 2405,
