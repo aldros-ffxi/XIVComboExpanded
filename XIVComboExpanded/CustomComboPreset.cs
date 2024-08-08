@@ -792,14 +792,20 @@ public enum CustomComboPreset
     GunbreakerBurstStrikeFeature = 3710,
 
     [SectionCombo("Single Target")]
+    [IconsCombo([GNB.Hypervelocity, UTL.ArrowLeft, GNB.BurstStrike, UTL.Blank, GNB.Buffs.ReadyToBlast, UTL.Checkmark])]
+    [CustomComboInfo("Burst Strike Continuation", "Replace Burst Strike with Continuation moves when appropriate.", GNB.JobID)]
+    GunbreakerBurstStrikeCont = 3703,
+
+    [SectionCombo("Single Target")]
     [IconsCombo([GNB.EyeGouge, UTL.ArrowLeft, GNB.WickedTalon, UTL.ArrowLeft, GNB.AbdomenTear, UTL.ArrowLeft, GNB.SavageClaw, UTL.ArrowLeft, GNB.JugularRip, UTL.ArrowLeft, GNB.GnashingFang])]
     [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerGnashingFangCont = 3702,
 
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cycle, GNB.SonicBreak, UTL.Cycle, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cycle, GNB.DoubleDown, GNB.FatedCircle, UTL.Cycle, GNB.ReignOfBeasts])]
     [SectionCombo("Single Target")]
-    [IconsCombo([GNB.Hypervelocity, UTL.ArrowLeft, GNB.BurstStrike])]
-    [CustomComboInfo("Burst Strike Continuation", "Replace Burst Strike with Continuation moves when appropriate.", GNB.JobID)]
-    GunbreakerBurstStrikeCont = 3703,
+    [SecretCustomCombo]
+    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\nCombo Danger Zone after Keen Edge or Brutal Shell\nCombo Sonic Break after No Mercy\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike\nFollow up Demon Slaughter with Double Down or Fated Circle\nFollow up Bloodfest with the Reign combo", GNB.JobID)]
+    GunbreakerExpandedContinuation = 3715,
 
     [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.DemonSlice])]
@@ -814,18 +820,18 @@ public enum CustomComboPreset
     GunbreakerFatedCircleFeature = 3706,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([GNB.FatedBrand, UTL.ArrowLeft, GNB.FatedCircle])]
+    [IconsCombo([GNB.FatedCircle, UTL.ArrowLeft, GNB.FatedBrand, UTL.Blank, GNB.Buffs.ReadyToFated, UTL.Checkmark])]
     [CustomComboInfo("Fated Circle Continuation", "Replace Fated Circle with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerFatedCircleCont = 3714,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([GNB.DoubleDown, UTL.ArrowLeft, GNB.FatedCircle, GNB.BurstStrike])]
+    [IconsCombo([ GNB.FatedCircle, GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
     GunbreakerDoubleDownFeature = 3709,
 
     [SectionCombo("No Mercy")]
-    [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.NoMercy, UTL.Checkmark])]
+    [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.Buffs.NoMercy, UTL.Checkmark])]
     [ConflictingCombos(GunbreakerNoMercyFeature)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("No Mercy Always Double Down Feature", "Replace No Mercy with Double Down while No Mercy is active.", GNB.JobID)]
@@ -844,7 +850,7 @@ public enum CustomComboPreset
     GunbreakerNoMercyFeature = 3708,
 
     [SectionCombo("Buffs")]
-    [IconsCombo([GNB.Bloodfest, UTL.ArrowLeft, GNB.BurstStrike, GNB.FatedCircle])]
+    [IconsCombo([GNB.BurstStrike, GNB.FatedCircle, UTL.ArrowLeft, GNB.Bloodfest, UTL.Blank, UTL.Blank, UTL.Danger])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Empty Bloodfest Feature", "Replace Burst Strike and Fated Circle with Bloodfest if the powder gauge is empty.", GNB.JobID)]
     GunbreakerEmptyBloodfestFeature = 3707,
@@ -855,10 +861,9 @@ public enum CustomComboPreset
     [CustomComboInfo("Sonic Shock Feature", "Replace both Sonic Break and Bow Shock with the former when it is available and you are not on GCD, and the latter when it is not on CD and either Sonic Break is not available or you are on GCD.", GNB.JobID)]
     GunbreakerBowShockSonicBreakFeature = 3704,
 
-    [SecretCustomCombo]
-    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\nCombo Danger Zone after Keen Edge or Brutal Shell\nCombo Sonic Break after No Mercy\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike\nFollow up Demon Slaughter with Double Down or Fated Circle\nFollow up Bloodfest with the Reign combo", GNB.JobID)]
-    GunbreakerExpandedContinuation = 3715,
-
+    [IconsCombo([GNB.Trajectory, UTL.ArrowLeft, GNB.LightningShot])]
+    [SectionCombo("Level Synchronization")]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Trajectory downgrade when level capped", "Replaces Trajectory with Lightning Shot when below level for it.", GNB.JobID)]
     GunbreakerTrajectoryDowngradeFeature = 3716,
 
