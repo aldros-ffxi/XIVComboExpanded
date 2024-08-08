@@ -1020,7 +1020,7 @@ public class ConfigWindow : Window
         var actionList = Service.DataManager.GameData.Excel.GetSheet<Action>();
         var skill = actionList.GetRow(skillID);
         // Check if the icon isn't Cure's AND isn't actually Cure
-        if (skill.Icon == 405 && skill.RowId != 120)
+        if (skill.Icon == 405 && skill.RowId != 120 && !skill.IsPlayerAction)
             return null;
         return GetIcon((uint)skill.Icon);
     }
@@ -1033,14 +1033,16 @@ public class ConfigWindow : Window
     {
         var statusList = Service.DataManager.GameData.Excel.GetSheet<Status>();
         var status = statusList.GetRow(statusID);
+        return GetIcon((uint)status.Icon);
 
-        List<uint> whiteList = new List<uint>();
-        whiteList.Add((uint)DOL.Buffs.EurekaMoment);
+        // If ever needed for some reason
+        //List<uint> whiteList = new List<uint>();
+        //whiteList.Add((uint)DOL.Buffs.EurekaMoment);
 
-        if (status.ClassJobCategory.Value.Name.RawString.Length == 3 || whiteList.Contains(statusID))
-            return GetIcon((uint)status.Icon);
-        else
-            return GetIcon((uint)statusID);
+        //if (status.ClassJobCategory.Value.Name.RawString.Length == 3 || whiteList.Contains(statusID))
+        //    return GetIcon((uint)status.Icon);
+        //else
+        //    return GetIcon((uint)statusID);
     }
 
     /// <summary>
