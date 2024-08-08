@@ -347,40 +347,40 @@ public enum CustomComboPreset
     // ====================================================================================
     #region BARD
 
-    [IconsCombo([BRD.StraightShot, UTL.ArrowLeft, BRD.HeavyShot])]
+    [IconsCombo([BRD.StraightShot, UTL.ArrowLeft, BRD.HeavyShot, UTL.Blank, BRD.Buffs.HawksEye, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [CustomComboInfo("Heavy Shot into Straight Shot", "Replace Heavy Shot with Straight Shot/Refulgent Arrow when available.", BRD.JobID)]
     BardStraightShotUpgradeFeature = 2302,
 
-    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, UTL.Blank, UTL.Blank, UTL.Danger])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Iron Jaws Feature", "Replace Iron Jaws with Venomous Bite/Windbite depending on which is not present on the target.", BRD.JobID)]
     BardIronJawsFeature = 2308,
 
-    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, BRD.IronJaws, UTL.Cross])]
+    [IconsCombo([BRD.IronJaws, UTL.ArrowLeft, BRD.VenomousBite, UTL.Cycle, BRD.Windbite, UTL.Blank, UTL.Blank, BRD.IronJaws, UTL.Cross])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Locked Iron Jaws", "Replace Iron Jaws with Venomous Bite/Windbite depending on the duration when Iron Jaws is not available.", BRD.JobID)]
     BardPreIronJawsFeature = 2303,
 
-    [IconsCombo([BRD.BurstShot, BRD.QuickNock, UTL.ArrowLeft, BRD.ApexArrow, UTL.Blank, BRD.ApexArrow, UTL.Checkmark])]
+    [IconsCombo([BRD.BurstShot, BRD.QuickNock, UTL.ArrowLeft, BRD.ApexArrow, UTL.Blank, UTL.Blank, BRD.ApexArrow, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replace Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID)]
     BardApexFeature = 2304,
 
-    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,  UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Danger])]
+    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws,  UTL.Blank, BRD.Debuffs.CausticBite, BRD.Debuffs.Windbite, UTL.Danger])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Heavy Shot Iron Jaws Feature", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 5 seconds on the target.", BRD.JobID)]
     BardShotIronJawsFeature = 2322,
 
-    [IconsCombo([UTL.Idea])]
+    [IconsCombo([BRD.HeavyShot, UTL.ArrowLeft, BRD.IronJaws, UTL.Blank, BRD.Debuffs.CausticBite, BRD.Debuffs.Windbite, UTL.Idea])]
     [SectionCombo("Single Target")]
     [ParentCombo(BardShotIronJawsFeature)]
     [SecretCustomCombo]
-    [CustomComboInfo("Heavy Shot Iron Jaws Optimized Option", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 2.8 seconds on the target.", BRD.JobID)]
+    [CustomComboInfo("Heavy Shot Iron Jaws Optimized Option", "Replace Heavy shot with Iron Jaws when Venomous Bite/Windbite is less than 2.8 seconds on the target instead of 5 seconds.", BRD.JobID)]
     BardShotIronJawsOption = 2323,
 
     [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.EmpyrealArrow, UTL.Cycle, BRD.Bloodletter, UTL.Cycle, BRD.Sidewinder])]
@@ -402,12 +402,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Sidewinder Feature", "Replace Sidewinder with Empyreal Arrow depending on which is available.", BRD.JobID)]
     BardSidewinderFeature = 2309,
 
-    [IconsCombo([BRD.QuickNock, UTL.ArrowLeft, BRD.WideVolley, UTL.Blank, BRD.WideVolley, UTL.Checkmark])]
+    [IconsCombo([BRD.QuickNock, UTL.ArrowLeft, BRD.WideVolley, UTL.Blank, UTL.Blank, BRD.Buffs.HawksEye, UTL.Checkmark])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("Quick Nock into Wide Volley/Shadowbite", "Replace Quick Nock with Wide Volley/Shadowbite when available.", BRD.JobID)]
     BardShadowbiteFeature = 2305,
 
-    [IconsCombo([BRD.QuickNock, UTL.ArrowLeft, BRD.Barrage, UTL.Blank, BRD.Barrage, UTL.Clock])]
+    [IconsCombo([BRD.QuickNock, UTL.ArrowLeft, BRD.Barrage, UTL.Blank, UTL.Blank, BRD.Barrage, UTL.Clock])]
     [SectionCombo("Area of Effect")]
     [ParentCombo(BardShadowbiteFeature)]
     [ExpandedCustomCombo]
@@ -420,7 +420,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Rain of Death Feature", "Replace Rain of Death with Empyreal Arrow and Sidewinder depending on which is available.", BRD.JobID)]
     BardRainOfDeathFeature = 2307,
 
-    [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.RainOfDeath, UTL.Blank, BRD.VenomousBite, BRD.Windbite, UTL.Cross])]
+    [IconsCombo([BRD.Bloodletter, UTL.ArrowLeft, BRD.RainOfDeath, UTL.Blank, BRD.Debuffs.CausticBite, BRD.Debuffs.Windbite, UTL.Cross])]
     [SectionCombo("Area of Effect")]
     [SecretCustomCombo]
     [ConflictingCombos(BardBloodletterFeature)]
