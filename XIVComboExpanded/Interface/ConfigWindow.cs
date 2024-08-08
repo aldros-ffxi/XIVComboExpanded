@@ -7,13 +7,13 @@ using System.Numerics;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures;
-using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
+using Newtonsoft.Json.Linq;
 using XIVComboExpandedPlugin.Attributes;
-
+using XIVComboExpandedPlugin.Combos;
 using Action = Lumina.Excel.GeneratedSheets.Action;
 using Language = Lumina.Data.Language;
 
@@ -35,13 +35,15 @@ public class ConfigWindow : Window
     private readonly Dictionary<string, List<(CustomComboPreset Preset, CustomComboInfoAttribute Info)>> groupedPresets;
     private readonly Dictionary<CustomComboPreset, (CustomComboPreset Preset, CustomComboInfoAttribute Info)[]> presetChildren;
     private readonly Vector4 shadedColor = new(0.68f, 0.68f, 0.68f, 1.0f);
+    private XIVComboExpandedPlugin Plugin;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConfigWindow"/> class.
     /// </summary>
-    public ConfigWindow()
+    public ConfigWindow(XIVComboExpandedPlugin Plugin)
         : base("XIV Combo Expanded")
     {
+        this.Plugin = Plugin;
         this.RespectCloseHotkey = true;
 
         this.groupedPresets = Enum
@@ -102,7 +104,7 @@ public class ConfigWindow : Window
                 {
                     ImGui.SameLine(1f);
 
-                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(40f*scale, 36f*scale), 4f*scale))
+                    if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(36f*scale, 36f*scale), 4f*scale))
                     {
                         if ((Service.Configuration.CurrentJobTab == "Adventurer"
                             || Service.Configuration.CurrentJobTab == "Disciples of the Land"
@@ -173,7 +175,7 @@ public class ConfigWindow : Window
                 ImGui.PushStyleColor(ImGuiCol.ChildBg, ImGuiColors.DalamudWhite);
                 ImGui.PushStyleColor(ImGuiCol.Border, ImGuiColors.DalamudWhite2);
 
-                ImGui.Indent(4f);
+                ImGui.Indent(-10f);
                 if (ImGui.BeginChild("TabContent", new Vector2(0, -1), true, ImGuiWindowFlags.NoBackground))
                 {
                     #region COMBOS TAB HEADER
@@ -223,7 +225,6 @@ public class ConfigWindow : Window
                                     previousSection = this.DrawPreset(Tabs.Expanded, preset, info, previousSection, ref i);
                                 }
 
-
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
@@ -242,7 +243,6 @@ public class ConfigWindow : Window
                                     previousSection = this.DrawPreset(Tabs.Accessibility, preset, info, previousSection, ref i);
                                 }
 
-
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
                             }
@@ -260,7 +260,6 @@ public class ConfigWindow : Window
                                 {
                                     previousSection = this.DrawPreset(Tabs.Secret, preset, info, previousSection, ref i);
                                 }
-
 
                                 ImGui.EndChild();
                                 ImGui.EndTabItem();
@@ -289,7 +288,7 @@ public class ConfigWindow : Window
                 ImGui.Spacing();
                 ImGuiWindowFlags window_flags = ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.ChildWindow;
                 ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                ImGui.BeginChild("ChildL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 250f), false, window_flags);
+                ImGui.BeginChild("ChildL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), true, window_flags);
 
                 ImGui.PushFont(UiBuilder.MonoFont);
                 ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
@@ -354,26 +353,38 @@ public class ConfigWindow : Window
                     Service.Configuration.Save();
                 }
 
+                ImGui.Spacing();
+                ImGui.Spacing();
+
+                if (ImGui.Button("Re-open the first time pop-up window"))
+                {
+                    Service.Configuration.OneTimePopUp = true;
+                    Plugin.oneTimeModal.IsOpen = true;
+                    Service.Configuration.Save();
+                }
+
                 ImGui.EndChild();
                 ImGui.PopStyleVar();
                 ImGui.SameLine();
 
                 ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                ImGui.BeginChild("ChildR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 250f), true, window_flags);
+                ImGui.BeginChild("ChildR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 300f), true, window_flags);
 
                 ImGui.PushFont(UiBuilder.MonoFont);
-                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.TankBlue);
                 ImGui.Text($"Expanded Combos");
                 ImGui.PopStyleColor();
                 ImGui.PopFont();
                 ImGui.Separator();
 
-                ImGui.BulletText("Those combos are additional features not included in vanilla XIVCombo.");
+                ImGui.BulletText("Those combos are additional features absent in original XIVCombo.");
                 ImGui.BulletText("They usually aim at further reducing button bloating.");
                 ImGui.BulletText("They are also designed to bring QoL improvements to some jobs.");
                 ImGui.BulletText("They are meant to be used by anyone, whatever their reasons may be.");
 
                 ImGui.Separator();
+                ImGui.Spacing();
+                ImGui.Spacing();
 
                 var showExpanded = Service.Configuration.EnableExpandedCombos;
                 if (ImGui.Checkbox("Enable the expanded features for XIVCombo.", ref showExpanded))
@@ -384,6 +395,7 @@ public class ConfigWindow : Window
                         Service.Configuration.EnableAccessibilityCombos = false;
                         Service.Configuration.EnableSecretCombos = false;
                     }
+
                     Service.Configuration.Save();
                 }
 
@@ -393,10 +405,10 @@ public class ConfigWindow : Window
                 if (Service.Configuration.EnableExpandedCombos)
                 {
                     ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 5f);
-                    ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), false, window_flags);
+                    ImGui.BeginChild("ChildBL", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X * 0.5f - ImGui.GetScrollX(), 300f), true, window_flags);
 
                     ImGui.PushFont(UiBuilder.MonoFont);
-                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
                     ImGui.Text($"Accessibility Combos");
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
@@ -408,12 +420,14 @@ public class ConfigWindow : Window
                     ImGui.BulletText("However, they definitely won't make you a better player.");
 
                     ImGui.Separator();
+                    ImGui.Spacing();
+                    ImGui.Spacing();
 
                     var showAccessibility = Service.Configuration.EnableAccessibilityCombos;
                     if (ImGui.Checkbox("Enable accessibility combos.", ref showAccessibility))
                     {
                         Service.Configuration.EnableAccessibilityCombos = showAccessibility;
-                        if(!showAccessibility) Service.Configuration.EnableSecretCombos = false;
+                        if (!showAccessibility) Service.Configuration.EnableSecretCombos = false;
                         Service.Configuration.Save();
                     }
 
@@ -428,17 +442,21 @@ public class ConfigWindow : Window
                         ImGui.BeginChild("ChildBR", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X - ImGui.GetScrollX(), 300f), true, window_flags);
 
                         ImGui.PushFont(UiBuilder.MonoFont);
-                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.ParsedGold);
+                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DPSRed);
                         ImGui.Text($"Secret Combos");
                         ImGui.PopStyleColor();
                         ImGui.PopFont();
                         ImGui.Separator();
 
                         ImGui.BulletText("Those combos are optimization routes which give little benefits.");
-                        ImGui.BulletText("They often have to unintuitive behavior or specific rotation routes.");
+                        ImGui.BulletText("They often lead to an unintuitive behavior or specific rotation routes.");
                         ImGui.BulletText("They generally require a heavy knowledge of your job.");
                         ImGui.BulletText("They are niche options, and probably pointless for most players.");
+
                         ImGui.Separator();
+                        ImGui.Spacing();
+                        ImGui.Spacing();
+
                         var showSecrets = Service.Configuration.EnableSecretCombos;
                         if (ImGui.Checkbox("Enable secret forbidden knowledge.\nThis option requires the accessibility combos to be enabled.", ref showSecrets))
                         {
@@ -466,15 +484,13 @@ public class ConfigWindow : Window
 
                 var changelog = new Dictionary<string, string[]>()
                 {
-                    { "v3", ["dummy (like me)"] },
-                    { "v2", ["data"] },
-                    { "v1", ["text", "can be on 2 lines I think", "and even three wooooo"] },
+                    { "v2.0.0.0", ["Initial re-release"] },
                 };
 
 
                 foreach (var (version, info) in changelog)
                 {
-                    if (ImGui.CollapsingHeader(version))
+                    if (ImGui.CollapsingHeader(version, ImGuiTreeNodeFlags.DefaultOpen))
                     {
                         ImGui.PushItemWidth(200);
 
@@ -503,8 +519,6 @@ public class ConfigWindow : Window
             #region ABOUT TAB
             if (ImGui.BeginTabItem("About"))
             {
-
-
                 ImGui.Separator();
                 ImGui.Spacing();
 
@@ -518,12 +532,12 @@ public class ConfigWindow : Window
                 ImGui.Separator();
                 ImGui.Spacing();
 
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && Service.Configuration.IsEnabled(preset)).Count()} combos are currently enabled.");
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Classic combos are available in total.");
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Expanded combos are available in total.");
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Accessibility combos are available in total.");
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && Service.Configuration.IsSecret(preset)).Count()} Secret combos are available in total.");
-                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled).Count()} combos are available in total.");
+                ImGui.BulletText($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && Service.Configuration.IsEnabled(preset)).Count()} combos are currently enabled.");
+                ImGui.BulletText($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Classic combos are available.");
+                ImGui.BulletText($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Expanded combos are available.");
+                ImGui.BulletText($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && Service.Configuration.IsAccessible(preset) && !Service.Configuration.IsSecret(preset)).Count()} Accessibility combos are available.");
+                ImGui.BulletText($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled && !Service.Configuration.IsExpanded(preset) && !Service.Configuration.IsAccessible(preset) && Service.Configuration.IsSecret(preset)).Count()} Secret combos are available.");
+                ImGui.Text($"{Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset > 100 && preset != CustomComboPreset.Disabled).Count()} total combos are available.");
 
                 ImGui.Separator();
                 ImGui.Spacing();
@@ -797,6 +811,7 @@ public class ConfigWindow : Window
             int it = 0;
             foreach (var iconId in icons)
             {
+                ImGui.AlignTextToFramePadding();
                 bool isStatus = false;
                 bool isUTL = false;
                 string hoverName = string.Empty;
@@ -820,16 +835,18 @@ public class ConfigWindow : Window
 
                 if (isStatus)
                 {
-                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
-                    ImGui.SameLine(0, 0);
-                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(18f * scale, 24f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 4f);
+                    ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(24f * scale, 32f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 4f);
                     hoverName = GetStatusName(iconId);
                 }
                 else if (isUTL)
                 {
                     ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(2f * scale, 24f * scale));
                     ImGui.SameLine(0, 0);
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 3f);
                     ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(20f * scale, 20f * scale));
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 3f);
                 }
                 else
                 {
@@ -845,12 +862,6 @@ public class ConfigWindow : Window
                         ImGui.TextUnformatted(hoverName);
                         ImGui.EndTooltip();
                     }
-                }
-
-                if (isStatus)
-                {
-                    ImGui.SameLine(0, 0);
-                    ImGui.Image(GetIcon(IconsComboAttribute.Blank).GetWrapOrEmpty().ImGuiHandle, new System.Numerics.Vector2(3f * scale, 24f * scale));
                 }
 
                 if (isUTL)
@@ -1006,10 +1017,14 @@ public class ConfigWindow : Window
     /// <param name="skillID">ID of the skill.</param>
     private static ISharedImmediateTexture GetSkillIcon(uint skillID)
     {
+
+        List<uint> whiteList = new List<uint>();
+        whiteList.Add((uint)ADV.VariantRaise2);
+
         var actionList = Service.DataManager.GameData.Excel.GetSheet<Action>();
         var skill = actionList.GetRow(skillID);
         // Check if the icon isn't Cure's AND isn't actually Cure
-        if (skill.Icon == 405 && skill.RowId != 120)
+        if ((skill.Icon == 405 && skill.RowId != 120) || (!skill.IsPlayerAction && skill.ClassJobLevel == 0) && !whiteList.Contains(skillID))
             return null;
         return GetIcon((uint)skill.Icon);
     }
@@ -1022,11 +1037,16 @@ public class ConfigWindow : Window
     {
         var statusList = Service.DataManager.GameData.Excel.GetSheet<Status>();
         var status = statusList.GetRow(statusID);
+        return GetIcon((uint)status.Icon);
 
-        if (status.ClassJobCategory.Value.Name.RawString.Length == 3)
-            return GetIcon((uint)status.Icon);
-        else
-            return GetIcon((uint)statusID);
+        // If ever needed for some reason
+        //List<uint> whiteList = new List<uint>();
+        //whiteList.Add((uint)DOL.Buffs.EurekaMoment);
+
+        //if (status.ClassJobCategory.Value.Name.RawString.Length == 3 || whiteList.Contains(statusID))
+        //    return GetIcon((uint)status.Icon);
+        //else
+        //    return GetIcon((uint)statusID);
     }
 
     /// <summary>

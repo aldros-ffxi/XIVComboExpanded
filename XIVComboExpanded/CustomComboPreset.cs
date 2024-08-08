@@ -149,15 +149,15 @@ public enum CustomComboPreset
     [SectionCombo("Casters & Healers Role Actions")]
     [IconsCombo([ADV.LucidDreaming, UTL.ArrowLeft, UTL.ArrowLeft, UTL.ArrowLeft, UTL.Danger])]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Automatic Dreams", "Replace EVERY SPELL AND ABILITY with Lucid Dreaming whenever your MP drop under 5000, it's off cooldown and you are a Healer or Caster. Use with caution.", ADV.JobID)]
+    [CustomComboInfo("Automatic Dreams", "Replace EVERY SPELL AND ABILITY with Lucid Dreaming whenever your MP drop under 5000, it's off cooldown and you are a Healer or Caster (except BLM/THM). Use with caution.", ADV.JobID)]
     AdvAutoLucidDreamingFeature = 1008,
 
     [SectionCombo("Casters & Healers Role Actions")]
-    [IconsCombo([ADV.LucidDreaming, UTL.Forbidden])]
+    [IconsCombo([ADV.LucidDreaming, UTL.Idea])]
     [ParentCombo(AdvAutoLucidDreamingFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Disable for BLM", "Doesn't apply this feature to Black Mage nor to Thaumaturge.", ADV.JobID)]
-    AdvDisableBLMLucidFeature = 1009,
+    [CustomComboInfo("Enable for BLM", "Also apply this feature to Black Mage and Thaumaturge\nAre you REALLY sure you want to do this?.", ADV.JobID)]
+    AdvEnableBLMLucidFeature = 1009,
 
     #endregion
     // ====================================================================================
@@ -242,7 +242,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Enochian Despair into Flare Star Feature", "Replace Fire 4 and Blizzard 4 with Flare Star when you have 6 astral soul and 0 mana, or when optimal.\n\nSince Despair refreshes Astral Fire, casting Flare Star afterwards is safer instead of cramming it Fire 4s. Exceptions are during the Dawntrail opener, or manafont is used before casting Flare Star from the previous fire phase.", BLM.JobID)]
     BlackEnochianDespairFlareStarFeature = 2524,
 
-    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, UTL.Clock])]
+    [IconsCombo([BLM.Fire4, BLM.Blizzard4, UTL.ArrowLeft, BLM.Buffs.Firestarter, BLM.Fire3, UTL.Blank, BLM.Paradox, UTL.Blank, ADV.Swiftcast, BLM.Triplecast, BLM.Despair, UTL.Blank, UTL.Clock])]
     [SectionCombo("Single Target")]
     [ParentCombo(BlackEnochianFeature)]
     [AccessibilityCustomCombo]
@@ -1400,23 +1400,30 @@ public enum CustomComboPreset
     [CustomComboInfo("Scythe Combo", "Replace Nightmare Scythe with its combo chain.", RPR.JobID)]
     ReaperScytheCombo = 3902,
 
-    [IconsCombo([RPR.SoulScythe, UTL.ArrowLeft, UTL.Idea, RPR.GrimSwathe])]
-    [SectionCombo("Area of Effect")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul (Scythe) Overcap Feature", "Replace Soul Scythe with Grim Swathe when not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
-    ReaperSoulScytheOvercapFeature = 3935,
-
     [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.HarvestMoon])]
     [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Scythe Harvest Moon Feature", "Replace Nightmare Scythe with Harvest Moon when Soulsow is active and you have a target.", RPR.JobID)]
     ReaperScytheHarvestMoonFeature = 3932,
 
+    [IconsCombo([RPR.SoulScythe, UTL.ArrowLeft, UTL.Idea, RPR.GrimSwathe])]
+    [SectionCombo("Area of Effect")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Soul (Scythe) Overcap Feature", "Replace Soul Scythe with Grim Swathe when not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
+    ReaperSoulScytheOvercapFeature = 3935,
+
     [IconsCombo([RPR.GrimSwathe, UTL.ArrowLeft, RPR.Gluttony])]
     [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Grim Swathe Gluttony Feature", "Replace Grim Swathe with Gluttony when available.", RPR.JobID)]
     ReaperGrimSwatheGluttonyFeature = 3916,
+
+    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gibbet])]
+    [SectionCombo("Area of Effect")]
+    [ConflictingCombos(ReaperShadowGallowsFeature)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
+    ReaperShadowGibbetFeature = 3906,
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
@@ -1432,6 +1439,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Slice Gallows Feature", "Replace Infernal Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
     ReaperSliceGallowsFeature = 3904,
 
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gibbet])]
+    [SectionCombo("Soul Reaver")]
+    [ConflictingCombos(ReaperSoulGallowsFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
+    ReaperSoulGibbetFeature = 3926,
+
     [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSoulGibbetFeature)]
@@ -1439,26 +1453,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Soul Gallows Feature", "Replace Soul Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
     ReaperSoulGallowsFeature = 3925,
 
-    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gallows])]
-    [SectionCombo("Soul Reaver")]
-    [ConflictingCombos(ReaperSoulGallowsFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
-    ReaperSoulGibbetFeature = 3926,
-
     [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperShadowGibbetFeature)]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Shadow Gallows Feature", "Replace Shadow of Death with Gallows while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
     ReaperShadowGallowsFeature = 3905,
-
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
-    [SectionCombo("Soul Reaver")]
-    [ConflictingCombos(ReaperShadowGallowsFeature)]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
-    ReaperShadowGibbetFeature = 3906,
 
     [IconsCombo([RPR.Gallows, RPR.Gibbet, UTL.Idea])]
     [SectionCombo("Soul Reaver")]
@@ -1760,6 +1760,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Auto Eukrasian Dosis", "Replace Dosis with Eukrasia when Eukrasian Dosis is about to run out.", SGE.JobID)]
     SageDoTFeature = 4012,
 
+    [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Clock])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(SageDoTFeature)]
+    [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
+    SageDosisPsyche = 4014,
+
     [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Kardia, UTL.Cross])]
     [SectionCombo("Kardia features")]
     [ExpandedCustomCombo]
@@ -1809,10 +1816,17 @@ public enum CustomComboPreset
     SagePhlegmaToxikon = 4007,
 
     [IconsCombo([SGE.Toxikon, UTL.ArrowLeft, SGE.Phlegma, UTL.Blank, SGE.Phlegma, UTL.Checkmark])]
-    [SectionCombo("Phlegma features")]
+    [SectionCombo("Toxicon features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Toxikon into Phlegma Feature", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
     SageToxikonPhlegma = 4011,
+
+    [IconsCombo([SGE.Toxikon, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Checkmark])]
+    [SectionCombo("Toxicon features")]
+    [AccessibilityCustomCombo]
+    [ParentCombo(SageToxikonPhlegma)]
+    [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
+    SagePsycheToxikonFeature = 4013,
 
     [IconsCombo([SGE.Druochole, UTL.ArrowLeft, SGE.Taurochole, UTL.Blank, SGE.Druochole, UTL.Checkmark])]
     [SectionCombo("Somethingchole features")]
@@ -1825,10 +1839,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Taurochole into Druochole Feature", "Replace Taurochole with Druochole when on cooldown", SGE.JobID)]
     SageTaurocholeDruocholeFeature = 4001,
-
-    [ParentCombo(SageToxikonPhlegma)]
-    [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
-    SagePsycheToxikonFeature = 4013,
 
     #endregion
     // ====================================================================================
@@ -2455,7 +2465,7 @@ public enum CustomComboPreset
     DolCastLightElectricCurrentFeature = 51007,
 
     [SectionCombo("Disciple of the Land")]
-    [IconsCombo([DOL.AgelessWords, UTL.ArrowLeft, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld])]
+    [IconsCombo([DOL.AgelessWords, DOL.SolidReason, UTL.ArrowLeft, DOL.BtnWiseToTheWorld, DOL.MinWiseToTheWorld, UTL.Blank, DOL.Buffs.EurekaMoment, UTL.Checkmark])]
     [ExpandedCustomCombo]
     [CustomComboInfo("Eureka Feature", "Replace Ageless Words and Solid Reason with Wise to the World when available.", DOL.JobID)]
     DolEurekaFeature = 51001,

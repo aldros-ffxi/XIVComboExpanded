@@ -62,10 +62,9 @@ public class PluginConfiguration : IPluginConfiguration
     public HashSet<CustomComboPreset> EnabledActions { get; set; } = new();
 
     /// <summary>
-    /// Gets or sets the collection of enabled combos.
+    /// Gets or sets the first time pop-up bool.
     /// </summary>
-    [JsonProperty("EnabledActionsV4")]
-    public HashSet<CustomComboPreset> EnabledActions4 { get; set; } = new();
+    public bool OneTimePopUp { get; set; } = false;
 
     /// <summary>
     /// Gets or sets a value indicating whether to enable the plugin or not.
@@ -95,7 +94,7 @@ public class PluginConfiguration : IPluginConfiguration
     /// Gets or sets a value indicating whether to allow and display secret combos.
     /// </summary>
     [JsonProperty("SecretUnlock")]
-    public bool UnlockSecretCombos { get; set; } = false;
+    public bool UnlockSecretCombos { get; set; } = true;
 
     /// <summary>
     /// Gets or sets a value indicating which is the current tab.
