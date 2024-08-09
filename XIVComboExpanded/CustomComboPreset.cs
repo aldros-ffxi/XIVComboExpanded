@@ -1189,13 +1189,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
     PaladinComboDivineMightFeature = 1912,
 
-    [IconsCombo([PLD.HolySpirit, UTL.ArrowLeft, PLD.ShieldLob])]
-    [SectionCombo("Combined/Other")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Holy Spirit Level Sync", "Replace Holy Spirit with Shield Lob when below level 64 in synced content.", PLD.JobID)]
-    PaladinHolySpiritLevelSyncFeature = 1916,
-
-    [IconsCombo([UTL.Idea, PLD.CircleOfScorn, PLD.SpiritsWithin, PLD.Expiacion])]
+    [IconsCombo([ PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
     [SectionCombo("Combined/Other")]
     [SecretCustomCombo]
     [CustomComboInfo("Scornful Spirits Feature", "Replace Spirits Within/Expiacion and Circle of Scorn with whichever is available soonest.", PLD.JobID)]
@@ -1230,7 +1224,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Combo Confiteor Feature", "Replace Royal Authority and Prominence with Confiteor and its combo chain when available.", PLD.JobID)]
     PaladinComboConfiteorFeature = 1917,
 
-    [IconsCombo([UTL.Idea, PLD.HolyCircle, PLD.Atonement, PLD.Supplication, PLD.Sepulchre, PLD.GoringBlade])]
+    [IconsCombo([PLD.HolyCircle, PLD.Atonement, PLD.Supplication, PLD.Sepulchre, PLD.GoringBlade, UTL.Blank, UTL.Idea])]
     [SectionCombo("Cooldowns")]
     [SecretCustomCombo]
     [ParentCombo(PaladinComboConfiteorFeature)]
@@ -1260,6 +1254,12 @@ public enum CustomComboPreset
     [AccessibilityCustomCombo]
     [CustomComboInfo("Goring Blade before Confiteor", "Use Goring Blade before the Confiteor combo, rather than after it, for any combos that combine the two on the same button.\nNOTE: This is generally not recommended, from an optimization perspective, but can help avoid lost Goring Blade usage if you have to disengage from the boss shortly after using Requiescat.  Confiteor will still be used over Goring Blade if you're not currently in melee range.", PLD.JobID)]
     PaladinGoringBladeBeforeConfiteorFeature = 1923,
+
+    [IconsCombo([PLD.HolySpirit, UTL.ArrowLeft, PLD.ShieldLob])]
+    [SectionCombo("Level Synchronization")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Holy Spirit Level Sync", "Replace Holy Spirit with Shield Lob when below level 64 in synced content.", PLD.JobID)]
+    PaladinHolySpiritLevelSyncFeature = 1916,
 
     #endregion
     // ====================================================================================
