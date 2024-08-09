@@ -99,11 +99,11 @@ public class ConfigWindow : Window
                 float scale = 1f;
                 if (Service.Configuration.BigJobIcons)
                     scale = 1.5f;
-
                 if (ImGui.BeginChild("TabButtons", new System.Numerics.Vector2(36f*scale, 0f), false, ImGuiWindowFlags.NoScrollbar))
                 {
                     ImGui.SameLine(1f);
 
+                    ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new System.Numerics.Vector2(4f, 3f));
                     if (ImGui.BeginTable("TabButtonsTable", 1, ImGuiTableFlags.None, new System.Numerics.Vector2(36f*scale, 36f*scale), 4f*scale))
                     {
                         if ((Service.Configuration.CurrentJobTab == "Adventurer"
@@ -163,11 +163,11 @@ public class ConfigWindow : Window
                         }
 
                         ImGui.EndTable();
+                        ImGui.PopStyleVar();
                     }
 
                     ImGui.EndChild();
                 }
-
                 ImGui.SameLine();
 
                 ImGui.BeginGroup();
