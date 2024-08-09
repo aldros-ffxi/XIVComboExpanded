@@ -64,7 +64,7 @@ public class PluginConfiguration : IPluginConfiguration
     /// <summary>
     /// Gets or sets the first time pop-up bool.
     /// </summary>
-    public bool OneTimePopUp { get; set; } = false;
+    public bool OneTimePopUp { get; set; } = true;
 
     /// <summary>
     /// Gets or sets a value indicating whether to enable the plugin or not.
