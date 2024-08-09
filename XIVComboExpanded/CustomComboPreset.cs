@@ -452,6 +452,7 @@ public enum CustomComboPreset
     BardExpiringPerfectRainOfDeathFeature = 2319,
 
     [IconsCombo([BRD.MagesBallad, UTL.ArrowLeft, BRD.WanderersMinuet, UTL.Cycle, BRD.MagesBallad, UTL.Cycle, BRD.ArmysPaeon])]
+    [ExpandedCustomCombo]
     [SectionCombo("Song features")]
     [CustomComboInfo("Cycling Song Feature", "Replace Mage's Ballad with Wanderer's Minuet, Mage's Ballad, and Army's Paeon, while the previous is on cooldown.", BRD.JobID)]
     BardCyclingSongFeature = 2317,
@@ -989,6 +990,7 @@ public enum CustomComboPreset
 
     [IconsCombo([MNK.Bootshine, MNK.DragonKick, MNK.TrueStrike, MNK.TwinSnakes, MNK.SnapPunch, MNK.Demolish, UTL.ArrowLeft, MNK.MasterfulBlitz, UTL.Blank, UTL.Blank, UTL.Checkmark])]
     [SectionCombo("Masterful Blitz")]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Single Target Perfect Balance Feature", "Replace Bootshine/Leaping Opo, Dragon Kick, True Strike/Rising Raptor, Twin Snakes, Snap Punch/Pouncing Coeurl and Demolish with Masterful Blitz if you have 3 Beast Chakra.", MNK.JobID)]
     MonkSTBalanceFeature = 2005,
 
@@ -1213,7 +1215,6 @@ public enum CustomComboPreset
 
     [IconsCombo([PLD.Requiescat, UTL.ArrowLeft, PLD.Confiteor, PLD.BladeOfFaith, PLD.BladeOfTruth, PLD.BladeOfValor, PLD.BladeOfHonor])]
     [SectionCombo("Cooldowns")]
-    [ExpandedCustomCombo]
     [CustomComboInfo("Requiescat/Imperator Confiteor", "Replace Requiescat/Imperator with Confiteor and combo chain when available, and then with Holy Spirit if there are remaining charges.", PLD.JobID)]
     PaladinRequiescatConfiteorFeature = 1905,
 
@@ -1491,8 +1492,9 @@ public enum CustomComboPreset
 
     [IconsCombo([RPR.Enshroud, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Enshroud")]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Enshroud Perfectio Feature", "Replace Enshroud with Perfectio when available.", RPR.JobID)]
-    ReaperEnshroudPerfectioFeature = 3944,
+    ReaperEnshroudPerfectioFeature = 3945,
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.LemuresSlice, UTL.Blank, UTL.Blank, UTL.Idea])]
     [SectionCombo("Enshroud")]
@@ -1599,7 +1601,8 @@ public enum CustomComboPreset
 
     [IconsCombo([RPR.PlentifulHarvest, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]
-    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available.  Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled.", RPR.JobID)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available. Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled.", RPR.JobID)]
     ReaperPerfectHarvestFeature = 3943,
 
     [IconsCombo([RPR.InfernalSlice, RPR.NightmareScythe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
@@ -1628,6 +1631,7 @@ public enum CustomComboPreset
 
     [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.Soulsow])]
     [SectionCombo("Out of Combat")]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Harpe Soulsow Feature", "Replace Harpe with Soulsow when not active and out of combat or you have no target.", RPR.JobID)]
     ReaperHarpeHarvestSoulsowFeature = 3936,
 
@@ -2195,16 +2199,15 @@ public enum CustomComboPreset
     #region VIPER
 
     [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
+    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
+    ViperSteelTailFeature = 4101,
+
+    [SectionCombo("Standard Combos")]
     [IconsCombo([VPR.SteelFangs, UTL.Cycle, VPR.ReavingFangs, UTL.Blank, VPR.SteelMaw, UTL.Cycle, VPR.ReavingMaw])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Steel Reaving", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever is currently empowered. Only affects the first combo hit.", VPR.JobID)]
     ViperAutoSteelReavingFeature = 4124,
-
-    [SectionCombo("Standard Combos")]
-    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
-    ViperSteelTailFeature = 4101,
 
     [SectionCombo("Vice Combos")]
     [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil, VPR.HuntersDen, VPR.SwiftskinsDen])]
@@ -2231,13 +2234,12 @@ public enum CustomComboPreset
     ViperAutoViceAoEFeature = 4110,
 
     [SectionCombo("Reawaken")]
-    [IconsCombo([VPR.FirstGeneration, UTL.ArrowLeft, VPR.FirstLegacy])]
-    [ExpandedCustomCombo]
+    [IconsCombo([VPR.FirstGeneration, VPR.FirstLegacy, VPR.SecondGeneration, VPR.SecondLegacy, VPR.ThirdGeneration, VPR.ThirdLegacy, VPR.FourthGeneration, VPR.FourthLegacy, UTL.Blank])]
     [CustomComboInfo("Generation Legacy Feature", "Replace the Generation skills with their respective Legacies.", VPR.JobID)]
     ViperGenerationLegaciesFeature = 4105,
 
     [SectionCombo("Reawaken")]
-    [IconsCombo([VPR.Reawaken, UTL.ArrowLeft, VPR.FirstLegacy, VPR.FirstLegacy, UTL.Cycle, UTL.Idea])]
+    [IconsCombo([VPR.Reawaken, UTL.ArrowLeft, VPR.FirstGeneration, VPR.FirstLegacy, VPR.SecondGeneration, VPR.SecondLegacy, VPR.ThirdGeneration, VPR.ThirdLegacy, VPR.FourthGeneration, VPR.FourthLegacy, VPR.Ouroboros])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken with the Generation skills and their respective Legacies in order.", VPR.JobID)]
     ViperReawakenAIOFeature = 4123,
