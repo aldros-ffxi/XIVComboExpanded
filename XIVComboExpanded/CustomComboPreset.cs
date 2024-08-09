@@ -1590,13 +1590,18 @@ public enum CustomComboPreset
     [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest])]
     [SectionCombo("Miscellaneous")]
     [CustomComboInfo("Arcane Harvest Feature", "Replace Arcane Circle with Plentiful Harvest when you have stacks of Immortal Sacrifice.", RPR.JobID)]
-    ReaperHarvestFeature = 3908,
+    ReaperArcaneHarvestFeature = 3908,
+
+    [IconsCombo([RPR.PlentifulHarvest, UTL.ArrowLeft, RPR.Perfectio])]
+    [SectionCombo("Miscellaneous")]
+    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available.  Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled..", RPR.JobID)]
+    ReaperPerfectHarvestFeature = 3943,
 
     [IconsCombo([RPR.InfernalSlice, RPR.NightmareScythe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Perfectio Feature", "Replace Infernal Slice and Nightmare Scythe with Perfectio when under Perfectio Parata.", RPR.JobID)]
-    ReaperPerfectioFeature = 3942,
+    [CustomComboInfo("Combo Perfectio Feature", "Replace Infernal Slice and Nightmare Scythe with Perfectio when under Perfectio Parata.", RPR.JobID)]
+    ReaperComboPerfectioFeature = 3942,
 
     [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]

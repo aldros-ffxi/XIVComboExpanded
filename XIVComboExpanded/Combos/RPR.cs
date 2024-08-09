@@ -173,7 +173,7 @@ internal class ReaperSlice : CustomCombo
                     return OriginalHook(RPR.Gallows);
             }
 
-            if (IsEnabled(CustomComboPreset.ReaperPerfectioFeature))
+            if (IsEnabled(CustomComboPreset.ReaperComboPerfectioFeature))
             {
                 if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
                     return RPR.Perfectio;
@@ -251,7 +251,7 @@ internal class ReaperScythe : CustomCombo
                     return RPR.Soulsow;
             }
 
-            if (IsEnabled(CustomComboPreset.ReaperPerfectioFeature))
+            if (IsEnabled(CustomComboPreset.ReaperComboPerfectioFeature))
             {
                 if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
                     return RPR.Perfectio;
@@ -560,10 +560,35 @@ internal class ReaperArcaneCircle : CustomCombo
     {
         if (actionID == RPR.ArcaneCircle)
         {
-            if (IsEnabled(CustomComboPreset.ReaperHarvestFeature))
+            if (IsEnabled(CustomComboPreset.ReaperArcaneHarvestFeature))
             {
                 if (level >= RPR.Levels.PlentifulHarvest && HasEffect(RPR.Buffs.ImmortalSacrifice))
                     return RPR.PlentifulHarvest;
+            }
+
+            if (IsEnabled(CustomComboPreset.ReaperPerfectHarvestFeature))
+            {
+                if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
+                    return RPR.Perfectio;
+            }
+        }
+
+        return actionID;
+    }
+}
+
+internal class ReaperPlentifulHarvest : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.RprAny;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == RPR.PlentifulHarvest)
+        {
+            if (IsEnabled(CustomComboPreset.ReaperPerfectHarvestFeature))
+            {
+                if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
+                    return RPR.Perfectio;
             }
         }
 
