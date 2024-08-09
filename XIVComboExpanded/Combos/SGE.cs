@@ -33,6 +33,7 @@ internal static class SGE
         Holos = 24310,
         Panhaima = 24311,
         Phlegma3 = 24313,
+        Dyskrasia2 = 24315,
         Krasis = 24317,
         Pneuma = 24318,
         Psyche = 37033;
@@ -116,6 +117,13 @@ internal class SageDosis : CustomCombo
                     return SGE.Kardia;
             }
         }
+
+        if ((actionID == SGE.Dyskrasia || actionID == SGE.Dyskrasia2) && IsEnabled(CustomComboPreset.SageDosisPsyche))
+        {
+            if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
+                return OriginalHook(SGE.Psyche);
+        }
+
 
         return actionID;
     }

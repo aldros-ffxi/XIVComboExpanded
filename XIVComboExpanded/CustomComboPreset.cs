@@ -1815,6 +1815,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
     SageDosisPsyche = 4014,
 
+    [IconsCombo([SGE.Dyskrasia, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Clock])]
+    [SectionCombo("Area of Effect")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Dyskrasia Psyche Feature", "Replace Dyskrasia with Psyche when cooldown is available.", SGE.JobID)]
+    SagePsycheDyskrasiaFeature = 4015,
+
     [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Kardia, UTL.Blank, SGE.Buffs.Kardion, UTL.Cross])]
     [SectionCombo("Kardia features")]
     [ExpandedCustomCombo]
@@ -2421,17 +2427,23 @@ public enum CustomComboPreset
     // ====================================================================================
     #region WHITE MAGE
 
-    [SectionCombo("Single Target")]
-    [IconsCombo([WHM.Glare3, UTL.ArrowLeft, WHM.Glare4])]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Glare 4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
-    WhiteMageGlare4Feature = 2407,
-
     [IconsCombo([WHM.Stone, UTL.ArrowLeft, WHM.Aero, UTL.Blank, WHM.Debuffs.Aero, UTL.Clock])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Aero", "Replace Stone and its upgrades with Aero and its upgrades when it is about to run out.", WHM.JobID)]
     WhiteMageDoTFeature = 2409,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([WHM.Glare3, UTL.ArrowLeft, WHM.Glare4, UTL.Blank, WHM.Buffs.Glare4Ready, UTL.Checkmark])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Glare 4 Feature", "Replace Glare 3 with Glare 4 when a stack is available.", WHM.JobID)]
+    WhiteMageGlare4Feature = 2407,
+
+    [SectionCombo("Area of Effect")]
+    [IconsCombo([WHM.Holy3, UTL.ArrowLeft, WHM.Glare4, UTL.Blank, WHM.Buffs.Glare4Ready, UTL.Checkmark])]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Glare 4 AoE Feature", "Replace Holy 3 with Glare 4 when a stack is available.", WHM.JobID)]
+    WhiteMageGlare4AoEFeature = 2410,
 
     [SectionCombo("Afflatus Misery")]
     [IconsCombo([WHM.AfflatusSolace, UTL.ArrowLeft, WHM.AfflatusMisery, UTL.Blank, UTL.Blank, UTL.Enemy])]

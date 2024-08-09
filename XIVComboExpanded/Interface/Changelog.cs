@@ -16,7 +16,9 @@ namespace XIVComboExpanded.Interface
                         "v2.0.0.3",
                         [
                             "WAR's Storm's Path Combo logic fix (electric boogaloo).",
-                            "PLD's Divine Might Feature fix (also electric boogaloo)."
+                            "PLD's Divine Might Feature logic fix (also electric boogaloo).",
+                            "Added WHM's Glare 4 AoE Feature.",
+                            "Added SGE's Dyskrasia Psyche Feature",
                         ]
                     },
                     {

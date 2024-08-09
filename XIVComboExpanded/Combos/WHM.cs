@@ -212,6 +212,13 @@ internal class WhiteMageGlare4Feature : CustomCombo
             }
         }
 
+        if ((actionID == WHM.Holy || actionID == WHM.Holy3) && IsEnabled(CustomComboPreset.WhiteMageGlare4AoEFeature))
+        {
+            if (level >= WHM.Levels.Glare4 && HasEffect(WHM.Buffs.Glare4Ready))
+                return WHM.Glare4;
+        }
+
+
         return actionID;
     }
 }
