@@ -98,7 +98,7 @@ internal class NinjaAeolianEdge : CustomCombo
                     return NIN.FleetingRaiju;
             }
 
-            if (IsEnabled(CustomComboPreset.NinjaAeolianEdgeCombo))
+            if (IsEnabled(CustomComboPreset.NinjaAeolianEdgeCombo) || IsEnabled(CustomComboPreset.NinjaKazematoiFeature))
             {
                 if (comboTime > 0)
                 {

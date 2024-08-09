@@ -13,6 +13,9 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.1", ["NIN's Auto-Refill Kazematoi fix "]
+                    },
+                    {
                         "v2.0.0.0",
                         ["Initial re-release!",
                         "Every job is Dawntrail updated at least up to the level 90.",
