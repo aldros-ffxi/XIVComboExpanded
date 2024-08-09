@@ -172,9 +172,9 @@ namespace XIVComboExpanded.Interface
                 ImGui.Separator();
 
                 ImGui.BulletText("Those combos are non-optimal routes which simplify a rotation overall.");
-                ImGui.BulletText("They are intuitive, and aim considerably reduce button bloating.");
+                ImGui.BulletText("They are intuitive, and aim at considerably reducing button bloating.");
                 ImGui.BulletText("They are meant to be used to give accessibility options to everyone.");
-                ImGui.BulletText("However, they definitely won't make you a better player.");
+                ImGui.BulletText("They will often lower your ability to perform well in high-end content.");
 
                 ImGui.Separator();
 

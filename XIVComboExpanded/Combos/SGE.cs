@@ -118,7 +118,7 @@ internal class SageDosis : CustomCombo
             }
         }
 
-        if ((actionID == SGE.Dyskrasia || actionID == SGE.Dyskrasia2) && IsEnabled(CustomComboPreset.SageDosisPsyche))
+        if ((actionID == SGE.Dyskrasia || actionID == SGE.Dyskrasia2) && IsEnabled(CustomComboPreset.SagePsycheDyskrasiaFeature))
         {
             if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
                 return OriginalHook(SGE.Psyche);
