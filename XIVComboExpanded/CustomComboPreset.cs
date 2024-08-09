@@ -1592,7 +1592,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Prioritize Sacrificium over Lemure's", "Replace Lemure's Slice/Scythe with Sacrificium even when you have 2 Void Shroud.  This can help ensure you do not miss a usage of Sacrificium, at the cost of potentially missing a Lemure's Slice/Scythe usage.", RPR.JobID)]
     ReaperLemuresSacrificiumPriorityFeature = 3941,
 
-    [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
+    [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest, UTL.Blank, RPR.Buffs.ImmortalSacrifice, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]
     [CustomComboInfo("Arcane Harvest Feature", "Replace Arcane Circle with Plentiful Harvest when you have stacks of Immortal Sacrifice.", RPR.JobID)]
     ReaperArcaneHarvestFeature = 3908,
