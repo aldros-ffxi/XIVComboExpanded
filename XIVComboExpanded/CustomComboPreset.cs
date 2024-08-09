@@ -2135,8 +2135,14 @@ public enum CustomComboPreset
     [IconsCombo([SMN.SummonBahamut, SMN.SummonPhoenix, SMN.SummonSolarBahamut, UTL.ArrowLeft, SMN.SearingLight, UTL.Blank, SMN.SummonBahamut, SMN.SummonPhoenix, SMN.SummonSolarBahamut, UTL.Checkmark])]
     [SectionCombo("Summons features")]
     [SecretCustomCombo]
-    [CustomComboInfo("Searing Demi Feature", "Replace Summon Bahamut, Summon Phoenix and Summon Solar Bahamut with Searing Light when any of them is ready to be summoned, Searing Light is off cooldown, and you are in combat.", SMN.JobID)]
+    [CustomComboInfo("Searing Demi Feature", "Replace Summon Bahamut, Summon Phoenix and Summon Solar Bahamut with Searing Light when any of them is ready to be summoned, Searing Light is off cooldown, and you are in combat.\nNote: this used to be the optimal behavior for the 6.0 rework. It is now deprecated in favor of the Searing Demi Flash Feature.", SMN.JobID)]
     SummonerDemiSearingLightFeature = 2715,
+
+    [IconsCombo([SMN.SummonBahamut, SMN.SummonPhoenix, SMN.SummonSolarBahamut, UTL.ArrowLeft, SMN.SearingLight, UTL.Blank, SMN.Buffs.RubysGlimmer, UTL.Checkmark, UTL.Plus, SMN.SummonBahamut, SMN.SummonPhoenix, SMN.SummonSolarBahamut, UTL.Clock])]
+    [SectionCombo("Summons features")]
+    [SecretCustomCombo]
+    [CustomComboInfo("Searing Demi Flash Feature", "Replace Summon Bahamut, Summon Phoenix and Summon Solar Bahamut with Searing Light when Ruby's Glimmer is available, Searing Light is off cooldown, Summon Demi is on cooldown, and you are in combat.", SMN.JobID)]
+    SummonerSearingDemiFlashFeature = 2719,
 
     [IconsCombo([SMN.Gemshine, SMN.PreciousBrilliance, UTL.ArrowLeft, SMN.MountainBuster, UTL.Blank, SMN.Buffs.TitansFavor, UTL.Checkmark])]
     [SectionCombo("Gems features")]

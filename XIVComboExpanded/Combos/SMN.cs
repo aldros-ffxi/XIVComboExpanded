@@ -48,6 +48,7 @@ internal static class SMN
         Gemshine = 25883,
         PreciousBrilliance = 25884,
         Necrosis = 36990,
+        SearingFlash = 36991,
         SummonSolarBahamut = 36992,
         Sunflare = 36996,
         LuxSolaris = 36997,
@@ -62,6 +63,7 @@ internal static class SMN
             IfritsFavor = 2724,
             GarudasFavor = 2725,
             TitansFavor = 2853,
+            RubysGlimmer = 3873,
             LuxSolarisReady = 3874;
     }
 
@@ -256,9 +258,18 @@ internal class SummonerDemiFeature : CustomCombo
 
             var gauge = GetJobGauge<SMNGauge>();
 
+            if (IsEnabled(CustomComboPreset.SummonerSearingDemiFlashFeature))
+            {
+                if (level >= SMN.Levels.SearingLight && !CanUseAction(SMN.SummonBahamut) && !CanUseAction(SMN.SummonPhoenix) && !CanUseAction(SMN.SummonSolarBahamut) && InCombat())
+                    if (IsCooldownUsable(SMN.SearingLight))
+                        return SMN.SearingLight;
+                    else if (HasEffect(SMN.Buffs.RubysGlimmer))
+                        return SMN.SearingFlash;
+            }
+
             if (IsEnabled(CustomComboPreset.SummonerDemiSearingLightFeature))
             {
-                if (level >= SMN.Levels.SearingLight && (gauge.IsBahamutReady || gauge.IsPhoenixReady) && InCombat() && IsCooldownUsable(SMN.SearingLight))
+                if (level >= SMN.Levels.SearingLight && CanUseAction(SMN.SummonBahamut) && CanUseAction(SMN.SummonPhoenix) && CanUseAction(SMN.SummonSolarBahamut) && InCombat() && IsCooldownUsable(SMN.SearingLight))
                     return SMN.SearingLight;
             }
 
