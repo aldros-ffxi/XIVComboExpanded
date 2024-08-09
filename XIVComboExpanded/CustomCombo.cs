@@ -68,7 +68,7 @@ internal abstract partial class CustomCombo
     {
         newActionID = 0;
 
-        if (!IsEnabled(this.Preset))
+        if (!IsEnabled(this.Preset) || !Service.Configuration.EnablePlugin)
             return false;
 
         var classJobID = LocalPlayer!.ClassJob.Id;
@@ -202,6 +202,13 @@ internal abstract partial class CustomCombo
     /// <returns>A value indicating whether the preset is not enabled.</returns>
     protected static bool IsNotEnabled(CustomComboPreset preset)
         => !IsEnabled(preset);
+
+    /// <summary>
+    /// Gets bool determining if action is greyed out or not.
+    /// </summary>
+    /// <param name="actionID">Action ID.</param>
+    /// <returns>A bool value of whether the action can be used or not.</returns>
+    protected static bool CanUseAction(uint actionID) => Service.IconReplacer.CanUseAction(actionID);
 
     /// <summary>
     /// Find if the player has a certain condition.
@@ -442,11 +449,4 @@ internal abstract partial class CustomCombo
 
         return true;
     }
-
-    /// <summary>
-    /// Gets bool determining if action is greyed out or not.
-    /// </summary>
-    /// <param name="actionID">Action ID.</param>
-    /// <returns>A bool value of whether the action can be used or not.</returns>
-    protected static bool CanUseAction(uint actionID) => Service.IconReplacer.CanUseAction(actionID);
 }

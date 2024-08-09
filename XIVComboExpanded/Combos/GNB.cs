@@ -17,8 +17,8 @@ internal static class GNB
         SolidBarrel = 16145,
         GnashingFang = 16146,
         SavageClaw = 16147,
-        WickedTalon = 16150,
         DemonSlaughter = 16149,
+        WickedTalon = 16150,
         SonicBreak = 16153,
         Trajectory = 36934,
         Continuation = 16155,
@@ -42,13 +42,13 @@ internal static class GNB
         public const ushort
             NoMercy = 1831,
             RoyalGuard = 1833,
-            ReadyToBreak = 3886,
             ReadyToRip = 1842,
             ReadyToTear = 1843,
             ReadyToGouge = 1844,
             ReadyToBlast = 2686,
             ReadyToFated = 3839,
-            ReadyToReign = 3840;
+            ReadyToReign = 3840,
+            ReadyToBreak = 3886;
     }
 
     public static class Debuffs
@@ -195,6 +195,35 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     }
 }
 
+internal class GunbreakerBowShockSonicBreak : CustomCombo
+{
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerBowShockSonicBreakFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == GNB.BowShock || actionID == GNB.SonicBreak)
+        {
+            if (level >= GNB.Levels.BowShock && IsCooldownUsable(GNB.BowShock))
+            {
+                // Sonic Break has no real cooldown, but this also conveniently checks the GCD, so if Bow Shock is
+                // off cooldown and the Ready to Break buff from No Mercy is active, this effectively returns
+                // Sonic Break if the GCD is not active, and Bow Shock if the GCD *is* active, which is exactly
+                // what we want.
+                if (HasEffect(GNB.Buffs.ReadyToBreak))
+                    return CalcBestAction(GNB.SonicBreak, GNB.SonicBreak, GNB.BowShock);
+
+                return GNB.BowShock;
+            }
+
+            // Level check just to reduce useless buff checks when synced.
+            if (level >= GNB.Levels.SonicBreak && HasEffect(GNB.Buffs.ReadyToBreak))
+                return GNB.SonicBreak;
+        }
+
+        return actionID;
+    }
+}
+
 internal class GunbreakerDemonSlaughter : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GunbreakerDemonSlaughterCombo;
@@ -203,15 +232,16 @@ internal class GunbreakerDemonSlaughter : CustomCombo
     {
         if (actionID == GNB.DemonSlaughter)
         {
-            if (HasEffect(GNB.Buffs.ReadyToFated) && IsEnabled(CustomComboPreset.GunbreakerFatedCircleCont))
-            {
-                return GNB.FatedBrand;
-            }
 
             if (comboTime > 0 && lastComboMove == GNB.DemonSlice && level >= GNB.Levels.DemonSlaughter)
             {
                 if (IsEnabled(CustomComboPreset.GunbreakerFatedCircleFeature))
                 {
+                    if (HasEffect(GNB.Buffs.ReadyToFated) && IsEnabled(CustomComboPreset.GunbreakerFatedCircleCont))
+                    {
+                        return GNB.FatedBrand;
+                    }
+
                     var gauge = GetJobGauge<GNBGauge>();
                     var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
@@ -257,15 +287,19 @@ internal class GunbreakerNoMercy : CustomCombo
                 }
             }
 
-            if (IsEnabled(CustomComboPreset.GunbreakerNoMercyFeature))
+            if (IsEnabled(CustomComboPreset.GunbreakerNoMercyFeature) &&
+                level >= GNB.Levels.NoMercy && HasEffect(GNB.Buffs.NoMercy))
             {
-                if (level >= GNB.Levels.NoMercy && HasEffect(GNB.Buffs.NoMercy))
+                if (level >= GNB.Levels.BowShock && IsCooldownUsable(GNB.BowShock))
                 {
-                    if (level >= GNB.Levels.SonicBreak && HasEffect(GNB.Buffs.ReadyToBreak))
-                        return GNB.SonicBreak;
+                    // Sonic Break has no real cooldown, but this also conveniently checks the GCD, so if Bow Shock is
+                    // off cooldown and the Ready to Break buff from No Mercy is active, this effectively returns
+                    // Sonic Break if the GCD is not active, and Bow Shock if the GCD *is* active, which is exactly
+                    // what we want.
+                    if (HasEffect(GNB.Buffs.ReadyToBreak))
+                        return CalcBestAction(GNB.SonicBreak, GNB.SonicBreak, GNB.BowShock);
 
-                    if (level >= GNB.Levels.BowShock)
-                        return GNB.BowShock;
+                    return GNB.BowShock;
                 }
             }
         }

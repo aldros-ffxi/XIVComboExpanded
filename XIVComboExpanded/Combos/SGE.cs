@@ -92,10 +92,11 @@ internal class SageDosis : CustomCombo
         {
             if (IsEnabled(CustomComboPreset.SageDosisPsyche))
             {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget())
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
                     return OriginalHook(SGE.Psyche);
             }
-            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy())
+            
+            if (IsEnabled(CustomComboPreset.SageDoTFeature) && TargetIsEnemy() && InCombat())
             {
                 var eurkasiandosis = FindTargetEffect(SGE.Debuffs.EukrasianDosis);
                 var eurkasiandosis2 = FindTargetEffect(SGE.Debuffs.EukrasianDosis2);
@@ -286,7 +287,7 @@ internal class SagePhlegma : CustomCombo
                     return OriginalHook(SGE.Dyskrasia);
             }
 
-            if (IsEnabled(CustomComboPreset.SagePhlegmaToxicon))
+            if (IsEnabled(CustomComboPreset.SagePhlegmaToxikon))
             {
                 var phlegma =
                     level >= SGE.Levels.Phlegma3 ? SGE.Phlegma3 :

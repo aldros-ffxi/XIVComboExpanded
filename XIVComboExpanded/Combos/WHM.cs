@@ -9,6 +9,11 @@ internal static class WHM
 
     public const uint
         Stone = 119,
+        Stone2 = 127,
+        Stone3 = 3568,
+        Glare = 16533,
+        Glare3 = 25859,
+        Glare4 = 37009,
         Aero = 121,
         Cure = 120,
         Medica = 124,
@@ -29,7 +34,6 @@ internal static class WHM
         Holy3 = 25860,
         Aquaveil = 25861,
         LiturgyOfTheBell = 25862,
-        Glare4 = 37009,
         Medica3 = 37010;
 
     public static class Buffs
@@ -71,15 +75,8 @@ internal class WhiteMageAfflatusSolace : CustomCombo
 
             if (level >= WHM.Levels.AfflatusMisery && gauge.BloodLily == 3)
             {
-                if (IsEnabled(CustomComboPreset.WhiteMageSolaceMiseryTargetFeature))
-                {
-                    if (TargetIsEnemy())
-                        return WHM.AfflatusMisery;
-                }
-                else
-                {
+                if (TargetIsEnemy())
                     return WHM.AfflatusMisery;
-                }
             }
         }
 
@@ -145,15 +142,8 @@ internal class WhiteMageCure2 : CustomCombo
                 {
                     if (level >= WHM.Levels.AfflatusMisery && gauge.BloodLily == 3)
                     {
-                        if (IsEnabled(CustomComboPreset.WhiteMageSolaceMiseryTargetFeature))
-                        {
-                            if (TargetIsEnemy())
-                                return WHM.AfflatusMisery;
-                        }
-                        else
-                        {
+                        if (TargetIsEnemy())
                             return WHM.AfflatusMisery;
-                        }
                     }
                 }
 
@@ -201,9 +191,10 @@ internal class WhiteMageGlare4Feature : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == WHM.Stone)
+        if (actionID == WHM.Stone || actionID == WHM.Stone2 || actionID == WHM.Stone3 ||
+            actionID == WHM.Glare || actionID == WHM.Glare3)
         {
-            if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature) && TargetIsEnemy())
+            if (IsEnabled(CustomComboPreset.WhiteMageDoTFeature) && TargetIsEnemy() && InCombat())
             {
                 var aero = FindTargetEffect(WHM.Debuffs.Aero);
                 var aero2 = FindTargetEffect(WHM.Debuffs.Aero2);

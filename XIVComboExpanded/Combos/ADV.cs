@@ -1,4 +1,6 @@
-﻿namespace XIVComboExpandedPlugin.Combos;
+﻿using Lumina.Excel.GeneratedSheets2;
+
+namespace XIVComboExpandedPlugin.Combos;
 
 internal static class ADV
 {
@@ -6,18 +8,22 @@ internal static class ADV
     public const byte JobID = 0;
 
     public const uint
-        LucidDreaming = 1204,
         Provoke = 7533,
         Shirk = 7537,
+        LowBlow = 7540,
+        HeadGraze = 7551,
         Peloton = 7557,
         Swiftcast = 7561,
+        LucidDreaming = 7562,
         AngelWhisper = 18317,
         VariantRaise2 = 29734;
 
     public static class Buffs
     {
         public const ushort
-            Medicated = 49;
+            Swiftcast = 167,
+            Medicated = 49,
+            Peloton = 1199;
     }
 
     public static class Debuffs
@@ -29,6 +35,9 @@ internal static class ADV
     public static class Levels
     {
         public const byte
+            // Note that unlike class/job abilities, role actions are available even when level-synced below their
+            // the level they are learned at.
+            LowBlow = 12,
             Swiftcast = 18,
             VariantRaise2 = 90;
     }
@@ -157,6 +166,55 @@ internal class ShirkStanceFeature : CustomCombo
                     return DRK.GritRemoval;
                 if (job == GNB.JobID && level >= GNB.Levels.RoyalGuard)
                     return GNB.RoyalGuardRemoval;
+            }
+        }
+
+        return actionID;
+    }
+}
+
+internal class HeadGrazePelotonFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset => CustomComboPreset.AdvPelotonSTFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (actionID == ADV.HeadGraze && (LocalPlayer?.ClassJob.Id == BRD.ClassID || LocalPlayer?.ClassJob.Id == BRD.JobID || LocalPlayer?.ClassJob.Id == MCH.JobID || LocalPlayer?.ClassJob.Id == DNC.JobID))
+        {
+            if (!HasEffect(ADV.Buffs.Peloton) && OutOfCombat())
+            {
+                return ADV.Peloton;
+            }
+        }
+
+        return actionID;
+    }
+}
+
+
+internal class AdvAutoLucidDreamingFeature : CustomCombo
+{
+    protected internal override CustomComboPreset Preset => CustomComboPreset.AdvAutoLucidDreamingFeature;
+
+    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+    {
+        if (LocalPlayer?.CurrentMp < 5000 && CanUseAction(OriginalHook(ADV.LucidDreaming)) && IsCooldownUsable(ADV.LucidDreaming))
+        {
+            var job = LocalPlayer?.ClassJob.Id;
+            if (job == WHM.ClassID
+            || (job == BLM.ClassID && IsEnabled(CustomComboPreset.AdvEnableBLMLucidFeature))
+            || job == WHM.JobID
+            || (job == BLM.JobID && IsEnabled(CustomComboPreset.AdvEnableBLMLucidFeature))
+            || job == SMN.ClassID
+            || job == SMN.JobID
+            || job == SCH.JobID
+            || job == AST.JobID
+            || job == RDM.JobID
+            || job == BLU.JobID
+            || job == SGE.JobID
+            || job == PCT.JobID)
+            {
+                return ADV.LucidDreaming;
             }
         }
 

@@ -19,7 +19,7 @@ internal static class PCT
         ExtraBlizzardCyan = 34659,
         ExtraEarthYellow = 34660,
         ExtraThunderMagenta = 34661,
-        MiracleWhite = 34662,
+        HolyInWhite = 34662,
         CometBlack = 34663,
         PomMotif = 34664,
         WingMotif = 34665,
@@ -174,7 +174,7 @@ internal static class PCT
                     {
                         if (HasEffect(PCT.Buffs.InvertedColors))
                             return PCT.CometBlack;
-                        return PCT.MiracleWhite;
+                        return PCT.HolyInWhite;
                     }
                 }
 
@@ -275,7 +275,7 @@ internal static class PCT
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
-            if (actionID == PCT.MiracleWhite)
+            if (actionID == PCT.HolyInWhite)
             {
                 if (IsEnabled(CustomComboPreset.PictomancerRainbowHolyCombo) && HasEffect(PCT.Buffs.RainbowReady))
                 {

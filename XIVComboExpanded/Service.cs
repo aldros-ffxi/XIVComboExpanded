@@ -117,6 +117,12 @@ internal class Service
     internal static ITargetManager TargetManager { get; private set; } = null!;
 
     /// <summary>
+    /// Gets the Dalamud texture provider.
+    /// </summary>
+    [PluginService]
+    internal static ITextureProvider TextureProvider { get; private set; } = null!;
+
+    /// <summary>
     /// Gets the Dalamud plugin log.
     /// </summary>
     [PluginService]

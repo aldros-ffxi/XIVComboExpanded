@@ -21,6 +21,7 @@ internal static class BLM
         Flare = 162,
         LeyLines = 3573,
         Sharpcast = 3574,
+        Triplecast = 7421,
         Blizzard4 = 3576,
         Fire4 = 3577,
         BetweenTheLines = 7419,
@@ -32,6 +33,7 @@ internal static class BLM
         HighFire2 = 25794,
         HighBlizzard2 = 25795,
         Paradox = 25797,
+        Retrace = 36988,
         FlareStar = 36989;
 
     public static class Buffs
@@ -72,6 +74,7 @@ internal static class BLM
             HighBlizzard2 = 82,
             EnhancedSharpcast2 = 88,
             Paradox = 90,
+            Retrace = 96,
             FlareStar = 100;
     }
 
@@ -123,12 +126,12 @@ internal class BlackFireBlizzard4 : CustomCombo
                             if (((HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast))
                             && gauge.ElementTimeRemaining / 1000.0 < fire4.BaseCooldown * 1.10) || gauge.ElementTimeRemaining / 1000.0 < fire4.CastTime * 1.10)
                             {
+                                if (level > BLM.Levels.Despair && LocalPlayer?.CurrentMp > 0 && LocalPlayer?.CurrentMp < 2400 && (HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)))
+                                    return BLM.Despair;
                                 if (HasEffect(BLM.Buffs.Firestarter))
                                     return BLM.Fire3;
                                 if (level > BLM.Levels.Paradox && gauge.IsParadoxActive)
                                     return BLM.Paradox;
-                                if (level > BLM.Levels.Despair && LocalPlayer?.CurrentMp > 0 && (HasEffect(BLM.Buffs.Swiftcast) || HasEffect(BLM.Buffs.Triplecast)))
-                                    return BLM.Despair;
                                 if (level >= BLM.Levels.Blizzard3)
                                     return BLM.Blizzard3;
                             }
@@ -137,8 +140,9 @@ internal class BlackFireBlizzard4 : CustomCombo
                     if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature))
                     {
                         if (IsEnabled(CustomComboPreset.BlackEnochianDespairFlareStarFeature))
-                        {
-                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && LocalPlayer?.CurrentMp <= 0)
+                        {   
+                            // 2nd and 3rd checks for opener and post-manafont usage
+                            if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && (LocalPlayer?.CurrentMp <= 0 || LocalPlayer?.CurrentMp == 8400 || LocalPlayer?.CurrentMp == 10000))
                                 return BLM.FlareStar;
                         }
 
@@ -209,7 +213,9 @@ internal class BlackLeyLines : CustomCombo
     {
         if (actionID == BLM.LeyLines)
         {
-            if (level >= BLM.Levels.BetweenTheLines && HasEffect(BLM.Buffs.LeyLines))
+            if (level >= BLM.Levels.BetweenTheLines && HasEffect(BLM.Buffs.LeyLines) &&
+                (level < BLM.Levels.Retrace || !IsCooldownUsable(BLM.Retrace) ||
+                !IsEnabled(CustomComboPreset.BlackLeyLinesRetraceFeature)))
                 return BLM.BetweenTheLines;
         }
 

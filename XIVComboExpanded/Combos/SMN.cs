@@ -48,6 +48,7 @@ internal static class SMN
         Gemshine = 25883,
         PreciousBrilliance = 25884,
         Necrosis = 36990,
+        SearingFlash = 36991,
         SummonSolarBahamut = 36992,
         Sunflare = 36996,
         LuxSolaris = 36997,
@@ -62,6 +63,7 @@ internal static class SMN
             IfritsFavor = 2724,
             GarudasFavor = 2725,
             TitansFavor = 2853,
+            RubysGlimmer = 3873,
             LuxSolarisReady = 3874;
     }
 
@@ -256,9 +258,18 @@ internal class SummonerDemiFeature : CustomCombo
 
             var gauge = GetJobGauge<SMNGauge>();
 
+            if (IsEnabled(CustomComboPreset.SummonerSearingDemiFlashFeature))
+            {
+                if (level >= SMN.Levels.SearingLight && !CanUseAction(SMN.SummonBahamut) && !CanUseAction(SMN.SummonPhoenix) && !CanUseAction(SMN.SummonSolarBahamut) && InCombat())
+                    if (IsCooldownUsable(SMN.SearingLight))
+                        return SMN.SearingLight;
+                    else if (HasEffect(SMN.Buffs.RubysGlimmer))
+                        return SMN.SearingFlash;
+            }
+
             if (IsEnabled(CustomComboPreset.SummonerDemiSearingLightFeature))
             {
-                if (level >= SMN.Levels.SearingLight && (gauge.IsBahamutReady || gauge.IsPhoenixReady) && InCombat() && IsCooldownUsable(SMN.SearingLight))
+                if (level >= SMN.Levels.SearingLight && CanUseAction(SMN.SummonBahamut) && CanUseAction(SMN.SummonPhoenix) && CanUseAction(SMN.SummonSolarBahamut) && InCombat() && IsCooldownUsable(SMN.SearingLight))
                     return SMN.SearingLight;
             }
 
@@ -276,22 +287,22 @@ internal class SummonerDemiFeature : CustomCombo
 
 internal class SummonerRadiantCarbuncleFeature : CustomCombo
 {
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SummonerRadiantCarbuncleFeature;
+    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SmnAny;
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
         if (actionID == SMN.RadiantAegis)
         {
-            var gauge = GetJobGauge<SMNGauge>();
-
-            if (level >= SMN.Levels.SummonCarbuncle && !HasPetPresent())
-                return SMN.SummonCarbuncle;
-
             if (IsEnabled(CustomComboPreset.SummonerRadiantLuxSolarisFeature))
             {
                 if (HasEffect(SMN.Buffs.LuxSolarisReady))
                     return SMN.LuxSolaris;
             }
+
+            var gauge = GetJobGauge<SMNGauge>();
+
+            if (level >= SMN.Levels.SummonCarbuncle && !HasPetPresent() && IsEnabled(CustomComboPreset.SummonerRadiantCarbuncleFeature))
+                return SMN.SummonCarbuncle;
         }
 
         return actionID;

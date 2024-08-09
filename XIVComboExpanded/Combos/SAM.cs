@@ -211,36 +211,6 @@ internal class SamuraiOka : CustomCombo
         return actionID;
     }
 }
-
-internal class SamuraiTsubame : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SamAny;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == SAM.TsubameGaeshi)
-        {
-            var gauge = GetJobGauge<SAMGauge>();
-
-            if (IsEnabled(CustomComboPreset.SamuraiTsubameGaeshiShohaFeature))
-            {
-                if (level >= SAM.Levels.Shoha && gauge.MeditationStacks >= 3)
-                    return SAM.Shoha;
-            }
-
-            if (IsEnabled(CustomComboPreset.SamuraiTsubameGaeshiIaijutsuFeature))
-            {
-                if (level >= SAM.Levels.TsubameGaeshi && gauge.Sen == Sen.NONE)
-                    return OriginalHook(SAM.TsubameGaeshi);
-
-                return OriginalHook(SAM.Iaijutsu);
-            }
-        }
-
-        return actionID;
-    }
-}
-
 internal class SamuraiIaijutsu : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SamAny;
@@ -259,10 +229,9 @@ internal class SamuraiIaijutsu : CustomCombo
 
             if (IsEnabled(CustomComboPreset.SamuraiIaijutsuTsubameGaeshiFeature))
             {
-                if (level >= SAM.Levels.TsubameGaeshi && gauge.Sen == Sen.NONE)
-                    return OriginalHook(SAM.TsubameGaeshi);
-
-                return OriginalHook(SAM.Iaijutsu);
+                var original = OriginalHook(SAM.TsubameGaeshi);
+                if (level >= SAM.Levels.TsubameGaeshi && CanUseAction(original))
+                    return original;
             }
         }
 

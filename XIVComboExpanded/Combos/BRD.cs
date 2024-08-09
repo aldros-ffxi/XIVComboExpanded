@@ -107,13 +107,22 @@ internal class BardHeavyShot : CustomCombo
             {
                 if (level >= BRD.Levels.IronJaws)
                 {
+                    // Using 5 seconds instead of 2.8s like the other DoT auto-refresh features, because Bard loses a
+                    // lot more from letting their DoTs drop, since they have to use two GCDs instead of one to
+                    // re-apply them.
+                    var dotTimer = 5.0;
+
+                    if (IsEnabled(CustomComboPreset.BardShotIronJawsOption)) // option to use 2.8
+                        dotTimer = 2.8;
+
                     // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
                     var venomous = FindTargetEffect(BRD.Debuffs.VenomousBite);
                     var windbite = FindTargetEffect(BRD.Debuffs.Windbite);
                     var stormbite = FindTargetEffect(BRD.Debuffs.Stormbite);
                     var caustic = FindTargetEffect(BRD.Debuffs.CausticBite);
 
-                    if (venomous?.RemainingTime < 2.8 || windbite?.RemainingTime < 2.8 || stormbite?.RemainingTime < 2.8 || caustic?.RemainingTime < 2.8)
+                    if (venomous?.RemainingTime < dotTimer || windbite?.RemainingTime < dotTimer ||
+                    stormbite?.RemainingTime < dotTimer || caustic?.RemainingTime < dotTimer)
                         return BRD.IronJaws;
                 }
             }
@@ -226,7 +235,7 @@ internal class BardQuickNock : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BardShadowbiteFeature))
             {
-                if (level >= BRD.Levels.WideVolley && (HasEffect(BRD.Buffs.HawksEye) || HasEffect(BRD.Buffs.Barrage)))
+                if (level >= BRD.Levels.WideVolley)
                 {
                     if (IsEnabled(CustomComboPreset.BardShadowbiteBarrageFeature))
                     {
@@ -234,7 +243,8 @@ internal class BardQuickNock : CustomCombo
                             return BRD.Barrage;
                     }
 
-                    return OriginalHook(BRD.WideVolley);
+                    if (HasEffect(BRD.Buffs.HawksEye) || HasEffect(BRD.Buffs.Barrage))
+                        return OriginalHook(BRD.WideVolley);
                 }
             }
         }
@@ -371,23 +381,6 @@ internal class BardEmpyrealArrow : CustomCombo
     }
 }
 
-internal class BardBarrage : CustomCombo
-{
-    protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BardBarrageFeature;
-
-    protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-    {
-        if (actionID == BRD.Barrage)
-        {
-            if (level >= BRD.Levels.StraightShot && HasEffect(BRD.Buffs.HawksEye))
-                // Refulgent Arrow
-                return OriginalHook(BRD.StraightShot);
-        }
-
-        return actionID;
-    }
-}
-
 internal class BardRadiantFinale : CustomCombo
 {
     protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BrdAny;
@@ -466,13 +459,10 @@ internal class BardMagesBallad : CustomCombo
 
             // Show the next expected song while on cooldown
             if (level >= BRD.Levels.WanderersMinuet)
-                return BRD.WanderersMinuet;
-
-            if (level >= BRD.Levels.MagesBallad)
-                return BRD.MagesBallad;
+                return CalcBestAction(BRD.WanderersMinuet, BRD.WanderersMinuet, BRD.MagesBallad, BRD.ArmysPaeon);
 
             if (level >= BRD.Levels.ArmysPaeon)
-                return BRD.ArmysPaeon;
+                return CalcBestAction(BRD.MagesBallad, BRD.MagesBallad, BRD.ArmysPaeon);
         }
 
         return actionID;
