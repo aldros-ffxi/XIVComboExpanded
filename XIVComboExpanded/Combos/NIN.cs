@@ -102,8 +102,8 @@ internal class NinjaAeolianEdge : CustomCombo
             {
                 if (comboTime > 0)
                 {
-                    if (IsEnabled(CustomComboPreset.NinjaKazematoiFeature) && lastComboMove == NIN.GustSlash && level >= NIN.Levels.ArmorCrush && gauge.Kazematoi > 0)
-                        return NIN.AeolianEdge;
+                    if (IsEnabled(CustomComboPreset.NinjaKazematoiFeature) && lastComboMove == NIN.GustSlash && level >= NIN.Levels.ArmorCrush && gauge.Kazematoi == 0)
+                        return NIN.ArmorCrush;
 
                     if (lastComboMove == NIN.GustSlash && level >= NIN.Levels.AeolianEdge)
                         return NIN.AeolianEdge;

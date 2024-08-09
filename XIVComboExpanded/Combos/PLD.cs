@@ -274,18 +274,23 @@ internal class PaladinProminence : PaladinCombo
             // During FoF, use Holy Circle if Divine Might OR Requiescat is up.  This only captures remaining charges of
             // Requiescat after the Confiteor combo above, which only happens when the player is under the level for the
             // full 4-part Confiteor combo (level 90), or if they somehow break the combo.
-            if (level >= PLD.Levels.HolyCircle && this.HasMp(PLD.HolyCircle))
+            if (level >= PLD.Levels.HolyCircle && this.HasMp(PLD.HolyCircle)
+                && (IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature)
+                    || IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature)))
             {
                 var divineMight = FindEffect(PLD.Buffs.DivineMight);
-                if (IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature) && 
-                    HasEffect(PLD.Buffs.FightOrFlight) && 
+                if
+                    (
+                    //IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature) && 
+                    //HasEffect(PLD.Buffs.FightOrFlight) && 
                     (divineMight != null || HasEffect(PLD.Buffs.Requiescat)))
                     return PLD.HolyCircle;
 
-                if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
-                    (lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4 ||
-                    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
-                    return PLD.HolySpirit;
+                // Unsure there's any reason at any time to return Holy Spirit instead of Holy Circle on Prominence?
+                //if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
+                //    (lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4 ||
+                //    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
+                //    return PLD.HolySpirit;
             }
 
 

@@ -110,7 +110,7 @@ internal class WarriorStormsPathCombo : CustomCombo
                 if (level >= WAR.Levels.StormsEye)
                 {
                     var surgingTempest = FindEffect(WAR.Buffs.SurgingTempest);
-                    if (surgingTempest is null)
+                    if (surgingTempest is null && IsEnabled(CustomComboPreset.WarriorAutoSurgingTempestFeature))
                         return WAR.StormsEye;
 
                     if (!IsEnabled(CustomComboPreset.WarriorOptimizeSurgingTempestFeature) &&

@@ -13,7 +13,15 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
-                        "v2.0.0.1", ["NIN's Auto-Refill Kazematoi fix "]
+                        "v2.0.0.2",
+                        [
+                            "NIN's Auto-Refill Kazematoi additional logic fix.",
+                            "WAR's Storm's Path Combo logic fix.",
+                            "PLD's Divine Might Feature fix."
+                        ]
+                    },
+                    {
+                        "v2.0.0.1", ["NIN's Auto-Refill Kazematoi fix."]
                     },
                     {
                         "v2.0.0.0",

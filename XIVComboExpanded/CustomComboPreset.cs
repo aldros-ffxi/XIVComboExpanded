@@ -1234,7 +1234,7 @@ public enum CustomComboPreset
     [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
     [SectionCombo("Cooldowns")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Combo Fight or Flight Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominance with Holy Circle while both Fight or Flight and Divine Might are active.", PLD.JobID)]
+    [CustomComboInfo("Combo Fight or Flight Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle while both Fight or Flight and Divine Might are active.", PLD.JobID)]
     PaladinFightOrFlightDivineMightFeature = 1915,
 
     [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.GoringBlade])]
