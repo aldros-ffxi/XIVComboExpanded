@@ -129,8 +129,8 @@ internal class PaladinRoyalAuthority : PaladinCombo
         {
             var inMeleeRange = InMeleeRange(); // Only calculate this once, to save some CPU cycles
 
-            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityGoringBladeFeature) && 
-                IsEnabled(CustomComboPreset.PaladinGoringBladeBeforeConfiteorFeature) && 
+            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityGoringBladeFeature) &&
+                IsEnabled(CustomComboPreset.PaladinGoringBladeBeforeConfiteorFeature) &&
                 OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade && inMeleeRange)
                 return PLD.GoringBlade;
 
@@ -147,7 +147,7 @@ internal class PaladinRoyalAuthority : PaladinCombo
                     return PLD.Confiteor;
             }
 
-            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityGoringBladeFeature) && 
+            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityGoringBladeFeature) &&
                 OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade && inMeleeRange)
                 return PLD.GoringBlade;
 
@@ -166,24 +166,24 @@ internal class PaladinRoyalAuthority : PaladinCombo
                 // rather than the other way around.  However, since optimizing gains or losses of only 10p
                 // doesn't really matter at all while leveling, we don't bother to adjust this logic for lower
                 // levels, except where Atonement isn't yet learned.
-                if (level >= PLD.Levels.Atonement && 
+                if (level >= PLD.Levels.Atonement &&
                     IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature))
                 {
                     // These use a fixed 2.5s, with some buffer, for the GCD, both because Paladin GCD length
                     // actually scales with two separate stats (some with skill speed, others with spell speed),
-                    // and because Paladins ideally don't want to use ANY skill or spell speed on their gear. 
-                    // If the player happens to have some skill/spell speed, the result here will just be a bit 
+                    // and because Paladins ideally don't want to use ANY skill or spell speed on their gear.
+                    // If the player happens to have some skill/spell speed, the result here will just be a bit
                     // of additional buffer on the timers.
                     if (HasEffect(PLD.Buffs.SepulchreReady) && inMeleeRange)
                         return PLD.Sepulchre;
 
-                    if (HasEffect(PLD.Buffs.SupplicationReady) && inMeleeRange && 
-                        (!IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature) || 
+                    if (HasEffect(PLD.Buffs.SupplicationReady) && inMeleeRange &&
+                        (!IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature) ||
                         fof.RemainingTime > 3 || !HasEffect(PLD.Buffs.DivineMight)))
                         return PLD.Supplication;
 
-                    if (HasEffect(PLD.Buffs.AtonementReady) && inMeleeRange && 
-                        (!IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature) || 
+                    if (HasEffect(PLD.Buffs.AtonementReady) && inMeleeRange &&
+                        (!IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature) ||
                         fof.RemainingTime > 6 || !HasEffect(PLD.Buffs.DivineMight)))
                         return PLD.Atonement;
                 }
@@ -197,7 +197,7 @@ internal class PaladinRoyalAuthority : PaladinCombo
                 this.HasMp(PLD.HolySpirit) && HasEffect(PLD.Buffs.Requiescat))
                 return PLD.HolySpirit;
 
-            if (level >= PLD.Levels.Atonement && 
+            if (level >= PLD.Levels.Atonement &&
                 IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature))
             {
                 var sepulchre = FindEffect(PLD.Buffs.SepulchreReady);
@@ -219,7 +219,7 @@ internal class PaladinRoyalAuthority : PaladinCombo
             if (level >= PLD.Levels.HolySpirit && IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature))
             {
                 var divineMight = FindEffect(PLD.Buffs.DivineMight);
-                if (this.HasMp(PLD.HolySpirit) && divineMight != null && 
+                if (this.HasMp(PLD.HolySpirit) && divineMight != null &&
                     (!inMeleeRange || lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4 ||
                     !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
                     return PLD.HolySpirit;
@@ -249,8 +249,8 @@ internal class PaladinProminence : PaladinCombo
     {
         if (actionID == PLD.Prominence)
         {
-            if (IsEnabled(CustomComboPreset.PaladinProminenceGoringBladeFeature) && 
-                IsEnabled(CustomComboPreset.PaladinGoringBladeBeforeConfiteorFeature) && 
+            if (IsEnabled(CustomComboPreset.PaladinProminenceGoringBladeFeature) &&
+                IsEnabled(CustomComboPreset.PaladinGoringBladeBeforeConfiteorFeature) &&
                 OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade)
                 return PLD.GoringBlade;
 
@@ -267,30 +267,25 @@ internal class PaladinProminence : PaladinCombo
                     return PLD.Confiteor;
             }
 
-            if (IsEnabled(CustomComboPreset.PaladinProminenceGoringBladeFeature) && 
+            if (IsEnabled(CustomComboPreset.PaladinProminenceGoringBladeFeature) &&
                 OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade)
                 return PLD.GoringBlade;
 
             // During FoF, use Holy Circle if Divine Might OR Requiescat is up.  This only captures remaining charges of
             // Requiescat after the Confiteor combo above, which only happens when the player is under the level for the
             // full 4-part Confiteor combo (level 90), or if they somehow break the combo.
-            if (level >= PLD.Levels.HolyCircle && this.HasMp(PLD.HolyCircle)
-                && (IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature)
-                    || IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature)))
+            if (level >= PLD.Levels.HolyCircle && this.HasMp(PLD.HolyCircle))
             {
                 var divineMight = FindEffect(PLD.Buffs.DivineMight);
-                if
-                    (
-                    //IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature) && 
-                    //HasEffect(PLD.Buffs.FightOrFlight) && 
+                if (IsEnabled(CustomComboPreset.PaladinFightOrFlightDivineMightFeature) &&
+                    HasEffect(PLD.Buffs.FightOrFlight) &&
                     (divineMight != null || HasEffect(PLD.Buffs.Requiescat)))
                     return PLD.HolyCircle;
 
-                // Unsure there's any reason at any time to return Holy Spirit instead of Holy Circle on Prominence?
-                //if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
-                //    (lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4 ||
-                //    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
-                //    return PLD.HolySpirit;
+                if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
+                   (lastComboMove == PLD.TotalEclipse || divineMight.RemainingTime < 4 ||
+                   !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
+                   return PLD.HolyCircle;
             }
 
 
@@ -358,7 +353,7 @@ internal class PaladinRequiescat : PaladinCombo
 
             if (IsEnabled(CustomComboPreset.PaladinRequiescatFightOrFlightFeature) &&
                 IsEnabled(CustomComboPreset.PaladinGoringBladeBeforeConfiteorFeature) &&
-                OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade && 
+                OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade &&
                 requiescat.CooldownRemaining > 5 && InMeleeRange())
                 return PLD.GoringBlade;
 
@@ -375,15 +370,15 @@ internal class PaladinRequiescat : PaladinCombo
                     return PLD.Confiteor;
             }
 
-            if (IsEnabled(CustomComboPreset.PaladinRequiescatFightOrFlightFeature) && 
-                OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade && 
+            if (IsEnabled(CustomComboPreset.PaladinRequiescatFightOrFlightFeature) &&
+                OriginalHook(PLD.FightOrFlight) == PLD.GoringBlade &&
                 requiescat.CooldownRemaining > 5 && InMeleeRange())
                 return PLD.GoringBlade;
 
             // This captures any remaining charges of Requiescat after the Confiteor combo above, which only happens
             // when the player is under the level for the full 4-part Confiteor combo (level 90), or if they somehow
             // break the combo.
-            if (IsEnabled(CustomComboPreset.PaladinRequiescatConfiteorFeature) && 
+            if (IsEnabled(CustomComboPreset.PaladinRequiescatConfiteorFeature) &&
                 level >= PLD.Levels.Requiescat && HasEffect(PLD.Buffs.Requiescat))
                 return PLD.HolySpirit;
 
