@@ -482,10 +482,7 @@ public class ConfigWindow : Window
                 ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
 
 
-                var changelog = new Dictionary<string, string[]>()
-                {
-                    { "v2.0.0.0", ["Initial re-release"] },
-                };
+                var changelog = XIVComboExpanded.Interface.Changelog.GetChangelog();
 
 
                 foreach (var (version, info) in changelog)

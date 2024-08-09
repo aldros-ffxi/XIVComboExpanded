@@ -156,7 +156,7 @@ public enum CustomComboPreset
     [IconsCombo([ADV.LucidDreaming, UTL.Idea])]
     [ParentCombo(AdvAutoLucidDreamingFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Enable for BLM", "Also apply this feature to Black Mage and Thaumaturge\nAre you REALLY sure you want to do this?.", ADV.JobID)]
+    [CustomComboInfo("Enable for BLM", "Also apply this feature to Black Mage and Thaumaturge\nAre you REALLY sure you want to do this?", ADV.JobID)]
     AdvEnableBLMLucidFeature = 1009,
 
     #endregion
