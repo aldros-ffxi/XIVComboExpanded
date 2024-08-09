@@ -546,6 +546,12 @@ internal class ReaperEnshroud : CustomCombo
                 if (level >= RPR.Levels.Communio && gauge.EnshroudedTimeRemaining > 0)
                     return RPR.Communio;
             }
+
+            if (IsEnabled(CustomComboPreset.ReaperEnshroudPerfectioFeature))
+            {
+                if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
+                    return RPR.Perfectio;
+            }
         }
 
         return actionID;

@@ -1489,6 +1489,11 @@ public enum CustomComboPreset
     [CustomComboInfo("Enshroud Communio Feature", "Replace Enshroud with Communio when Enshrouded.", RPR.JobID)]
     ReaperEnshroudCommunioFeature = 3909,
 
+    [IconsCombo([RPR.Enshroud, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
+    [SectionCombo("Enshroud")]
+    [CustomComboInfo("Enshroud Perfectio Feature", "Replace Enshroud with Perfectio when available.", RPR.JobID)]
+    ReaperEnshroudPerfectioFeature = 3944,
+
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.LemuresSlice, UTL.Blank, UTL.Blank, UTL.Idea])]
     [SectionCombo("Enshroud")]
     [AccessibilityCustomCombo]
@@ -1587,14 +1592,14 @@ public enum CustomComboPreset
     [CustomComboInfo("Prioritize Sacrificium over Lemure's", "Replace Lemure's Slice/Scythe with Sacrificium even when you have 2 Void Shroud.  This can help ensure you do not miss a usage of Sacrificium, at the cost of potentially missing a Lemure's Slice/Scythe usage.", RPR.JobID)]
     ReaperLemuresSacrificiumPriorityFeature = 3941,
 
-    [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest])]
+    [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]
     [CustomComboInfo("Arcane Harvest Feature", "Replace Arcane Circle with Plentiful Harvest when you have stacks of Immortal Sacrifice.", RPR.JobID)]
     ReaperArcaneHarvestFeature = 3908,
 
-    [IconsCombo([RPR.PlentifulHarvest, UTL.ArrowLeft, RPR.Perfectio])]
+    [IconsCombo([RPR.PlentifulHarvest, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
     [SectionCombo("Miscellaneous")]
-    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available.  Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled..", RPR.JobID)]
+    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available.  Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled.", RPR.JobID)]
     ReaperPerfectHarvestFeature = 3943,
 
     [IconsCombo([RPR.InfernalSlice, RPR.NightmareScythe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
