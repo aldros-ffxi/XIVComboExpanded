@@ -19,6 +19,7 @@ namespace XIVComboExpanded.Interface
                             "Added DNC's Auto-Fan Dance 3.",
                             "Added DNC's AoE Feather Overcap Feature.",
                             "Added DNC's AoE Auto-Fan Dance 3.",
+                            "Added SGE's Phlegma into Psyche.",
                         ]
                     },
                     {

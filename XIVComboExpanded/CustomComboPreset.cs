@@ -1880,6 +1880,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Kerachole into Rhizomata Feature", "Replace Kerachole with Rhizomata when Addersgall is empty.", SGE.JobID)]
     SageKeracholaRhizomataFeature = 4005,
 
+    [IconsCombo([SGE.Phlegma, UTL.ArrowLeft, SGE.Dyskrasia, UTL.Blank, SGE.Psyche, UTL.Checkmark])]
+    [SectionCombo("Phlegma features")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Phlegma into Psyche", "Replace Phlegma with Psyche when Psyche is available, you're in combat, and have a target.", SGE.JobID)]
+    SagePhlegmaPsyche = 4008,
+
     [IconsCombo([SGE.Phlegma, UTL.ArrowLeft, SGE.Dyskrasia, UTL.Blank, SGE.Phlegma, UTL.Cross])]
     [SectionCombo("Phlegma features")]
     [ExpandedCustomCombo]
