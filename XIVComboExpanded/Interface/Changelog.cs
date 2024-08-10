@@ -13,9 +13,18 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.6",
+                        [
+                            "RPR's Perfect Harvest feature fix by @kaedys.",
+                            "VPR's Generation Legacy Feature fix by @kaedys.",
+                            "Added SAM's Iaijutsu to Tsubame-gaeshi Single Sen by @mikel-gh."
+                        ]
+                    },
+                    {
                         "v2.0.0.5",
                         [
-                            "Fixed a white background which was leaking when an invalid job was automatically picked with the auto-pick setting."
+                            "Fixed a white background which was leaking when an invalid job was automatically picked with the auto-pick setting.",
+                            "BRD's Bloodletter features fix when Heartbreak Shot was unlocked by @aldros-ffxi."
                         ]
                     },
                     {
@@ -28,8 +37,8 @@ namespace XIVComboExpanded.Interface
                     {
                         "v2.0.0.3",
                         [
-                            "WAR's Storm's Path Combo logic fix (electric boogaloo).",
-                            "PLD's Divine Might Feature logic fix (also electric boogaloo).",
+                            "WAR's Storm's Path Combo logic fix (electric boogaloo) by @kaedys.",
+                            "PLD's Divine Might Feature logic fix (also electric boogaloo) by @kaedys.",
                             "Added WHM's Glare 4 AoE Feature.",
                             "Added SGE's Dyskrasia Psyche Feature.",
                         ]
