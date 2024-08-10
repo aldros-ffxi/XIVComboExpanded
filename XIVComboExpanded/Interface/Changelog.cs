@@ -13,6 +13,12 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.7",
+                        [
+                            "MCH's Gauss Round / Double Check & Ricochet / Checkmate Feature fix if Checkmate/Double Check were assigned in the hotbar instead of Ricochet/Gauss Round.",
+                        ]
+                    },
+                    {
                         "v2.0.0.6",
                         [
                             "RPR's Perfect Harvest feature fix by @kaedys.",
