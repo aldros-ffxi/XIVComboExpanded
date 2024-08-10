@@ -139,7 +139,7 @@ internal class MachinistGaussRoundRicochet : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == MCH.GaussRound || actionID == MCH.Ricochet)
+        if (actionID is MCH.GaussRound or MCH.Ricochet or MCH.Checkmate or MCH.DoubleCheck)
         {
             var gauge = GetJobGauge<MCHGauge>();
 
