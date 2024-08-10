@@ -1941,6 +1941,12 @@ public enum CustomComboPreset
     [CustomComboInfo("Iaijutsu to Tsubame-gaeshi", "Replace Iaijutsu with Tsubame-gaeshi when it is usable", SAM.JobID)]
     SamuraiIaijutsuTsubameGaeshiFeature = 3409,
 
+    [SectionCombo("Iaijutsu")]
+    [SecretCustomCombo]
+    [CustomComboInfo("Iaijutsu to Tsubame-gaeshi Single Sen", "Don't replace Iaijutsu with a single Sen active", SAM.JobID)]
+    [ParentCombo(SamuraiIaijutsuTsubameGaeshiFeature)]
+    SamuraiIaijutsuSingleSenNoReplaceTsubameFeature = 3422,
+
     [IconsCombo([SAM.Iaijutsu, UTL.ArrowLeft, SAM.Shoha, UTL.Blank, SAM.Shoha, UTL.Checkmark])]
     [SectionCombo("Iaijutsu")]
     [ExpandedCustomCombo]

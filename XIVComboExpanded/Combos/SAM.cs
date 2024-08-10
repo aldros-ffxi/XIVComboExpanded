@@ -1,3 +1,4 @@
+using System.Linq;
 using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 
@@ -227,10 +228,19 @@ internal class SamuraiIaijutsu : CustomCombo
                     return SAM.Shoha;
             }
 
-            if (IsEnabled(CustomComboPreset.SamuraiIaijutsuTsubameGaeshiFeature))
+            if (IsEnabled(CustomComboPreset.SamuraiIaijutsuTsubameGaeshiFeature) && level >= SAM.Levels.TsubameGaeshi)
             {
+                if (IsEnabled(CustomComboPreset.SamuraiIaijutsuSingleSenNoReplaceTsubameFeature))
+                {
+                    var hasSingleSen = new[] { gauge.HasSetsu, gauge.HasGetsu, gauge.HasKa }.Count(b => b) == 1;
+                    if (hasSingleSen)
+                    {
+                        return actionID;
+                    }
+                }
+
                 var original = OriginalHook(SAM.TsubameGaeshi);
-                if (level >= SAM.Levels.TsubameGaeshi && CanUseAction(original))
+                if (CanUseAction(original))
                     return original;
             }
         }
