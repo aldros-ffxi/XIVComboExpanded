@@ -423,6 +423,8 @@ internal class ViperUncoiled : CustomCombo
     {
         if (actionID == VPR.UncoiledFury)
         {
+            var gauge = GetJobGauge<VPRGauge>();
+
             if (IsEnabled(CustomComboPreset.ViperUncoiledFollowupFeature))
             {
                 if (OriginalHook(VPR.Twinfang) == VPR.UncoiledTwinfang && HasEffect(VPR.Buffs.PoisedForTwinfang))
@@ -434,9 +436,13 @@ internal class ViperUncoiled : CustomCombo
 
             if (IsEnabled(CustomComboPreset.ViperFuryAndIreFeature) && level >= VPR.Levels.SerpentsIre)
             {
-                var gauge = GetJobGauge<VPRGauge>();
                 if (gauge.RattlingCoilStacks == 0)
                     return VPR.SerpentsIre;
+            }
+
+            if (IsEnabled(CustomComboPreset.ViperSnapCoilFeature) && gauge.RattlingCoilStacks == 0)
+            {
+                return VPR.WrithingSnap;
             }
         }
 
@@ -570,6 +576,11 @@ internal class ViperReawaken : CustomCombo
                 if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
                     return VPR.Ouroboros;
             }
+        }
+
+        if (IsEnabled(CustomComboPreset.ViperReawakenIreFeature) && IsCooldownUsable(VPR.SerpentsIre))
+        {
+            return VPR.SerpentsIre;
         }
 
         return actionID;

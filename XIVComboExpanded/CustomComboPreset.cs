@@ -2250,6 +2250,12 @@ public enum CustomComboPreset
     [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken with the Generation skills and their respective Legacies in order.", VPR.JobID)]
     ViperReawakenAIOFeature = 4123,
 
+    [SectionCombo("Reawaken")]
+    [IconsCombo([VPR.Reawaken, UTL.ArrowLeft, VPR.SerpentsIre])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Serpent's Ire on Reawaken", "Replace Reawaken with Serpent's Ire when it's up.", VPR.JobID)]
+    ViperReawakenIreFeature = 4127,
+
     [SectionCombo("Uncoiled Fury")]
     [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.UncoiledTwinfang, VPR.UncoiledTwinblood])]
     [ExpandedCustomCombo]
@@ -2261,6 +2267,12 @@ public enum CustomComboPreset
     [AccessibilityCustomCombo]
     [CustomComboInfo("Fury And Ire", "Replace Uncoiled Fury with Serpent's Ire when out of Rattling Coil stacks.\n\nNOTE: This is strongly discouraged.  Serpent's Ire is not just a Rattling Coil generator, it is also Viper's primary 2-minute cooldown, as it also enables a free Reawaken.  It should be aligned with party buffs, not held and used when you happen to be out of Rattling Coil charges.", VPR.JobID)]
     ViperFuryAndIreFeature = 4108,
+
+    [SectionCombo("Uncoiled Fury")]
+    [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.WrithingSnap])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Uncoiled Fury to Writhing Snap", "Replace Uncoiled Fury with Writhing Snap when you are out of Rattling Coil charges.", VPR.JobID)]
+    ViperSnapCoilFeature = 4125,
 
     [SectionCombo("oGCDs")]
     [IconsCombo([VPR.SerpentsTail, UTL.ArrowLeft, VPR.Twinfang, VPR.Twinblood, UTL.Idea])]
@@ -2279,6 +2291,7 @@ public enum CustomComboPreset
     [SectionCombo("One-Button Combos")]
     [IconsCombo([VPR.SteelFangs, UTL.ArrowLeft, VPR.ReavingFangs, VPR.HuntersSting, VPR.SwiftskinsSting, VPR.FlanksbaneFang, VPR.FlankstingStrike, VPR.HindsbaneFang, VPR.HindstingStrike])]
     [SecretCustomCombo]
+    [ConflictingCombos(ViperAutoSteelReavingFeature)]
     [CustomComboInfo("Viper PvP Style Main Combo", "Condenses the main combo to a single button, like PvP.\nThe combo detects buffs to prioritize skills.\nThe default combo ender is Hindsting Strike, configurable below.", VPR.JobID)]
     ViperPvPMainComboFeature = 4113,
 
