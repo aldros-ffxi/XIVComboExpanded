@@ -570,12 +570,12 @@ internal class ReaperArcaneCircle : CustomCombo
             {
                 if (level >= RPR.Levels.PlentifulHarvest && HasEffect(RPR.Buffs.ImmortalSacrifice))
                     return RPR.PlentifulHarvest;
-            }
 
-            if (IsEnabled(CustomComboPreset.ReaperPerfectHarvestFeature))
-            {
-                if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
-                    return RPR.Perfectio;
+                if (IsEnabled(CustomComboPreset.ReaperPerfectHarvestFeature))
+                {
+                    if (level >= RPR.Levels.Perfectio && HasEffect(RPR.Buffs.PerfectioParata))
+                        return RPR.Perfectio;
+                }
             }
         }
 
