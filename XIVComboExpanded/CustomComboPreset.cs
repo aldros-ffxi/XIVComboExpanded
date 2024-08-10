@@ -1890,7 +1890,7 @@ public enum CustomComboPreset
     [SectionCombo("Phlegma features")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Phlegma into Dyskrasia", "Replace Phlegma with Dyskrasia when no charges remain or have no target.", SGE.JobID)]
-    SagePhlegmaDyskrasia = 4008,
+    SagePhlegmaDyskrasia = 4016,
 
     [IconsCombo([SGE.Phlegma, UTL.ArrowLeft, SGE.Toxikon, UTL.Blank, SGE.Phlegma, UTL.Cross])]
     [SectionCombo("Phlegma features")]
