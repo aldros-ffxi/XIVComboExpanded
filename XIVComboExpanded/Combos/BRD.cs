@@ -259,7 +259,7 @@ internal class BardBloodletter : CustomCombo
 
     protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
     {
-        if (actionID == BRD.Bloodletter)
+        if (actionID is BRD.Bloodletter or BRD.HeartbreakShot)
         {
             var gauge = GetJobGauge<BRDGauge>();
 
@@ -281,13 +281,13 @@ internal class BardBloodletter : CustomCombo
             if (IsEnabled(CustomComboPreset.BardBloodletterFeature))
             {
                 if (level >= BRD.Levels.Sidewinder)
-                    return CalcBestAction(actionID, BRD.Bloodletter, BRD.EmpyrealArrow, BRD.Sidewinder);
+                    return CalcBestAction(actionID, OriginalHook(BRD.Bloodletter), BRD.EmpyrealArrow, BRD.Sidewinder);
 
                 if (level >= BRD.Levels.EmpyrealArrow)
-                    return CalcBestAction(actionID, BRD.Bloodletter, BRD.EmpyrealArrow);
+                    return CalcBestAction(actionID, OriginalHook(BRD.Bloodletter), BRD.EmpyrealArrow);
 
                 if (level >= BRD.Levels.Bloodletter)
-                    return BRD.Bloodletter;
+                    return OriginalHook(BRD.Bloodletter);
             }
 
             if (IsEnabled(CustomComboPreset.BardBloodRainFeature))
