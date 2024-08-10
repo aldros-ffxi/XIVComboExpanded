@@ -145,6 +145,15 @@ internal class ViperFangs : CustomCombo
 
             if (IsEnabled(CustomComboPreset.ViperSteelCoilFeature))
             {
+                if (IsEnabled(CustomComboPreset.ViperGenerationLegaciesFeature))
+                {
+                    if (actionID == VPR.SteelFangs && OriginalHook(VPR.SerpentsTail) == VPR.ThirdLegacy)
+                        return VPR.ThirdLegacy;
+
+                    if (actionID == VPR.ReavingFangs && OriginalHook(VPR.SerpentsTail) == VPR.FourthLegacy)
+                        return VPR.FourthLegacy;
+                }
+
                 if (IsEnabled(CustomComboPreset.ViperTwinCoilFeature))
                 {
                     if (HasEffect(VPR.Buffs.HuntersVenom))
@@ -171,7 +180,7 @@ internal class ViperFangs : CustomCombo
                 else
                 {
                     if (CanUseAction(VPR.SwiftskinsCoil) || CanUseAction(VPR.HuntersCoil))
-                        return actionID == VPR.SteelFangs ? VPR.HuntersCoil: VPR.SwiftskinsCoil;
+                        return actionID == VPR.SteelFangs ? VPR.HuntersCoil : VPR.SwiftskinsCoil;
                 }
             }
 
@@ -213,6 +222,15 @@ internal class ViperMaws : CustomCombo
 
             if (IsEnabled(CustomComboPreset.ViperSteelCoilFeature))
             {
+                if (IsEnabled(CustomComboPreset.ViperGenerationLegaciesFeature))
+                {
+                    if (actionID == VPR.SteelMaw && OriginalHook(VPR.SerpentsTail) == VPR.ThirdLegacy)
+                        return VPR.ThirdLegacy;
+
+                    if (actionID == VPR.ReavingMaw && OriginalHook(VPR.SerpentsTail) == VPR.FourthLegacy)
+                        return VPR.FourthLegacy;
+                }
+
                 if (IsEnabled(CustomComboPreset.ViperTwinCoilFeature))
                 {
                     if (HasEffect(VPR.Buffs.FellhuntersVenom))
@@ -239,7 +257,7 @@ internal class ViperMaws : CustomCombo
                 else
                 {
                     if (CanUseAction(VPR.SwiftskinsDen) || CanUseAction(VPR.HuntersDen))
-                        return actionID == VPR.SteelMaw ? VPR.HuntersDen: VPR.SwiftskinsDen;
+                        return actionID == VPR.SteelMaw ? VPR.HuntersDen : VPR.SwiftskinsDen;
                 }
             }
 

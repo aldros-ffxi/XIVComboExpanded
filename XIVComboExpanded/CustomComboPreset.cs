@@ -826,7 +826,7 @@ public enum CustomComboPreset
     GunbreakerFatedCircleCont = 3714,
 
     [SectionCombo("Area of Effect")]
-    [IconsCombo([ GNB.FatedCircle, GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
+    [IconsCombo([GNB.FatedCircle, GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
     GunbreakerDoubleDownFeature = 3709,
@@ -938,7 +938,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
     MachinistOverdriveFeature = 3104,
-
 
     #endregion
     // ====================================================================================
@@ -1172,7 +1171,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority/Rage of Halone with its combo chain.", PLD.JobID)]
     PaladinRoyalAuthorityCombo = 1902,
 
-    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.Atonement,PLD.Supplication, PLD.Sepulchre])]
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.Atonement, PLD.Supplication, PLD.Sepulchre])]
     [SectionCombo("Single Target")]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.\nNOTE: Does not require the Royal Authority Combo, if you prefer to do your standard 1-2-3 combo yourself.", PLD.JobID)]
@@ -1189,7 +1188,7 @@ public enum CustomComboPreset
     [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
     PaladinComboDivineMightFeature = 1912,
 
-    [IconsCombo([ PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
+    [IconsCombo([PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
     [SectionCombo("Combined/Other")]
     [SecretCustomCombo]
     [CustomComboInfo("Scornful Spirits Feature", "Replace Spirits Within/Expiacion and Circle of Scorn with whichever is available soonest.", PLD.JobID)]
@@ -2089,7 +2088,6 @@ public enum CustomComboPreset
     [ExpandedCustomCombo]
     [CustomComboInfo("Adloquium Level Sync", "Replace Adloquium with Physick when below level 30 in synced content.", SCH.JobID)]
     ScholarAdloquiumSyncFeature = 2810,
-
 
     #endregion
     // ====================================================================================

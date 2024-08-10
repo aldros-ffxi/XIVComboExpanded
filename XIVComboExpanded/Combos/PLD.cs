@@ -288,10 +288,9 @@ internal class PaladinProminence : PaladinCombo
                    return PLD.HolyCircle;
             }
 
-
             if (IsEnabled(CustomComboPreset.PaladinProminenceCombo))
             {
-                if(lastComboMove == PLD.TotalEclipse && level >= PLD.Levels.Prominence)
+                if (lastComboMove == PLD.TotalEclipse && level >= PLD.Levels.Prominence)
                     return PLD.Prominence;
 
                 return PLD.TotalEclipse;
