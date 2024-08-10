@@ -323,35 +323,35 @@ internal class GunbreakerExpandedContinuation : CustomCombo
                 return OriginalHook(GNB.Continuation);
 
             // Combo Danger/Blasting zone off Keen Edge
-            if (level >= GNB.Levels.DangerZone && (lastComboMove == GNB.KeenEdge || lastComboMove == GNB.BrutalShell) && IsCooldownUsable(GNB.DangerZone)) // TODO: IsEnabled(thing)
+            if (level >= GNB.Levels.DangerZone && (lastComboMove == GNB.KeenEdge || lastComboMove == GNB.BrutalShell) && IsCooldownUsable(GNB.DangerZone) && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableDangerZone))
                 return OriginalHook(GNB.DangerZone);
 
             // Bow Shock off cd, which functionally combos with Trajectory for your intro combo. Similar to PLD entry > Circle of Scorn
-            if (level >= GNB.Levels.BowShock && IsCooldownUsable(GNB.BowShock))
+            if (level >= GNB.Levels.BowShock && IsCooldownUsable(GNB.BowShock) && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableBowShock))
                 return GNB.BowShock;
 
             // Combo with No Mercy > Sonic Break
-            if (HasEffect(GNB.Buffs.ReadyToBreak) && level >= GNB.Levels.SonicBreak && IsCooldownUsable(GNB.SonicBreak))
+            if ((HasEffect(GNB.Buffs.ReadyToBreak) && level >= GNB.Levels.SonicBreak && IsCooldownUsable(GNB.SonicBreak)) && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableSonicBreak))
                 return GNB.SonicBreak;
 
             // Combo Double Down off either Solid Barrel or Demon Slaughter
-            if ((lastComboMove == GNB.SolidBarrel || lastComboMove == GNB.DemonSlaughter) && level >= GNB.Levels.DoubleDown && gauge.Ammo >= 2 && IsCooldownUsable(GNB.DoubleDown))
+            if (((lastComboMove == GNB.SolidBarrel && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableSolidBarrel)) || (lastComboMove == GNB.DemonSlaughter && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableDemonSlaughter))) && level >= GNB.Levels.DoubleDown && gauge.Ammo >= 2 && IsCooldownUsable(GNB.DoubleDown))
                 return OriginalHook(GNB.DoubleDown);
 
             // Combo to prefer Gnashing Fang combo over Burst Strike after Solid Barrel
-            if ((lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.GnashingFang && gauge.Ammo >= 1 && IsCooldownUsable(GNB.GnashingFang)) || !IsOriginal(GNB.GnashingFang))
+            if (((lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.GnashingFang && gauge.Ammo >= 1 && IsCooldownUsable(GNB.GnashingFang)) || !IsOriginal(GNB.GnashingFang) ) && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableSolidBarrel))
                 return OriginalHook(GNB.GnashingFang);
 
             // Combo for Burst Strike after Solid Barrel
-            if (lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.BurstStrike && gauge.Ammo >= 1)
+            if (lastComboMove == GNB.SolidBarrel && level >= GNB.Levels.BurstStrike && gauge.Ammo >= 1 && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableSolidBarrel))
                 return GNB.BurstStrike;
 
             // Combo for Demon Slaughter > Fated Circle
-            if (lastComboMove == GNB.DemonSlaughter && level >= GNB.Levels.FatedCircle && gauge.Ammo >= 1)
+            if (lastComboMove == GNB.DemonSlaughter && level >= GNB.Levels.FatedCircle && gauge.Ammo >= 1 && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableDemonSlaughter))
                 return GNB.FatedCircle;
 
             // Reign combo, combos off of Bloodfest
-            if (HasEffect(GNB.Buffs.ReadyToReign) || !IsOriginal(GNB.ReignOfBeasts))
+            if (HasEffect(GNB.Buffs.ReadyToReign) || !IsOriginal(GNB.ReignOfBeasts) && !IsEnabled(CustomComboPreset.GunbreakerExpandedContinuationDisableBloodfest))
                 return OriginalHook(GNB.ReignOfBeasts);
 
             return OriginalHook(GNB.Continuation);
