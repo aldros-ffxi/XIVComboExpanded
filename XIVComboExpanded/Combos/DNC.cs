@@ -272,6 +272,11 @@ internal class DancerCascadeFountain : CustomCombo
                     return OriginalHook(DNC.SaberDance);
             }
 
+            if (IsEnabled(CustomComboPreset.DancerFan3FeatherOvercap) && HasEffect(DNC.Buffs.ThreefoldFanDance))
+                return DNC.FanDance3;
+            if (gauge.Feathers > 3 && IsEnabled(CustomComboPreset.DancerFanFeatherOvercap))
+                return DNC.FanDance1;
+
             if (actionID == DNC.Cascade && IsEnabled(CustomComboPreset.DancerSingleTargetMultibutton))
             {
                 if (level >= DNC.Levels.Fountainfall &&
@@ -327,6 +332,11 @@ internal class DancerWindmillBladeshower : CustomCombo
                     !IsEnabled(CustomComboPreset.DancerAutoSaberDanceST85Esprit)))
                     return OriginalHook(DNC.SaberDance);
             }
+
+            if (IsEnabled(CustomComboPreset.DancerFan3FeatherAoEOvercap) && HasEffect(DNC.Buffs.ThreefoldFanDance))
+                return DNC.FanDance3;
+            if (gauge.Feathers > 3 && IsEnabled(CustomComboPreset.DancerFanFeatherAoEOvercap))
+                return DNC.FanDance2;
 
             if (actionID == DNC.Windmill && IsEnabled(CustomComboPreset.DancerAoeMultibutton))
             {

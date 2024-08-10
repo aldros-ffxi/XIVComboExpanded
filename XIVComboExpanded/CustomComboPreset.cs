@@ -551,6 +551,30 @@ public enum CustomComboPreset
     [CustomComboInfo("Fan Dance 3 Feature", "Replace Fan Dance and Fan Dance 2 with Fan Dance 3 when available.", DNC.JobID)]
     DancerFanDance3Feature = 3801,
 
+    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.FanDance1, UTL.Blank, DNC.FanDance1, UTL.Checkmark])]
+    [SectionCombo("Fan features")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Single Target Feather Overcap Feature", "Replace Cascade, Reverse Cascade, Fountain and Fountainfall by Fan Dance if at maximum feathers.", DNC.JobID)]
+    DancerFanFeatherOvercap = 3825,
+
+    [IconsCombo([DNC.Cascade, DNC.ReverseCascade, DNC.Fountain, DNC.Fountainfall, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
+    [SectionCombo("Fan features")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto-Fan Dance 3", "Replace Cascade, Reverse Cascade, Fountain and Fountainfall by Fan Dance 3 if you have the Threefold Fan Dance buff.", DNC.JobID)]
+    DancerFan3FeatherOvercap = 3827,
+
+    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.FanDance2, UTL.Blank, DNC.FanDance2, UTL.Checkmark])]
+    [SectionCombo("Fan features")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("AoE Feather Overcap Feature", "Replace Windmill, Rising Windmill, Bladeshower and Bloodshower by Fan Dance 2 if at maximum feathers.", DNC.JobID)]
+    DancerFanFeatherAoEOvercap = 3826,
+
+    [IconsCombo([DNC.Windmill, DNC.RisingWindmill, DNC.Bladeshower, DNC.Bloodshower, UTL.ArrowLeft, DNC.FanDance3, UTL.Blank, DNC.Buffs.ThreefoldFanDance, UTL.Checkmark])]
+    [SectionCombo("Fan features")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("AoE Auto-Fan Dance 3", "Replace Windmill, Rising Windmill, Bladeshower and Bloodshower  by Fan Dance 3 if you have the Threefold Fan Dance buff.", DNC.JobID)]
+    DancerFan3FeatherAoEOvercap = 3828,
+
     [IconsCombo([DNC.FanDance1, DNC.FanDance2, UTL.ArrowLeft, DNC.FanDance4, UTL.Blank, DNC.Buffs.FourfoldFanDance, UTL.Checkmark])]
     [SectionCombo("Fan features")]
     [ExpandedCustomCombo]

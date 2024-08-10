@@ -13,6 +13,15 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.8",
+                        [
+                            "Added DNC's Single Target Feather Overcap Feature.",
+                            "Added DNC's Auto-Fan Dance 3.",
+                            "Added DNC's AoE Feather Overcap Feature.",
+                            "Added DNC's AoE Auto-Fan Dance 3.",
+                        ]
+                    },
+                    {
                         "v2.0.0.7",
                         [
                             "MCH's Gauss Round / Double Check & Ricochet / Checkmate Feature fix if Checkmate/Double Check were assigned in the hotbar instead of Ricochet/Gauss Round.",
