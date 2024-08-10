@@ -11,6 +11,10 @@ Every job should be working correctly at lvl 90 and below. Nothing is guaranteed
 ## About
 XIVCombo is a plugin to allow for "one-button" combo chains, as well as implementing various other mutually-exclusive button consolidation and quality of life replacements. 
 
+![ffxiv_dx11_HYu4aLT75g](https://github.com/user-attachments/assets/9ebf9a61-c093-4300-958b-4abde9188484)
+
+![ffxiv_dx11_BrmTBN2FuL](https://github.com/user-attachments/assets/734cd1ff-9159-4862-9876-8485257dd222)
+
 For some jobs, this frees a massive amount of hotbar space (looking at you, DRG). For most, it removes a lot of mindless tedium associated with having to press various buttons that have little logical reason to be separate.
 
 ## Installation
