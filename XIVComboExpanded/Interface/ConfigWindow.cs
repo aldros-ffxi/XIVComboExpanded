@@ -41,7 +41,7 @@ public class ConfigWindow : Window
     /// Initializes a new instance of the <see cref="ConfigWindow"/> class.
     /// </summary>
     public ConfigWindow(XIVComboExpandedPlugin Plugin)
-        : base("XIV Combo Expanded")
+        : base($"XIV Combo Expanded v{Service.Interface.Manifest.AssemblyVersion}")
     {
         this.Plugin = Plugin;
         this.RespectCloseHotkey = true;

@@ -20,6 +20,8 @@ namespace XIVComboExpanded.Interface
                             "Added DNC's AoE Feather Overcap Feature.",
                             "Added DNC's AoE Auto-Fan Dance 3.",
                             "Added SGE's Phlegma into Psyche.",
+                            "Added GNB's Expanded Continuation Disable X Features.",
+                            "Added the currently installed version in the titlebar.",
                         ]
                     },
                     {
@@ -31,7 +33,7 @@ namespace XIVComboExpanded.Interface
                     {
                         "v2.0.0.6",
                         [
-                            "RPR's Perfect Harvest feature fix by @kaedys.",
+                            "RPR's Perfect Harvest Feature fix by @kaedys.",
                             "VPR's Generation Legacy Feature fix by @kaedys.",
                             "Added SAM's Iaijutsu to Tsubame-gaeshi Single Sen by @mikel-gh."
                         ]
@@ -40,7 +42,7 @@ namespace XIVComboExpanded.Interface
                         "v2.0.0.5",
                         [
                             "Fixed a white background which was leaking when an invalid job was automatically picked with the auto-pick setting.",
-                            "BRD's Bloodletter features fix when Heartbreak Shot was unlocked by @aldros-ffxi."
+                            "BRD's Bloodletter Features fix when Heartbreak Shot was unlocked by @aldros-ffxi."
                         ]
                     },
                     {
@@ -74,7 +76,7 @@ namespace XIVComboExpanded.Interface
                         "v2.0.0.0",
                         ["Initial re-release!",
                         "Every job is Dawntrail updated at least up to the level 90.",
-                        "Please request reasonable new features on GitHub (link in the About tab) if you'd like to see new combos.",
+                        "Please request reasonable new Features on GitHub (link in the About tab) if you'd like to see new combos.",
                         "A one-time pop-up allows for an easier first installation. It can be re-enabled in the Settings tab.",
                         "Please note that some jobs do not have any combos available at all if you don't enable Expanded combos.",]
                     },
