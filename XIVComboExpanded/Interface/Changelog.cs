@@ -13,7 +13,13 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
-                        "v2.0.0.3",
+                        "v2.0.0.5",
+                        [
+                            "Fixed a white background which was leaking when an invalid job was automatically picked with the auto-pick setting."
+                        ]
+                    },
+                    {
+                        "v2.0.0.4",
                         [
                             "Reworded the Accessiiblity Combos description.",
                             "Fixed SGE's Dyskrasia Psyche Feature's logic.",
