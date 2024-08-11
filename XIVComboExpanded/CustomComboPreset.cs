@@ -1163,6 +1163,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Auto-Refill Kazematoi / Huton Feature", "Replace Aeolian Edge with Armor Crush when you don't have any Kazematoi left or with its combo chain else.", NIN.JobID)]
     NinjaKazematoiFeature = 3019,
 
+    [IconsCombo([NIN.ArmorCrush, UTL.Cycle, NIN.AeolianEdge, UTL.ArrowLeft, NIN.GustSlash, UTL.ArrowLeft, NIN.SpinningEdge])]
+    [SectionCombo("Single Target")]
+    [SecretCustomCombo]
+    [ParentCombo(NinjaKazematoiFeature)]
+    [CustomComboInfo("Kazematoi Overcap Feature", "Instead only replace Armor Crush with Aeolian Edge when you are about to overcap Kazematoi stacks or with its combo chain else.", NIN.JobID)]
+    NinjaOvercapKazematoiFeature = 3021,
+
     [IconsCombo([NIN.AeolianEdge, UTL.ArrowLeft, NIN.Ninjutsu, UTL.Blank, NIN.Ninjutsu, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
