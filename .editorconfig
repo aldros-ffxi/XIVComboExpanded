@@ -10,3 +10,5 @@ dotnet_diagnostic.CA1822.severity=silent
 dotnet_diagnostic.SA1518.severity = none
 dotnet_diagnostic.SA1516.severity = none
 dotnet_diagnostic.SA1005.severity = none
+dotnet_diagnostic.SA1119.severity = none
+dotnet_diagnostic.IDE0047.severity = none

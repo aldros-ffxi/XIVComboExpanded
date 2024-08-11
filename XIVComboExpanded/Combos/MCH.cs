@@ -167,7 +167,7 @@ internal class MachinistWildfire : CustomCombo
     {
         if (actionID == MCH.Hypercharge)
         {
-            if (level >= MCH.Levels.Wildfire && IsCooldownUsable(MCH.Wildfire) && HasTarget())
+            if (level >= MCH.Levels.Wildfire && IsCooldownUsable(MCH.Wildfire) && TargetIsEnemy())
                 return MCH.Wildfire;
 
             if (level >= MCH.Levels.Wildfire && !IsCooldownUsable(MCH.Hypercharge) && !IsOriginal(MCH.Wildfire))
@@ -190,7 +190,7 @@ internal class MachinistHeatBlastAutoCrossbow : CustomCombo
 
             if (IsEnabled(CustomComboPreset.MachinistHyperfireFeature))
             {
-                if (level >= MCH.Levels.Wildfire && IsCooldownUsable(MCH.Wildfire) && HasTarget())
+                if (level >= MCH.Levels.Wildfire && IsCooldownUsable(MCH.Wildfire) && TargetIsEnemy())
                     return MCH.Wildfire;
             }
 

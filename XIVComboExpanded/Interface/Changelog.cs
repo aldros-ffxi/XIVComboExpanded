@@ -13,6 +13,14 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.10",
+                        [
+                            "Rewrote RPR features and logic, combining many prior ones and updating interactions. @kaedys",
+                            "Implemented RPR automatic Soul Slice feature. @kaedys",
+                            "Removed Sacrificium Priority and Soulsow on Shadow of Death features. @kaedys",
+                        ]
+                    },
+                    {
                         "v2.0.0.9",
                         [
                             "Fixed SGE's Dosis Psyche Feature being a child combo of the Auto Eukrasian Dosis feature.",
