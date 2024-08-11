@@ -1,4 +1,5 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
+using System;
 
 namespace XIVComboExpandedPlugin.Combos;
 
@@ -98,6 +99,12 @@ internal class GunbreakerSolidBarrel : CustomCombo
                         var gauge = GetJobGauge<GNBGauge>();
                         var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
+                        if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureST))
+                        {
+                            if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
+                                return GNB.DoubleDown;
+                        }
+
                         if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
                         {
                             if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
@@ -178,12 +185,6 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
         {
             var gauge = GetJobGauge<GNBGauge>();
 
-            if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeature))
-            {
-                if (level >= GNB.Levels.DoubleDown && gauge.Ammo >= 2 && IsCooldownUsable(GNB.DoubleDown))
-                    return GNB.DoubleDown;
-            }
-
             if (IsEnabled(CustomComboPreset.GunbreakerEmptyBloodfestFeature))
             {
                 if (level >= GNB.Levels.Bloodfest && gauge.Ammo == 0)
@@ -235,6 +236,15 @@ internal class GunbreakerDemonSlaughter : CustomCombo
 
             if (comboTime > 0 && lastComboMove == GNB.DemonSlice && level >= GNB.Levels.DemonSlaughter)
             {
+                var gauge = GetJobGauge<GNBGauge>();
+                var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
+
+                if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureAoE))
+                {
+                    if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
+                        return GNB.DoubleDown;
+                }
+
                 if (IsEnabled(CustomComboPreset.GunbreakerFatedCircleFeature))
                 {
                     if (HasEffect(GNB.Buffs.ReadyToFated) && IsEnabled(CustomComboPreset.GunbreakerFatedCircleCont))
@@ -242,8 +252,6 @@ internal class GunbreakerDemonSlaughter : CustomCombo
                         return GNB.FatedBrand;
                     }
 
-                    var gauge = GetJobGauge<GNBGauge>();
-                    var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
                     if (level >= GNB.Levels.FatedCircle && gauge.Ammo == maxAmmo)
                         return GNB.FatedCircle;

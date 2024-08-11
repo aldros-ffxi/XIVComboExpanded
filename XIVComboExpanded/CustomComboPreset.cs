@@ -817,6 +817,13 @@ public enum CustomComboPreset
     GunbreakerBurstStrikeFeature = 3710,
 
     [SectionCombo("Single Target")]
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
+    [AccessibilityCustomCombo]
+    [ParentCombo(GunbreakerSolidBarrelCombo)]
+    [CustomComboInfo("Double Down Burst Feature", "In addition to the Solid Barrel combo, replace it with Double Down when charges are full. Takes priority over Burst Strike.", GNB.JobID)]
+    GunbreakerDoubleDownFeatureST = 3709,
+
+    [SectionCombo("Single Target")]
     [IconsCombo([GNB.Hypervelocity, UTL.ArrowLeft, GNB.BurstStrike, UTL.Blank, GNB.Buffs.ReadyToBlast, UTL.Checkmark])]
     [CustomComboInfo("Burst Strike Continuation", "Replace Burst Strike with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerBurstStrikeCont = 3703,
@@ -825,60 +832,6 @@ public enum CustomComboPreset
     [IconsCombo([GNB.EyeGouge, UTL.ArrowLeft, GNB.WickedTalon, UTL.ArrowLeft, GNB.AbdomenTear, UTL.ArrowLeft, GNB.SavageClaw, UTL.ArrowLeft, GNB.JugularRip, UTL.ArrowLeft, GNB.GnashingFang])]
     [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerGnashingFangCont = 3702,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cycle, GNB.SonicBreak, UTL.Cycle, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cycle, GNB.DoubleDown, GNB.FatedCircle, UTL.Cycle, GNB.ReignOfBeasts])]
-    [SectionCombo("Single Target")]
-    [SecretCustomCombo]
-    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\n" +
-        "Becomes Bow Shock if it is available" +
-        "Combo Danger Zone after Keen Edge or Brutal Shell" +
-        "\nCombo Sonic Break after No Mercy" +
-        "\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike" +
-        "\nFollow up Demon Slaughter with Double Down or Fated Circle" +
-        "\nFollow up Bloodfest with the Reign combo.", GNB.JobID)]
-    GunbreakerExpandedContinuation = 3715,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.BowShock, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Bow Shock", "Disable Bow Shock when available for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableBowShock = 3721,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Danger Zone", "Disable Danger Zone after Keen Edge or Brutal Shell for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableDangerZone = 3722,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.SonicBreak, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Sonic Break", "Disable Sonic Break after No Mercy for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableSonicBreak = 3717,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Solid Barrel Follow-up", "Disable the follow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableSolidBarrel = 3718,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.FatedCircle, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Demon Slaughter Follow-up", "Disable the follow up Demon Slaughter with Double Down or Fated Circle.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableDemonSlaughter = 3719,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.ReignOfBeasts, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Bloodfest Follow-up", "Disable the follow up Bloodfest with the Reign combo.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableBloodfest = 3720,
 
     [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.DemonSlice])]
@@ -893,15 +846,16 @@ public enum CustomComboPreset
     GunbreakerFatedCircleFeature = 3706,
 
     [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.FatedCircle, UTL.ArrowLeft, GNB.DoubleDown])]
+    [ParentCombo(GunbreakerDemonSlaughterCombo)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Double Down Fated Feature", "In addition to the Demon Slaughter combo, replace it with Double Down when charges are full. Takes priority over Fated Circle.", GNB.JobID)]
+    GunbreakerDoubleDownFeatureAoE = 3723,
+
+    [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.FatedCircle, UTL.ArrowLeft, GNB.FatedBrand, UTL.Blank, GNB.Buffs.ReadyToFated, UTL.Checkmark])]
     [CustomComboInfo("Fated Circle Continuation", "Replace Fated Circle with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerFatedCircleCont = 3714,
-
-    [SectionCombo("Area of Effect")]
-    [IconsCombo([GNB.FatedCircle, GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
-    GunbreakerDoubleDownFeature = 3709,
 
     [SectionCombo("No Mercy")]
     [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.Buffs.NoMercy, UTL.Checkmark])]
@@ -933,6 +887,60 @@ public enum CustomComboPreset
     [AccessibilityCustomCombo]
     [CustomComboInfo("Sonic Shock Feature", "Replace both Sonic Break and Bow Shock with the former when it is available and you are not on GCD, and the latter when it is not on CD and either Sonic Break is not available or you are on GCD.", GNB.JobID)]
     GunbreakerBowShockSonicBreakFeature = 3704,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cycle, GNB.SonicBreak, UTL.Cycle, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cycle, GNB.DoubleDown, GNB.FatedCircle, UTL.Cycle, GNB.ReignOfBeasts])]
+    [SectionCombo("Alternative Playstyle")]
+    [SecretCustomCombo]
+    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\n" +
+        "Becomes Bow Shock if it is available" +
+        "Combo Danger Zone after Keen Edge or Brutal Shell" +
+        "\nCombo Sonic Break after No Mercy" +
+        "\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike" +
+        "\nFollow up Demon Slaughter with Double Down or Fated Circle" +
+        "\nFollow up Bloodfest with the Reign combo.", GNB.JobID)]
+    GunbreakerExpandedContinuation = 3715,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.BowShock, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Bow Shock", "Disable Bow Shock when available for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableBowShock = 3721,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Danger Zone", "Disable Danger Zone after Keen Edge or Brutal Shell for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableDangerZone = 3722,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.SonicBreak, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Sonic Break", "Disable Sonic Break after No Mercy for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableSonicBreak = 3717,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Solid Barrel Follow-up", "Disable the follow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableSolidBarrel = 3718,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.FatedCircle, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Demon Slaughter Follow-up", "Disable the follow up Demon Slaughter with Double Down or Fated Circle.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableDemonSlaughter = 3719,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.ReignOfBeasts, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Bloodfest Follow-up", "Disable the follow up Bloodfest with the Reign combo.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableBloodfest = 3720,
 
     [IconsCombo([GNB.Trajectory, UTL.ArrowLeft, GNB.LightningShot])]
     [SectionCombo("Level Synchronization")]

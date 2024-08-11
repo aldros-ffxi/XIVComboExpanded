@@ -17,6 +17,7 @@ namespace XIVComboExpanded.Interface
                         [
                             "Fixed SGE's Dosis Psyche Feature being a child combo of the Auto Eukrasian Dosis feature.",
                             "Fixed SGE's Toxikon into Psyche being a child combo of the Toxikon into Phlegma.",
+                            "Split GNB's Double Down Feature into Double Down Burst Feature & Double Down Fated Feature.",
                         ]
                     },
                     {
