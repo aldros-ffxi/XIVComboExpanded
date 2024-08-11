@@ -2300,15 +2300,21 @@ public enum CustomComboPreset
     #region VIPER
 
     [SectionCombo("Standard Combos")]
-    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
-    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
-    ViperSteelTailFeature = 4101,
-
-    [SectionCombo("Standard Combos")]
     [IconsCombo([VPR.SteelFangs, UTL.Cycle, VPR.ReavingFangs, UTL.Blank, VPR.SteelMaw, UTL.Cycle, VPR.ReavingMaw])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Steel Reaving", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever is currently empowered. Only affects the first combo hit.", VPR.JobID)]
     ViperAutoSteelReavingFeature = 4124,
+
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.HindstingStrike, VPR.HindsbaneFang, VPR.FlanksbaneFang, VPR.FlankstingStrike, UTL.Idea, UTL.Blank, VPR.JaggedMaw, VPR.BloodiedMaw, UTL.Idea])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Fang/Bite", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever of the two available 3rd combo hits is currently empowered. Only affects the third combo hit.\n\nNOTE: This means that, for example, rather than Steel Fangs having Hindsting Strike and Reaving Fangs having Hindsbane Fang, both will have whichever of those two is currently empowered.  If neither is empowered, they'll have whatever they normally have for the 3rd combo hit.", VPR.JobID)]
+    ViperAutoFangBiteFeature = 4125,
+
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
+    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
+    ViperSteelTailFeature = 4101,
 
     [SectionCombo("Vice Combos")]
     [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil, VPR.HuntersDen, VPR.SwiftskinsDen])]
