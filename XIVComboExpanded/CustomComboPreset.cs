@@ -1881,14 +1881,13 @@ public enum CustomComboPreset
 
     [IconsCombo([SGE.Dosis, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Clock])]
     [SectionCombo("Single Target")]
-    [AccessibilityCustomCombo]
-    [ParentCombo(SageDoTFeature)]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Dosis Psyche Feature", "Replace Dosis with Psyche when cooldown is available.", SGE.JobID)]
     SageDosisPsyche = 4014,
 
     [IconsCombo([SGE.Dyskrasia, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Clock])]
     [SectionCombo("Area of Effect")]
-    [AccessibilityCustomCombo]
+    [ExpandedCustomCombo]
     [CustomComboInfo("Dyskrasia Psyche Feature", "Replace Dyskrasia with Psyche when cooldown is available.", SGE.JobID)]
     SagePsycheDyskrasiaFeature = 4015,
 
@@ -1947,16 +1946,15 @@ public enum CustomComboPreset
     SagePhlegmaToxikon = 4007,
 
     [IconsCombo([SGE.Toxikon, UTL.ArrowLeft, SGE.Phlegma, UTL.Blank, SGE.Phlegma, UTL.Checkmark])]
-    [SectionCombo("Toxicon features")]
+    [SectionCombo("Toxikon features")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Toxikon into Phlegma Feature", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
+    [CustomComboInfo("Toxikon into Phlegma", "Replace Toxikon with Phlegma when charges are available.", SGE.JobID)]
     SageToxikonPhlegma = 4011,
 
     [IconsCombo([SGE.Toxikon, UTL.ArrowLeft, SGE.Psyche, UTL.Blank, SGE.Psyche, UTL.Checkmark])]
-    [SectionCombo("Toxicon features")]
-    [AccessibilityCustomCombo]
-    [ParentCombo(SageToxikonPhlegma)]
-    [CustomComboInfo("Psyche Combo", "Adds Psyche to the Toxikon combo", SGE.JobID)]
+    [SectionCombo("Toxikon features")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Toxikon into Psyche", "Replace Toxicon with Psyche when Psyche is available", SGE.JobID)]
     SagePsycheToxikonFeature = 4013,
 
     [IconsCombo([SGE.Druochole, UTL.ArrowLeft, SGE.Taurochole, UTL.Blank, SGE.Druochole, UTL.Checkmark])]

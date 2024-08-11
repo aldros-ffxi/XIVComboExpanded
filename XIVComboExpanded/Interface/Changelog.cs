@@ -13,6 +13,13 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.9",
+                        [
+                            "Fixed SGE's Dosis Psyche Feature being a child combo of the Auto Eukrasian Dosis feature.",
+                            "Fixed SGE's Toxikon into Psyche being a child combo of the Toxikon into Phlegma.",
+                        ]
+                    },
+                    {
                         "v2.0.0.8",
                         [
                             "Added DNC's Single Target Feather Overcap Feature.",
