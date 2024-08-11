@@ -13,6 +13,12 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.10",
+                        [
+                            "Updated the order in which actions are used outside Fight or Flight when using the Paladin FoF Optimize feature.  See issue #418 for reasoning.  @kaedys",
+                        ]
+                    },
+                    {
                         "v2.0.0.9",
                         [
                             "Fixed SGE's Dosis Psyche Feature being a child combo of the Auto Eukrasian Dosis feature.",
