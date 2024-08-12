@@ -833,6 +833,18 @@ public enum CustomComboPreset
     [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerGnashingFangCont = 3702,
 
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.GnashingFang])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Burst Strike into Gnashing Fang", "Replace Burst Strike with Gnashing Fang if available.", GNB.JobID)]
+    GunbreakerBurstStrikeGnashingFang = 3724,
+
+    [SectionCombo("Single Target")]
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.DangerZone])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Burst Strike into Danger Zone", "Replace Burst Strike with Danger Zone if available.", GNB.JobID)]
+    GunbreakerBurstStrikeDangerZone = 3725,
+
     [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.DemonSlice])]
     [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain.", GNB.JobID)]
