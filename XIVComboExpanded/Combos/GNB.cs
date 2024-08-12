@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using System;
 
@@ -165,10 +166,32 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     {
         if (actionID == GNB.BurstStrike)
         {
+            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeDangerZone))
+            {
+                if (level >= GNB.Levels.DangerZone && IsCooldownUsable(GNB.DangerZone))
+                    return OriginalHook(GNB.DangerZone);
+            }
+
             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
             {
                 if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
                     return GNB.Hypervelocity;
+            }
+
+            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeGnashingFang))
+            {
+                if (level >= GNB.Levels.GnashingFang)
+                {
+                    var gauge = GetJobGauge<GNBGauge>();
+                    if (IsEnabled(CustomComboPreset.GunbreakerGnashingFangCont) &&
+                        (HasEffect(GNB.Buffs.ReadyToRip) ||
+                         HasEffect(GNB.Buffs.ReadyToTear) ||
+                         HasEffect(GNB.Buffs.ReadyToGouge)))
+                        return OriginalHook(GNB.Continuation);
+                    if ((IsCooldownUsable(GNB.GnashingFang) && gauge.Ammo > 0) || !IsOriginal(GNB.GnashingFang))
+                        return OriginalHook(GNB.GnashingFang);
+
+                }
             }
         }
 
@@ -251,7 +274,6 @@ internal class GunbreakerDemonSlaughter : CustomCombo
                     {
                         return GNB.FatedBrand;
                     }
-
 
                     if (level >= GNB.Levels.FatedCircle && gauge.Ammo == maxAmmo)
                         return GNB.FatedCircle;
