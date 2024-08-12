@@ -2306,6 +2306,12 @@ public enum CustomComboPreset
     [CustomComboInfo("All-in-one Reawaken Feature", "Replace Reawaken with the Generation skills and their respective Legacies in order.", VPR.JobID)]
     ViperReawakenAIOFeature = 4123,
 
+    [SectionCombo("Reawaken")]
+    [IconsCombo([VPR.Reawaken, UTL.ArrowLeft, VPR.SerpentsIre])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Serpent's Ire on Reawaken", "Replace Reawaken with Serpent's Ire when it's up.", VPR.JobID)]
+    ViperReawakenIreFeature = 4127,
+
     [SectionCombo("Uncoiled Fury")]
     [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.UncoiledTwinfang, VPR.UncoiledTwinblood])]
     [ExpandedCustomCombo]
@@ -2317,6 +2323,12 @@ public enum CustomComboPreset
     [AccessibilityCustomCombo]
     [CustomComboInfo("Fury And Ire", "Replace Uncoiled Fury with Serpent's Ire when out of Rattling Coil stacks.\n\nNOTE: This is strongly discouraged.  Serpent's Ire is not just a Rattling Coil generator, it is also Viper's primary 2-minute cooldown, as it also enables a free Reawaken.  It should be aligned with party buffs, not held and used when you happen to be out of Rattling Coil charges.", VPR.JobID)]
     ViperFuryAndIreFeature = 4108,
+
+    [SectionCombo("Uncoiled Fury")]
+    [IconsCombo([VPR.UncoiledFury, UTL.ArrowLeft, VPR.WrithingSnap])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Uncoiled Fury to Writhing Snap", "Replace Uncoiled Fury with Writhing Snap when you are out of Rattling Coil charges.", VPR.JobID)]
+    ViperSnapCoilFeature = 4125,
 
     [SectionCombo("oGCDs")]
     [IconsCombo([VPR.SerpentsTail, UTL.ArrowLeft, VPR.Twinfang, VPR.Twinblood, UTL.Idea])]
@@ -2332,38 +2344,45 @@ public enum CustomComboPreset
     [CustomComboInfo("Merge Serpent's Tail onto Twinfang/Twinblood Feature", "Merge all Serpent's Tail abilities onto Twinfang/Twinblood.", VPR.JobID)]
     ViperMergeTwinsSerpentFeature = 4112,
 
-    // [SecretCustomCombo]
-    // [ConflictingCombos(ViperSteelTailFeature)]
-    // [CustomComboInfo("Viper PvP Style Main Combo", "Condenses the main combo to a single button, like PvP.\nThe combo detects buffs and debuffs to prioritize skills.\nThe default combo ender is Hindsbane Fang, configurable below.", VPR.JobID)]
-    // ViperPvPMainComboFeature = 4113,
+    [SectionCombo("One-Button Combos")]
+    [IconsCombo([VPR.SteelFangs, UTL.ArrowLeft, VPR.ReavingFangs, VPR.HuntersSting, VPR.SwiftskinsSting, VPR.FlanksbaneFang, VPR.FlankstingStrike, VPR.HindsbaneFang, VPR.HindstingStrike])]
+    [SecretCustomCombo]
+    [ConflictingCombos(ViperAutoSteelReavingFeature)]
+    [CustomComboInfo("Viper PvP Style Main Combo", "Condenses the main combo to a single button, like PvP.\nThe combo detects buffs to prioritize skills.\nThe default combo ender is Hindsting Strike, configurable below.", VPR.JobID)]
+    ViperPvPMainComboFeature = 4113,
 
-    // [SecretCustomCombo]
-    // [ConflictingCombos(ViperPvPMainComboStartFlankstingFeature, ViperPvPMainComboStartHindstingFeature)]
-    // [ParentCombo(ViperPvPMainComboFeature)]
-    // [CustomComboInfo("PvP Combo Start Flanksbane Fang", "With no buffs, end first combo with Flanksbane Fang.", VPR.JobID)]
-    // ViperPvPMainComboStartFlanksbaneFeature = 4114,
+    [SectionCombo("One-Button Combos")]
+    [SecretCustomCombo]
+    [ConflictingCombos(ViperPvPMainComboStartFlankstingFeature, ViperPvPMainComboStartHindsbaneFeature)]
+    [ParentCombo(ViperPvPMainComboFeature)]
+    [CustomComboInfo("PvP Combo Start Flanksbane Fang", "With no buffs, end first combo with Flanksbane Fang.", VPR.JobID)]
+    ViperPvPMainComboStartFlanksbaneFeature = 4114,
 
-    // [SecretCustomCombo]
-    // [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartHindstingFeature)]
-    // [ParentCombo(ViperPvPMainComboFeature)]
-    // [CustomComboInfo("PvP Combo Start Flanksting Strike", "With no buffs, end first combo with Flanksting Strike.", VPR.JobID)]
-    // ViperPvPMainComboStartFlankstingFeature = 4115,
+    [SectionCombo("One-Button Combos")]
+    [SecretCustomCombo]
+    [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartHindsbaneFeature)]
+    [ParentCombo(ViperPvPMainComboFeature)]
+    [CustomComboInfo("PvP Combo Start Flanksting Strike", "With no buffs, end first combo with Flanksting Strike.", VPR.JobID)]
+    ViperPvPMainComboStartFlankstingFeature = 4115,
 
-    // [SecretCustomCombo]
-    // [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartFlankstingFeature)]
-    // [ParentCombo(ViperPvPMainComboFeature)]
-    // [CustomComboInfo("PvP Combo Start Hindsting Strike", "With no buffs, end first combo with Hindsting Strike.", VPR.JobID)]
-    // ViperPvPMainComboStartHindstingFeature = 4116,
+    [SectionCombo("One-Button Combos")]
+    [SecretCustomCombo]
+    [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartFlankstingFeature)]
+    [ParentCombo(ViperPvPMainComboFeature)]
+    [CustomComboInfo("PvP Combo Start Hindsbane Fang", "With no buffs, end first combo with Hindsbane Fang.", VPR.JobID)]
+    ViperPvPMainComboStartHindsbaneFeature = 4116,
 
-    // [SecretCustomCombo]
-    // [ConflictingCombos(ViperSteelTailAoEFeature)]
-    // [CustomComboInfo("Viper PvP Style AoE Combo", "Condenses the main combo to a single button, like PvP.\nThe combo can only detect debuffs on the current target.\nStarts with Jagged Maw by default, configurable below.", VPR.JobID)]
-    // ViperPvPMainComboAoEFeature = 4117,
+    [SectionCombo("One-Button Combos")]
+    [SecretCustomCombo]
+    [IconsCombo([VPR.SteelMaw, UTL.ArrowLeft, VPR.ReavingMaw, VPR.HuntersBite, VPR.SwiftskinsBite, VPR.JaggedMaw, VPR.BloodiedMaw])]
+    [CustomComboInfo("Viper PvP Style AoE Combo", "Condenses the main combo to a single button, like PvP.\nStarts with Reaving Maw by default, configurable below.", VPR.JobID)]
+    ViperPvPAoEFeature = 4117,
 
-    // [SecretCustomCombo]
-    // [ParentCombo(ViperPvPMainComboAoEFeature)]
-    // [CustomComboInfo("PvP AoE Combo Start Bloodied Maw", "With no buffs, end first combo with Bloodied Maw.", VPR.JobID)]
-    // ViperPvPMainComboAoEStartBloodiedFeature = 4118,
+    [SectionCombo("One-Button Combos")]
+    [SecretCustomCombo]
+    [ParentCombo(ViperPvPAoEFeature)]
+    [CustomComboInfo("PvP AoE Combo Start Bloodied Maw", "With no buffs, end first combo with Bloodied Maw.", VPR.JobID)]
+    ViperPvPMainComboAoEStartBloodiedFeature = 4118,
 
     [SectionCombo("One-Button Combos")]
     [IconsCombo([VPR.Vicewinder, UTL.ArrowLeft, VPR.SwiftskinsCoil, VPR.HuntersCoil])]
