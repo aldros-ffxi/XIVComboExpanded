@@ -1264,16 +1264,22 @@ public enum CustomComboPreset
     [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.\nNOTE: Does not require the Royal Authority Combo, if you prefer to do your standard 1-2-3 combo yourself.", PLD.JobID)]
     PaladinRoyalAuthorityAtonementComboFeature = 1903,
 
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.HolySpirit, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Royal Authority Divine Might Feature", "Replace Royal Authority with Holy Spirit when Divine Might is active.", PLD.JobID)]
+    PaladinRoyalAuthorityDivineMightFeature = 1912,
+
     [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.TotalEclipse])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID)]
     PaladinProminenceCombo = 1904,
 
-    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit, PLD.HolyCircle])]
-    [SectionCombo("Combined/Other")]
+    [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.HolyCircle, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
-    PaladinComboDivineMightFeature = 1912,
+    [CustomComboInfo("Prominence Divine Might Feature", "Replace Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
+    PaladinProminenceDivineMightFeature = 1924,
 
     [IconsCombo([PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
     [SectionCombo("Combined/Other")]

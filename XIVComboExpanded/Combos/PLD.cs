@@ -230,7 +230,8 @@ internal class PaladinRoyalAuthority : PaladinCombo
                     return PLD.Atonement;
             }
 
-            if (level >= PLD.Levels.HolySpirit && IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) &&
+            if (level >= PLD.Levels.HolySpirit &&
+                IsEnabled(CustomComboPreset.PaladinRoyalAuthorityDivineMightFeature) &&
                 IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature))
             {
                 var divineMight = FindEffect(PLD.Buffs.DivineMight);
@@ -251,7 +252,8 @@ internal class PaladinRoyalAuthority : PaladinCombo
 
             // Divine Might after Atonement combo if not doing optimization, just to handle potential melee disconnects
             // during that time.
-            if (level >= PLD.Levels.HolySpirit && IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) &&
+            if (level >= PLD.Levels.HolySpirit &&
+                IsEnabled(CustomComboPreset.PaladinRoyalAuthorityDivineMightFeature) &&
                 !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature))
             {
                 if (this.HasMp(PLD.HolySpirit) && HasEffect(PLD.Buffs.DivineMight))
@@ -315,7 +317,7 @@ internal class PaladinProminence : PaladinCombo
                     (divineMight != null || HasEffect(PLD.Buffs.Requiescat)))
                     return PLD.HolyCircle;
 
-                if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
+                if (IsEnabled(CustomComboPreset.PaladinProminenceDivineMightFeature) && divineMight != null &&
                    (lastComboMove == PLD.TotalEclipse || divineMight.RemainingTime < 4 ||
                    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
                    return PLD.HolyCircle;
