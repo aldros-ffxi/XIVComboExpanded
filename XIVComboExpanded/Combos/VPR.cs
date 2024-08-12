@@ -189,7 +189,27 @@ internal class ViperFangs : CustomCombo
                 IsCooldownUsable(VPR.Vicewinder) && IsOriginal(VPR.SerpentsTail))
                 return VPR.Vicewinder;
 
-            if (IsEnabled(CustomComboPreset.ViperAutoSteelReavingFeature) && OriginalHook(VPR.SteelFangs) == VPR.SteelFangs)
+            if (IsEnabled(CustomComboPreset.ViperAutoFangBiteFeature))
+            {
+                if (OriginalHook(VPR.SteelFangs) == VPR.HindstingStrike)
+                {
+                    if (HasEffect(VPR.Buffs.HindsbaneVenom))
+                        return VPR.HindsbaneFang;
+                    if (HasEffect(VPR.Buffs.HindstungVenom))
+                        return VPR.HindstingStrike;
+                }
+
+                if (OriginalHook(VPR.SteelFangs) == VPR.FlankstingStrike)
+                {
+                    if (HasEffect(VPR.Buffs.FlanksbaneVenom))
+                        return VPR.FlanksbaneFang;
+                    if (HasEffect(VPR.Buffs.FlankstungVenom))
+                        return VPR.FlankstingStrike;
+                }
+            }
+
+            if (IsEnabled(CustomComboPreset.ViperAutoSteelReavingFeature) &&
+                OriginalHook(VPR.SteelFangs) == VPR.SteelFangs)
                 return HasEffect(VPR.Buffs.HonedReavers) ? VPR.ReavingFangs : VPR.SteelFangs;
         }
 
@@ -266,7 +286,19 @@ internal class ViperMaws : CustomCombo
                 IsCooldownUsable(VPR.VicePit) && IsOriginal(VPR.SerpentsTail))
                 return VPR.VicePit;
 
-            if (IsEnabled(CustomComboPreset.ViperAutoSteelReavingFeature) && OriginalHook(VPR.SteelMaw) == VPR.SteelMaw)
+            if (IsEnabled(CustomComboPreset.ViperAutoFangBiteFeature))
+            {
+                if (OriginalHook(VPR.SteelMaw) == VPR.JaggedMaw)
+                {
+                    if (HasEffect(VPR.Buffs.GrimhuntersVenom))
+                        return VPR.JaggedMaw;
+                    if (HasEffect(VPR.Buffs.GrimskinsVenom))
+                        return VPR.BloodiedMaw;
+                }
+            }
+
+            if (IsEnabled(CustomComboPreset.ViperAutoSteelReavingFeature) &&
+                OriginalHook(VPR.SteelMaw) == VPR.SteelMaw)
                 return HasEffect(VPR.Buffs.HonedReavers) ? VPR.ReavingMaw : VPR.SteelMaw;
         }
 
