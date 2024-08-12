@@ -1468,126 +1468,141 @@ public enum CustomComboPreset
     #endregion
     // ====================================================================================
     #region REAPER
+    // Currently unused: 3913, 3914, 3915, 3919, 3920, 3921, 3922, 3923, 3924, 3927, 3928, 3929, 3935, 3941, 3946
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.WaxingSlice, UTL.ArrowLeft, RPR.Slice])]
-    [SectionCombo("Single Target")]
+    [SectionCombo("Main Combos")]
     [CustomComboInfo("Slice Combo", "Replace Infernal Slice with its combo chain.", RPR.JobID)]
     ReaperSliceCombo = 3901,
 
-    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.BloodStalk, UTL.Blank, UTL.Blank, UTL.Danger])]
-    [SectionCombo("Single Target")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul (Slice) Overcap Feature", "Replace Soul Slice with Blood Stalk not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
-    ReaperSoulOvercapFeature = 3934,
-
-    [IconsCombo([RPR.BloodStalk, UTL.ArrowLeft, RPR.Gluttony])]
-    [SectionCombo("Single Target")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Blood Stalk Gluttony Feature", "Replace Blood Stalk with Gluttony when available.", RPR.JobID)]
-    ReaperBloodStalkGluttonyFeature = 3915,
-
-    [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.HarvestMoon])]
-    [SectionCombo("Single Target")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Harpe Harvest Moon Feature", "Replace Harpe with Harvest Moon when Soulsow is active and you are in combat.", RPR.JobID)]
-    ReaperHarpeHarvestMoonFeature = 3937,
-
-    [IconsCombo([UTL.Forbidden, RPR.Buffs.EnhancedHarpe])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(ReaperHarpeHarvestMoonFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Enhanced Harpe Option", "Prevent replacing Harpe with Harvest Moon when Enhanced Harpe is active.", RPR.JobID)]
-    ReaperHarpeHarvestMoonEnhancedFeature = 3939,
-
-    [IconsCombo([UTL.Forbidden, UTL.OutOfBattle])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(ReaperHarpeHarvestMoonFeature)]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Harpe Harvest Moon Only In Combat", "Prevent replacing Harpe with Harvest Moon when not in combat.", RPR.JobID)]
-    ReaperHarpeHarvestMoonCombatFeature = 3938,
-
     [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.SpinningScythe])]
-    [SectionCombo("Area of Effect")]
+    [SectionCombo("Main Combos")]
     [CustomComboInfo("Scythe Combo", "Replace Nightmare Scythe with its combo chain.", RPR.JobID)]
     ReaperScytheCombo = 3902,
 
-    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.HarvestMoon])]
-    [SectionCombo("Area of Effect")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Scythe Harvest Moon Feature", "Replace Nightmare Scythe with Harvest Moon when Soulsow is active and you have a target.", RPR.JobID)]
-    ReaperScytheHarvestMoonFeature = 3932,
+    [IconsCombo([RPR.BloodStalk, RPR.GrimSwathe, UTL.ArrowLeft, RPR.Gluttony])]
+    [SectionCombo("Soul Gauge")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Soul Reaver Gluttony Feature", "Replace Blood Stalk and Grim Swathe with Gluttony whenever it is available.  This also applies to any other features that replace other actions with Blood Stalk or Grim Swathe.", RPR.JobID)]
+    ReaperSoulReaverGluttonyFeature = 3916,
 
-    [IconsCombo([RPR.GrimSwathe, UTL.ArrowLeft, RPR.Gluttony])]
-    [SectionCombo("Area of Effect")]
+    [IconsCombo([RPR.InfernalSlice, RPR.NightmareScythe, UTL.ArrowLeft, RPR.SoulSlice, RPR.SoulScythe, UTL.Blank, UTL.Idea, UTL.Danger])]
+    [SectionCombo("Soul Gauge")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Grim Swathe Gluttony Feature", "Replace Grim Swathe with Gluttony when available.", RPR.JobID)]
-    ReaperGrimSwatheGluttonyFeature = 3916,
+    [CustomComboInfo("Automatic Soul Slice", "Replace Infernal Slice with Soul Slice and Nightmare Scythe with Soul Scythe when a charge is available, you are not Reaving or Enshrouded, and you have 50 gauge or less.\n\nNOTE: This will not overcap your gauge by itself, but can easily cause you to overcap with a follow-up GCD when you suddenly gain much more gauge from a GCD than you expected.  It is highly recommended to also enable the Automatic Soul Reaver feature to avoid this.", RPR.JobID)]
+    ReaperAutoSoulSliceFeature = 3951,
 
-    [IconsCombo([RPR.SoulScythe, UTL.ArrowLeft, RPR.GrimSwathe, UTL.Blank, UTL.Blank, UTL.Danger])]
-    [SectionCombo("Area of Effect")]
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.BloodStalk, UTL.Blank, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Soul Gauge")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul (Scythe) Overcap Feature", "Replace Soul Scythe with Grim Swathe when not Enshrouded or Reaving and greater-than 50 Soul Gauge is present.", RPR.JobID)]
-    ReaperSoulScytheOvercapFeature = 3935,
+    [CustomComboInfo("Automatic Soul Reaver", "Replace all Soul Gauge generating abilities with Blood Stalk or Grim Swathe when at 50 or greater Soul Gauge and you're not currently Reaving or Enshrouded.  This does NOT apply to Harpe or Harvest Moon, however, since those are ranged attacks and also rarely used.\n\nNOTE: This can cause you to miss positionals or use the incorrect Reaving ability if you're not expecting the Blood Stalk usage.  It also has a very high chance of delaying your usage of Gluttony by not having enough gauge available when it comes off cooldown.", RPR.JobID)]
+    ReaperAutoSoulReaverFeature = 3934,
+
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.BloodStalk, UTL.Blank, UTL.Blank, UTL.Danger])]
+    [SectionCombo("Soul Gauge")]
+    [ParentCombo(ReaperAutoSoulReaverFeature)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Soul Reaver Overcap", "Only replace Soul Gauge generating abilities if their next usage would overcap Soul Gauge.\n\nNOTE: This will cause Soul Slice and Soul Scythe to be replaced much earlier than other actions, due to their greater gauge generation.", RPR.JobID)]
+    ReaperReaperAutoBloodStalkOvercapFeature = 3948,
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gibbet])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSliceGallowsFeature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Slice Gibbet Feature", "Replace Infernal Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
+    [CustomComboInfo("Slice Gibbet Feature", "Replace Infernal Slice with Gibbet while Reaving and Void Reaping while Enshrouded.", RPR.JobID)]
     ReaperSliceGibbetFeature = 3903,
 
     [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSliceGibbetFeature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Slice Gallows Feature", "Replace Infernal Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
+    [CustomComboInfo("Slice Gallows Feature", "Replace Infernal Slice with Gallows while Reaving and Cross Reaping while Enshrouded.", RPR.JobID)]
     ReaperSliceGallowsFeature = 3904,
 
     [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gibbet])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSoulGallowsFeature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving or Enshrouded.", RPR.JobID)]
+    [CustomComboInfo("Soul Gibbet Feature", "Replace Soul Slice with Gibbet while Reaving and Void Reaping while Enshrouded.", RPR.JobID)]
     ReaperSoulGibbetFeature = 3926,
 
     [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperSoulGibbetFeature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Soul Gallows Feature", "Replace Soul Slice with Gallows while Reaving or Enshrouded.", RPR.JobID)]
+    [CustomComboInfo("Soul Gallows Feature", "Replace Soul Slice with Gallows while Reaving and Cross Reaping while Enshrouded.", RPR.JobID)]
     ReaperSoulGallowsFeature = 3925,
 
     [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gibbet])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperShadowGallowsFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
+    [CustomComboInfo("Shadow Gibbet Feature", "Replace Shadow of Death with Gibbet while Reaving (but NOT while Enshrouded).\n\nNOTE: Unlike the features for Slice and Soul Slice for Gibbet/Gallows, this feature only works when Reaving, not while Enshrouded.  There is a subfeature available below to also work while Enshrouded.", RPR.JobID)]
     ReaperShadowGibbetFeature = 3906,
+
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.BloodStalk, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Danger])]
+    [SectionCombo("Soul Reaver")]
+    [ParentCombo(ReaperShadowGibbetFeature)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Shadow Gibbet while Enshrouded", "Also replace Soul Slice when Enshrouded\n\nNOTE: This feature COMPLETELY prevents usage of Shadow of Death during Enshroud, which is a common element of Reaper gameplay, both for refreshing an expiring debuff and for delaying Communio when near raid buff windows.  It is strongly recommended not to use this feature, and to either use the Soul Slice Gibbet feature instead of the Shadow Gibbet one, or use the Slice Enhanced Enshrouded Feature to place all of the Enshrouded actions on the Slice/Scythe combo buttons instead.", RPR.JobID)]
+    ReaperShadowGibbetEnshroudedFeature = 3949,
 
     [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Gallows])]
     [SectionCombo("Soul Reaver")]
     [ConflictingCombos(ReaperShadowGibbetFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Gallows Feature", "Replace Shadow of Death with Gallows while Reaving or Enshrouded.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
+    [CustomComboInfo("Shadow Gallows Feature", "Replace Shadow of Death with Gallows while Reaving or Enshrouded.\n\nNOTE: Unlike the features for Slice and Soul Slice for Gibbet/Gallows, this feature only works when Reaving, not while Enshrouded.  There is a subfeature available below to also work while Enshrouded.", RPR.JobID)]
     ReaperShadowGallowsFeature = 3905,
 
-    [IconsCombo([RPR.Gibbet, UTL.Cycle, RPR.Gallows])]
+    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.BloodStalk, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Danger])]
     [SectionCombo("Soul Reaver")]
+    [ParentCombo(ReaperShadowGallowsFeature)]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Gibbet/Gallows Enhanced Feature", "Replace Gibbet and Gallows with whichever is currently enhanced while Reaving.", RPR.JobID)]
-    ReaperGibbetGallowsReaverFeature = 3917,
-
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Gibbet, UTL.Cycle, RPR.Gallows])]
-    [SectionCombo("Soul Reaver")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Slice Enhanced Soul Reaver Feature", "Replace Infernal Slice with whichever of Gibbet or Gallows is currently enhanced while Reaving.\nNOTE: This can cause you to miss positionals.", RPR.JobID)]
-    ReaperSliceEnhancedSoulReaverFeature = 3913,
+    [CustomComboInfo("Shadow Gallows while Enshrouded", "Also replace Soul Slice when Enshrouded\n\nNOTE: This feature COMPLETELY prevents usage of Shadow of Death during Enshroud, which is a common element of Reaper gameplay, both for refreshing an expiring debuff and for delaying Communio when near raid buff windows.  It is strongly recommended not to use this feature, and to either use the Soul Slice Gallows feature instead of the Shadow Gibbet one, or use the Slice Enhanced Enshrouded Feature to place all of the Enshrouded actions on the Slice/Scythe combo buttons instead.", RPR.JobID)]
+    ReaperShadowGallowsEnshroudedFeature = 3950,
 
     [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.Guillotine])]
     [SectionCombo("Soul Reaver")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Scythe Guillotine Feature", "Replace Nightmare Scythe with Guillotine while Reaving or Enshrouded.", RPR.JobID)]
     ReaperScytheGuillotineFeature = 3907,
+
+    [IconsCombo([RPR.Gibbet, UTL.Cycle, RPR.Gallows])]
+    [SectionCombo("Soul Reaver")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Soul Reaver Enhanced Feature", "Replace Gibbet and Gallows with whichever is currently enhanced while Reaving.  This also applies to any other features that replace other actions with Gibbet or Gallows.\n\nNOTE: This can cause you to miss positionals on Gibbet and Gallows. ", RPR.JobID)]
+    ReaperSoulReaverEnhancedFeature = 3917,
+
+    [IconsCombo([RPR.CrossReaping, UTL.Cycle, RPR.VoidReaping, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Checkmark])]
+    [SectionCombo("Enshroud")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Reaping Enhanced Feature", "Replace Void Reaping and Cross Reaping with whichever is currently enhanced while Enshrouded.  This also applies to any other features that replace other actions with Void Reaping or Cross Reaping.", RPR.JobID)]
+    ReaperReapingEnhancedFeature = 3918,
+
+    [IconsCombo([RPR.VoidReaping, RPR.CrossReaping, RPR.GrimReaping, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Enshroud")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Reaping Communio Feature", "Replace Void Reaping, Cross Reaping, and Grim Reaping with Communio when one stack of Shroud is left.  This also applies to any other features that replace other actions with Void Reaping,  Cross Reaping, or Grim Reaping.", RPR.JobID)]
+    ReaperSoulReaverCommunioFeature = 3912,
+
+    [IconsCombo([RPR.VoidReaping, RPR.CrossReaping, RPR.GrimReaping, UTL.ArrowLeft, RPR.LemuresSlice, RPR.LemuresScythe, UTL.Blank, UTL.Blank, UTL.Idea])]
+    [SectionCombo("Enshroud")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Reaping Lemure's Feature", "Replace Void Reaping and Cross Reaping with Lemure's Slice and Grim Reaping with Lemure's Scythe when two or more stacks of Void Shroud are active.  This also applies to any other features that replace other actions with Void Reaping, Cross Reaping, or Grim Reaping.", RPR.JobID)]
+    ReaperSoulReaverLemuresFeature = 3911,
+
+    [IconsCombo([RPR.LemuresSlice, RPR.LemuresScythe, UTL.ArrowLeft, RPR.Sacrificium, UTL.Blank, RPR.Buffs.Oblatio, UTL.Checkmark])]
+    [SectionCombo("Enshroud")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Lemure's Sacrificium Feature", "Replace Lemure's Slice/Scythe with Sacrificium when available and you have fewer than 2 Void Shroud.  This also applies to any other features that replace other actions with Lemure's Slice or Lemure's Scythe.", RPR.JobID)]
+    ReaperLemuresSacrificiumFeature = 3940,
+
+    [IconsCombo([RPR.Sacrificium, UTL.Clock])]
+    [SectionCombo("Enshroud")]
+    [SecretCustomCombo]
+    [ParentCombo(ReaperLemuresSacrificiumFeature)]
+    [CustomComboInfo("Sacrificium 3rd weave", "Only replace Lemure's Slice/Scythe with Sacrificium when you have used 3 of the 5 Lemure's Shroud charges (ie. after the third Void/Cross Reaping).\n\nNOTE: This can be superior for certain cooldown windows, due to the first weave window often occurring before raid buffs are active during a double Enshroud sequence.", RPR.JobID)]
+    ReaperSacrificiumAdvancedFeature = 3947,
 
     [IconsCombo([RPR.Enshroud, UTL.ArrowLeft, RPR.Communio, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Checkmark])]
     [SectionCombo("Enshroud")]
@@ -1600,161 +1615,83 @@ public enum CustomComboPreset
     [CustomComboInfo("Enshroud Perfectio Feature", "Replace Enshroud with Perfectio when available.", RPR.JobID)]
     ReaperEnshroudPerfectioFeature = 3945,
 
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.LemuresSlice, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Slice Lemure's Feature", "Replace Infernal Slice with Lemure's Slice when two or more stacks of Void Shroud are active.", RPR.JobID)]
-    ReaperSliceLemuresFeature = 3919,
-
-    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.LemuresSlice, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul Lemure's Feature", "Replace Soul Slice with Lemure's Slice when two or more stacks of Void Shroud are active.", RPR.JobID)]
-    ReaperSoulLemuresFeature = 3927,
-
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.LemuresSlice, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Lemure's Feature", "Replace Shadow of Death with Lemure's Slice when two or more stacks of Void Shroud are active.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
-    ReaperShadowLemuresFeature = 3923,
-
-    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.LemuresScythe, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Scythe Lemure's Feature", "Replace Nightmare Scythe with Lemure's Scythe when two or more stacks of Void Shroud are active.", RPR.JobID)]
-    ReaperScytheLemuresFeature = 3921,
-
-    [IconsCombo([RPR.Gibbet, RPR.Gallows, RPR.Guillotine, UTL.ArrowLeft, RPR.LemuresSlice, RPR.LemuresScythe, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul Reaver Lemure's Feature", "Replace Gibbet and Gallows with Lemure's Slice and Guillotine with Lemure's Scythe when two or more stacks of Void Shroud are active.", RPR.JobID)]
-    ReaperLemuresSoulReaverFeature = 3911,
-
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Slice Communio Feature", "Replace Infernal Slice with Communio when one stack of Shroud is left.", RPR.JobID)]
-    ReaperSliceCommunioFeature = 3920,
-
-    [IconsCombo([RPR.SoulSlice, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul Communio Feature", "Replace Soul Slice with Communio when one stack of Shroud is left.", RPR.JobID)]
-    ReaperSoulCommunioFeature = 3928,
-
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Shadow Communio Feature", "Replace Shadow of Death with Communio when one stack of Shroud is left.\nNOTE: This feature can be very problematic and is not recommended, since Shadow of Death is one of the few abilities than can be and is commonly used during Enshroud.", RPR.JobID)]
-    ReaperShadowCommunioFeature = 3924,
-
-    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Scythe Communio Feature", "Replace Nightmare Scythe with Communio when one stack is left of Shroud.", RPR.JobID)]
-    ReaperScytheCommunioFeature = 3922,
-
-    [IconsCombo([RPR.Gibbet, RPR.Gallows, RPR.Guillotine, UTL.ArrowLeft, RPR.Communio, UTL.Blank, UTL.Blank, UTL.Idea])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Soul Reaver Communio Feature", "Replace Gibbet, Gallows, and Guillotine with Communio when one stack is left of Shroud.", RPR.JobID)]
-    ReaperCommunioSoulReaverFeature = 3912,
-
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.VoidReaping, RPR.CrossReaping, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Checkmark])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Slice Enhanced Enshrouded Feature", "Replace Infernal Slice with whichever of Void Reaping or Cross Reaping is currently enhanced while Enshrouded.", RPR.JobID)]
-    ReaperSliceEnhancedEnshroudedFeature = 3914,
-
-    [IconsCombo([RPR.CrossReaping, UTL.Cycle, RPR.VoidReaping, UTL.Blank, RPR.Buffs.Enshrouded, UTL.Checkmark])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Reaping Enhanced Feature", "Replace Void Reaping and Cross Reaping with whichever is currently enhanced while Enshrouded.", RPR.JobID)]
-    ReaperReapingEnhancedFeature = 3918,
-
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Sacrificium, UTL.Blank, RPR.Buffs.Oblatio, UTL.Checkmark, UTL.Plus, RPR.Buffs.Enshrouded, UTL.Checkmark])]
-    [SectionCombo("Enshroud")]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Sacrificium Feature", "Replace Infernal Slice and Nightmare Scythe with Sacrificium when available.", RPR.JobID)]
-    ReaperSacrificiumFeature = 3946,
-
-    [IconsCombo([UTL.Clock])]
-    [SectionCombo("Enshroud")]
-    [SecretCustomCombo]
-    [ParentCombo(ReaperSacrificiumFeature)]
-    [CustomComboInfo("Sacrificium 3rd weave", "Replace Infernal Slice and Nightmare Scythe with Sacrificium during the 3rd Enshroud weave window instead of the 1st.  Can be superior for certain cooldown windows.", RPR.JobID)]
-    ReaperSacrificiumAdvancedFeature = 3947,
-
-    [IconsCombo([RPR.LemuresSlice, RPR.LemuresScythe, UTL.ArrowLeft, RPR.Sacrificium, UTL.Blank, RPR.Buffs.Oblatio, UTL.Checkmark, UTL.Plus, RPR.Buffs.Enshrouded, UTL.Checkmark])]
-    [SectionCombo("Enshroud")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Lemure's Sacrificium Feature", "Replace Lemure's Slice/Scythe with Sacrificium when available and you have fewer than 2 Void Shroud.", RPR.JobID)]
-    ReaperLemuresSacrificiumFeature = 3940,
-
-    [IconsCombo([RPR.Sacrificium, UTL.ArrowUp])]
-    [SectionCombo("Enshroud")]
-    [ParentCombo(ReaperLemuresSacrificiumFeature)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Prioritize Sacrificium over Lemure's", "Replace Lemure's Slice/Scythe with Sacrificium even when you have 2 Void Shroud.  This can help ensure you do not miss a usage of Sacrificium, at the cost of potentially missing a Lemure's Slice/Scythe usage.", RPR.JobID)]
-    ReaperLemuresSacrificiumPriorityFeature = 3941,
-
     [IconsCombo([RPR.ArcaneCircle, UTL.ArrowLeft, RPR.PlentifulHarvest, UTL.Blank, RPR.Buffs.ImmortalSacrifice, UTL.Checkmark])]
-    [SectionCombo("Miscellaneous")]
+    [SectionCombo("Arcane Circle")]
     [CustomComboInfo("Arcane Harvest Feature", "Replace Arcane Circle with Plentiful Harvest when you have stacks of Immortal Sacrifice.", RPR.JobID)]
     ReaperArcaneHarvestFeature = 3908,
 
     [IconsCombo([RPR.PlentifulHarvest, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
-    [SectionCombo("Miscellaneous")]
+    [SectionCombo("Arcane Circle")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available. Also replaces Arcane Circle if the Arcane Harvest Feature is also enabled.", RPR.JobID)]
+    [CustomComboInfo("Perfect Harvest Feature", "Replace Plentiful Harvest with Perfectio when available.  This also applies to any other features that replace other actions with Plentiful Harvest.", RPR.JobID)]
     ReaperPerfectHarvestFeature = 3943,
 
     [IconsCombo([RPR.InfernalSlice, RPR.NightmareScythe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
-    [SectionCombo("Miscellaneous")]
-    [ExpandedCustomCombo]
+    [SectionCombo("Arcane Circle")]
+    [AccessibilityCustomCombo]
     [CustomComboInfo("Combo Perfectio Feature", "Replace Infernal Slice and Nightmare Scythe with Perfectio when under Perfectio Parata.", RPR.JobID)]
     ReaperComboPerfectioFeature = 3942,
 
     [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.Perfectio, UTL.Blank, RPR.Buffs.PerfectioParata, UTL.Checkmark])]
-    [SectionCombo("Miscellaneous")]
+    [SectionCombo("Arcane Circle")]
     [ExpandedCustomCombo]
     [CustomComboInfo("Harpe Perfectio Feature", "Replace Harpe with with Perfectio when under Perfectio Parata.", RPR.JobID)]
     ReaperHarpePerfectioFeature = 3944,
 
-    [IconsCombo([RPR.HellsIngress, RPR.HellsEgress, UTL.ArrowLeft, RPR.Regress])]
+    [IconsCombo([RPR.HellsIngress, RPR.HellsEgress, UTL.ArrowLeft, RPR.Regress, UTL.Blank, RPR.Buffs.Threshold])]
     [SectionCombo("Miscellaneous")]
     [CustomComboInfo("Regress Feature", "Replace Hell's Ingress and Egress turn with Regress when Threshold is active, instead of just the opposite of the one used.", RPR.JobID)]
     ReaperRegressFeature = 3910,
 
-    [IconsCombo([UTL.Clock])]
+    [IconsCombo([RPR.Buffs.Threshold, UTL.Clock])]
     [SectionCombo("Miscellaneous")]
     [ParentCombo(ReaperRegressFeature)]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Delayed Regress Option", "Replace the action used with Regress only after 1.5 seconds have elapsed on Threshold.", RPR.JobID)]
+    [CustomComboInfo("Delayed Regress Option", "Replace the action used with Regress only after 1.5 seconds have elapsed on Threshold.\n\nNOTE: This is to prevent you from immediately using Regress if you are spamming the button for the teleport.", RPR.JobID)]
     ReaperRegressOption = 3933,
 
-    [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.Soulsow])]
-    [SectionCombo("Out of Combat")]
+    [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.HarvestMoon])]
+    [SectionCombo("Harvest Moon")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Harpe Soulsow Feature", "Replace Harpe with Soulsow when not active and out of combat or you have no target.", RPR.JobID)]
+    [CustomComboInfo("Harpe Harvest Moon Feature", "Replace Harpe with Harvest Moon when Soulsow is active.", RPR.JobID)]
+    ReaperHarpeHarvestMoonFeature = 3937,
+
+    [IconsCombo([UTL.Forbidden, RPR.Buffs.EnhancedHarpe])]
+    [SectionCombo("Harvest Moon")]
+    [ParentCombo(ReaperHarpeHarvestMoonFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Enhanced Harpe Option", "Prevent replacing Harpe with Harvest Moon when Enhanced Harpe is active.", RPR.JobID)]
+    ReaperHarpeHarvestMoonEnhancedFeature = 3939,
+
+    [IconsCombo([UTL.Forbidden, UTL.OutOfBattle])]
+    [SectionCombo("Harvest Moon")]
+    [ParentCombo(ReaperHarpeHarvestMoonFeature)]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Harpe Harvest Moon Only In Combat", "Prevent replacing Harpe with Harvest Moon when not in combat.", RPR.JobID)]
+    ReaperHarpeHarvestMoonCombatFeature = 3938,
+
+    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.HarvestMoon])]
+    [SectionCombo("Harvest Moon")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Scythe Harvest Moon Feature", "Replace Nightmare Scythe with Harvest Moon when Soulsow is active, you have an enemy target, and are not Reaving or Enshrouded.", RPR.JobID)]
+    ReaperScytheHarvestMoonFeature = 3932,
+
+    [IconsCombo([RPR.Harpe, UTL.ArrowLeft, RPR.Soulsow, UTL.Blank, UTL.OutOfBattle])]
+    [SectionCombo("Harvest Moon")]
+    [ExpandedCustomCombo]
+    [CustomComboInfo("Harpe Soulsow Feature", "Replace Harpe with Soulsow when not active and you're either out of combat or have no target.", RPR.JobID)]
     ReaperHarpeHarvestSoulsowFeature = 3936,
 
-    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Soulsow])]
-    [SectionCombo("Out of Combat")]
+    [IconsCombo([RPR.InfernalSlice, UTL.ArrowLeft, RPR.Soulsow, UTL.Blank, UTL.OutOfBattle])]
+    [SectionCombo("Harvest Moon")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Slice Soulsow Feature", "Replace Infernal Slice with Soulsow when out of combat and not active.", RPR.JobID)]
+    [CustomComboInfo("Slice Soulsow Feature", "Replace Infernal Slice with Soulsow when not active and out of combat.", RPR.JobID)]
     ReaperSliceSoulsowFeature = 3930,
 
-    [IconsCombo([RPR.ShadowOfDeath, UTL.ArrowLeft, RPR.Soulsow])]
-    [SectionCombo("Out of Combat")]
+    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.Soulsow, UTL.Blank, UTL.OutOfBattle])]
+    [SectionCombo("Harvest Moon")]
     [ExpandedCustomCombo]
-    [CustomComboInfo("Shadow Soulsow Feature", "Replace Shadow of Death with Soulsow when out of combat and not active.", RPR.JobID)]
-    ReaperShadowSoulsowFeature = 3929,
-
-    [IconsCombo([RPR.NightmareScythe, UTL.ArrowLeft, RPR.Soulsow])]
-    [SectionCombo("Out of Combat")]
-    [ExpandedCustomCombo]
-    [CustomComboInfo("Scythe Soulsow Feature", "Replace Nightmare Scythe with Soulsow when out of combat and not active.", RPR.JobID)]
+    [CustomComboInfo("Scythe Soulsow Feature", "Replace Nightmare Scythe with Soulsow when not active and out of combat.", RPR.JobID)]
     ReaperScytheSoulsowFeature = 3931,
 
     #endregion

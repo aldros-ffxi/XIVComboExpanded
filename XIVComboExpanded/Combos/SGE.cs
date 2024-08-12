@@ -93,7 +93,7 @@ internal class SageDosis : CustomCombo
         {
             if (IsEnabled(CustomComboPreset.SageDosisPsyche))
             {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && TargetIsEnemy() && InCombat())
                     return OriginalHook(SGE.Psyche);
             }
 
@@ -107,7 +107,8 @@ internal class SageDosis : CustomCombo
                     return OriginalHook(SGE.Dosis);
 
                 // have to explicitly check all variants of the dot for some reason else spaghetti code ensues
-                if (!(eurkasiandosis?.RemainingTime > 2.8 || eurkasiandosis2?.RemainingTime > 2.8 || eurkasiandosis3?.RemainingTime > 2.8))
+                if (!(eurkasiandosis?.RemainingTime > 2.8 || eurkasiandosis2?.RemainingTime > 2.8 ||
+                    eurkasiandosis3?.RemainingTime > 2.8))
                     return SGE.Eukrasia;
             }
 
@@ -118,9 +119,10 @@ internal class SageDosis : CustomCombo
             }
         }
 
-        if ((actionID == SGE.Dyskrasia || actionID == SGE.Dyskrasia2) && IsEnabled(CustomComboPreset.SagePsycheDyskrasiaFeature))
+        if ((actionID == SGE.Dyskrasia || actionID == SGE.Dyskrasia2) &&
+            IsEnabled(CustomComboPreset.SagePsycheDyskrasiaFeature))
         {
-            if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
+            if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && TargetIsEnemy() && InCombat())
                 return OriginalHook(SGE.Psyche);
         }
 
@@ -289,26 +291,26 @@ internal class SagePhlegma : CustomCombo
 
             if (IsEnabled(CustomComboPreset.SagePhlegmaPsyche))
             {
-                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && HasTarget() && InCombat())
+                if (level >= SGE.Levels.Psyche && IsCooldownUsable(SGE.Psyche) && TargetIsEnemy() && InCombat())
                     return OriginalHook(SGE.Psyche);
             }
 
             if (IsEnabled(CustomComboPreset.SagePhlegmaDyskrasia))
             {
-                if (level >= SGE.Levels.Dyskrasia && HasNoTarget())
+                if (level >= SGE.Levels.Dyskrasia && !TargetIsEnemy())
                     return OriginalHook(SGE.Dyskrasia);
             }
 
-            var gauge = GetJobGauge<SGEGauge>();
-
             if (IsEnabled(CustomComboPreset.SagePhlegmaToxikon))
             {
+                var gauge = GetJobGauge<SGEGauge>();
                 var phlegma =
                     level >= SGE.Levels.Phlegma3 ? SGE.Phlegma3 :
                     level >= SGE.Levels.Phlegma2 ? SGE.Phlegma2 :
                     level >= SGE.Levels.Phlegma ? SGE.Phlegma : 0;
 
-                if (level >= SGE.Levels.Toxicon && phlegma != 0 && !IsCooldownUsable(phlegma) && gauge.Addersting > 0)
+                if (level >= SGE.Levels.Toxicon && phlegma != 0 && !IsCooldownUsable(phlegma) &&
+                    gauge.Addersting > 0)
                     return OriginalHook(SGE.Toxikon);
             }
 

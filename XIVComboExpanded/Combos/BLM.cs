@@ -98,7 +98,7 @@ internal class BlackFireBlizzard4 : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BlackSpellsUmbralSoulFeature))
             {
-                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !HasTarget())
+                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !TargetIsEnemy())
                     return BLM.UmbralSoul;
             }
         }
@@ -140,7 +140,7 @@ internal class BlackFireBlizzard4 : CustomCombo
                     if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature))
                     {
                         if (IsEnabled(CustomComboPreset.BlackEnochianDespairFlareStarFeature))
-                        {   
+                        {
                             // 2nd and 3rd checks for opener and post-manafont usage
                             if (level >= BLM.Levels.FlareStar && gauge.AstralSoulStacks >= 6 && (LocalPlayer?.CurrentMp <= 0 || LocalPlayer?.CurrentMp == 8400 || LocalPlayer?.CurrentMp == 10000))
                                 return BLM.FlareStar;
@@ -244,7 +244,7 @@ internal class BlackFire : CustomCombo
                         return BLM.Fire3;
                 }
 
-                if (IsNotEnabled(CustomComboPreset.BlackFireOption2))
+                if (!IsEnabled(CustomComboPreset.BlackFireOption2))
                 {
                     if (!gauge.InAstralFire)
                         return BLM.Fire3;
@@ -271,7 +271,7 @@ internal class BlackBlizzard : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BlackSpellsUmbralSoulFeature))
             {
-                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !HasTarget())
+                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !TargetIsEnemy())
                     return BLM.UmbralSoul;
             }
 
@@ -306,7 +306,7 @@ internal class BlackFreezeFlare : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BlackSpellsUmbralSoulFeature))
             {
-                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !HasTarget())
+                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !TargetIsEnemy())
                     return BLM.UmbralSoul;
             }
         }
@@ -380,7 +380,7 @@ internal class BlackBlizzard2 : CustomCombo
 
             if (IsEnabled(CustomComboPreset.BlackSpellsUmbralSoulFeature))
             {
-                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !HasTarget())
+                if (level >= BLM.Levels.UmbralSoul && gauge.InUmbralIce && !TargetIsEnemy())
                     return BLM.UmbralSoul;
             }
 

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.Enums;
@@ -5,8 +7,6 @@ using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
 using Dalamud.Utility;
-using System;
-using System.Linq;
 using XIVComboExpandedPlugin.Attributes;
 
 namespace XIVComboExpandedPlugin.Combos;
@@ -106,7 +106,7 @@ internal abstract partial class CustomCombo
             (uint ActionID, CooldownData Data) a1,
             (uint ActionID, CooldownData Data) a2)
         {
-            // This intent of this priority algorithm is to generate a single unified number that results in the 
+            // This intent of this priority algorithm is to generate a single unified number that results in the
             // following behaviors:
             //   * Any ability that is off cooldown and at maximum charges has maximum (and equal) priority.
             //   * If only one of the two abilities is currently usable, it has a higher priority.
@@ -196,14 +196,6 @@ internal abstract partial class CustomCombo
         => (int)preset < 100 || Service.Configuration.IsEnabled(preset);
 
     /// <summary>
-    /// Determine if the given preset is not enabled.
-    /// </summary>
-    /// <param name="preset">Preset to check.</param>
-    /// <returns>A value indicating whether the preset is not enabled.</returns>
-    protected static bool IsNotEnabled(CustomComboPreset preset)
-        => !IsEnabled(preset);
-
-    /// <summary>
     /// Gets bool determining if action is greyed out or not.
     /// </summary>
     /// <param name="actionID">Action ID.</param>
@@ -226,25 +218,11 @@ internal abstract partial class CustomCombo
         => Service.Condition[ConditionFlag.InCombat];
 
     /// <summary>
-    /// Find if the player is not in combat.
-    /// </summary>
-    /// <returns>A value indicating whether the player is not in combat.</returns>
-    protected static bool OutOfCombat()
-        => !InCombat();
-
-    /// <summary>
     /// Find if the player has a target.
     /// </summary>
     /// <returns>A value indicating whether the player has a target.</returns>
     protected static bool HasTarget()
         => CurrentTarget is not null;
-
-    /// <summary>
-    /// Find if the player has no target.
-    /// </summary>
-    /// <returns>A value indicating whether the player has a target.</returns>
-    protected static bool HasNoTarget()
-        => CurrentTarget is null;
 
     /// <summary>
     /// Find if the current target is an enemy.

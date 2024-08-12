@@ -15,7 +15,10 @@ namespace XIVComboExpanded.Interface
                     {
                         "v2.0.0.10",
                         [
-                            "Updated the order in which actions are used outside Fight or Flight when using the Paladin FoF Optimize feature.  See issue #418 for reasoning.  @kaedys",
+                            "Rewrote RPR features and logic, combining many prior ones and updating interactions. @kaedys",
+                            "Implemented RPR automatic Soul Slice feature. @kaedys",
+                            "Removed Sacrificium Priority and Soulsow on Shadow of Death features. @kaedys",
+                            "Updated the order in which actions are used outside Fight or Flight when using the Paladin FoF Optimize feature. See issue #418 for reasoning.  @kaedys",
                         ]
                     },
                     {
