@@ -1276,16 +1276,22 @@ public enum CustomComboPreset
     [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.\nNOTE: Does not require the Royal Authority Combo, if you prefer to do your standard 1-2-3 combo yourself.", PLD.JobID)]
     PaladinRoyalAuthorityAtonementComboFeature = 1903,
 
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.HolySpirit, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Royal Authority Divine Might Feature", "Replace Royal Authority with Holy Spirit when Divine Might is active.", PLD.JobID)]
+    PaladinRoyalAuthorityDivineMightFeature = 1912,
+
     [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.TotalEclipse])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID)]
     PaladinProminenceCombo = 1904,
 
-    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit, PLD.HolyCircle])]
-    [SectionCombo("Combined/Other")]
+    [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.HolyCircle, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
-    PaladinComboDivineMightFeature = 1912,
+    [CustomComboInfo("Prominence Divine Might Feature", "Replace Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
+    PaladinProminenceDivineMightFeature = 1924,
 
     [IconsCombo([PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
     [SectionCombo("Combined/Other")]
@@ -1322,11 +1328,11 @@ public enum CustomComboPreset
     [CustomComboInfo("Combo Confiteor Feature", "Replace Royal Authority and Prominence with Confiteor and its combo chain when available.", PLD.JobID)]
     PaladinComboConfiteorFeature = 1917,
 
-    [IconsCombo([PLD.HolyCircle, PLD.Atonement, PLD.Supplication, PLD.Sepulchre, PLD.GoringBlade, UTL.Blank, UTL.Idea])]
+    [IconsCombo([PLD.RoyalAuthority, PLD.Atonement, PLD.FastBlade, PLD.RiotBlade, PLD.Supplication, PLD.HolySpirit, PLD.Sepulchre, UTL.Blank, UTL.Idea, UTL.Danger])]
     [SectionCombo("Cooldowns")]
     [SecretCustomCombo]
     [ParentCombo(PaladinComboConfiteorFeature)]
-    [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  It will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Supplication, Sepulchre, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
+    [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  The actual order of usage of these 3 actions may be counter-intuitive, but they are used in the order and the rotational location that maximizes the potential potency during Fight or Flight, and are in line with rotational guidance from The Balance.  This feature will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Sepulchre, Supplication, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
     PaladinFoFOptimizeFeature = 1922,
 
     [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
