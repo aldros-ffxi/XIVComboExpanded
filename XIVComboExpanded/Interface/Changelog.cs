@@ -18,6 +18,7 @@ namespace XIVComboExpanded.Interface
                             "Rewrote RPR features and logic, combining many prior ones and updating interactions. @kaedys",
                             "Implemented RPR automatic Soul Slice feature. @kaedys",
                             "Removed Sacrificium Priority and Soulsow on Shadow of Death features. @kaedys",
+                            "Updated the order in which actions are used outside Fight or Flight when using the Paladin FoF Optimize feature. See issue #418 for reasoning.  @kaedys",
                         ]
                     },
                     {
@@ -25,6 +26,8 @@ namespace XIVComboExpanded.Interface
                         [
                             "Fixed SGE's Dosis Psyche Feature being a child combo of the Auto Eukrasian Dosis feature.",
                             "Fixed SGE's Toxikon into Psyche being a child combo of the Toxikon into Phlegma.",
+                            "Split GNB's Double Down Feature into Double Down Burst Feature & Double Down Fated Feature.",
+                            "Added NIN's Kazematoi Overcap Feature.",
                         ]
                     },
                     {

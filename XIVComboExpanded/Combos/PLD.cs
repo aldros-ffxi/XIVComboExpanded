@@ -160,10 +160,15 @@ internal class PaladinRoyalAuthority : PaladinCombo
                 //  * Atonement, Royal Authority (460p).
                 // Notably, if we enter FoF with both Atonement and Holy Spirit available, using the full
                 // Atonement combo yields 40 more potency than using Holy Spirit + Atonement + Supplication.
-                // The absolute best combo is Supplication + Sepulchre + Holy Spirit, however (1540p).
+                // Optimal combos, in descending order, depending on when we enter FoF:
+                //   * Holy Spirit -> Supplication -> Sepulchre (1540p)
+                //   * Sepulchre -> Royal Authority -> Holy Spirit (1500p)
+                //   * Atonement -> Supplication -> Sepulchre (1500p)
+                //   * Supplication -> Sepulchre -> Royal Authority (1500p)
+                //   * Royal Authority -> Holy Spirit -> Atonement (1460p)
                 // Note: Technically, this is only true after level 94's Melee Mastery II trait, as prior to
                 // that, Holy Spirit with Divine Might (450p) has 10 more potency than Sepulchre (440p),
-                // rather than the other way around.  However, since optimizing gains or losses of only 10p
+                // rather than being equal.  However, since optimizing gains or losses of only 10p
                 // doesn't really matter at all while leveling, we don't bother to adjust this logic for lower
                 // levels, except where Atonement isn't yet learned.
                 if (level >= PLD.Levels.Atonement &&
@@ -197,31 +202,61 @@ internal class PaladinRoyalAuthority : PaladinCombo
                 this.HasMp(PLD.HolySpirit) && HasEffect(PLD.Buffs.Requiescat))
                 return PLD.HolySpirit;
 
-            if (level >= PLD.Levels.Atonement &&
-                IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature))
+            // Outside of FoF, we want to use Atonement immediately following Royal Authority, since it's in the lowest
+            // rung of potencies for FoF.  We delay the rest of the Atonement combo AND using Divine Might until they'd
+            // be overwritten by a new Royal Authority combo.  The specifically order we use them in prior to Royal
+            // Authority, assuming we're continuously in melee range, is Supplication -> Holy Spirit -> Sepulchre.
+            // This delays using the highest-potency Sepulchre until as late as possible, giving as many opportunities
+            // as possible for it to end up in FoF.  Notably, this gives us an extra 40p if we enter FoF between the
+            // 2nd GCD prior to Royal Authority and the GCD immediately prior to it.
+            //
+            // Supplication is used before Divine Might for two reasons: it provides an extra GCD during the "standard"
+            // combo sequence (outside FoF) where we have it available for handling a disconnect, and it means that if
+            // we enter FoF between the 2nd and 3rd GCDs prior to Royal Authority, that Divine Might now protects TWO
+            // GCDs during FoF from disconnects where we otherwise wouldn't have any disconnect protection at all.
+            // Basically, Holy Spirit (w/ Divine Might) and Supplication have identical potencies, but Holy Spirit is
+            // the more flexible of the two, both because it is ranged and because it does not strictly need to be used
+            // prior to Sepulchre during FoF, so we prefer to have it available during FoF over Supplication.
+            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature) &&
+                level >= PLD.Levels.Atonement && inMeleeRange)
             {
-                var sepulchre = FindEffect(PLD.Buffs.SepulchreReady);
-                if (sepulchre != null && inMeleeRange && (
-                    lastComboMove == PLD.RiotBlade || sepulchre.RemainingTime < 4 ||
-                    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
-                    return PLD.Sepulchre;
-
                 var supplication = FindEffect(PLD.Buffs.SupplicationReady);
                 if (supplication != null && inMeleeRange && (
                     lastComboMove == PLD.RiotBlade || supplication.RemainingTime < 4 ||
                     !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
                     return PLD.Supplication;
 
-                if (HasEffect(PLD.Buffs.AtonementReady) && inMeleeRange)
+                if (HasEffect(PLD.Buffs.AtonementReady))
                     return PLD.Atonement;
             }
 
-            if (level >= PLD.Levels.HolySpirit && IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature))
+            if (level >= PLD.Levels.HolySpirit &&
+                IsEnabled(CustomComboPreset.PaladinRoyalAuthorityDivineMightFeature) &&
+                IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature))
             {
                 var divineMight = FindEffect(PLD.Buffs.DivineMight);
                 if (this.HasMp(PLD.HolySpirit) && divineMight != null &&
-                    (!inMeleeRange || lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4 ||
+                    (!inMeleeRange || lastComboMove == PLD.RiotBlade || divineMight.RemainingTime < 4))
+                    return PLD.HolySpirit;
+            }
+
+            if (IsEnabled(CustomComboPreset.PaladinRoyalAuthorityAtonementComboFeature) &&
+                level >= PLD.Levels.Atonement)
+            {
+                var sepulchre = FindEffect(PLD.Buffs.SepulchreReady);
+                if (sepulchre != null && inMeleeRange && (
+                    lastComboMove == PLD.RiotBlade || sepulchre.RemainingTime < 4 ||
                     !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
+                    return PLD.Sepulchre;
+            }
+
+            // Divine Might after Atonement combo if not doing optimization, just to handle potential melee disconnects
+            // during that time.
+            if (level >= PLD.Levels.HolySpirit &&
+                IsEnabled(CustomComboPreset.PaladinRoyalAuthorityDivineMightFeature) &&
+                !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature))
+            {
+                if (this.HasMp(PLD.HolySpirit) && HasEffect(PLD.Buffs.DivineMight))
                     return PLD.HolySpirit;
             }
 
@@ -282,7 +317,7 @@ internal class PaladinProminence : PaladinCombo
                     (divineMight != null || HasEffect(PLD.Buffs.Requiescat)))
                     return PLD.HolyCircle;
 
-                if (IsEnabled(CustomComboPreset.PaladinComboDivineMightFeature) && divineMight != null &&
+                if (IsEnabled(CustomComboPreset.PaladinProminenceDivineMightFeature) && divineMight != null &&
                    (lastComboMove == PLD.TotalEclipse || divineMight.RemainingTime < 4 ||
                    !IsEnabled(CustomComboPreset.PaladinFoFOptimizeFeature)))
                    return PLD.HolyCircle;

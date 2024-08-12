@@ -1,4 +1,6 @@
+using System.Data.Common;
 using Dalamud.Game.ClientState.JobGauge.Types;
+using System;
 
 namespace XIVComboExpandedPlugin.Combos;
 
@@ -98,6 +100,12 @@ internal class GunbreakerSolidBarrel : CustomCombo
                         var gauge = GetJobGauge<GNBGauge>();
                         var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
+                        if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureST))
+                        {
+                            if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
+                                return GNB.DoubleDown;
+                        }
+
                         if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
                         {
                             if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
@@ -158,10 +166,32 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     {
         if (actionID == GNB.BurstStrike)
         {
+            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeDangerZone))
+            {
+                if (level >= GNB.Levels.DangerZone && IsCooldownUsable(GNB.DangerZone))
+                    return OriginalHook(GNB.DangerZone);
+            }
+
             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
             {
                 if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
                     return GNB.Hypervelocity;
+            }
+
+            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeGnashingFang))
+            {
+                if (level >= GNB.Levels.GnashingFang)
+                {
+                    var gauge = GetJobGauge<GNBGauge>();
+                    if (IsEnabled(CustomComboPreset.GunbreakerGnashingFangCont) &&
+                        (HasEffect(GNB.Buffs.ReadyToRip) ||
+                         HasEffect(GNB.Buffs.ReadyToTear) ||
+                         HasEffect(GNB.Buffs.ReadyToGouge)))
+                        return OriginalHook(GNB.Continuation);
+                    if ((IsCooldownUsable(GNB.GnashingFang) && gauge.Ammo > 0) || !IsOriginal(GNB.GnashingFang))
+                        return OriginalHook(GNB.GnashingFang);
+
+                }
             }
         }
 
@@ -177,12 +207,6 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
         if (actionID == GNB.BurstStrike || actionID == GNB.FatedCircle)
         {
             var gauge = GetJobGauge<GNBGauge>();
-
-            if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeature))
-            {
-                if (level >= GNB.Levels.DoubleDown && gauge.Ammo >= 2 && IsCooldownUsable(GNB.DoubleDown))
-                    return GNB.DoubleDown;
-            }
 
             if (IsEnabled(CustomComboPreset.GunbreakerEmptyBloodfestFeature))
             {
@@ -235,15 +259,21 @@ internal class GunbreakerDemonSlaughter : CustomCombo
 
             if (comboTime > 0 && lastComboMove == GNB.DemonSlice && level >= GNB.Levels.DemonSlaughter)
             {
+                var gauge = GetJobGauge<GNBGauge>();
+                var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
+
+                if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureAoE))
+                {
+                    if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
+                        return GNB.DoubleDown;
+                }
+
                 if (IsEnabled(CustomComboPreset.GunbreakerFatedCircleFeature))
                 {
                     if (HasEffect(GNB.Buffs.ReadyToFated) && IsEnabled(CustomComboPreset.GunbreakerFatedCircleCont))
                     {
                         return GNB.FatedBrand;
                     }
-
-                    var gauge = GetJobGauge<GNBGauge>();
-                    var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
                     if (level >= GNB.Levels.FatedCircle && gauge.Ammo == maxAmmo)
                         return GNB.FatedCircle;

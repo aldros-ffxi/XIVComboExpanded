@@ -817,6 +817,13 @@ public enum CustomComboPreset
     GunbreakerBurstStrikeFeature = 3710,
 
     [SectionCombo("Single Target")]
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
+    [AccessibilityCustomCombo]
+    [ParentCombo(GunbreakerSolidBarrelCombo)]
+    [CustomComboInfo("Double Down Burst Feature", "In addition to the Solid Barrel combo, replace it with Double Down when charges are full. Takes priority over Burst Strike.", GNB.JobID)]
+    GunbreakerDoubleDownFeatureST = 3709,
+
+    [SectionCombo("Single Target")]
     [IconsCombo([GNB.Hypervelocity, UTL.ArrowLeft, GNB.BurstStrike, UTL.Blank, GNB.Buffs.ReadyToBlast, UTL.Checkmark])]
     [CustomComboInfo("Burst Strike Continuation", "Replace Burst Strike with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerBurstStrikeCont = 3703,
@@ -826,59 +833,17 @@ public enum CustomComboPreset
     [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerGnashingFangCont = 3702,
 
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cycle, GNB.SonicBreak, UTL.Cycle, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cycle, GNB.DoubleDown, GNB.FatedCircle, UTL.Cycle, GNB.ReignOfBeasts])]
     [SectionCombo("Single Target")]
-    [SecretCustomCombo]
-    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\n" +
-        "Becomes Bow Shock if it is available" +
-        "Combo Danger Zone after Keen Edge or Brutal Shell" +
-        "\nCombo Sonic Break after No Mercy" +
-        "\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike" +
-        "\nFollow up Demon Slaughter with Double Down or Fated Circle" +
-        "\nFollow up Bloodfest with the Reign combo.", GNB.JobID)]
-    GunbreakerExpandedContinuation = 3715,
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.GnashingFang])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Burst Strike into Gnashing Fang", "Replace Burst Strike with Gnashing Fang if available.", GNB.JobID)]
+    GunbreakerBurstStrikeGnashingFang = 3724,
 
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.BowShock, UTL.Cross])]
     [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Bow Shock", "Disable Bow Shock when available for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableBowShock = 3721,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Danger Zone", "Disable Danger Zone after Keen Edge or Brutal Shell for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableDangerZone = 3722,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.SonicBreak, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Sonic Break", "Disable Sonic Break after No Mercy for the Expanded Continuation.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableSonicBreak = 3717,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Solid Barrel Follow-up", "Disable the follow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableSolidBarrel = 3718,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.FatedCircle, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Demon Slaughter Follow-up", "Disable the follow up Demon Slaughter with Double Down or Fated Circle.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableDemonSlaughter = 3719,
-
-    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.ReignOfBeasts, UTL.Cross])]
-    [SectionCombo("Single Target")]
-    [ParentCombo(GunbreakerExpandedContinuation)]
-    [SecretCustomCombo]
-    [CustomComboInfo("Disable Bloodfest Follow-up", "Disable the follow up Bloodfest with the Reign combo.", GNB.JobID)]
-    GunbreakerExpandedContinuationDisableBloodfest = 3720,
+    [IconsCombo([GNB.BurstStrike, UTL.ArrowLeft, GNB.DangerZone])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Burst Strike into Danger Zone", "Replace Burst Strike with Danger Zone if available.", GNB.JobID)]
+    GunbreakerBurstStrikeDangerZone = 3725,
 
     [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.DemonSlaughter, UTL.ArrowLeft, GNB.DemonSlice])]
@@ -893,15 +858,16 @@ public enum CustomComboPreset
     GunbreakerFatedCircleFeature = 3706,
 
     [SectionCombo("Area of Effect")]
+    [IconsCombo([GNB.FatedCircle, UTL.ArrowLeft, GNB.DoubleDown])]
+    [ParentCombo(GunbreakerDemonSlaughterCombo)]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Double Down Fated Feature", "In addition to the Demon Slaughter combo, replace it with Double Down when charges are full. Takes priority over Fated Circle.", GNB.JobID)]
+    GunbreakerDoubleDownFeatureAoE = 3723,
+
+    [SectionCombo("Area of Effect")]
     [IconsCombo([GNB.FatedCircle, UTL.ArrowLeft, GNB.FatedBrand, UTL.Blank, GNB.Buffs.ReadyToFated, UTL.Checkmark])]
     [CustomComboInfo("Fated Circle Continuation", "Replace Fated Circle with Continuation moves when appropriate.", GNB.JobID)]
     GunbreakerFatedCircleCont = 3714,
-
-    [SectionCombo("Area of Effect")]
-    [IconsCombo([GNB.FatedCircle, GNB.BurstStrike, UTL.ArrowLeft, GNB.DoubleDown])]
-    [AccessibilityCustomCombo]
-    [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID)]
-    GunbreakerDoubleDownFeature = 3709,
 
     [SectionCombo("No Mercy")]
     [IconsCombo([GNB.NoMercy, UTL.ArrowLeft, GNB.DoubleDown, UTL.Blank, GNB.Buffs.NoMercy, UTL.Checkmark])]
@@ -933,6 +899,60 @@ public enum CustomComboPreset
     [AccessibilityCustomCombo]
     [CustomComboInfo("Sonic Shock Feature", "Replace both Sonic Break and Bow Shock with the former when it is available and you are not on GCD, and the latter when it is not on CD and either Sonic Break is not available or you are on GCD.", GNB.JobID)]
     GunbreakerBowShockSonicBreakFeature = 3704,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cycle, GNB.SonicBreak, UTL.Cycle, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cycle, GNB.DoubleDown, GNB.FatedCircle, UTL.Cycle, GNB.ReignOfBeasts])]
+    [SectionCombo("Alternative Playstyle")]
+    [SecretCustomCombo]
+    [CustomComboInfo("Expanded Continuation Feature", "Replace Continuation with several abilities, giving a continuation-like followup to several abilities.\n" +
+        "Becomes Bow Shock if it is available" +
+        "Combo Danger Zone after Keen Edge or Brutal Shell" +
+        "\nCombo Sonic Break after No Mercy" +
+        "\nFollow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike" +
+        "\nFollow up Demon Slaughter with Double Down or Fated Circle" +
+        "\nFollow up Bloodfest with the Reign combo.", GNB.JobID)]
+    GunbreakerExpandedContinuation = 3715,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.BowShock, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Bow Shock", "Disable Bow Shock when available for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableBowShock = 3721,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DangerZone, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Danger Zone", "Disable Danger Zone after Keen Edge or Brutal Shell for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableDangerZone = 3722,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.SonicBreak, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Sonic Break", "Disable Sonic Break after No Mercy for the Expanded Continuation.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableSonicBreak = 3717,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.GnashingFang, GNB.BurstStrike, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Solid Barrel Follow-up", "Disable the follow up Solid Barrel with Double Down, Gnashing Fang combo, or Burst Strike.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableSolidBarrel = 3718,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.DoubleDown, GNB.FatedCircle, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Demon Slaughter Follow-up", "Disable the follow up Demon Slaughter with Double Down or Fated Circle.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableDemonSlaughter = 3719,
+
+    [IconsCombo([GNB.Continuation, UTL.ArrowLeft, GNB.ReignOfBeasts, UTL.Cross])]
+    [SectionCombo("Alternative Playstyle")]
+    [ParentCombo(GunbreakerExpandedContinuation)]
+    [SecretCustomCombo]
+    [CustomComboInfo("Disable Bloodfest Follow-up", "Disable the follow up Bloodfest with the Reign combo.", GNB.JobID)]
+    GunbreakerExpandedContinuationDisableBloodfest = 3720,
 
     [IconsCombo([GNB.Trajectory, UTL.ArrowLeft, GNB.LightningShot])]
     [SectionCombo("Level Synchronization")]
@@ -1155,6 +1175,13 @@ public enum CustomComboPreset
     [CustomComboInfo("Auto-Refill Kazematoi / Huton Feature", "Replace Aeolian Edge with Armor Crush when you don't have any Kazematoi left or with its combo chain else.", NIN.JobID)]
     NinjaKazematoiFeature = 3019,
 
+    [IconsCombo([NIN.ArmorCrush, UTL.Cycle, NIN.AeolianEdge, UTL.ArrowLeft, NIN.GustSlash, UTL.ArrowLeft, NIN.SpinningEdge])]
+    [SectionCombo("Single Target")]
+    [SecretCustomCombo]
+    [ParentCombo(NinjaKazematoiFeature)]
+    [CustomComboInfo("Kazematoi Overcap Feature", "Instead only replace Armor Crush with Aeolian Edge when you are about to overcap Kazematoi stacks or with its combo chain else.", NIN.JobID)]
+    NinjaOvercapKazematoiFeature = 3021,
+
     [IconsCombo([NIN.AeolianEdge, UTL.ArrowLeft, NIN.Ninjutsu, UTL.Blank, NIN.Ninjutsu, UTL.Checkmark])]
     [SectionCombo("Single Target")]
     [ExpandedCustomCombo]
@@ -1249,16 +1276,22 @@ public enum CustomComboPreset
     [CustomComboInfo("Royal Authority Atonement Feature", "Replace Royal Authority with Atonement, Supplication & Sepulchre when under the effect of the corresponding buffs.\nNOTE: Does not require the Royal Authority Combo, if you prefer to do your standard 1-2-3 combo yourself.", PLD.JobID)]
     PaladinRoyalAuthorityAtonementComboFeature = 1903,
 
+    [IconsCombo([PLD.RoyalAuthority, UTL.ArrowLeft, PLD.HolySpirit, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Single Target")]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Royal Authority Divine Might Feature", "Replace Royal Authority with Holy Spirit when Divine Might is active.", PLD.JobID)]
+    PaladinRoyalAuthorityDivineMightFeature = 1912,
+
     [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.TotalEclipse])]
     [SectionCombo("Area of Effect")]
     [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain.", PLD.JobID)]
     PaladinProminenceCombo = 1904,
 
-    [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit, PLD.HolyCircle])]
-    [SectionCombo("Combined/Other")]
+    [IconsCombo([PLD.Prominence, UTL.ArrowLeft, PLD.HolyCircle, UTL.Blank, PLD.Buffs.DivineMight, UTL.Checkmark])]
+    [SectionCombo("Area of Effect")]
     [AccessibilityCustomCombo]
-    [CustomComboInfo("Combo Divine Might Feature", "Replace Royal Authority with Holy Spirit and Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
-    PaladinComboDivineMightFeature = 1912,
+    [CustomComboInfo("Prominence Divine Might Feature", "Replace Prominence with Holy Circle when Divine Might is active.", PLD.JobID)]
+    PaladinProminenceDivineMightFeature = 1924,
 
     [IconsCombo([PLD.CircleOfScorn, UTL.Cycle, PLD.SpiritsWithin, UTL.Cycle, PLD.Expiacion])]
     [SectionCombo("Combined/Other")]
@@ -1295,11 +1328,11 @@ public enum CustomComboPreset
     [CustomComboInfo("Combo Confiteor Feature", "Replace Royal Authority and Prominence with Confiteor and its combo chain when available.", PLD.JobID)]
     PaladinComboConfiteorFeature = 1917,
 
-    [IconsCombo([PLD.HolyCircle, PLD.Atonement, PLD.Supplication, PLD.Sepulchre, PLD.GoringBlade, UTL.Blank, UTL.Idea])]
+    [IconsCombo([PLD.RoyalAuthority, PLD.Atonement, PLD.FastBlade, PLD.RiotBlade, PLD.Supplication, PLD.HolySpirit, PLD.Sepulchre, UTL.Blank, UTL.Idea, UTL.Danger])]
     [SectionCombo("Cooldowns")]
     [SecretCustomCombo]
     [ParentCombo(PaladinComboConfiteorFeature)]
-    [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  It will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Supplication, Sepulchre, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
+    [CustomComboInfo("Combo Optimize Fight or Flight GCDs", "This is an advance optimization feature that modifies several other combo features to ensure the highest potency attacks are used during the 'spare' 3 GCDs during Fight or Flight.\n\nSpecifically, this feature will delay usage of Divine Might, Supplication, and Sepulchre until they'd be overwritten by another Royal Authority usage, to ensure the next 3 GCDs can always be high-potency (460+) actions.  The actual order of usage of these 3 actions may be counter-intuitive, but they are used in the order and the rotational location that maximizes the potential potency during Fight or Flight, and are in line with rotational guidance from The Balance.  This feature will also dynamically determine which 3 abilities to use during Fight or Flight (after the Confiteor combo) to maximize the potency for those 3 GCDs, using Sepulchre, Supplication, and Holy Spirit, if available, and filling with Atonement and/or Royal Authority.\n\nNOTE: This feature interacts with the following combos, and it is HIGHLY recommended to enable all of them:\n- Royal Authority Atonement Feature\n- Combo Divine Might Feature\n- Combo Fight or Flight Divine Might Feature\n- Royal Authority Goring Blade Feature\n- Prominence Goring Blade Feature", PLD.JobID)]
     PaladinFoFOptimizeFeature = 1922,
 
     [IconsCombo([PLD.RoyalAuthority, PLD.Prominence, UTL.ArrowLeft, PLD.HolySpirit])]
@@ -2222,15 +2255,21 @@ public enum CustomComboPreset
     #region VIPER
 
     [SectionCombo("Standard Combos")]
-    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
-    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
-    ViperSteelTailFeature = 4101,
-
-    [SectionCombo("Standard Combos")]
     [IconsCombo([VPR.SteelFangs, UTL.Cycle, VPR.ReavingFangs, UTL.Blank, VPR.SteelMaw, UTL.Cycle, VPR.ReavingMaw])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Steel Reaving", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever is currently empowered. Only affects the first combo hit.", VPR.JobID)]
     ViperAutoSteelReavingFeature = 4124,
+
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.HindstingStrike, VPR.HindsbaneFang, VPR.FlanksbaneFang, VPR.FlankstingStrike, UTL.Idea, UTL.Blank, VPR.JaggedMaw, VPR.BloodiedMaw, UTL.Idea])]
+    [AccessibilityCustomCombo]
+    [CustomComboInfo("Auto Fang/Bite", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever of the two available 3rd combo hits is currently empowered. Only affects the third combo hit.\n\nNOTE: This means that, for example, rather than Steel Fangs having Hindsting Strike and Reaving Fangs having Hindsbane Fang, both will have whichever of those two is currently empowered.  If neither is empowered, they'll have whatever they normally have for the 3rd combo hit.", VPR.JobID)]
+    ViperAutoFangBiteFeature = 4125,
+
+    [SectionCombo("Standard Combos")]
+    [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
+    [CustomComboInfo("Serpent's Fang Feature", "Replace Steel Fangs, Reaving Fangs, Steel Maw, and Reaving Maw with Serpent's Tail after finishing a combo.", VPR.JobID)]
+    ViperSteelTailFeature = 4101,
 
     [SectionCombo("Vice Combos")]
     [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil, VPR.HuntersDen, VPR.SwiftskinsDen])]
