@@ -166,6 +166,11 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     {
         if (actionID == GNB.BurstStrike)
         {
+            if (IsEnabled(CustomComboPreset.GunbreakerBloodReignFeature) &&
+                (HasEffect(GNB.Buffs.ReadyToReign) ||
+                 !IsOriginal(GNB.Bloodfest)))
+                return OriginalHook(GNB.Bloodfest);
+
             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeDangerZone))
             {
                 if (level >= GNB.Levels.DangerZone && IsCooldownUsable(GNB.DangerZone))
@@ -190,13 +195,17 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
                         return OriginalHook(GNB.Continuation);
                     if ((IsCooldownUsable(GNB.GnashingFang) && gauge.Ammo > 0) || !IsOriginal(GNB.GnashingFang))
                         return OriginalHook(GNB.GnashingFang);
-
                 }
             }
         }
 
         if (actionID == GNB.FatedCircle)
         {
+            if (IsEnabled(CustomComboPreset.GunbreakerBloodReignFeature) &&
+                (HasEffect(GNB.Buffs.ReadyToReign) ||
+                 !IsOriginal(GNB.Bloodfest)))
+                return OriginalHook(GNB.Bloodfest);
+
             if (IsEnabled(CustomComboPreset.GunbreakerFatedCircleCont))
             {
                 if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToFated))
