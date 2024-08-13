@@ -2264,7 +2264,7 @@ public enum CustomComboPreset
     [IconsCombo([VPR.HindstingStrike, VPR.HindsbaneFang, VPR.FlanksbaneFang, VPR.FlankstingStrike, UTL.Idea, UTL.Blank, VPR.JaggedMaw, VPR.BloodiedMaw, UTL.Idea])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Auto Fang/Bite", "Replace Steel Fangs/Reaving Fangs and Steel Maw/Reaving Maw with whichever of the two available 3rd combo hits is currently empowered. Only affects the third combo hit.\n\nNOTE: This means that, for example, rather than Steel Fangs having Hindsting Strike and Reaving Fangs having Hindsbane Fang, both will have whichever of those two is currently empowered.  If neither is empowered, they'll have whatever they normally have for the 3rd combo hit.", VPR.JobID)]
-    ViperAutoFangBiteFeature = 4125,
+    ViperAutoFangBiteFeature = 4128,
 
     [SectionCombo("Standard Combos")]
     [IconsCombo([VPR.SteelFangs, VPR.ReavingFangs, UTL.ArrowLeft, VPR.DeathRattle, UTL.Blank, VPR.SteelMaw, VPR.ReavingMaw, UTL.ArrowLeft, VPR.LastLash])]
@@ -2344,68 +2344,68 @@ public enum CustomComboPreset
     [CustomComboInfo("Merge Serpent's Tail onto Twinfang/Twinblood Feature", "Merge all Serpent's Tail abilities onto Twinfang/Twinblood.", VPR.JobID)]
     ViperMergeTwinsSerpentFeature = 4112,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [IconsCombo([VPR.SteelFangs, UTL.ArrowLeft, VPR.ReavingFangs, VPR.HuntersSting, VPR.SwiftskinsSting, VPR.FlanksbaneFang, VPR.FlankstingStrike, VPR.HindsbaneFang, VPR.HindstingStrike])]
     [SecretCustomCombo]
     [ConflictingCombos(ViperAutoSteelReavingFeature)]
     [CustomComboInfo("Viper PvP Style Main Combo", "Condenses the main combo to a single button, like PvP.\nThe combo detects buffs to prioritize skills.\nThe default combo ender is Hindsting Strike, configurable below.", VPR.JobID)]
     ViperPvPMainComboFeature = 4113,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [SecretCustomCombo]
     [ConflictingCombos(ViperPvPMainComboStartFlankstingFeature, ViperPvPMainComboStartHindsbaneFeature)]
     [ParentCombo(ViperPvPMainComboFeature)]
     [CustomComboInfo("PvP Combo Start Flanksbane Fang", "With no buffs, end first combo with Flanksbane Fang.", VPR.JobID)]
     ViperPvPMainComboStartFlanksbaneFeature = 4114,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [SecretCustomCombo]
     [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartHindsbaneFeature)]
     [ParentCombo(ViperPvPMainComboFeature)]
     [CustomComboInfo("PvP Combo Start Flanksting Strike", "With no buffs, end first combo with Flanksting Strike.", VPR.JobID)]
     ViperPvPMainComboStartFlankstingFeature = 4115,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [SecretCustomCombo]
     [ConflictingCombos(ViperPvPMainComboStartFlanksbaneFeature, ViperPvPMainComboStartFlankstingFeature)]
     [ParentCombo(ViperPvPMainComboFeature)]
     [CustomComboInfo("PvP Combo Start Hindsbane Fang", "With no buffs, end first combo with Hindsbane Fang.", VPR.JobID)]
     ViperPvPMainComboStartHindsbaneFeature = 4116,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [SecretCustomCombo]
     [IconsCombo([VPR.SteelMaw, UTL.ArrowLeft, VPR.ReavingMaw, VPR.HuntersBite, VPR.SwiftskinsBite, VPR.JaggedMaw, VPR.BloodiedMaw])]
     [CustomComboInfo("Viper PvP Style AoE Combo", "Condenses the main combo to a single button, like PvP.\nStarts with Reaving Maw by default, configurable below.", VPR.JobID)]
     ViperPvPAoEFeature = 4117,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [SecretCustomCombo]
     [ParentCombo(ViperPvPAoEFeature)]
     [CustomComboInfo("PvP AoE Combo Start Bloodied Maw", "With no buffs, end first combo with Bloodied Maw.", VPR.JobID)]
     ViperPvPMainComboAoEStartBloodiedFeature = 4118,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [IconsCombo([VPR.Vicewinder, UTL.ArrowLeft, VPR.SwiftskinsCoil, VPR.HuntersCoil])]
     [ExpandedCustomCombo]
     [ConflictingCombos(ViperAutoViceSTFeature)]
     [CustomComboInfo("Viper PvP Style Winder Combo", "Condenses the Vicewinder combo to a single button, like PvP.\nStarts with Swiftskin's Coil (rear positional) by default.\n\nNOTE: Does not include the Twinfang and Twinblood weaves unless the 'Twin Coil Feature' under 'Vice Combos' is also enabled.", VPR.JobID)]
     ViperPvPWinderComboFeature = 4119,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [IconsCombo([VPR.Vicewinder, UTL.ArrowLeft, VPR.HuntersCoil, VPR.SwiftskinsCoil])]
     [ExpandedCustomCombo]
     [ParentCombo(ViperPvPWinderComboFeature)]
     [CustomComboInfo("Start with Hunter's Coil", "Start with Hunter's Coil (flank positional) instead.", VPR.JobID)]
     ViperPvPWinderComboStartHuntersFeature = 4120,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [IconsCombo([VPR.VicePit, UTL.ArrowLeft, VPR.SwiftskinsDen, VPR.HuntersDen])]
     [ExpandedCustomCombo]
     [ConflictingCombos(ViperAutoViceAoEFeature)]
     [CustomComboInfo("Viper PvP Style Pit Combo", "Condenses the Vicepit combo to a single button, like PvP.\nStarts with Swiftskin's Den by default.\n\nNOTE: Does not include the Twinfang and Twinblood weaves unless the 'Twin Coil Feature' under 'Vice Combos' is also enabled.", VPR.JobID)]
     ViperPvPPitComboFeature = 4121,
 
-    [SectionCombo("One-Button Combos")]
+    [SectionCombo("Alternative Playstyle")]
     [IconsCombo([VPR.VicePit, UTL.ArrowLeft, VPR.HuntersDen, VPR.SwiftskinsDen])]
     [ExpandedCustomCombo]
     [ParentCombo(ViperPvPPitComboFeature)]

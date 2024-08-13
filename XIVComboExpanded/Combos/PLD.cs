@@ -470,7 +470,7 @@ internal class PaladinShieldBash : PaladinCombo
     {
         if (actionID == PLD.ShieldBash)
         {
-            if (level < PLD.Levels.ShieldBash || IsCooldownUsable(ADV.LowBlow))
+            if (level < PLD.Levels.ShieldBash || (IsCooldownUsable(ADV.LowBlow) && CanUseAction(ADV.LowBlow)))
                 return ADV.LowBlow;
         }
 

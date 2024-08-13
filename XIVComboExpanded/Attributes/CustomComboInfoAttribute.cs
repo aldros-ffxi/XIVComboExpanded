@@ -65,13 +65,13 @@ internal class CustomComboInfoAttribute : Attribute
         return key switch
         {
             0 => "Adventurer",
-            1 => "Gladiator",
-            2 => "Pugilist",
-            3 => "Marauder",
-            4 => "Lancer",
-            5 => "Archer",
-            6 => "Conjurer",
-            7 => "Thaumaturge",
+            1 => "Paladin",
+            2 => "Monk",
+            3 => "Warrior",
+            4 => "Dragoon",
+            5 => "Bard",
+            6 => "White Mage",
+            7 => "Black Mage",
             8 => "Disciples of the Hand",
             9 => "Disciples of the Hand",
             10 => "Disciples of the Hand",
@@ -90,10 +90,10 @@ internal class CustomComboInfoAttribute : Attribute
             23 => "Bard",
             24 => "White Mage",
             25 => "Black Mage",
-            26 => "Arcanist",
+            26 => "Summoner", // Arcanist
             27 => "Summoner",
             28 => "Scholar",
-            29 => "Rogue",
+            29 => "Ninja",
             30 => "Ninja",
             31 => "Machinist",
             32 => "Dark Knight",
@@ -109,7 +109,7 @@ internal class CustomComboInfoAttribute : Attribute
             42 => "Pictomancer",
             DOH.JobID => "Disciples of the Hand",
             DOL.JobID => "Disciples of the Land",
-            _ => "Unknown",
+            _ => "Adventurer",
         };
     }
 
