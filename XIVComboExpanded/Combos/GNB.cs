@@ -100,16 +100,16 @@ internal class GunbreakerSolidBarrel : CustomCombo
                         var gauge = GetJobGauge<GNBGauge>();
                         var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
-                        if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureST))
-                        {
-                            if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
-                                return GNB.DoubleDown;
-                        }
-
                         if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
                         {
                             if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
                                 return GNB.Hypervelocity;
+                        }
+
+                        if (IsEnabled(CustomComboPreset.GunbreakerDoubleDownFeatureST))
+                        {
+                            if (level >= GNB.Levels.DoubleDown && gauge.Ammo == maxAmmo && IsCooldownUsable(GNB.DoubleDown))
+                                return GNB.DoubleDown;
                         }
 
                         if (level >= GNB.Levels.BurstStrike && gauge.Ammo == maxAmmo)
@@ -166,17 +166,22 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
     {
         if (actionID == GNB.BurstStrike)
         {
+            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
+            {
+                if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
+                    return GNB.Hypervelocity;
+            }
+
             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeDangerZone))
             {
                 if (level >= GNB.Levels.DangerZone && IsCooldownUsable(GNB.DangerZone))
                     return OriginalHook(GNB.DangerZone);
             }
 
-            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
-            {
-                if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
-                    return GNB.Hypervelocity;
-            }
+            if (IsEnabled(CustomComboPreset.GunbreakerBloodReignFeature) &&
+                (HasEffect(GNB.Buffs.ReadyToReign) ||
+                 !IsOriginal(GNB.Bloodfest)))
+                return OriginalHook(GNB.Bloodfest);
 
             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeGnashingFang))
             {
@@ -190,7 +195,6 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
                         return OriginalHook(GNB.Continuation);
                     if ((IsCooldownUsable(GNB.GnashingFang) && gauge.Ammo > 0) || !IsOriginal(GNB.GnashingFang))
                         return OriginalHook(GNB.GnashingFang);
-
                 }
             }
         }
@@ -202,6 +206,11 @@ internal class GunbreakerBurstStrikeFatedCircle : CustomCombo
                 if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToFated))
                     return GNB.FatedBrand;
             }
+
+            if (IsEnabled(CustomComboPreset.GunbreakerBloodReignFeature) &&
+                (HasEffect(GNB.Buffs.ReadyToReign) ||
+                 !IsOriginal(GNB.Bloodfest)))
+                return OriginalHook(GNB.Bloodfest);
         }
 
         if (actionID == GNB.BurstStrike || actionID == GNB.FatedCircle)
