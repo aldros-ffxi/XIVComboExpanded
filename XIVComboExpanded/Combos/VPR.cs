@@ -626,11 +626,11 @@ internal class ViperReawaken : CustomCombo
                 if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
                     return VPR.Ouroboros;
             }
-        }
 
-        if (IsEnabled(CustomComboPreset.ViperReawakenIreFeature) && IsCooldownUsable(VPR.SerpentsIre))
-        {
-            return VPR.SerpentsIre;
+            if (IsEnabled(CustomComboPreset.ViperReawakenIreFeature) && IsCooldownUsable(VPR.SerpentsIre))
+            {
+                return VPR.SerpentsIre;
+            }
         }
 
         return actionID;

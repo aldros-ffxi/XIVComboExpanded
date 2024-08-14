@@ -13,13 +13,20 @@ namespace XIVComboExpanded.Interface
             return new Dictionary<string, string[]>()
                 {
                     {
+                        "v2.0.0.11",
+                        [
+                            "Changed the Combo tabs order.",
+                            "Fixed VPR's Serpent's Ire on Reawaken.",
+                        ]
+                    },
+                    {
                         "v2.0.0.10",
                         [
                             "Fixed an issue with classes not being properly recognized as jobs and being auto-selected by the auto-selection setting.\nGrab your job stones!",
                             "Updated the order in which actions are used outside Fight or Flight when using the Paladin FoF Optimize feature. \nSee issue #418 for reasoning by @kaedys.",
                             "Fixed PLD's One-Stop Stun Button locking Shield Bash into an unusable Low Blow when abilities are disabled (like in Deep Dungeons)\nFurther checks will be added for Deep Dungeons compatibility.",
                             "Rewrote RPR features and logic, combining many prior ones and updating interactions by @kaedys.",
-                            "Implemented RPR automatic Soul Slice featureby @kaedys.",
+                            "Implemented RPR automatic Soul Slice feature by @kaedys.",
                             "Removed Sacrificium Priority and Soulsow on Shadow of Death features by @kaedys.",
                             "Added VPR's Auto Fang/Bite feature by @kaedys.",
                             "Added VPR's Serpent's Ire on Reawaken by @aldros-ffxi.",

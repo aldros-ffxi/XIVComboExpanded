@@ -54,7 +54,7 @@ internal class SwiftRaiseFeature : CustomCombo
             (actionID == SGE.Egeiro && level >= SGE.Levels.Egeiro) ||
             (actionID == WHM.Raise && level >= WHM.Levels.Raise))
         {
-            if (level >= ADV.Levels.Swiftcast && IsCooldownUsable(ADV.Swiftcast))
+            if (level >= ADV.Levels.Swiftcast && CanUseAction(ADV.Swiftcast))
                 return ADV.Swiftcast;
         }
 
@@ -67,7 +67,7 @@ internal class SwiftRaiseFeature : CustomCombo
             }
             else if (!IsEnabled(CustomComboPreset.AdvDisableVerRaiseFeature))
             {
-                if (level >= ADV.Levels.Swiftcast && IsCooldownUsable(ADV.Swiftcast))
+                if (level >= ADV.Levels.Swiftcast && CanUseAction(ADV.Swiftcast))
                     return ADV.Swiftcast;
             }
         }
