@@ -895,6 +895,13 @@ public enum CustomComboPreset
     GunbreakerEmptyBloodfestFeature = 3707,
 
     [SectionCombo("Buffs")]
+    [IconsCombo([GNB.Bloodfest, UTL.ArrowLeft, GNB.ReignOfBeasts, GNB.NobleBlood, GNB.LionHeart])]
+    [AccessibilityCustomCombo]
+    [ParentCombo(GunbreakerEmptyBloodfestFeature)]
+    [CustomComboInfo("Empty Blood Reign Feature", "Additionally, use the rest of the Reign combo on Bloodfest.", GNB.JobID)]
+    GunbreakerBloodReignFeature = 3726,
+
+    [SectionCombo("Buffs")]
     [IconsCombo([GNB.BowShock, UTL.Cycle, GNB.SonicBreak])]
     [AccessibilityCustomCombo]
     [CustomComboInfo("Sonic Shock Feature", "Replace both Sonic Break and Bow Shock with the former when it is available and you are not on GCD, and the latter when it is not on CD and either Sonic Break is not available or you are on GCD.", GNB.JobID)]
